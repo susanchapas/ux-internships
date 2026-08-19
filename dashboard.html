@@ -377,6 +377,55 @@ td.source-cell{font-size:0.8125rem}
 .status-accepted{background:var(--mint);color:var(--text-on-accent)}
 .status-rejected{background:rgba(220,69,69,0.10);color:var(--danger)}
 .status-withdrawn{background:rgba(0,0,0,0.05);color:var(--text-faint)}
+.status-ghosted{background:rgba(139,92,246,0.10);color:#7c3aed}
+
+.pipeline-section{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xl);
+  padding:1.25rem 1.5rem;
+  margin-bottom:1.25rem;
+  box-shadow:var(--shadow-card);
+}
+.pipeline-grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:1.5rem}
+.pipeline-group{}
+.pipeline-group-title{
+  font-family:var(--font-body);font-size:0.6875rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--text-faint);margin-bottom:0.625rem;
+}
+.pipeline-funnel{display:flex;flex-direction:column;gap:0.25rem}
+.pipeline-row{
+  display:flex;align-items:center;gap:0.625rem;
+  padding:0.25rem 0.375rem;border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.pipeline-row:hover{background:rgba(0,0,0,0.03)}
+.pipeline-row.active{background:var(--mint-a10)}
+.pipeline-label{
+  font-size:0.8125rem;font-weight:500;color:var(--text-body);
+  width:6rem;text-align:right;flex-shrink:0;
+}
+.pipeline-bar-track{
+  flex:1;height:1.25rem;background:var(--ink-a05);
+  border-radius:var(--radius-sm);overflow:hidden;
+}
+.pipeline-bar{
+  height:100%;border-radius:var(--radius-sm);
+  transition:width var(--duration-base) var(--ease-smooth);
+  min-width:2px;
+}
+.pipeline-count{
+  font-family:var(--font-mono);font-size:0.8125rem;font-weight:500;
+  color:var(--text-muted);width:2rem;text-align:left;flex-shrink:0;
+}
+.pipeline-separator{background:var(--border-subtle)}
+@media(max-width:700px){
+  .pipeline-grid{grid-template-columns:1fr;gap:1rem}
+  .pipeline-separator{display:none}
+  .pipeline-label{width:5rem}
+}
 
 .inline-select{
   font-family:var(--font-body);font-size:0.8125rem;
@@ -423,6 +472,43 @@ td.source-cell{font-size:0.8125rem}
   transition:color var(--duration-fast) var(--ease-smooth),background var(--duration-fast) var(--ease-smooth);
 }
 .delete-btn:hover{color:var(--danger);background:rgba(220,69,69,0.08)}
+
+.fav-btn{
+  background:none;border:none;cursor:pointer;
+  font-size:1rem;padding:0.125rem;
+  color:var(--text-faint);line-height:1;
+  transition:color var(--duration-fast) var(--ease-smooth);
+}
+.fav-btn:hover{color:var(--clay)}
+.fav-btn.active{color:var(--clay)}
+th.fav-col{width:2rem;min-width:2rem;cursor:default !important}
+
+.fav-employer{
+  background:none;border:none;cursor:pointer;
+  font-size:0.6875rem;padding:0 0.25rem 0 0;
+  color:var(--border-default);line-height:1;
+  transition:color var(--duration-fast) var(--ease-smooth);
+  vertical-align:middle;
+}
+.fav-employer:hover{color:var(--danger)}
+.fav-employer.active{color:var(--danger)}
+
+.toolbar-toggle{
+  font-family:var(--font-display);
+  font-size:0.8125rem;font-weight:600;
+  padding:0.375rem 0.875rem;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-subtle);
+  background:var(--surface-card);color:var(--text-muted);
+  cursor:pointer;white-space:nowrap;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.toolbar-toggle:hover{border-color:var(--border-hover);color:var(--text-body)}
+.toolbar-toggle.active{
+  background:var(--mint-a10);border-color:var(--mint-a30);color:var(--mint);
+}
+
+tr.hidden-row td{opacity:0.4}
 
 .add-btn{
   font-family:var(--font-display);
@@ -501,7 +587,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   .stats{grid-template-columns:repeat(2,1fr)}
   .hl-grid{grid-template-columns:1fr}
   .toolbar{flex-direction:column}
-  #search,.tracker-search,.result-count,.filter-select{width:100%}
+  #search,.tracker-search,.result-count,.filter-select,.toolbar-toggle{width:100%}
   .result-count{text-align:left;margin-left:0}
   header{padding:0.625rem 0.875rem;flex-wrap:wrap}
   main{padding:1rem 0.625rem 3.75rem}
@@ -598,11 +684,14 @@ td.notes-cell{min-width:10rem;max-width:16rem}
         <select id="source-filter" class="filter-select" onchange="renderTable()">
           <option value="">All sources</option>
         </select>
+        <button class="toolbar-toggle" id="fav-toggle" onclick="toggleShowFav()">★ Favorites</button>
+        <button class="toolbar-toggle" id="hidden-toggle" onclick="toggleShowHidden()">Hidden (0)</button>
         <div class="result-count" id="result-count"></div>
       </div>
       <div class="table-wrap">
         <table>
           <thead><tr>
+            <th class="fav-col"></th>
             <th onclick="sortBy('company')">Company <span class="arrow"></span></th>
             <th onclick="sortBy('title')">Title <span class="arrow"></span></th>
             <th onclick="sortBy('location')">Location <span class="arrow"></span></th>
@@ -626,6 +715,8 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <div class="stat"><div class="n" id="t-offers">0</div><div class="label">Offers</div></div>
     </div>
 
+    <div class="pipeline-section" id="pipeline" style="display:none"></div>
+
     <div class="toolbar">
       <button class="add-btn" onclick="openAddModal()">+ Add Application</button>
       <input type="text" class="tracker-search" id="tracker-search" placeholder="Search tracked applications..." oninput="renderTracker()">
@@ -639,6 +730,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
         <option value="accepted">Accepted</option>
         <option value="rejected">Rejected</option>
         <option value="withdrawn">Withdrawn</option>
+        <option value="ghosted">Ghosted</option>
       </select>
       <div class="result-count" id="tracker-count"></div>
     </div>
@@ -699,6 +791,9 @@ td.notes-cell{min-width:10rem;max-width:16rem}
           <option value="phone_screen">Phone Screen</option>
           <option value="interview">Interview</option>
           <option value="offer">Offer</option>
+          <option value="rejected">Rejected</option>
+          <option value="withdrawn">Withdrawn</option>
+          <option value="ghosted">Ghosted</option>
         </select>
       </div>
       <div class="modal-field">
@@ -721,12 +816,48 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 let allJobs = [];
 let scanErrors = [];
 let scanning = false;
+let scanSource = null;
+let scanId = 0;
 let sortCol = 'company';
 let sortDir = 1;
 let trackedIds = new Set();
 let applications = [];
 const jobsById = new Map();
 const STATIC = typeof STATIC_DATA !== 'undefined';
+
+let hiddenJobs = new Set(JSON.parse(localStorage.getItem('ux-internship-hidden') || '[]'));
+let favJobs = new Set(JSON.parse(localStorage.getItem('ux-internship-fav-jobs') || '[]'));
+let favEmployers = new Set(JSON.parse(localStorage.getItem('ux-internship-fav-employers') || '[]'));
+let showFavOnly = false;
+let showHidden = false;
+function saveHidden() { localStorage.setItem('ux-internship-hidden', JSON.stringify([...hiddenJobs])); }
+function saveFavJobs() { localStorage.setItem('ux-internship-fav-jobs', JSON.stringify([...favJobs])); }
+function saveFavEmployers() { localStorage.setItem('ux-internship-fav-employers', JSON.stringify([...favEmployers])); }
+
+function toggleFavJob(id) {
+  favJobs.has(id) ? favJobs.delete(id) : favJobs.add(id);
+  saveFavJobs(); renderTable(); buildHighlights();
+}
+function toggleFavEmployerByJob(jobId) {
+  const job = jobsById.get(jobId);
+  if (!job) return;
+  favEmployers.has(job.company) ? favEmployers.delete(job.company) : favEmployers.add(job.company);
+  saveFavEmployers(); renderTable(); buildHighlights();
+}
+function toggleHideJob(id) {
+  hiddenJobs.has(id) ? hiddenJobs.delete(id) : hiddenJobs.add(id);
+  saveHidden(); renderTable(); buildHighlights(); updateStats();
+}
+function toggleShowFav() {
+  showFavOnly = !showFavOnly;
+  document.getElementById('fav-toggle').classList.toggle('active', showFavOnly);
+  renderTable();
+}
+function toggleShowHidden() {
+  showHidden = !showHidden;
+  document.getElementById('hidden-toggle').classList.toggle('active', showHidden);
+  renderTable();
+}
 
 const LS_KEY = 'ux-internship-tracker';
 function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch { return []; } }
@@ -765,23 +896,202 @@ function loadStaticData() {
       scanErrors.map(e => '<li style="margin:4px 0">' + esc(e.company) + ': ' + esc(e.error) + '</li>').join('');
   }
 
+}
+
+const PAY_REGEX = /\$\s*[\d,]+(?:\.\d{2})?(?:\s*(?:[-–—\/]|to)\s*\$?\s*[\d,]+(?:\.\d{2})?)?(?:\s*(?:per|\/|an?)\s*(?:hour|hr|yr|year|month|week|annum|annually))?(?:\s*(?:USD|CAD))?(?:\s*(?:per|\/|an?)\s*(?:hour|hr|yr|year|month|week|annum|annually))?/gi;
+
+function extractPay(text) {
+  if (!text) return '';
+  const el = document.createElement('div');
+  el.innerHTML = text;
+  text = el.textContent;
+  const m = [...new Set(text.match(PAY_REGEX) || [])];
+  return m.join('; ');
+}
+
+const CLIENT_LEVEL_RULES = [
+  ['intern', /\bintern(?:ship)?\b|\bco-?op\b|\bextern(?:ship)?\b|\btrainee\b|\bpracticum\b/i],
+  ['fellow', /\bfellow(?:ship)?\b/i],
+  ['apprentice', /\bapprentice(?:ship)?\b/i],
+  ['entry', /\b(?:associate|junior|jr\.?|entry[\s-]level|new[\s-]grad|analyst\s*I\b)/i],
+  ['manager+', /\b(?:manager|director|vp\b|vice\s*president|head\s+of|chief|president)\b/i],
+  ['senior+', /\b(?:senior|sr\.?|lead|staff|principal)\b/i],
+];
+
+function classifyJob(job) {
+  job.level = 'mid';
+  for (const [lbl, pat] of CLIENT_LEVEL_RULES) {
+    if (pat.test(job.title || '')) { job.level = lbl; break; }
+  }
+  const pay = job.pay || '';
+  if (!pay) job.pay_type = '';
+  else if (/(?:per|\/|an?)\s*(?:hour|hr)\b/i.test(pay)) job.pay_type = 'hourly';
+  else if (/(?:per|\/|an?)\s*(?:year|yr|annum|annually)\b/i.test(pay)) job.pay_type = 'salary';
+  else { const a = pay.match(/\$\s*([\d,]+)/); job.pay_type = a && parseInt(a[1].replace(/,/g,'')) > 1000 ? 'salary' : ''; }
+  const emp = (job.commitment || job.employment_type || '').toLowerCase();
+  const tl = (job.title || '').toLowerCase();
+  if (/\bpart[\s-]?time\b/.test(tl) || emp.includes('part-time')) job.schedule = 'part-time';
+  else if (/\bfull[\s-]?time\b/.test(tl) || emp.includes('full-time')) job.schedule = 'full-time';
+  else if (emp.includes('contract') || /\bcontract\b/.test(tl)) job.schedule = 'contract';
+  else job.schedule = '';
+}
+
+const BOARD_FETCH = {
+  greenhouse: async (e) => {
+    const r = await fetch('https://boards-api.greenhouse.io/v1/boards/' + e.slug + '/jobs?content=true');
+    if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+    return ((await r.json()).jobs || []).map(j => ({
+      id: 'gh:' + e.slug + ':' + j.id, title: j.title || '',
+      location: (j.location || {}).name || '', url: j.absolute_url || '',
+      company: e.name, source: 'greenhouse',
+      pay: extractPay(j.content || ''), posted_at: j.updated_at || '',
+    }));
+  },
+  lever: async (e) => {
+    const r = await fetch('https://api.lever.co/v0/postings/' + e.slug + '?mode=json');
+    if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+    return (await r.json()).map(j => {
+      const cats = j.categories || {};
+      let text = [j.descriptionPlain, j.additionalPlain, j.openingPlain].filter(Boolean).join(' ');
+      (j.lists || []).forEach(s => { if (typeof s.content === 'string') text += ' ' + s.content; });
+      return {
+        id: 'lv:' + e.slug + ':' + j.id, title: j.text || '',
+        location: cats.location || '', url: j.hostedUrl || '',
+        company: e.name, source: 'lever', pay: extractPay(text),
+        posted_at: j.createdAt ? new Date(j.createdAt).toISOString() : '',
+        commitment: cats.commitment || '',
+      };
+    });
+  },
+  ashby: async (e) => {
+    const r = await fetch('https://api.ashbyhq.com/posting-api/job-board/' + e.slug);
+    if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+    return ((await r.json()).jobs || []).map(j => ({
+      id: 'ab:' + e.slug + ':' + j.id, title: j.title || '',
+      location: j.location || '', url: j.jobUrl || '',
+      company: e.name, source: 'ashby',
+      pay: j.compensationTierSummary || extractPay(j.descriptionHtml || ''),
+      posted_at: j.publishedAt || '', employment_type: j.employmentType || '',
+    }));
+  },
+  smartrecruiters: async (e) => {
+    const out = []; let off = 0;
+    while (true) {
+      const r = await fetch('https://api.smartrecruiters.com/v1/companies/' + e.slug + '/postings?limit=100&offset=' + off);
+      if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+      const d = await r.json();
+      for (const j of d.content || []) {
+        const loc = j.location || {}, comp = j.compensation || {};
+        let pay = '';
+        if (comp.min || comp.max) {
+          const p = [];
+          if (comp.min) p.push('$' + Number(comp.min).toLocaleString());
+          if (comp.max) p.push('$' + Number(comp.max).toLocaleString());
+          pay = p.join(' - ');
+        }
+        out.push({
+          id: 'sr:' + e.slug + ':' + j.id, title: j.name || '',
+          location: [loc.city, loc.region].filter(Boolean).join(', '),
+          url: 'https://jobs.smartrecruiters.com/' + e.slug + '/' + j.id,
+          company: e.name, source: 'smartrecruiters', pay, posted_at: j.releasedDate || '',
+        });
+      }
+      off += 100;
+      if (off >= (d.totalFound || 0) || !(d.content || []).length) break;
+    }
+    return out;
+  },
+  workday: async (e) => {
+    const base = 'https://' + e.tenant + '.wd' + (e.wd||5) + '.myworkdayjobs.com';
+    const ep = base + '/wday/cxs/' + e.tenant + '/' + e.site + '/jobs';
+    const out = []; let off = 0;
+    while (true) {
+      const r = await fetch(ep, {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ appliedFacets: {}, limit: 20, offset: off, searchText: e.search || 'intern' }),
+      });
+      if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+      const d = await r.json();
+      for (const j of d.jobPostings || []) {
+        const path = j.externalPath || '';
+        out.push({
+          id: 'wd:' + e.tenant + ':' + path, title: j.title || '',
+          location: j.locationsText || '', url: base + '/en-US/' + e.site + path,
+          company: e.name, source: 'workday',
+          pay: String(j.compensationAmount || j.salaryAmount || ''),
+          posted_at: j.postedOn || '',
+        });
+      }
+      off += 20;
+      if (off >= (d.total || 0) || !(d.jobPostings || []).length) break;
+    }
+    return out;
+  },
+};
+
+async function clientScan() {
+  const cfg = STATIC_CONFIG;
+  const titleInc = new RegExp(cfg.title_include.join('|'), 'i');
+  const titleExc = cfg.title_exclude.length ? new RegExp(cfg.title_exclude.join('|'), 'i') : null;
+  const locInc = new RegExp(cfg.location_include.join('|'), 'i');
+  const seen = new Set(allJobs.map(j => j.id));
+  const myId = scanId;
+
+  for (let i = 0; i < cfg.companies.length; i++) {
+    if (scanId !== myId) return;
+    const entry = cfg.companies[i];
+    const company = entry.name || entry.slug || entry.board;
+    document.getElementById('progress-fill').style.width = ((i+1)/cfg.companies.length*100).toFixed(0) + '%';
+    document.getElementById('progress-text').textContent = 'Scanning ' + company + '… (' + (i+1) + '/' + cfg.companies.length + ')';
+
+    const fetcher = BOARD_FETCH[entry.board];
+    if (!fetcher) continue;
+    try {
+      const jobs = await fetcher(entry);
+      const hits = jobs.filter(j => {
+        const t = j.title || '', l = j.location || '';
+        if (!titleInc.test(t)) return false;
+        if (titleExc && titleExc.test(t)) return false;
+        return !l || locInc.test(l);
+      });
+      for (const h of hits) { h.is_new = !seen.has(h.id); classifyJob(h); seen.add(h.id); }
+      if (hits.length) { allJobs.push(...hits); updateStats(); renderTable(); }
+    } catch (e) {
+      scanErrors.push({ company, error: String(e.message || e) });
+    }
+  }
+
+  if (scanId !== myId) return;
+  scanning = false;
   const btn = document.getElementById('scan-btn');
-  const d = new Date(STATIC_DATA.updated_at);
-  btn.disabled = true;
-  btn.querySelector('span').textContent = 'Updated ' + d.toLocaleDateString();
+  btn.classList.remove('loading');
+  btn.querySelector('span').textContent = 'Scan Now';
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-text').textContent = 'Done — ' + allJobs.length + ' matches across ' + cfg.companies.length + ' companies';
+  document.getElementById('s-companies').textContent = cfg.companies.length;
+  updateStats(); buildHighlights(); buildSourceFilter();
+  if (scanErrors.length) {
+    document.getElementById('errors').style.display = 'block';
+    document.getElementById('error-summary').textContent = scanErrors.length + ' error(s)';
+    document.getElementById('error-list').innerHTML =
+      scanErrors.map(e => '<li style="margin:4px 0">' + esc(e.company) + ': ' + esc(e.error) + '</li>').join('');
+  }
+  setTimeout(() => { document.getElementById('progress-fill').style.width = '0%'; document.getElementById('progress-text').style.display = 'none'; }, 3000);
 }
 
 function startScan() {
-  if (STATIC) return;
-  if (scanning) return;
+  if (scanSource) {
+    scanSource.close();
+    scanSource = null;
+  }
+  ++scanId;
   scanning = true;
   allJobs = [];
   scanErrors = [];
 
   const btn = document.getElementById('scan-btn');
   btn.classList.add('loading');
-  btn.disabled = true;
-  btn.querySelector('span').textContent = 'Scanning…';
+  btn.querySelector('span').textContent = 'Restart';
 
   document.getElementById('empty').style.display = 'none';
   document.getElementById('stats').style.display = 'grid';
@@ -795,7 +1105,9 @@ function startScan() {
 
   updateStats();
 
-  const source = new EventSource('/api/scan');
+  if (STATIC) { clientScan(); return; }
+
+  const source = scanSource = new EventSource('/api/scan');
 
   source.addEventListener('progress', e => {
     const d = JSON.parse(e.data);
@@ -820,6 +1132,7 @@ function startScan() {
   source.addEventListener('done', e => {
     const d = JSON.parse(e.data);
     source.close();
+    scanSource = null;
     scanning = false;
 
     btn.classList.remove('loading');
@@ -850,6 +1163,7 @@ function startScan() {
 
   source.onerror = () => {
     source.close();
+    scanSource = null;
     scanning = false;
     btn.classList.remove('loading');
     btn.disabled = false;
@@ -866,7 +1180,7 @@ function updateStats() {
 
 function buildHighlights() {
   const hl = allJobs
-    .filter(j => j.is_new)
+    .filter(j => j.is_new && !hiddenJobs.has(j.id))
     .sort((a, b) => {
       if (a.pay && !b.pay) return -1;
       if (!a.pay && b.pay) return 1;
@@ -918,6 +1232,8 @@ function getFiltered() {
   const pt = document.getElementById('pay-type-filter').value;
   const sched = document.getElementById('schedule-filter').value;
   return allJobs.filter(j => {
+    if (!showHidden && hiddenJobs.has(j.id)) return false;
+    if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
     if (q && !(j.title + j.company + j.location).toLowerCase().includes(q)) return false;
     if (src && j.source !== src) return false;
     if (lvl && j.level !== lvl) return false;
@@ -948,16 +1264,23 @@ function renderTable() {
   const cols = ['company','title','location','pay','posted_at','source'];
   const idx = cols.indexOf(sortCol);
   if (idx >= 0) {
-    const th = document.querySelectorAll('#scanner-tab th')[idx];
+    const th = document.querySelectorAll('#scanner-tab th')[idx + 1];
     th.classList.add('active');
     th.querySelector('.arrow').textContent = sortDir === 1 ? '▲' : '▼';
   }
 
+  const hiddenCount = allJobs.filter(j => hiddenJobs.has(j.id)).length;
+  document.getElementById('hidden-toggle').textContent = 'Hidden (' + hiddenCount + ')';
+
   document.getElementById('tbody').innerHTML = jobs.map(j => {
     jobsById.set(j.id, j);
     const tracked = trackedIds.has(j.id);
-    return '<tr>' +
-    '<td>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
+    const isFav = favJobs.has(j.id);
+    const isEmpFav = favEmployers.has(j.company);
+    const isHidden = hiddenJobs.has(j.id);
+    return '<tr' + (isHidden ? ' class="hidden-row"' : '') + '>' +
+    '<td><button class="fav-btn' + (isFav ? ' active' : '') + '" onclick="toggleFavJob(\'' + escAttr(j.id) + '\')" title="Favorite job">' + (isFav ? '★' : '☆') + '</button></td>' +
+    '<td><button class="fav-employer' + (isEmpFav ? ' active' : '') + '" onclick="toggleFavEmployerByJob(\'' + escAttr(j.id) + '\')" title="Favorite employer">♥</button>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
     '<td class="title-cell">' + levelBadge(j.level) + ' <a href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">' + esc(j.title) + '<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">(opens in new tab)</span></a></td>' +
     '<td class="loc-cell">' + esc(j.location || '—') + '</td>' +
     '<td class="pay-cell">' + (j.pay ? '<span class="pay-text">' + esc(j.pay) + '</span>' + (j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
@@ -966,6 +1289,7 @@ function renderTable() {
     '<td>' + (tracked
       ? '<button class="track-btn" disabled>Tracked</button>'
       : '<button class="track-btn" onclick="trackJob(this,\'' + escAttr(j.id) + '\')">Track</button>') +
+    ' <button class="delete-btn" onclick="toggleHideJob(\'' + escAttr(j.id) + '\')" title="' + (isHidden ? 'Unhide' : 'Hide') + '">' + (isHidden ? '◉' : '⊘') + '</button>' +
     '</td></tr>';
   }).join('');
 }
@@ -999,8 +1323,13 @@ function trackJob(btn, jobId) {
     lsSave(applications);
     trackedIds.add(job.id);
     btn.textContent = 'Tracked';
+    updateTrackerStats();
+    renderTracker();
     return;
   }
+
+  trackedIds.add(job.id);
+  btn.textContent = 'Tracked';
 
   fetch('/api/applications', {
     method: 'POST',
@@ -1016,11 +1345,17 @@ function trackJob(btn, jobId) {
     }),
   })
   .then(r => r.json())
-  .then(() => {
-    trackedIds.add(job.id);
-    btn.textContent = 'Tracked';
+  .then(data => {
+    applications.push({
+      id: data.id, job_id: job.id, company: job.company, title: job.title,
+      url: job.url || '', location: job.location || '', pay: job.pay || '',
+      status: 'saved', applied_at: '', notes: '',
+    });
+    updateTrackerStats();
+    renderTracker();
   })
   .catch(() => {
+    trackedIds.delete(job.id);
     btn.disabled = false;
     btn.textContent = 'Track';
   });
@@ -1059,10 +1394,60 @@ function updateTrackerStats() {
 const STATUS_LABELS = {
   saved:'Saved', applied:'Applied', phone_screen:'Phone Screen',
   interview:'Interview', offer:'Offer', accepted:'Accepted',
-  rejected:'Rejected', withdrawn:'Withdrawn'
+  rejected:'Rejected', withdrawn:'Withdrawn', ghosted:'Ghosted'
 };
 
+const PIPELINE_COLORS = {
+  saved:'var(--sky)', applied:'var(--mint)', phone_screen:'var(--clay)',
+  interview:'#b5723d', offer:'#1e8a5a', accepted:'var(--mint)',
+  rejected:'var(--danger)', withdrawn:'var(--text-faint)', ghosted:'#7c3aed'
+};
+
+function renderPipeline() {
+  const el = document.getElementById('pipeline');
+  if (!applications.length) { el.style.display = 'none'; return; }
+  el.style.display = 'block';
+
+  const stages = ['saved','applied','phone_screen','interview','offer','accepted'];
+  const outcomes = ['rejected','withdrawn','ghosted'];
+  const counts = {};
+  [...stages, ...outcomes].forEach(s => counts[s] = 0);
+  applications.forEach(a => { if (counts[a.status] !== undefined) counts[a.status]++; });
+
+  const maxPipeline = Math.max(1, ...stages.map(s => counts[s]));
+  const maxOutcome = Math.max(1, ...outcomes.map(s => counts[s]));
+
+  function row(status, max) {
+    const pct = Math.max(2, counts[status] / max * 100).toFixed(1);
+    const active = document.getElementById('tracker-status-filter').value === status;
+    return '<div class="pipeline-row' + (active ? ' active' : '') + '" onclick="filterByStatus(\'' + status + '\')">' +
+      '<div class="pipeline-label">' + STATUS_LABELS[status] + '</div>' +
+      '<div class="pipeline-bar-track"><div class="pipeline-bar" style="width:' + pct + '%;background:' + PIPELINE_COLORS[status] + '"></div></div>' +
+      '<div class="pipeline-count">' + counts[status] + '</div></div>';
+  }
+
+  el.innerHTML =
+    '<div class="pipeline-grid">' +
+      '<div class="pipeline-group">' +
+        '<div class="pipeline-group-title">Pipeline</div>' +
+        '<div class="pipeline-funnel">' + stages.map(s => row(s, maxPipeline)).join('') + '</div>' +
+      '</div>' +
+      '<div class="pipeline-separator"></div>' +
+      '<div class="pipeline-group">' +
+        '<div class="pipeline-group-title">Outcomes</div>' +
+        '<div class="pipeline-funnel">' + outcomes.map(s => row(s, maxOutcome)).join('') + '</div>' +
+      '</div>' +
+    '</div>';
+}
+
+function filterByStatus(status) {
+  const sel = document.getElementById('tracker-status-filter');
+  sel.value = sel.value === status ? '' : status;
+  renderTracker();
+}
+
 function renderTracker() {
+  renderPipeline();
   const q = document.getElementById('tracker-search').value.toLowerCase();
   const sf = document.getElementById('tracker-status-filter').value;
   const filtered = applications.filter(a => {
@@ -1125,23 +1510,17 @@ function updateApp(id, field, value) {
 }
 
 function deleteApp(id) {
+  const app = applications.find(a => a.id === id);
+  if (app && app.job_id) trackedIds.delete(app.job_id);
+  applications = applications.filter(a => a.id !== id);
+  updateTrackerStats();
+  renderTracker();
+  renderTable();
   if (STATIC) {
-    const app = applications.find(a => a.id === id);
-    if (app && app.job_id) trackedIds.delete(app.job_id);
-    applications = applications.filter(a => a.id !== id);
     lsSave(applications);
-    updateTrackerStats();
-    renderTracker();
-    return;
+  } else {
+    fetch('/api/applications/' + id, { method: 'DELETE' });
   }
-  fetch('/api/applications/' + id, { method: 'DELETE' })
-    .then(() => {
-      const app = applications.find(a => a.id === id);
-      if (app && app.job_id) trackedIds.delete(app.job_id);
-      applications = applications.filter(a => a.id !== id);
-      updateTrackerStats();
-      renderTracker();
-    });
 }
 
 function openAddModal() {

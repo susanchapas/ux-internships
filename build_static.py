@@ -108,9 +108,12 @@ def build():
         "updated_at": now,
     }, default=str)
 
+    cfg = load_json(CONFIG_PATH, None)
+    config_json = json.dumps(cfg)
+
     html = DASHBOARD.read_text()
 
-    static_script = f"<script>const STATIC_DATA = {static_data};</script>\n<script>"
+    static_script = f"<script>const STATIC_DATA = {static_data};\nconst STATIC_CONFIG = {config_json};</script>\n<script>"
     html = html.replace("<script>", static_script, 1)
 
     OUT_DIR.mkdir(exist_ok=True)
