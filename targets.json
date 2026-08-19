@@ -1,0 +1,1487 @@
+{
+  "_readme": "Target list for resolve.py. 'hint' = a likely ATS slug worth trying first (still verified, never trusted). 'board'/'tenant' = known-good config, skips resolution. 'portal' = not on a standard ATS; use the URL manually. Priority: 1=apply first, 2=strong, 3=wide net.",
+  "categories": {
+    "fintech_mission": {
+      "label": "Mission-driven fintech / financial inclusion",
+      "note": "Your Spring Bank CDFI background is a direct, uncommon match here. Lead with these.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "Esusu",
+          "hint": "esusu",
+          "note": "Rent reporting for credit building. NYC."
+        },
+        {
+          "name": "Propel",
+          "hint": "propel",
+          "note": "Providers/EBT app. Brooklyn. Heavy UX research culture."
+        },
+        {
+          "name": "Nova Credit",
+          "hint": "novacredit",
+          "note": "Cross-border credit. NYC."
+        },
+        {
+          "name": "MoCaFi",
+          "hint": "mocafi",
+          "note": "Banking for underserved. Jersey City."
+        },
+        {
+          "name": "Self Financial",
+          "hint": "selffinancial"
+        },
+        {
+          "name": "Oportun",
+          "hint": "oportun"
+        },
+        {
+          "name": "Kiva",
+          "hint": "kiva"
+        },
+        {
+          "name": "Accion",
+          "hint": "accion"
+        },
+        {
+          "name": "LendingClub",
+          "hint": "lendingclub"
+        },
+        {
+          "name": "Greenwood",
+          "hint": "greenwood"
+        },
+        {
+          "name": "Stash",
+          "hint": "stash",
+          "note": "NYC. Financial literacy focus."
+        },
+        {
+          "name": "Petal",
+          "hint": "petal",
+          "note": "NYC. Thin-file credit."
+        },
+        {
+          "name": "Current",
+          "hint": "current",
+          "note": "NYC."
+        },
+        {
+          "name": "MoneyLion",
+          "hint": "moneylion",
+          "note": "NYC."
+        },
+        {
+          "name": "Varo",
+          "hint": "varobank"
+        },
+        {
+          "name": "Dave",
+          "hint": "dave"
+        },
+        {
+          "name": "SoFi",
+          "hint": "sofi"
+        },
+        {
+          "name": "Upstart",
+          "hint": "upstart"
+        },
+        {
+          "name": "Grameen America",
+          "hint": "grameenamerica",
+          "note": "NYC. Microfinance nonprofit."
+        },
+        {
+          "name": "Community Reinvestment Fund",
+          "hint": "crfusa"
+        }
+      ]
+    },
+    "fintech_core": {
+      "label": "Fintech / payments / wealth",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "Stripe",
+          "hint": "stripe"
+        },
+        {
+          "name": "Plaid",
+          "hint": "plaid"
+        },
+        {
+          "name": "Block",
+          "hint": "block",
+          "note": "formerly Square"
+        },
+        {
+          "name": "Ramp",
+          "hint": "ramp",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Brex",
+          "hint": "brex"
+        },
+        {
+          "name": "Mercury",
+          "hint": "mercury"
+        },
+        {
+          "name": "Betterment",
+          "hint": "betterment",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Wealthfront",
+          "hint": "wealthfront"
+        },
+        {
+          "name": "Chime",
+          "hint": "chime"
+        },
+        {
+          "name": "Affirm",
+          "hint": "affirm"
+        },
+        {
+          "name": "Marqeta",
+          "hint": "marqeta"
+        },
+        {
+          "name": "Melio",
+          "hint": "melio",
+          "note": "NYC"
+        },
+        {
+          "name": "Alloy",
+          "hint": "alloy",
+          "note": "NYC"
+        },
+        {
+          "name": "Lithic",
+          "hint": "lithic",
+          "note": "NYC"
+        },
+        {
+          "name": "Unit",
+          "hint": "unit"
+        },
+        {
+          "name": "Modern Treasury",
+          "hint": "moderntreasury"
+        },
+        {
+          "name": "Column",
+          "hint": "column"
+        },
+        {
+          "name": "Public",
+          "hint": "public",
+          "note": "NYC"
+        },
+        {
+          "name": "Robinhood",
+          "hint": "robinhood"
+        },
+        {
+          "name": "Coinbase",
+          "hint": "coinbase"
+        },
+        {
+          "name": "Acorns",
+          "hint": "acorns"
+        },
+        {
+          "name": "Payoneer",
+          "hint": "payoneer",
+          "note": "NYC"
+        },
+        {
+          "name": "Wise",
+          "hint": "wise"
+        },
+        {
+          "name": "Remitly",
+          "hint": "remitly"
+        },
+        {
+          "name": "Flywire",
+          "hint": "flywire"
+        },
+        {
+          "name": "Bill",
+          "hint": "billcom"
+        },
+        {
+          "name": "Toast",
+          "hint": "toast"
+        },
+        {
+          "name": "Gusto",
+          "hint": "gusto"
+        },
+        {
+          "name": "Rippling",
+          "hint": "rippling"
+        },
+        {
+          "name": "Deel",
+          "hint": "deel"
+        },
+        {
+          "name": "Navan",
+          "hint": "navan"
+        },
+        {
+          "name": "Addepar",
+          "hint": "addepar"
+        },
+        {
+          "name": "Carta",
+          "hint": "carta"
+        },
+        {
+          "name": "Vestwell",
+          "hint": "vestwell",
+          "note": "NYC"
+        },
+        {
+          "name": "Justworks",
+          "hint": "justworks",
+          "note": "NYC"
+        }
+      ]
+    },
+    "banks_insurance": {
+      "label": "Banks, insurers, exchanges (Fortune 500)",
+      "note": "Mostly Workday or Taleo. Formal summer analyst programs, apply Aug-Oct.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "JPMorgan Chase",
+          "note": "NYC. Large design org."
+        },
+        {
+          "name": "Goldman Sachs",
+          "note": "NYC"
+        },
+        {
+          "name": "Morgan Stanley",
+          "note": "NYC"
+        },
+        {
+          "name": "Citi",
+          "note": "NYC"
+        },
+        {
+          "name": "Bank of America",
+          "note": "NYC offices"
+        },
+        {
+          "name": "American Express",
+          "note": "NYC. Strong UX team."
+        },
+        {
+          "name": "BlackRock",
+          "note": "NYC. Aladdin design."
+        },
+        {
+          "name": "Capital One",
+          "note": "Big design org, formal UX internship"
+        },
+        {
+          "name": "Charles Schwab"
+        },
+        {
+          "name": "Prudential Financial",
+          "note": "Newark NJ HQ"
+        },
+        {
+          "name": "MetLife",
+          "note": "NYC"
+        },
+        {
+          "name": "New York Life",
+          "note": "NYC"
+        },
+        {
+          "name": "TIAA",
+          "note": "NYC"
+        },
+        {
+          "name": "Chubb",
+          "note": "Jersey City / Warren NJ"
+        },
+        {
+          "name": "AIG",
+          "note": "NYC"
+        },
+        {
+          "name": "Marsh McLennan",
+          "note": "NYC"
+        },
+        {
+          "name": "Travelers"
+        },
+        {
+          "name": "Nasdaq",
+          "note": "NYC"
+        },
+        {
+          "name": "Intercontinental Exchange",
+          "note": "NYSE parent"
+        },
+        {
+          "name": "S&P Global",
+          "note": "NYC"
+        },
+        {
+          "name": "Moody's",
+          "note": "NYC"
+        },
+        {
+          "name": "Mastercard",
+          "note": "Purchase NY / Harrison NY"
+        },
+        {
+          "name": "Visa"
+        },
+        {
+          "name": "Discover"
+        },
+        {
+          "name": "Synchrony"
+        },
+        {
+          "name": "Ally"
+        },
+        {
+          "name": "Fidelity Investments"
+        },
+        {
+          "name": "Vanguard",
+          "note": "Malvern PA"
+        },
+        {
+          "name": "Northwestern Mutual"
+        },
+        {
+          "name": "Federal Reserve Bank of New York",
+          "hint": "newyorkfed",
+          "note": "NYC. Directly relevant to your CDFI background.",
+          "priority": 1
+        }
+      ],
+      "expect_workday": true
+    },
+    "quant_trading": {
+      "label": "Quant / trading",
+      "note": "Design and research roles exist but are few; internships pay extremely well.",
+      "priority": 3,
+      "companies": [
+        {
+          "name": "Two Sigma",
+          "hint": "twosigma",
+          "note": "NYC"
+        },
+        {
+          "name": "Jane Street",
+          "hint": "janestreet",
+          "note": "NYC"
+        },
+        {
+          "name": "Citadel",
+          "hint": "citadel"
+        },
+        {
+          "name": "Point72",
+          "hint": "point72",
+          "note": "Stamford CT"
+        },
+        {
+          "name": "Millennium",
+          "hint": "millennium"
+        },
+        {
+          "name": "DE Shaw",
+          "hint": "deshaw",
+          "note": "NYC"
+        },
+        {
+          "name": "Virtu Financial",
+          "hint": "virtu",
+          "note": "NYC"
+        },
+        {
+          "name": "Bridgewater Associates",
+          "hint": "bridgewater",
+          "note": "Westport CT"
+        },
+        {
+          "name": "AQR Capital",
+          "hint": "aqr",
+          "note": "Greenwich CT"
+        },
+        {
+          "name": "IMC Trading",
+          "hint": "imc"
+        },
+        {
+          "name": "Optiver",
+          "hint": "optiver"
+        },
+        {
+          "name": "Susquehanna",
+          "hint": "sig"
+        }
+      ]
+    },
+    "ux_agencies": {
+      "label": "UX / design / digital product agencies",
+      "note": "Many small studios hire via portfolio email, not ATS. Where resolve.py finds nothing, that usually means no ATS rather than no internship. Email the studio directly.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "IDEO",
+          "hint": "ideo"
+        },
+        {
+          "name": "Work and Co",
+          "hint": "workandco",
+          "note": "Brooklyn. Top-tier product design."
+        },
+        {
+          "name": "Huge",
+          "hint": "hugeinc",
+          "note": "Brooklyn"
+        },
+        {
+          "name": "R/GA",
+          "hint": "rga",
+          "note": "NYC"
+        },
+        {
+          "name": "AKQA",
+          "hint": "akqa",
+          "note": "NYC"
+        },
+        {
+          "name": "Code and Theory",
+          "hint": "codeandtheory",
+          "note": "NYC"
+        },
+        {
+          "name": "Instrument",
+          "hint": "instrument"
+        },
+        {
+          "name": "Fantasy",
+          "hint": "fantasy"
+        },
+        {
+          "name": "Big Human",
+          "hint": "bighuman",
+          "note": "NYC"
+        },
+        {
+          "name": "Barrel",
+          "hint": "barrel",
+          "note": "NYC"
+        },
+        {
+          "name": "Athletics",
+          "hint": "athletics",
+          "note": "Brooklyn"
+        },
+        {
+          "name": "Collins",
+          "hint": "collins",
+          "note": "NYC. Brand + experience."
+        },
+        {
+          "name": "Pentagram",
+          "hint": "pentagram",
+          "note": "NYC. Apply direct, no ATS."
+        },
+        {
+          "name": "Local Projects",
+          "hint": "localprojects",
+          "note": "NYC. Museum/exhibit UX."
+        },
+        {
+          "name": "ustwo",
+          "hint": "ustwo",
+          "note": "NYC"
+        },
+        {
+          "name": "Thoughtbot",
+          "hint": "thoughtbot"
+        },
+        {
+          "name": "Viget",
+          "hint": "viget"
+        },
+        {
+          "name": "Rangle",
+          "hint": "rangle"
+        },
+        {
+          "name": "Metalab",
+          "hint": "metalab"
+        },
+        {
+          "name": "Lippincott",
+          "hint": "lippincott",
+          "note": "NYC"
+        },
+        {
+          "name": "Siegel+Gale",
+          "hint": "siegelgale",
+          "note": "NYC"
+        },
+        {
+          "name": "Interbrand",
+          "hint": "interbrand",
+          "note": "NYC"
+        },
+        {
+          "name": "Landor",
+          "hint": "landor"
+        },
+        {
+          "name": "Prophet",
+          "hint": "prophet"
+        },
+        {
+          "name": "Droga5",
+          "hint": "droga5",
+          "note": "NYC, part of Accenture Song"
+        },
+        {
+          "name": "Anomaly",
+          "hint": "anomaly",
+          "note": "NYC"
+        },
+        {
+          "name": "Wieden+Kennedy",
+          "hint": "wk",
+          "note": "NYC office"
+        },
+        {
+          "name": "Ogilvy",
+          "hint": "ogilvy",
+          "note": "NYC"
+        },
+        {
+          "name": "Publicis Sapient",
+          "hint": "publicissapient"
+        },
+        {
+          "name": "Dentsu",
+          "hint": "dentsu"
+        },
+        {
+          "name": "EPAM",
+          "hint": "epam",
+          "note": "EPAM Continuum does design consulting"
+        },
+        {
+          "name": "Designit",
+          "hint": "designit",
+          "note": "Wipro-owned"
+        },
+        {
+          "name": "Slalom",
+          "hint": "slalom"
+        }
+      ]
+    },
+    "civic_tech": {
+      "label": "Civic tech / government contractors",
+      "note": "These build government services and hire UX researchers heavily. Strong fit for public-interest work, and they DO use standard ATS unlike actual agencies.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "Nava PBC",
+          "hint": "nava",
+          "note": "Public benefit corp. Medicare/VA work."
+        },
+        {
+          "name": "Ad Hoc",
+          "hint": "adhocteam",
+          "note": "VA.gov, healthcare.gov"
+        },
+        {
+          "name": "Skylight",
+          "hint": "skylight"
+        },
+        {
+          "name": "Coforma",
+          "hint": "coforma"
+        },
+        {
+          "name": "Truss",
+          "hint": "truss"
+        },
+        {
+          "name": "Bloom Works",
+          "hint": "bloomworks"
+        },
+        {
+          "name": "Fearless",
+          "hint": "fearless",
+          "note": "Baltimore"
+        },
+        {
+          "name": "Civilla",
+          "hint": "civilla",
+          "note": "Detroit. Benefits redesign research."
+        },
+        {
+          "name": "Code for America",
+          "hint": "codeforamerica",
+          "note": "Nonprofit. Fellowships + internships."
+        },
+        {
+          "name": "U.S. Digital Response",
+          "hint": "usdigitalresponse",
+          "note": "Volunteer-based nonprofit"
+        },
+        {
+          "name": "Mozilla",
+          "hint": "mozilla"
+        },
+        {
+          "name": "Wikimedia Foundation",
+          "hint": "wikimedia"
+        },
+        {
+          "name": "ProPublica",
+          "hint": "propublica",
+          "note": "NYC. Has paid internships."
+        },
+        {
+          "name": "Consumer Reports",
+          "hint": "consumerreports",
+          "note": "Yonkers NY. UX research on financial products."
+        },
+        {
+          "name": "Sesame Workshop",
+          "hint": "sesameworkshop",
+          "note": "NYC. Child-facing design research."
+        }
+      ]
+    },
+    "accessibility": {
+      "label": "Accessibility / assistive tech",
+      "note": "Directly continuous with your smart-glasses research lab work.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "Be My Eyes",
+          "hint": "bemyeyes"
+        },
+        {
+          "name": "Fable",
+          "hint": "fable",
+          "note": "Accessibility user research platform. Remote-friendly."
+        },
+        {
+          "name": "Level Access",
+          "hint": "levelaccess"
+        },
+        {
+          "name": "Deque Systems",
+          "hint": "deque"
+        },
+        {
+          "name": "TPGi",
+          "hint": "tpgi"
+        },
+        {
+          "name": "Aira",
+          "hint": "aira"
+        },
+        {
+          "name": "Vispero",
+          "hint": "vispero",
+          "note": "JAWS/ZoomText"
+        },
+        {
+          "name": "Lighthouse Guild",
+          "hint": "lighthouseguild",
+          "note": "NYC. Blind/low-vision services."
+        },
+        {
+          "name": "Helen Keller Services",
+          "hint": "helenkeller",
+          "note": "Brooklyn"
+        },
+        {
+          "name": "American Foundation for the Blind",
+          "hint": "afb"
+        }
+      ]
+    },
+    "big_tech": {
+      "label": "Big tech (NYC offices)",
+      "note": "Most have dedicated UX research + product design internship tracks with early deadlines.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "Google",
+          "note": "NYC Chelsea. UX Research Intern is a named program."
+        },
+        {
+          "name": "Meta",
+          "note": "NYC. UX Research + Product Design internships."
+        },
+        {
+          "name": "Amazon",
+          "note": "NYC"
+        },
+        {
+          "name": "Apple",
+          "note": "NYC"
+        },
+        {
+          "name": "Microsoft",
+          "note": "NYC. Strong inclusive-design practice."
+        },
+        {
+          "name": "IBM",
+          "note": "Armonk NY + NYC. IBM iX design internship."
+        },
+        {
+          "name": "Adobe",
+          "note": "NYC"
+        },
+        {
+          "name": "Salesforce",
+          "note": "NYC"
+        },
+        {
+          "name": "Oracle"
+        },
+        {
+          "name": "Intuit",
+          "note": "Strong design org"
+        },
+        {
+          "name": "LinkedIn",
+          "note": "NYC"
+        },
+        {
+          "name": "Spotify",
+          "hint": "spotify",
+          "note": "NYC HQ for Americas"
+        },
+        {
+          "name": "Netflix",
+          "hint": "netflix",
+          "note": "NYC office"
+        },
+        {
+          "name": "Uber",
+          "hint": "uber",
+          "note": "NYC"
+        },
+        {
+          "name": "Lyft",
+          "hint": "lyft",
+          "note": "NYC"
+        },
+        {
+          "name": "Airbnb",
+          "hint": "airbnb"
+        },
+        {
+          "name": "Pinterest",
+          "hint": "pinterest"
+        },
+        {
+          "name": "Reddit",
+          "hint": "reddit",
+          "note": "NYC"
+        },
+        {
+          "name": "Snap",
+          "hint": "snap",
+          "note": "NYC"
+        },
+        {
+          "name": "Discord",
+          "hint": "discord"
+        },
+        {
+          "name": "Datadog",
+          "hint": "datadog",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "MongoDB",
+          "hint": "mongodb",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Squarespace",
+          "hint": "squarespace",
+          "note": "NYC HQ. Design-led."
+        },
+        {
+          "name": "Etsy",
+          "hint": "etsy",
+          "note": "Brooklyn HQ"
+        },
+        {
+          "name": "Peloton",
+          "hint": "peloton",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Warby Parker",
+          "hint": "warbyparker",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Vimeo",
+          "hint": "vimeo",
+          "note": "NYC"
+        },
+        {
+          "name": "Kickstarter",
+          "hint": "kickstarter",
+          "note": "Brooklyn"
+        },
+        {
+          "name": "Braze",
+          "hint": "braze",
+          "note": "NYC"
+        },
+        {
+          "name": "Yext",
+          "hint": "yext",
+          "note": "NYC"
+        },
+        {
+          "name": "DoubleVerify",
+          "hint": "doubleverify",
+          "note": "NYC"
+        }
+      ],
+      "expect_workday": true
+    },
+    "product_saas": {
+      "label": "Product / SaaS companies known for design",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Figma",
+          "hint": "figma",
+          "note": "NYC office"
+        },
+        {
+          "name": "Notion",
+          "hint": "notion"
+        },
+        {
+          "name": "Canva",
+          "hint": "canva"
+        },
+        {
+          "name": "Atlassian",
+          "hint": "atlassian"
+        },
+        {
+          "name": "Asana",
+          "hint": "asana"
+        },
+        {
+          "name": "Miro",
+          "hint": "miro"
+        },
+        {
+          "name": "Airtable",
+          "hint": "airtable"
+        },
+        {
+          "name": "Webflow",
+          "hint": "webflow"
+        },
+        {
+          "name": "Framer",
+          "hint": "framer"
+        },
+        {
+          "name": "Vercel",
+          "hint": "vercel"
+        },
+        {
+          "name": "Linear",
+          "hint": "linear"
+        },
+        {
+          "name": "Retool",
+          "hint": "retool"
+        },
+        {
+          "name": "Zapier",
+          "hint": "zapier"
+        },
+        {
+          "name": "Twilio",
+          "hint": "twilio"
+        },
+        {
+          "name": "Amplitude",
+          "hint": "amplitude"
+        },
+        {
+          "name": "Mixpanel",
+          "hint": "mixpanel"
+        },
+        {
+          "name": "Klaviyo",
+          "hint": "klaviyo"
+        },
+        {
+          "name": "HubSpot",
+          "hint": "hubspot"
+        },
+        {
+          "name": "Dropbox",
+          "hint": "dropbox"
+        },
+        {
+          "name": "Zoom",
+          "hint": "zoom"
+        },
+        {
+          "name": "Duolingo",
+          "hint": "duolingo",
+          "note": "Design-heavy culture"
+        },
+        {
+          "name": "Shopify",
+          "hint": "shopify"
+        },
+        {
+          "name": "Wix",
+          "hint": "wix",
+          "note": "NYC office"
+        },
+        {
+          "name": "DoorDash",
+          "hint": "doordash",
+          "note": "NYC"
+        },
+        {
+          "name": "Instacart",
+          "hint": "instacart"
+        },
+        {
+          "name": "Bumble",
+          "hint": "bumble"
+        },
+        {
+          "name": "Hinge",
+          "hint": "hinge",
+          "note": "NYC"
+        },
+        {
+          "name": "Substack",
+          "hint": "substack"
+        },
+        {
+          "name": "Patreon",
+          "hint": "patreon"
+        },
+        {
+          "name": "Calm",
+          "hint": "calm"
+        },
+        {
+          "name": "Headspace",
+          "hint": "headspace"
+        }
+      ]
+    },
+    "pharma_nj": {
+      "label": "Pharma / life sciences (heavy NJ presence)",
+      "note": "NJ is the densest pharma corridor in the country. Large digital/UX teams, commutable from Bayonne.",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Johnson & Johnson",
+          "note": "New Brunswick NJ"
+        },
+        {
+          "name": "Merck",
+          "note": "Rahway NJ"
+        },
+        {
+          "name": "Bristol Myers Squibb",
+          "note": "Princeton NJ"
+        },
+        {
+          "name": "Pfizer",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Novartis",
+          "note": "East Hanover NJ"
+        },
+        {
+          "name": "Sanofi",
+          "note": "Bridgewater NJ"
+        },
+        {
+          "name": "Bayer",
+          "note": "Whippany NJ"
+        },
+        {
+          "name": "Organon",
+          "note": "Jersey City NJ"
+        },
+        {
+          "name": "Becton Dickinson",
+          "note": "Franklin Lakes NJ"
+        },
+        {
+          "name": "Novo Nordisk",
+          "note": "Plainsboro NJ"
+        },
+        {
+          "name": "Regeneron",
+          "note": "Tarrytown NY"
+        },
+        {
+          "name": "Eli Lilly"
+        },
+        {
+          "name": "Takeda"
+        },
+        {
+          "name": "GSK"
+        },
+        {
+          "name": "AstraZeneca"
+        }
+      ],
+      "expect_workday": true
+    },
+    "health_tech": {
+      "label": "Health tech (NYC-dense)",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Oscar Health",
+          "hint": "oscarhealth",
+          "note": "NYC HQ"
+        },
+        {
+          "name": "Cedar",
+          "hint": "cedar",
+          "note": "NYC"
+        },
+        {
+          "name": "Ro",
+          "hint": "ro",
+          "note": "NYC"
+        },
+        {
+          "name": "Zocdoc",
+          "hint": "zocdoc",
+          "note": "NYC"
+        },
+        {
+          "name": "Talkspace",
+          "hint": "talkspace",
+          "note": "NYC"
+        },
+        {
+          "name": "Headway",
+          "hint": "headway",
+          "note": "NYC"
+        },
+        {
+          "name": "Spring Health",
+          "hint": "springhealth",
+          "note": "NYC"
+        },
+        {
+          "name": "Alma",
+          "hint": "alma",
+          "note": "NYC"
+        },
+        {
+          "name": "Maven Clinic",
+          "hint": "mavenclinic",
+          "note": "NYC"
+        },
+        {
+          "name": "K Health",
+          "hint": "khealth",
+          "note": "NYC"
+        },
+        {
+          "name": "Flatiron Health",
+          "hint": "flatironhealth",
+          "note": "NYC"
+        },
+        {
+          "name": "Kindbody",
+          "hint": "kindbody",
+          "note": "NYC"
+        },
+        {
+          "name": "Included Health",
+          "hint": "includedhealth"
+        },
+        {
+          "name": "Hinge Health",
+          "hint": "hingehealth"
+        },
+        {
+          "name": "Omada Health",
+          "hint": "omadahealth"
+        },
+        {
+          "name": "Komodo Health",
+          "hint": "komodohealth"
+        }
+      ]
+    },
+    "media_retail_cpg": {
+      "label": "Media, retail, CPG (Fortune 500, NY/NJ)",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Verizon",
+          "note": "Basking Ridge NJ"
+        },
+        {
+          "name": "Comcast NBCUniversal",
+          "note": "NYC"
+        },
+        {
+          "name": "Warner Bros Discovery",
+          "note": "NYC"
+        },
+        {
+          "name": "Paramount",
+          "note": "NYC"
+        },
+        {
+          "name": "The Walt Disney Company",
+          "note": "NYC (ABC, ESPN)"
+        },
+        {
+          "name": "The New York Times",
+          "hint": "nytimes",
+          "note": "NYC. Real design internship."
+        },
+        {
+          "name": "Bloomberg",
+          "hint": "bloomberg",
+          "note": "NYC. Large design org."
+        },
+        {
+          "name": "Cond\u00e9 Nast",
+          "note": "NYC"
+        },
+        {
+          "name": "Hearst",
+          "note": "NYC"
+        },
+        {
+          "name": "News Corp",
+          "note": "NYC"
+        },
+        {
+          "name": "PepsiCo",
+          "note": "Purchase NY"
+        },
+        {
+          "name": "Colgate-Palmolive",
+          "note": "NYC + Piscataway NJ"
+        },
+        {
+          "name": "Unilever",
+          "note": "Englewood Cliffs NJ"
+        },
+        {
+          "name": "Est\u00e9e Lauder",
+          "note": "NYC"
+        },
+        {
+          "name": "L'Oreal USA",
+          "note": "NYC + Clark NJ"
+        },
+        {
+          "name": "Mondelez"
+        },
+        {
+          "name": "Campbell's",
+          "note": "Camden NJ"
+        },
+        {
+          "name": "Church & Dwight",
+          "note": "Ewing NJ"
+        },
+        {
+          "name": "Macy's",
+          "note": "NYC"
+        },
+        {
+          "name": "Ralph Lauren",
+          "note": "NYC"
+        },
+        {
+          "name": "Tapestry",
+          "note": "NYC. Coach/Kate Spade."
+        },
+        {
+          "name": "PVH",
+          "note": "NYC. Calvin Klein/Tommy Hilfiger."
+        },
+        {
+          "name": "Foot Locker",
+          "note": "NY"
+        },
+        {
+          "name": "Wayfair"
+        },
+        {
+          "name": "ADP",
+          "note": "Roseland NJ"
+        },
+        {
+          "name": "Cognizant",
+          "note": "Teaneck NJ"
+        },
+        {
+          "name": "Prudential",
+          "note": "Newark NJ"
+        },
+        {
+          "name": "JetBlue",
+          "note": "Long Island City NY"
+        },
+        {
+          "name": "United Airlines"
+        },
+        {
+          "name": "Delta Air Lines"
+        },
+        {
+          "name": "Marriott"
+        },
+        {
+          "name": "Hilton"
+        },
+        {
+          "name": "Booking Holdings",
+          "note": "Norwalk CT"
+        }
+      ],
+      "expect_workday": true
+    },
+    "consulting": {
+      "label": "Consulting (design + digital arms)",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Deloitte",
+          "note": "Deloitte Digital"
+        },
+        {
+          "name": "Accenture",
+          "note": "Accenture Song absorbed Fjord + Droga5"
+        },
+        {
+          "name": "McKinsey",
+          "note": "McKinsey Design"
+        },
+        {
+          "name": "Boston Consulting Group",
+          "note": "BCG X"
+        },
+        {
+          "name": "Bain",
+          "note": "Bain Vector"
+        },
+        {
+          "name": "EY"
+        },
+        {
+          "name": "PwC"
+        },
+        {
+          "name": "KPMG"
+        },
+        {
+          "name": "Gartner",
+          "note": "Stamford CT"
+        },
+        {
+          "name": "ZS Associates"
+        }
+      ],
+      "expect_workday": true
+    },
+    "edtech": {
+      "label": "Edtech",
+      "priority": 3,
+      "companies": [
+        {
+          "name": "Coursera",
+          "hint": "coursera"
+        },
+        {
+          "name": "Udemy",
+          "hint": "udemy"
+        },
+        {
+          "name": "Khan Academy",
+          "hint": "khanacademy"
+        },
+        {
+          "name": "Newsela",
+          "hint": "newsela",
+          "note": "NYC"
+        },
+        {
+          "name": "Amplify",
+          "hint": "amplify",
+          "note": "NYC"
+        },
+        {
+          "name": "Skillshare",
+          "hint": "skillshare",
+          "note": "NYC"
+        },
+        {
+          "name": "Codecademy",
+          "hint": "codecademy",
+          "note": "NYC"
+        },
+        {
+          "name": "General Assembly",
+          "hint": "generalassembly",
+          "note": "NYC"
+        },
+        {
+          "name": "MasterClass",
+          "hint": "masterclass"
+        },
+        {
+          "name": "Quizlet",
+          "hint": "quizlet"
+        },
+        {
+          "name": "Guild",
+          "hint": "guild"
+        },
+        {
+          "name": "2U",
+          "hint": "2u"
+        }
+      ]
+    }
+  },
+  "government_portals": {
+    "_note": "These are NOT on standard ATS platforms. Each needs its own handling; several are already wired into internship_watch.py or listed here for manual checking.",
+    "automated": [
+      {
+        "name": "USAJOBS (federal, incl. Pathways Internship Program)",
+        "how": "built into internship_watch.py \u2014 needs a free API key from developer.usajobs.gov",
+        "url": "https://www.usajobs.gov/"
+      },
+      {
+        "name": "NYC Jobs (all city agencies)",
+        "how": "NYC Open Data publishes current job postings as a dataset with a Socrata API \u2014 see resolve.py --gov",
+        "url": "https://opendata.cityofnewyork.us/"
+      }
+    ],
+    "manual": [
+      {
+        "name": "NYC Office of Technology & Innovation (OTI)",
+        "note": "City digital services + design. Best NYC civic UX entry point.",
+        "url": "https://www.nyc.gov/content/oti/pages/"
+      },
+      {
+        "name": "NYC Economic Development Corporation",
+        "url": "https://edc.nyc/careers"
+      },
+      {
+        "name": "MTA",
+        "note": "Has a formal internship program; large customer-experience org.",
+        "url": "https://new.mta.info/careers"
+      },
+      {
+        "name": "Port Authority of NY & NJ",
+        "note": "Bi-state, commutable, formal summer internship.",
+        "url": "https://www.panynj.gov/corporate/en/careers.html"
+      },
+      {
+        "name": "NJ Office of Innovation",
+        "note": "Actively hires designers and user researchers. Small team, high signal.",
+        "url": "https://innovation.nj.gov/"
+      },
+      {
+        "name": "NJ Civil Service Commission",
+        "url": "https://www.nj.gov/csc/"
+      },
+      {
+        "name": "NJ Transit",
+        "url": "https://www.njtransit.com/careers"
+      },
+      {
+        "name": "NJ Economic Development Authority",
+        "url": "https://www.njeda.gov/careers/"
+      },
+      {
+        "name": "New York State ITS / statejobs.ny.gov",
+        "url": "https://statejobs.ny.gov/"
+      },
+      {
+        "name": "Federal Reserve Bank of New York",
+        "note": "Strong internship program; your community-banking background is directly relevant.",
+        "url": "https://www.newyorkfed.org/careers"
+      },
+      {
+        "name": "FDIC",
+        "note": "Financial regulator. CDFI-adjacent policy work.",
+        "url": "https://www.fdic.gov/about/careers/"
+      },
+      {
+        "name": "OCC",
+        "url": "https://www.occ.gov/careers/"
+      },
+      {
+        "name": "SEC",
+        "url": "https://www.sec.gov/careers"
+      },
+      {
+        "name": "FINRA",
+        "url": "https://www.finra.org/careers"
+      },
+      {
+        "name": "United Nations",
+        "note": "NYC HQ. UN internships are typically unpaid \u2014 check before investing time.",
+        "url": "https://careers.un.org/"
+      },
+      {
+        "name": "UNICEF",
+        "url": "https://www.unicef.org/careers/"
+      },
+      {
+        "name": "World Bank",
+        "url": "https://www.worldbank.org/en/about/careers"
+      }
+    ],
+    "note_on_federal_digital": "18F and the U.S. Digital Service were the classic federal design-research entry points. Both were significantly restructured during 2025 \u2014 verify current status before building them into your pipeline. The private civic-tech contractors in the civic_tech category do much of the same work and hire more predictably."
+  }
+}
