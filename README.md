@@ -1,5 +1,7 @@
 # internship-watch
 
+**[Live Dashboard](https://susanchapas.github.io/ux-internships/)**
+
 Polls company ATS APIs on a schedule, pushes you a notification when a new posting matches your filters. Includes an interactive REPL for scanning, filtering, and tracking applications.
 
 ## Setup

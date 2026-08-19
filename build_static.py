@@ -12,7 +12,6 @@ from internship_watch import (
     load_json, compile_filters, matches, CONFIG_PATH,
     BOARD_FETCHERS, fetch_workday, fetch_usajobs,
 )
-from web import classify
 
 HERE = Path(__file__).parent
 DASHBOARD = HERE / "dashboard.html"
@@ -26,6 +25,35 @@ LEVEL_RULES = [
     ("manager+",   re.compile(r"\b(?:manager|director|vp\b|vice\s*president|head\s+of|chief|president)\b", re.I)),
     ("senior+",    re.compile(r"\b(?:senior|sr\.?|lead|staff|principal)\b", re.I)),
 ]
+
+HOURLY_RE = re.compile(r"(?:per|/|an?)\s*(?:hour|hr)\b", re.I)
+SALARY_RE = re.compile(r"(?:per|/|an?)\s*(?:year|yr|annum|annually)\b", re.I)
+AMOUNT_RE = re.compile(r"\$\s*([\d,]+)")
+
+
+def classify(job):
+    title = job.get("title") or ""
+    level = "mid"
+    for lbl, pat in LEVEL_RULES:
+        if pat.search(title):
+            level = lbl
+            break
+    job["level"] = level
+
+    pay = job.get("pay") or ""
+    if not pay:
+        job["pay_type"] = ""
+    elif HOURLY_RE.search(pay):
+        job["pay_type"] = "hourly"
+    elif SALARY_RE.search(pay):
+        job["pay_type"] = "salary"
+    else:
+        amounts = AMOUNT_RE.findall(pay)
+        if amounts:
+            val = int(amounts[0].replace(",", ""))
+            job["pay_type"] = "salary" if val > 1000 else "hourly"
+        else:
+            job["pay_type"] = ""
 
 
 def run_scan():
