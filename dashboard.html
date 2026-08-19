@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Internship Watch</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf9;--surface:#fff;--border:#e2e8f0;
+  --text:#1e293b;--muted:#64748b;--faint:#94a3b8;
+  --primary:#4f46e5;--primary-hover:#4338ca;
+  --accent:#f59e0b;--accent-bg:#fffbeb;
+  --green:#10b981;--green-bg:#ecfdf5;
+  --red:#ef4444;--red-bg:#fef2f2;
+  --radius:8px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+
+header{
+  position:sticky;top:0;z-index:10;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:12px 24px;display:flex;align-items:center;justify-content:space-between;
+}
+header h1{font-size:18px;font-weight:600;letter-spacing:-.3px}
+header h1 span{color:var(--primary)}
+#scan-btn{
+  background:var(--primary);color:#fff;border:none;
+  padding:8px 20px;border-radius:var(--radius);font-size:14px;font-weight:500;
+  cursor:pointer;display:flex;align-items:center;gap:6px;
+  transition:background .15s;
+}
+#scan-btn:hover{background:var(--primary-hover)}
+#scan-btn:disabled{opacity:.6;cursor:not-allowed}
+.spinner{
+  width:14px;height:14px;border:2px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;display:none;
+  animation:spin .6s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+#scan-btn.loading .spinner{display:block}
+
+#progress-bar{
+  height:3px;background:var(--border);position:sticky;top:49px;z-index:9;
+}
+#progress-fill{
+  height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));
+  transition:width .3s ease;
+}
+#progress-text{
+  text-align:center;padding:6px;font-size:13px;color:var(--muted);
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:none;
+}
+
+main{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.stat{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px 18px;
+  border-left:3px solid var(--border);
+}
+.stat.primary{border-left-color:var(--primary)}
+.stat.green{border-left-color:var(--green)}
+.stat.muted-stat{border-left-color:var(--muted)}
+.stat.accent{border-left-color:var(--accent)}
+.stat .n{font-size:28px;font-weight:700;line-height:1}
+.stat .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+
+.section-title{
+  font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;
+  color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:6px;
+}
+
+#highlights{margin-bottom:32px;display:none}
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.hl-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 18px;border-left:3px solid var(--accent);
+  display:flex;flex-direction:column;gap:6px;
+  transition:box-shadow .15s;
+}
+.hl-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.hl-company{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+.hl-title{font-size:15px;font-weight:600}
+.hl-title a{color:var(--text)}
+.hl-title a:hover{color:var(--primary)}
+.hl-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}
+.badge{
+  display:inline-flex;align-items:center;padding:2px 8px;
+  border-radius:99px;font-size:11px;font-weight:600;
+}
+.badge-new{background:var(--green-bg);color:var(--green)}
+.badge-pay{background:var(--accent-bg);color:#b45309}
+.badge-source{background:#f1f5f9;color:var(--muted)}
+.badge-level{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.badge-intern{background:#eef2ff;color:#4338ca}
+.badge-fellow{background:#f5f3ff;color:#7c3aed}
+.badge-apprentice{background:#fdf4ff;color:#a21caf}
+.badge-entry{background:#eff6ff;color:#2563eb}
+.badge-mid{background:#f1f5f9;color:var(--muted)}
+.badge-senior{background:#fff7ed;color:#c2410c}
+.badge-manager{background:var(--red-bg);color:var(--red)}
+
+#results{display:none}
+.toolbar{
+  display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap;
+}
+#search{
+  flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--border);
+  border-radius:var(--radius);font-size:14px;font-family:var(--font);
+  background:var(--surface);
+}
+#search:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.filter-select{
+  padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);
+  font-size:14px;background:var(--surface);font-family:var(--font);
+}
+.result-count{font-size:13px;color:var(--muted);margin-left:auto}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{
+  background:#f8fafc;text-align:left;padding:10px 14px;
+  font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;
+  border-bottom:1px solid var(--border);cursor:pointer;user-select:none;
+  position:sticky;top:0;white-space:nowrap;
+}
+th:hover{color:var(--text)}
+th .arrow{margin-left:4px;font-size:10px;opacity:.4}
+th.active .arrow{opacity:1;color:var(--primary)}
+td{padding:10px 14px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafaf9}
+td.title-cell{max-width:320px}
+td.title-cell a{color:var(--text);font-weight:500}
+td.title-cell a:hover{color:var(--primary)}
+td.loc-cell{color:var(--muted);max-width:180px}
+td.pay-cell{white-space:nowrap}
+td.time-cell{white-space:nowrap;color:var(--muted);font-size:13px}
+td.source-cell{font-size:13px}
+.pay-text{color:#b45309;font-weight:500}
+
+#empty{
+  text-align:center;padding:60px 20px;color:var(--muted);display:block;
+}
+#empty h2{font-size:20px;margin-bottom:8px;color:var(--text);font-weight:600}
+#empty p{font-size:14px;max-width:400px;margin:0 auto}
+
+#errors{display:none;margin-bottom:20px}
+.error-list{
+  background:var(--red-bg);border:1px solid #fecaca;border-radius:var(--radius);
+  padding:12px 16px;font-size:13px;color:#991b1b;
+}
+.error-list summary{cursor:pointer;font-weight:500;color:var(--red)}
+
+@media(max-width:700px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hl-grid{grid-template-columns:1fr}
+  .toolbar{flex-direction:column}
+  #search,.result-count{width:100%}
+  .result-count{text-align:left;margin-left:0}
+  header{padding:10px 14px}
+  main{padding:16px 10px 60px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span>UX</span> Internship Watch</h1>
+  <button id="scan-btn" onclick="startScan()">
+    <div class="spinner"></div>
+    <span>Scan Now</span>
+  </button>
+</header>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+<div id="progress-text"></div>
+
+<main>
+  <div id="empty">
+    <h2>Ready to scan</h2>
+    <p>Click <strong>Scan Now</strong> to check all companies for matching internship postings.</p>
+  </div>
+
+  <div class="stats" id="stats" style="display:none">
+    <div class="stat primary"><div class="n" id="s-matches">0</div><div class="label">Matches</div></div>
+    <div class="stat green"><div class="n" id="s-new">0</div><div class="label">New</div></div>
+    <div class="stat muted-stat"><div class="n" id="s-companies">0</div><div class="label">Companies</div></div>
+    <div class="stat accent"><div class="n" id="s-pay">0</div><div class="label">With Pay</div></div>
+  </div>
+
+  <div id="errors">
+    <details class="error-list">
+      <summary id="error-summary">0 errors</summary>
+      <ul id="error-list"></ul>
+    </details>
+  </div>
+
+  <div id="highlights">
+    <div class="section-title">Highlights</div>
+    <div class="hl-grid" id="hl-grid"></div>
+  </div>
+
+  <div id="results">
+    <div class="section-title">All Findings</div>
+    <div class="toolbar">
+      <input type="text" id="search" placeholder="Search company, title, or location…" oninput="renderTable()">
+      <select id="level-filter" class="filter-select" onchange="renderTable()">
+        <option value="">All levels</option>
+        <option value="intern">Intern / Co-op</option>
+        <option value="fellow">Fellow</option>
+        <option value="apprentice">Apprentice</option>
+        <option value="entry">Entry / Associate</option>
+        <option value="mid">Mid</option>
+        <option value="senior+">Senior+</option>
+        <option value="manager+">Manager+</option>
+      </select>
+      <select id="pay-type-filter" class="filter-select" onchange="renderTable()">
+        <option value="">All pay types</option>
+        <option value="hourly">Hourly</option>
+        <option value="salary">Salary</option>
+        <option value="listed">Any listed</option>
+        <option value="unlisted">Not listed</option>
+      </select>
+      <select id="schedule-filter" class="filter-select" onchange="renderTable()">
+        <option value="">All schedules</option>
+        <option value="full-time">Full-time</option>
+        <option value="part-time">Part-time</option>
+        <option value="contract">Contract</option>
+      </select>
+      <select id="source-filter" class="filter-select" onchange="renderTable()">
+        <option value="">All sources</option>
+      </select>
+      <div class="result-count" id="result-count"></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th onclick="sortBy('company')">Company <span class="arrow">▼</span></th>
+          <th onclick="sortBy('title')">Title <span class="arrow">▼</span></th>
+          <th onclick="sortBy('location')">Location <span class="arrow">▼</span></th>
+          <th onclick="sortBy('pay')">Pay <span class="arrow">▼</span></th>
+          <th onclick="sortBy('posted_at')">Posted <span class="arrow">▼</span></th>
+          <th onclick="sortBy('source')">Source <span class="arrow">▼</span></th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+let allJobs = [];
+let scanErrors = [];
+let scanning = false;
+let sortCol = 'company';
+let sortDir = 1;
+
+function startScan() {
+  if (scanning) return;
+  scanning = true;
+  allJobs = [];
+  scanErrors = [];
+
+  const btn = document.getElementById('scan-btn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  btn.querySelector('span').textContent = 'Scanning…';
+
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('stats').style.display = 'grid';
+  document.getElementById('progress-text').style.display = 'block';
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('highlights').style.display = 'none';
+  document.getElementById('errors').style.display = 'none';
+  document.getElementById('hl-grid').innerHTML = '';
+  document.getElementById('tbody').innerHTML = '';
+
+  updateStats();
+
+  const source = new EventSource('/api/scan');
+
+  source.addEventListener('progress', e => {
+    const d = JSON.parse(e.data);
+    const pct = (d.index / d.total * 100).toFixed(0);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent =
+      `Scanning ${d.company}… (${d.index}/${d.total})`;
+  });
+
+  source.addEventListener('matches', e => {
+    const d = JSON.parse(e.data);
+    allJobs.push(...d.jobs);
+    updateStats();
+    renderTable();
+  });
+
+  source.addEventListener('scan_error', e => {
+    const d = JSON.parse(e.data);
+    scanErrors.push(d);
+  });
+
+  source.addEventListener('done', e => {
+    const d = JSON.parse(e.data);
+    source.close();
+    scanning = false;
+
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    btn.querySelector('span').textContent = 'Scan Now';
+
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-text').textContent =
+      `Done — ${d.total_matches} matches across ${d.companies_scanned} companies`;
+
+    document.getElementById('s-companies').textContent = d.companies_scanned;
+    updateStats();
+    buildHighlights();
+    buildSourceFilter();
+
+    if (scanErrors.length) {
+      document.getElementById('errors').style.display = 'block';
+      document.getElementById('error-summary').textContent = scanErrors.length + ' error(s)';
+      document.getElementById('error-list').innerHTML =
+        scanErrors.map(e => `<li style="margin:4px 0">${esc(e.company)}: ${esc(e.error)}</li>`).join('');
+    }
+
+    setTimeout(() => {
+      document.getElementById('progress-fill').style.width = '0%';
+      document.getElementById('progress-text').style.display = 'none';
+    }, 3000);
+  });
+
+  source.onerror = () => {
+    source.close();
+    scanning = false;
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    btn.querySelector('span').textContent = 'Scan Now';
+    document.getElementById('progress-text').textContent = 'Connection lost — try again';
+  };
+}
+
+function updateStats() {
+  document.getElementById('s-matches').textContent = allJobs.length;
+  document.getElementById('s-new').textContent = allJobs.filter(j => j.is_new).length;
+  document.getElementById('s-pay').textContent = allJobs.filter(j => j.pay).length;
+}
+
+function buildHighlights() {
+  const hl = allJobs
+    .filter(j => j.is_new)
+    .sort((a, b) => {
+      if (a.pay && !b.pay) return -1;
+      if (!a.pay && b.pay) return 1;
+      return (b.posted_at || '').localeCompare(a.posted_at || '');
+    })
+    .slice(0, 6);
+
+  if (!hl.length) return;
+  document.getElementById('highlights').style.display = 'block';
+  document.getElementById('hl-grid').innerHTML = hl.map(j => `
+    <div class="hl-card">
+      <div class="hl-company">${esc(j.company)}</div>
+      <div class="hl-title"><a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a></div>
+      <div class="hl-meta">
+        ${levelBadge(j.level)}
+        ${j.location ? `<span>${esc(j.location)}</span>` : ''}
+        ${j.pay ? `<span class="badge badge-pay">${esc(j.pay)}</span>` : ''}
+        ${j.is_new ? '<span class="badge badge-new">NEW</span>' : ''}
+        ${j.schedule ? `<span class="badge badge-source">${j.schedule}</span>` : ''}
+        ${j.posted_at ? `<span>${timeAgo(j.posted_at)}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function buildSourceFilter() {
+  const sources = [...new Set(allJobs.map(j => j.source))].sort();
+  const sel = document.getElementById('source-filter');
+  sel.innerHTML = '<option value="">All sources</option>' +
+    sources.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+function levelBadge(lvl) {
+  const labels = {
+    'intern':'Intern','fellow':'Fellow','apprentice':'Apprentice',
+    'entry':'Entry','mid':'Mid','senior+':'Senior+','manager+':'Mgr+'
+  };
+  const cls = {
+    'intern':'intern','fellow':'fellow','apprentice':'apprentice',
+    'entry':'entry','mid':'mid','senior+':'senior','manager+':'manager'
+  };
+  return `<span class="badge badge-level badge-${cls[lvl]||'mid'}">${labels[lvl]||lvl}</span>`;
+}
+
+function getFiltered() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const src = document.getElementById('source-filter').value;
+  const lvl = document.getElementById('level-filter').value;
+  const pt = document.getElementById('pay-type-filter').value;
+  const sched = document.getElementById('schedule-filter').value;
+  return allJobs.filter(j => {
+    if (q && !(j.title + j.company + j.location).toLowerCase().includes(q)) return false;
+    if (src && j.source !== src) return false;
+    if (lvl && j.level !== lvl) return false;
+    if (pt === 'hourly' && j.pay_type !== 'hourly') return false;
+    if (pt === 'salary' && j.pay_type !== 'salary') return false;
+    if (pt === 'listed' && !j.pay) return false;
+    if (pt === 'unlisted' && j.pay) return false;
+    if (sched && j.schedule !== sched) return false;
+    return true;
+  });
+}
+
+function renderTable() {
+  const jobs = getFiltered();
+
+  jobs.sort((a, b) => {
+    let av = (a[sortCol] || '').toString().toLowerCase();
+    let bv = (b[sortCol] || '').toString().toLowerCase();
+    if (av < bv) return -1 * sortDir;
+    if (av > bv) return 1 * sortDir;
+    return 0;
+  });
+
+  document.getElementById('result-count').textContent =
+    jobs.length === allJobs.length ? `${jobs.length} results` : `${jobs.length} of ${allJobs.length}`;
+
+  document.querySelectorAll('th').forEach(th => th.classList.remove('active'));
+  const cols = ['company','title','location','pay','posted_at','source'];
+  const idx = cols.indexOf(sortCol);
+  if (idx >= 0) {
+    const th = document.querySelectorAll('th')[idx];
+    th.classList.add('active');
+    th.querySelector('.arrow').textContent = sortDir === 1 ? '▲' : '▼';
+  }
+
+  document.getElementById('tbody').innerHTML = jobs.map(j => `<tr>
+    <td>${esc(j.company)}${j.is_new ? ' <span class="badge badge-new">NEW</span>' : ''}</td>
+    <td class="title-cell">${levelBadge(j.level)} <a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a></td>
+    <td class="loc-cell">${esc(j.location || '—')}</td>
+    <td class="pay-cell">${j.pay ? `<span class="pay-text">${esc(j.pay)}</span>${j.pay_type ? ` <span style="color:var(--faint);font-size:11px">${j.pay_type}</span>` : ''}` : '<span style="color:var(--faint)">—</span>'}</td>
+    <td class="time-cell">${j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--faint)">—</span>'}</td>
+    <td class="source-cell"><span class="badge badge-source">${esc(j.source)}</span>${j.schedule ? ` <span class="badge badge-source">${j.schedule}</span>` : ''}</td>
+  </tr>`).join('');
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+  renderTable();
+}
+
+function timeAgo(s) {
+  if (!s) return '';
+  const d = new Date(s);
+  if (isNaN(d.getTime())) return esc(s);
+  const sec = Math.floor((Date.now() - d) / 1000);
+  if (sec < 0) return 'just now';
+  if (sec < 60) return 'just now';
+  if (sec < 3600) return Math.floor(sec / 60) + 'm ago';
+  if (sec < 86400) return Math.floor(sec / 3600) + 'h ago';
+  if (sec < 604800) return Math.floor(sec / 86400) + 'd ago';
+  if (sec < 2592000) return Math.floor(sec / 604800) + 'w ago';
+  return Math.floor(sec / 2592000) + 'mo ago';
+}
+
+function esc(s) {
+  if (!s) return '';
+  const d = document.createElement('div');
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+</script>
+</body>
+</html>

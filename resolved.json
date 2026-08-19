@@ -1,0 +1,1561 @@
+{
+ "AIG": {
+  "board": null,
+  "note": "NYC"
+ },
+ "AKQA": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 50,
+  "samples": [
+   "Account Director",
+   "Account Director",
+   "Account Executive "
+  ],
+  "slug": "akqa"
+ },
+ "Accion": {
+  "board": null,
+  "note": ""
+ },
+ "Acorns": {
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 11,
+  "samples": [
+   "Senior Backend Engineer, AI Team",
+   "Growth Marketing, Sr. Associate ",
+   "Product Marketing Manager II"
+  ],
+  "slug": "acorns"
+ },
+ "Ad Hoc": {
+  "board": null,
+  "note": "VA.gov, healthcare.gov"
+ },
+ "Addepar": {
+  "board": null,
+  "note": ""
+ },
+ "Adobe": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Adyen": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "adyen"
+ },
+ "Affirm": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 198,
+  "samples": [
+   "Affirm Bank Strategic Finance Manager",
+   "AI Solutions Engineer",
+   "AI Solutions Engineer"
+  ],
+  "slug": "affirm"
+ },
+ "Aira": {
+  "board": null,
+  "note": ""
+ },
+ "Airbnb": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 194,
+  "samples": [
+   "Acquisition Manager",
+   "Acquisition Manager",
+   "AMER Gathering Programs Manager"
+  ],
+  "slug": "airbnb"
+ },
+ "Alloy": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 24,
+  "samples": [
+   "Account Executive, Banking & Credit Unions",
+   "Account Executive, Enterprise",
+   "Applied AI Engineer, Ops"
+  ],
+  "slug": "alloy"
+ },
+ "Ally": {
+  "board": null,
+  "note": ""
+ },
+ "AlphaSense": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "alphasense"
+ },
+ "AlphaSights": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "alphasights"
+ },
+ "Amazon": {
+  "board": null,
+  "note": "slug collision with unrelated company on bamboohr"
+ },
+ "American Express": {
+  "board": null,
+  "note": "NYC. Strong UX team."
+ },
+ "American Foundation for the Blind": {
+  "board": null,
+  "note": ""
+ },
+ "Anomaly": {
+  "board": "lever",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 1,
+  "samples": [
+   "Early careers Portfolio review: CREATIVE PLACEMENT"
+  ],
+  "slug": "anomaly"
+ },
+ "AppLovin": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "applovin"
+ },
+ "Apple": {
+  "board": null,
+  "note": "NYC"
+ },
+ "AppsFlyer": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "appsflyer"
+ },
+ "Athletics": {
+  "board": null,
+  "note": "Brooklyn"
+ },
+ "Away": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "away"
+ },
+ "Axios": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "axios"
+ },
+ "BARK": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "bark"
+ },
+ "Bank of America": {
+  "board": null,
+  "note": "NYC offices"
+ },
+ "Barrel": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Be My Eyes": {
+  "board": null,
+  "note": "slug collision with unrelated company on recruitee"
+ },
+ "Betterment": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC HQ",
+  "open_jobs": 29,
+  "samples": [
+   "401(k) Consultant",
+   "Business Development Representative ",
+   "Business Systems Architect, GTM Systems"
+  ],
+  "slug": "betterment"
+ },
+ "Big Human": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Bill": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 49,
+  "samples": [
+   "Account Executive, Growth",
+   "Alliance Partnership Manager",
+   "Business Development Representative "
+  ],
+  "slug": "billcom"
+ },
+ "BlackRock": {
+  "board": null,
+  "note": "slug collision with unrelated company on bamboohr"
+ },
+ "Block": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "formerly Square",
+  "open_jobs": 192,
+  "samples": [
+   "Account Manager, SMB",
+   "Account Manager, SMB ",
+   "Account Manager, SMB "
+  ],
+  "slug": "block"
+ },
+ "Bloom Works": {
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 8,
+  "samples": [
+   "Director of Brand & Social | Poppy & Peonies",
+   "Director of Ecommerce | Poppy & Peonies",
+   "Fractional HR & Talent Advisor (Contract)"
+  ],
+  "slug": "bloom"
+ },
+ "Bombas": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "bombas"
+ },
+ "Braze": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 255,
+  "samples": [
+   "Account Executive, Commercial",
+   "Account Executive, Emerging Enterprise, Financial Services",
+   "Account Executive, Emerging Enterprise, Financial Services"
+  ],
+  "slug": "braze"
+ },
+ "Brex": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 303,
+  "samples": [
+   "Account Executive, Small Business",
+   "Account Executive, Small Business",
+   "Account Executive, Small Business"
+  ],
+  "slug": "brex"
+ },
+ "Business Insider": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "insider"
+ },
+ "BuzzFeed": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "buzzfeed"
+ },
+ "Capital One": {
+  "board": "lever",
+  "confidence": "verified",
+  "note": "Big design org, formal UX internship",
+  "open_jobs": 44,
+  "samples": [
+   "AI Security Engineer",
+   "Angular Software Engineer",
+   "Back Office Payments and AML Officer (Crypto Operations)"
+  ],
+  "slug": "capital"
+ },
+ "Capsule": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "capsule"
+ },
+ "Carta": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 59,
+  "samples": [
+   "Account Executive, Legal Services",
+   "Account Executive, Legal Services",
+   "Account Executive, PE Standard"
+  ],
+  "slug": "carta"
+ },
+ "Charles Schwab": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 3,
+  "samples": [
+   "Business Development Representative (German Speaker) (m/f/d)",
+   "Initiative Applications (m/f/d)",
+   "(Senior) Customer Success Manager (m/f/d) - Parental Leave C"
+  ],
+  "slug": "charles"
+ },
+ "Chime": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 59,
+  "samples": [
+   "2026 - Product Manager, Transaction Risk Decisioning",
+   "Analyst, Investor Relations",
+   "Chief of Staff, Head of Legal Ops"
+  ],
+  "slug": "chime"
+ },
+ "Chubb": {
+  "board": null,
+  "note": "Jersey City / Warren NJ"
+ },
+ "Citi": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Civilla": {
+  "board": null,
+  "note": "Detroit. Benefits redesign research."
+ },
+ "ClassPass": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "classpass"
+ },
+ "Cloudflare": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "cloudflare"
+ },
+ "Clover Health": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "cloverhealth"
+ },
+ "Cockroach Labs": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "cockroachlabs"
+ },
+ "Code and Theory": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 47,
+  "samples": [
+   "Adobe Multi-Solution Architect (US)",
+   "Associate Director, AI & Business Transformation (US)",
+   "Associate Director, AI & Creative Transformation (US)"
+  ],
+  "slug": "codeandtheory"
+ },
+ "Code for America": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "Nonprofit. Fellowships + internships.",
+  "open_jobs": 7,
+  "samples": [
+   "Associate Director, Content Production",
+   "Associate Program Director ",
+   "Emerging Technology & AI Governance & Enablement Lead"
+  ],
+  "slug": "codeforamerica"
+ },
+ "Coforma": {
+  "board": null,
+  "note": ""
+ },
+ "Coinbase": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 170,
+  "samples": [
+   "Accounting Manager, GL Operations & Intercompany",
+   "Accounting Manager, GL Operations & Intercompany",
+   "Accounting Manager, Prime Financing"
+  ],
+  "slug": "coinbase"
+ },
+ "Collins": {
+  "board": null,
+  "note": "slug collision with unrelated company on recruitee"
+ },
+ "Column": {
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 22,
+  "samples": [
+   "I don't fit into any of these roles!",
+   "Software Engineer",
+   "Growth"
+  ],
+  "slug": "column"
+ },
+ "Community Reinvestment Fund": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 1,
+  "samples": [
+   "Copy of Implementation Specialist - San Diego"
+  ],
+  "slug": "community"
+ },
+ "Consumer Reports": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "Yonkers NY. UX research on financial products.",
+  "open_jobs": 10,
+  "samples": [
+   "Accounting Systems Administrator (Oracle EBS/Concur)",
+   "Associate Director, Audience Development",
+   "Director, Strategic Initiatives"
+  ],
+  "slug": "consumerreports"
+ },
+ "Convene": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "convene"
+ },
+ "Coupang": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "coupang"
+ },
+ "Current": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC.",
+  "open_jobs": 6,
+  "samples": [
+   "Lead Engineer (Drupal / Web Platforms)",
+   "Lead, Growth",
+   "Producer, Client Experience & Growth (Contract) "
+  ],
+  "slug": "current"
+ },
+ "Datadog": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC HQ",
+  "open_jobs": 425,
+  "samples": [
+   "AI Research Engineer - Datadog AI Research (DAIR)",
+   "AI Research Scientist - Datadog AI Research (DAIR)",
+   "AI Research Scientist - Datadog AI Research (DAIR)"
+  ],
+  "slug": "datadog"
+ },
+ "Dave": {
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 7,
+  "samples": [
+   "Senior Software Engineer, Backend",
+   "Sr. IT Systems Engineer, AI & Business Solutions",
+   "Lead Product Marketing Manager"
+  ],
+  "slug": "dave"
+ },
+ "Deel": {
+  "board": null,
+  "note": ""
+ },
+ "Dentsu": {
+  "board": null,
+  "note": ""
+ },
+ "Deque Systems": {
+  "board": null,
+  "note": ""
+ },
+ "Designit": {
+  "board": null,
+  "note": "Wipro-owned"
+ },
+ "Discord": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 51,
+  "samples": [
+   "Account Manager, Advertising Solutions",
+   "Advertising Operations Manager",
+   "Associate Product Counsel, Safety"
+  ],
+  "slug": "discord"
+ },
+ "Discover": {
+  "board": null,
+  "note": ""
+ },
+ "DocuSign": {
+  "board": null,
+  "note": "NYC office."
+ },
+ "DoubleVerify": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 37,
+  "samples": [
+   "Associate Business Director - Sales - Tokyo",
+   "Business Development Manager",
+   "Client Analytics Lead"
+  ],
+  "slug": "doubleverify"
+ },
+ "Droga5": {
+  "board": null,
+  "note": "NYC, part of Accenture Song"
+ },
+ "EPAM": {
+  "board": null,
+  "note": "EPAM Continuum does design consulting"
+ },
+ "Esusu": {
+  "board": null,
+  "note": "Rent reporting for credit building. NYC."
+ },
+ "Etsy": {
+  "board": null,
+  "note": "Brooklyn HQ"
+ },
+ "Fable": {
+  "board": "ashby",
+  "confidence": "verified",
+  "note": "Accessibility user research platform. Remote-friendly.",
+  "open_jobs": 6,
+  "samples": [
+   "Backend Engineer",
+   "Technical Account Manager",
+   "Sales Engineer"
+  ],
+  "slug": "fable"
+ },
+ "Fantasy": {
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 3,
+  "samples": [
+   "Design Lead, Design Systems - Future Freelance",
+   "Experience Director (UX) - Future Freelance",
+   "Lead Product Designer - Future Freelance"
+  ],
+  "slug": "fantasy"
+ },
+ "Fearless": {
+  "board": null,
+  "note": "Baltimore"
+ },
+ "Federal Reserve Bank of New York": {
+  "board": null,
+  "note": "NYC. Directly relevant to your CDFI background."
+ },
+ "Fidelity Investments": {
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 8,
+  "samples": [
+   "Accounting Manager",
+   "Content Specialist",
+   "Culture & Events Specialist"
+  ],
+  "slug": "fi"
+ },
+ "Flywire": {
+  "board": null,
+  "note": ""
+ },
+ "Foursquare": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "foursquare"
+ },
+ "Gemini": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "gemini"
+ },
+ "General Atlantic": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "generalatlantic"
+ },
+ "Goldman Sachs": {
+  "board": null,
+  "note": "slug collision with unrelated company on recruitee"
+ },
+ "Google": {
+  "board": null,
+  "note": "slug collision with unrelated company on recruitee"
+ },
+ "Grameen America": {
+  "board": null,
+  "note": "NYC. Microfinance nonprofit."
+ },
+ "Greenwood": {
+  "board": null,
+  "note": "slug collision with unrelated company on bamboohr"
+ },
+ "Gusto": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 87,
+  "samples": [
+   "Benefits Advising (Renewals) Leader",
+   "Benefits Care Advocate, Phoenix ",
+   "Channel Partnerships Manager, Investor Ecosystems (VC & PE)"
+  ],
+  "slug": "gusto"
+ },
+ "Handshake": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "handshake"
+ },
+ "Hearst": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "hearst"
+ },
+ "Helen Keller Services": {
+  "board": null,
+  "note": "Brooklyn"
+ },
+ "Huge": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "Brooklyn",
+  "open_jobs": 16,
+  "samples": [
+   "Director, Client Partnership",
+   "Director, Program Delivery",
+   "Director, Strategy"
+  ],
+  "slug": "hugeinc"
+ },
+ "IBM": {
+  "board": null,
+  "note": "Armonk NY + NYC. IBM iX design internship."
+ },
+ "IDEO": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 16,
+  "samples": [
+   "Business Development Director",
+   "Digital Product Director",
+   "Director"
+  ],
+  "slug": "ideo"
+ },
+ "Instrument": {
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 10,
+  "samples": [
+   "Delivery Director (Freelance)",
+   "Design Director",
+   "Design Director, Product Design"
+  ],
+  "slug": "instrument"
+ },
+ "Interbrand": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 19,
+  "samples": [
+   "Associate Director Strategy",
+   "BECA CURRICULAR_ CLIENT SERVICES INTERN",
+   "Design Director"
+  ],
+  "slug": "interbrand"
+ },
+ "Intercontinental Exchange": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYSE parent",
+  "open_jobs": 11,
+  "samples": [
+   "Advisory/Client Service Roles - Expressions of Interest",
+   "Analysis Roles - Expressions of Interest",
+   "Business Services Roles (People, Marketing, Finance & Operat"
+  ],
+  "slug": "ie"
+ },
+ "Intuit": {
+  "board": null,
+  "note": "Strong design org"
+ },
+ "JPMorgan Chase": {
+  "board": null,
+  "note": "NYC. Large design org."
+ },
+ "Justworks": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 102,
+  "samples": [
+   "Account Development Executive",
+   "Account Development Executive (Miami, FL)",
+   "Account Executive - In-Territory (Phoenix, AZ)"
+  ],
+  "slug": "justworks"
+ },
+ "Kickstarter": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "Brooklyn",
+  "open_jobs": 5,
+  "samples": [
+   "Account Director, Design & Technology",
+   "Account Director, Publishing (I)",
+   "Director, Brand and Communications"
+  ],
+  "slug": "kickstarter"
+ },
+ "Kiva": {
+  "board": null,
+  "note": ""
+ },
+ "Kustomer": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "kustomer"
+ },
+ "Landor": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 34,
+  "samples": [
+   "3D Design Co-Op",
+   "Artworker",
+   "Business Development (stagiaire)"
+  ],
+  "slug": "landor"
+ },
+ "LendingClub": {
+  "board": null,
+  "note": ""
+ },
+ "Level Access": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 4,
+  "samples": [
+   "Interested in future opportunities? ",
+   "Senior International & Partner Marketing Director",
+   "Senior Product Manager "
+  ],
+  "slug": "levelaccess"
+ },
+ "Lighthouse Guild": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC. Blind/low-vision services.",
+  "open_jobs": 54,
+  "samples": [
+   "Account Executive",
+   "Account Executive - BI Team ",
+   "Account Executive \u2013 Business Intelligence (Italian speaker) "
+  ],
+  "slug": "lighthouse"
+ },
+ "LinkedIn": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 53,
+  "samples": [
+   "123123",
+   "Bug Bash Job [No Sensitive Questions] - 03/24 ",
+   "Bug Bash Job [No Sensitive Questions] - 03/24 "
+  ],
+  "slug": "linkedin"
+ },
+ "Lippincott": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Lithic": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 5,
+  "samples": [
+   "Product Delivery Specialist",
+   "Senior AML Analyst",
+   "Senior Dispute Analyst"
+  ],
+  "slug": "lithic"
+ },
+ "Local Projects": {
+  "board": null,
+  "note": "NYC. Museum/exhibit UX."
+ },
+ "Lyft": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 162,
+  "samples": [
+   "Account Manager, Strategic Healthcare Partnerships",
+   "Account Manager, Strategic Healthcare Partnerships",
+   "AI Business Solutions Architect, People Technology"
+  ],
+  "slug": "lyft"
+ },
+ "Marqeta": {
+  "board": null,
+  "note": ""
+ },
+ "Marsh McLennan": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 1,
+  "samples": [
+   "UI Artist - 6 months"
+  ],
+  "slug": "mm"
+ },
+ "Mastercard": {
+  "board": null,
+  "note": "Purchase NY / Harrison NY"
+ },
+ "Match Group": {
+  "board": "lever",
+  "confidence": "verified",
+  "slug": "matchgroup"
+ },
+ "Melio": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 22,
+  "samples": [
+   "Customer Success Manager",
+   "Customer Success Manager",
+   "Data Scientist "
+  ],
+  "slug": "melio"
+ },
+ "Mercury": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 58,
+  "samples": [
+   "AI Context Operations Lead",
+   "Chief Audit Officer",
+   "Content Marketer"
+  ],
+  "slug": "mercury"
+ },
+ "MetLife": {
+  "board": "lever",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 39,
+  "samples": [
+   "Andres Gonzalez - Consultor/a Comercial en Protecci\u00f3n - Mani",
+   "Andres Gonzalez- Gerente de Unidad en Formaci\u00f3n - Manizales",
+   "Angelica Blanco - Consultor/a Comercial en Protecci\u00f3n -  Bar"
+  ],
+  "slug": "metlife"
+ },
+ "Meta": {
+  "board": null,
+  "note": "slug collision with unrelated company on recruitee"
+ },
+ "Metalab": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 4,
+  "samples": [
+   "Brand Director",
+   "Design Director",
+   "Design Lead"
+  ],
+  "slug": "metalab"
+ },
+ "Microsoft": {
+  "board": null,
+  "note": "NYC. Strong inclusive-design practice."
+ },
+ "Miro": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "miro"
+ },
+ "MoCaFi": {
+  "board": null,
+  "note": "Banking for underserved. Jersey City."
+ },
+ "Modern Treasury": {
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 7,
+  "samples": [
+   "Software Engineer ",
+   "Software Engineer - Infrastructure ",
+   "Technical Account Manager"
+  ],
+  "slug": "moderntreasury"
+ },
+ "MoneyLion": {
+  "board": null,
+  "note": "NYC."
+ },
+ "MongoDB": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC HQ",
+  "open_jobs": 406,
+  "samples": [
+   "Account Development Representative",
+   "Account Development Representative",
+   "Account Development Representative"
+  ],
+  "slug": "mongodb"
+ },
+ "Moody's": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Morgan Stanley": {
+  "board": null,
+  "note": "slug collision with unrelated company on recruitee"
+ },
+ "Morning Brew": {
+  "board": "lever",
+  "confidence": "verified",
+  "slug": "morningbrew"
+ },
+ "Movable Ink": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "movableink"
+ },
+ "Mozilla": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 82,
+  "samples": [
+   "Brand Copywriter (Part-Time, Freelance)",
+   "Creative Producer, Europe (Contract)",
+   "Director of Product, Gaming (New Products)"
+  ],
+  "slug": "mozilla"
+ },
+ "Nasdaq": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Nava PBC": {
+  "board": null,
+  "note": "Public benefit corp. Medicare/VA work."
+ },
+ "Navan": {
+  "board": null,
+  "note": ""
+ },
+ "Netflix": {
+  "board": null,
+  "note": "NYC office"
+ },
+ "New York Life": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 1,
+  "samples": [
+   "Performance Marketing Manager (UK  & Ireland)"
+  ],
+  "slug": "new"
+ },
+ "News Corp": {
+  "board": "smartrecruiters",
+  "confidence": "verified",
+  "slug": "newscorp"
+ },
+ "Northwestern Mutual": {
+  "board": "smartrecruiters",
+  "confidence": "verified",
+  "open_jobs": 69,
+  "samples": [
+   "Advanced Technology Support Consultant",
+   "Network Support Consultant",
+   "Senior O365 Engineer"
+  ],
+  "slug": "northwesternmutual"
+ },
+ "Nova Credit": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "Cross-border credit. NYC.",
+  "open_jobs": 13,
+  "samples": [
+   "Campaign Marketing Lead",
+   "Chief Technology Officer",
+   "Senior Country Manager, India"
+  ],
+  "slug": "novacredit"
+ },
+ "Ogilvy": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 135,
+  "samples": [
+   "Account Director",
+   "Account Director",
+   "Account Director - Consumer PR "
+  ],
+  "slug": "ogilvy"
+ },
+ "Oportun": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 34,
+  "samples": [
+   "Agente Telefonico en Espa\u00f1ol ",
+   "Bilingual Agent",
+   "Bilingual and Spanish Member Loyalty Representative (R14123)"
+  ],
+  "slug": "oportun"
+ },
+ "Oracle": {
+  "board": null,
+  "note": ""
+ },
+ "Oscar Health": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "oscar"
+ },
+ "Paxos": {
+  "board": "ashby",
+  "confidence": "verified",
+  "slug": "paxos"
+ },
+ "Payoneer": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 121,
+  "samples": [
+   "Account Engagement Manager",
+   "Account Engagement Specialist",
+   "Account Manager"
+  ],
+  "slug": "payoneer"
+ },
+ "Peloton": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC HQ",
+  "open_jobs": 51,
+  "samples": [
+   "Android Engineer III",
+   "Associate Manager, Digital Media and Paid Social",
+   "Associate Production Director"
+  ],
+  "slug": "peloton"
+ },
+ "Pentagram": {
+  "board": null,
+  "note": "NYC. Apply direct, no ATS."
+ },
+ "Petal": {
+  "board": null,
+  "note": "NYC. Thin-file credit."
+ },
+ "Pinterest": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 218,
+  "samples": [
+   "Accountant I",
+   "Administrative Business Partner I - Engineering, Product and",
+   "Agency Lead"
+  ],
+  "slug": "pinterest"
+ },
+ "Plaid": {
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 106,
+  "samples": [
+   "Strategic Initiatives",
+   "Technical Support Engineer",
+   "Senior Data Engineer - Data Engineering"
+  ],
+  "slug": "plaid"
+ },
+ "ProPublica": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC. Has paid internships.",
+  "open_jobs": 4,
+  "samples": [
+   "Freelance Pitch Form",
+   "Local Reporting Network Fellow",
+   "Product Manager, Membership Growth and Development"
+  ],
+  "slug": "propublica"
+ },
+ "Propel": {
+  "board": "ashby",
+  "confidence": "verified",
+  "note": "Providers/EBT app. Brooklyn. Heavy UX research culture.",
+  "open_jobs": 7,
+  "samples": [
+   "Staff Software Engineer (Fullstack)",
+   "Senior Platform Engineer",
+   "Medicare Advisor"
+  ],
+  "slug": "propel"
+ },
+ "Prophet": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 21,
+  "samples": [
+   "Associate ",
+   "Associate, AI Foundry & Digital Growth",
+   "Associate - DACH"
+  ],
+  "slug": "prophet"
+ },
+ "Prudential Financial": {
+  "board": null,
+  "note": "Newark NJ HQ"
+ },
+ "Public": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 2,
+  "samples": [
+   "Senior Product Manager",
+   "Senior Product Manager - Growth & Engagement"
+  ],
+  "slug": "public"
+ },
+ "Publicis Sapient": {
+  "board": null,
+  "note": ""
+ },
+ "R/GA": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 8,
+  "samples": [
+   "Design Director, Motion",
+   "Senior Product Designer, Visual ",
+   "Senior Video Editor"
+  ],
+  "slug": "rga"
+ },
+ "Ramp": {
+  "board": "ashby",
+  "confidence": "verified",
+  "note": "NYC HQ",
+  "open_jobs": 137,
+  "samples": [
+   " Security Engineer, Cloud",
+   "Mobile Engineer, Android",
+   "Software Engineer, Frontend"
+  ],
+  "slug": "ramp"
+ },
+ "Rangle": {
+  "board": null,
+  "note": ""
+ },
+ "Reddit": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 153,
+  "samples": [
+   "3rd Party Partnerships Manager - Commerce",
+   "3rd Party Partnerships Manager - Signals",
+   "Ads Conversion Modeling, Machine Learning Engineering Manage"
+  ],
+  "slug": "reddit"
+ },
+ "Remitly": {
+  "board": null,
+  "note": ""
+ },
+ "Rippling": {
+  "board": null,
+  "note": ""
+ },
+ "Riskified": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "riskified"
+ },
+ "Robinhood": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 124,
+  "samples": [
+   "Account Maintenance Associate",
+   "Android Engineer, Government Products",
+   "Android Engineer, Money Experience"
+  ],
+  "slug": "robinhood"
+ },
+ "Rockstar Games": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "rockstargames"
+ },
+ "Roku": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC office.",
+  "open_jobs": 232,
+  "samples": [
+   "Account Coordinator",
+   "Account Executive",
+   " Account Executive, Ads Manager "
+  ],
+  "slug": "roku"
+ },
+ "S&P Global": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Salesforce": {
+  "board": null,
+  "note": "NYC"
+ },
+ "SeatGeek": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "seatgeek"
+ },
+ "Self Financial": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 5,
+  "samples": [
+   "Backend Software Engineer - Evergreen Posting",
+   "Data Engineering Manager",
+   "Senior DevOps Engineer"
+  ],
+  "slug": "selffinancial"
+ },
+ "Sesame Workshop": {
+  "board": "lever",
+  "confidence": "verified",
+  "note": "NYC. Child-facing design research.",
+  "open_jobs": 1,
+  "samples": [
+   "Provider Success Senior Account Manager"
+  ],
+  "slug": "sesame"
+ },
+ "Siegel+Gale": {
+  "board": null,
+  "note": "slug collision with unrelated company on bamboohr"
+ },
+ "Skylight": {
+  "board": null,
+  "note": ""
+ },
+ "Slalom": {
+  "board": null,
+  "note": ""
+ },
+ "Snap": {
+  "board": null,
+  "note": "NYC"
+ },
+ "SoFi": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 56,
+  "samples": [
+   "Associate Operational Exam & Business Support Analyst (SMB)",
+   "Branch Operations Supervisor",
+   "Condo Collateral Specialist"
+  ],
+  "slug": "sofi"
+ },
+ "Spotify": {
+  "board": "lever",
+  "confidence": "verified",
+  "note": "NYC HQ for Americas",
+  "open_jobs": 100,
+  "samples": [
+   "Advertiser Solutions Vendor Lead - Programmatic and Direct S",
+   "Android Engineer - Advertising",
+   "Android Engineer - Experience"
+  ],
+  "slug": "spotify"
+ },
+ "Squarespace": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC HQ. Design-led.",
+  "open_jobs": 23,
+  "samples": [
+   "Business Development Manager, AI Discoverability and Schedul",
+   "Customer Support Associate (Remote)",
+   "Database Engineering Team Manager"
+  ],
+  "slug": "squarespace"
+ },
+ "Stash": {
+  "board": null,
+  "note": "NYC. Financial literacy focus."
+ },
+ "Stripe": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 576,
+  "samples": [
+   "Account Executive, Bridge ",
+   "Account Executive, Bridge (Stripe Crypto and Stablecoins)",
+   "Account Executive, Commercial (Grower)"
+  ],
+  "slug": "stripe"
+ },
+ "Synchrony": {
+  "board": null,
+  "note": ""
+ },
+ "TIAA": {
+  "board": null,
+  "note": "NYC"
+ },
+ "TPGi": {
+  "board": null,
+  "note": ""
+ },
+ "The Athletic": {
+  "board": "lever",
+  "confidence": "verified",
+  "slug": "theathletic"
+ },
+ "The Knot Worldwide": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "theknotworldwide"
+ },
+ "Thoughtbot": {
+  "board": null,
+  "note": ""
+ },
+ "Toast": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 319,
+  "samples": [
+   "Android Software Engineer",
+   "BDR ",
+   "Bilingual Growth Account Executive - Mandarin"
+  ],
+  "slug": "toast"
+ },
+ "Travelers": {
+  "board": null,
+  "note": ""
+ },
+ "Truss": {
+  "board": null,
+  "note": "slug collision with unrelated company on bamboohr"
+ },
+ "Trustpilot": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "trustpilot"
+ },
+ "U.S. Digital Response": {
+  "board": null,
+  "note": "Volunteer-based nonprofit"
+ },
+ "Uber": {
+  "board": null,
+  "note": "smartrecruiters/uber is a test posting"
+ },
+ "Unit": {
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 5,
+  "samples": [
+   "Senior Backend Engineer",
+   "GTM Lead (Bay Area)",
+   "People & Talent Partner"
+  ],
+  "slug": "unit"
+ },
+ "Upstart": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 95,
+  "samples": [
+   "Affidavit Support Specialist",
+   "Analyst, Loan Salability & First-Line Model Governance",
+   "Applied Scientist "
+  ],
+  "slug": "upstart"
+ },
+ "Vanguard": {
+  "board": null,
+  "note": "Malvern PA"
+ },
+ "Varo": {
+  "board": null,
+  "note": ""
+ },
+ "VaynerMedia": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "vaynermedia"
+ },
+ "Vestwell": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 21,
+  "samples": [
+   "Associate, Payroll Operations",
+   "Associate, Sales Operations ",
+   "Associate, Sales Strategy"
+  ],
+  "slug": "vestwell"
+ },
+ "Via": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "via"
+ },
+ "Viget": {
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 1,
+  "samples": [
+   "Extended Talent Network"
+  ],
+  "slug": "viget"
+ },
+ "Vimeo": {
+  "board": null,
+  "note": "NYC"
+ },
+ "Visa": {
+  "board": "smartrecruiters",
+  "confidence": "verified",
+  "open_jobs": 2,
+  "samples": [
+   "Sr. Manager",
+   "Director"
+  ],
+  "slug": "visa"
+ },
+ "Vispero": {
+  "board": null,
+  "note": "JAWS/ZoomText"
+ },
+ "Vox Media": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "voxmedia"
+ },
+ "Warby Parker": {
+  "board": null,
+  "note": "wp on smartrecruiters is a test posting, not Warby Parker"
+ },
+ "Wealthfront": {
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 23,
+  "samples": [
+   "Android Engineer",
+   "Anti-Money Laundering Monitoring Analyst",
+   "Backend Engineer"
+  ],
+  "slug": "wealthfront"
+ },
+ "WeightWatchers": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "ww"
+ },
+ "Wieden+Kennedy": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC office",
+  "open_jobs": 15,
+  "samples": [
+   "BI Manager",
+   "Producer",
+   "Producer"
+  ],
+  "slug": "wk"
+ },
+ "Wikimedia Foundation": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 18,
+  "samples": [
+   "Fundraising Support Specialist (Contract)",
+   "Head of Marketing",
+   "Italian Translator / Linguist (Contract)"
+  ],
+  "slug": "wikimedia"
+ },
+ "Wise": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 19,
+  "samples": [
+   "Supplemental Sales Agent - Anchorage, AK",
+   "Supplemental Sales Agent - Bronx, NY",
+   "Supplemental Sales Agent - Chicago, IL"
+  ],
+  "slug": "wise"
+ },
+ "Work and Co": {
+  "board": null,
+  "note": "slug collision with unrelated company on bamboohr"
+ },
+ "Yext": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "note": "NYC",
+  "open_jobs": 23,
+  "samples": [
+   "Associate Marketing Operations/ Automation Manager ",
+   "Associate Technical Partner Manager",
+   "Customer Success Manager, Enterprise - Financial Services"
+  ],
+  "slug": "yext"
+ },
+ "Yotpo": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "yotpo"
+ },
+ "Zeta Global": {
+  "board": "greenhouse",
+  "confidence": "verified",
+  "slug": "zetaglobal"
+ },
+ "ustwo": {
+  "board": null,
+  "note": "NYC"
+ }
+}

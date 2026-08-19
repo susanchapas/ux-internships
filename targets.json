@@ -1188,7 +1188,7 @@
           "note": "NYC. Large design org."
         },
         {
-          "name": "Cond\u00e9 Nast",
+          "name": "Condé Nast",
           "note": "NYC"
         },
         {
@@ -1212,7 +1212,7 @@
           "note": "Englewood Cliffs NJ"
         },
         {
-          "name": "Est\u00e9e Lauder",
+          "name": "Estée Lauder",
           "note": "NYC"
         },
         {
@@ -1389,6 +1389,513 @@
           "hint": "2u"
         }
       ]
+    },
+    "fortune500_nycnj": {
+      "label": "Fortune 500 — NYC/NJ area (not covered elsewhere)",
+      "note": "Additional F500 companies HQ'd or with major offices in NYC/NJ metro. Many on Workday.",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Honeywell",
+          "note": "Charlotte HQ but large NJ presence (Morris Plains). Digital UX team."
+        },
+        {
+          "name": "AT&T",
+          "note": "Large NYC office"
+        },
+        {
+          "name": "T-Mobile",
+          "note": "NYC offices"
+        },
+        {
+          "name": "Omnicom Group",
+          "hint": "omnicom",
+          "note": "NYC HQ. Owns BBDO, DDB, TBWA — design/advertising."
+        },
+        {
+          "name": "Interpublic Group",
+          "hint": "interpublic",
+          "note": "NYC HQ. Owns McCann, MullenLowe, R/GA."
+        },
+        {
+          "name": "Broadridge",
+          "hint": "broadridge",
+          "note": "Lake Success NY. Fintech/capital markets."
+        },
+        {
+          "name": "Fiserv",
+          "hint": "fiserv",
+          "note": "Large NYC presence. Payments/fintech."
+        },
+        {
+          "name": "MSCI",
+          "hint": "msci",
+          "note": "NYC HQ. Finance data/analytics."
+        },
+        {
+          "name": "Verisk",
+          "hint": "verisk",
+          "note": "Jersey City NJ."
+        },
+        {
+          "name": "FactSet",
+          "hint": "factset",
+          "note": "Norwalk CT + NYC. Financial data."
+        },
+        {
+          "name": "IFF",
+          "hint": "iff",
+          "note": "NYC. Consumer product design."
+        },
+        {
+          "name": "Otis",
+          "hint": "otis",
+          "note": "Farmington CT. Has digital product team."
+        },
+        {
+          "name": "Henry Schein",
+          "hint": "henryschein",
+          "note": "Melville NY. Healthcare distribution."
+        },
+        {
+          "name": "Scholastic",
+          "hint": "scholastic",
+          "note": "NYC HQ. Children's content/publishing — design-heavy."
+        },
+        {
+          "name": "Hess",
+          "note": "NYC HQ."
+        },
+        {
+          "name": "Sealed Air",
+          "note": "Charlotte NC but NJ operations."
+        },
+        {
+          "name": "Bed Bath & Beyond",
+          "note": "Union NJ. (Check if still operating)"
+        },
+        {
+          "name": "Avis Budget Group",
+          "note": "Parsippany NJ."
+        },
+        {
+          "name": "Revlon",
+          "note": "NYC."
+        },
+        {
+          "name": "Coty",
+          "hint": "coty",
+          "note": "NYC. Beauty/cosmetics."
+        },
+        {
+          "name": "Hanes",
+          "note": "Winston-Salem but NYC design offices."
+        },
+        {
+          "name": "Tiffany & Co",
+          "note": "NYC. Part of LVMH."
+        },
+        {
+          "name": "Saks",
+          "note": "NYC."
+        },
+        {
+          "name": "Barnes & Noble",
+          "note": "NYC."
+        },
+        {
+          "name": "Simon & Schuster",
+          "hint": "simonandschuster",
+          "note": "NYC. Publishing."
+        },
+        {
+          "name": "NBCUniversal",
+          "hint": "nbcuniversal",
+          "note": "NYC. Media/streaming/design."
+        },
+        {
+          "name": "Sony Music",
+          "note": "NYC."
+        },
+        {
+          "name": "Warner Music",
+          "note": "NYC."
+        },
+        {
+          "name": "iHeartMedia",
+          "hint": "iheartmedia",
+          "note": "NYC."
+        },
+        {
+          "name": "MSG Entertainment",
+          "note": "NYC."
+        },
+        {
+          "name": "Zillow",
+          "hint": "zillow",
+          "note": "NYC office. Real estate tech — strong design."
+        },
+        {
+          "name": "Compass",
+          "hint": "compass",
+          "note": "NYC HQ. Real estate tech."
+        },
+        {
+          "name": "Coupang",
+          "hint": "coupang",
+          "note": "NYC office."
+        },
+        {
+          "name": "WeWork",
+          "hint": "wework",
+          "note": "NYC."
+        },
+        {
+          "name": "Grubhub",
+          "hint": "grubhub",
+          "note": "NYC."
+        }
+      ]
+    },
+    "best_places_to_work": {
+      "label": "Best Places to Work (Glassdoor/Fortune/LinkedIn) — NYC/NJ",
+      "note": "Companies consistently ranked highly on workplace lists that are not already in other categories.",
+      "priority": 2,
+      "companies": [
+        {
+          "name": "Roku",
+          "hint": "roku",
+          "note": "NYC office."
+        },
+        {
+          "name": "DocuSign",
+          "hint": "docusign",
+          "note": "NYC office."
+        },
+        {
+          "name": "Palo Alto Networks",
+          "hint": "paloaltonetworks"
+        },
+        {
+          "name": "Snowflake",
+          "hint": "snowflake",
+          "note": "NYC."
+        },
+        {
+          "name": "ServiceNow",
+          "hint": "servicenow"
+        },
+        {
+          "name": "CrowdStrike",
+          "hint": "crowdstrike"
+        },
+        {
+          "name": "Zscaler",
+          "hint": "zscaler"
+        },
+        {
+          "name": "Splunk",
+          "hint": "splunk"
+        },
+        {
+          "name": "Elastic",
+          "hint": "elastic"
+        },
+        {
+          "name": "Okta",
+          "hint": "okta",
+          "note": "NYC."
+        },
+        {
+          "name": "Workday",
+          "note": "NYC offices."
+        },
+        {
+          "name": "Autodesk",
+          "hint": "autodesk"
+        },
+        {
+          "name": "Unity",
+          "hint": "unity3d"
+        },
+        {
+          "name": "Epic Games",
+          "hint": "epicgames"
+        },
+        {
+          "name": "Take-Two Interactive",
+          "hint": "taketwo",
+          "note": "NYC HQ. Rockstar Games parent."
+        },
+        {
+          "name": "Roblox",
+          "hint": "roblox"
+        },
+        {
+          "name": "Twitch",
+          "hint": "twitch",
+          "note": "NYC office."
+        },
+        {
+          "name": "Glassdoor",
+          "hint": "glassdoor"
+        },
+        {
+          "name": "Indeed",
+          "hint": "indeed",
+          "note": "NYC."
+        },
+        {
+          "name": "The Trade Desk",
+          "hint": "thetradedesk",
+          "note": "NYC."
+        },
+        {
+          "name": "LiveRamp",
+          "hint": "liveramp"
+        },
+        {
+          "name": "MediaMath",
+          "hint": "mediamath",
+          "note": "NYC."
+        },
+        {
+          "name": "AppLovin",
+          "hint": "applovin"
+        },
+        {
+          "name": "Noom",
+          "hint": "noom",
+          "note": "NYC."
+        },
+        {
+          "name": "Thirty Madison",
+          "hint": "thirtymadison",
+          "note": "NYC. Consumer health."
+        },
+        {
+          "name": "Capsule",
+          "hint": "capsule",
+          "note": "NYC. Pharmacy."
+        },
+        {
+          "name": "Babylist",
+          "hint": "babylist"
+        },
+        {
+          "name": "Harry's",
+          "hint": "harrys",
+          "note": "NYC."
+        },
+        {
+          "name": "Glossier",
+          "hint": "glossier",
+          "note": "NYC. Beauty/DTC."
+        },
+        {
+          "name": "Away",
+          "hint": "away",
+          "note": "NYC."
+        },
+        {
+          "name": "Casper",
+          "hint": "casper",
+          "note": "NYC."
+        },
+        {
+          "name": "Rent the Runway",
+          "hint": "renttherunway",
+          "note": "NYC."
+        },
+        {
+          "name": "Stitch Fix",
+          "hint": "stitchfix"
+        },
+        {
+          "name": "ThredUp",
+          "hint": "thredup"
+        },
+        {
+          "name": "Vroom",
+          "hint": "vroom",
+          "note": "NYC."
+        },
+        {
+          "name": "Handshake",
+          "hint": "handshake",
+          "note": "NYC. Career platform — directly relevant."
+        },
+        {
+          "name": "Adyen",
+          "hint": "adyen",
+          "note": "Fintech. NYC office."
+        },
+        {
+          "name": "AlphaSense",
+          "hint": "alphasense",
+          "note": "NYC. Market intelligence."
+        },
+        {
+          "name": "AlphaSights",
+          "hint": "alphasights",
+          "note": "NYC. Expert network/research."
+        },
+        {
+          "name": "AppsFlyer",
+          "hint": "appsflyer",
+          "note": "NYC."
+        },
+        {
+          "name": "Axios",
+          "hint": "axios",
+          "note": "NYC. Media."
+        },
+        {
+          "name": "BARK",
+          "hint": "bark",
+          "note": "NYC. Consumer/pet brand."
+        },
+        {
+          "name": "Bombas",
+          "hint": "bombas",
+          "note": "NYC. DTC apparel."
+        },
+        {
+          "name": "Business Insider",
+          "hint": "insider",
+          "note": "NYC. Media."
+        },
+        {
+          "name": "BuzzFeed",
+          "hint": "buzzfeed",
+          "note": "NYC. Media."
+        },
+        {
+          "name": "ClassPass",
+          "hint": "classpass",
+          "note": "NYC. Fitness marketplace."
+        },
+        {
+          "name": "Cloudflare",
+          "hint": "cloudflare",
+          "note": "NYC office."
+        },
+        {
+          "name": "Clover Health",
+          "hint": "cloverhealth",
+          "note": "NYC. Healthtech."
+        },
+        {
+          "name": "Cockroach Labs",
+          "hint": "cockroachlabs",
+          "note": "NYC."
+        },
+        {
+          "name": "Convene",
+          "hint": "convene",
+          "note": "NYC. Event space."
+        },
+        {
+          "name": "Foursquare",
+          "hint": "foursquare",
+          "note": "NYC. Location data."
+        },
+        {
+          "name": "Gemini",
+          "hint": "gemini",
+          "note": "NYC. Crypto exchange."
+        },
+        {
+          "name": "General Atlantic",
+          "hint": "generalatlantic",
+          "note": "NYC. Growth equity."
+        },
+        {
+          "name": "Kustomer",
+          "hint": "kustomer",
+          "note": "NYC. CRM."
+        },
+        {
+          "name": "Match Group",
+          "hint": "matchgroup",
+          "note": "NYC. Tinder/Hinge/OkCupid parent."
+        },
+        {
+          "name": "Morning Brew",
+          "hint": "morningbrew",
+          "note": "NYC. Media."
+        },
+        {
+          "name": "Movable Ink",
+          "hint": "movableink",
+          "note": "NYC. Martech."
+        },
+        {
+          "name": "Paxos",
+          "hint": "paxos",
+          "note": "NYC. Blockchain infra."
+        },
+        {
+          "name": "Riskified",
+          "hint": "riskified",
+          "note": "NYC."
+        },
+        {
+          "name": "Rockstar Games",
+          "hint": "rockstargames",
+          "note": "NYC. Game studio (Take-Two)."
+        },
+        {
+          "name": "SeatGeek",
+          "hint": "seatgeek",
+          "note": "NYC. Ticketing."
+        },
+        {
+          "name": "The Athletic",
+          "hint": "theathletic",
+          "note": "NYC. NYT-owned sports media."
+        },
+        {
+          "name": "The Knot Worldwide",
+          "hint": "theknotworldwide",
+          "note": "NYC. Wedding media."
+        },
+        {
+          "name": "Trustpilot",
+          "hint": "trustpilot",
+          "note": "NYC office."
+        },
+        {
+          "name": "VaynerMedia",
+          "hint": "vaynermedia",
+          "note": "NYC. Ad agency."
+        },
+        {
+          "name": "Via",
+          "hint": "via",
+          "note": "NYC. Transit tech."
+        },
+        {
+          "name": "Vox Media",
+          "hint": "voxmedia",
+          "note": "NYC. Media."
+        },
+        {
+          "name": "WeightWatchers",
+          "hint": "ww",
+          "note": "NYC. Consumer health."
+        },
+        {
+          "name": "Yotpo",
+          "hint": "yotpo",
+          "note": "NYC."
+        },
+        {
+          "name": "Zeta Global",
+          "hint": "zetaglobal",
+          "note": "NYC. Martech."
+        }
+      ]
     }
   },
   "government_portals": {
@@ -1396,12 +1903,12 @@
     "automated": [
       {
         "name": "USAJOBS (federal, incl. Pathways Internship Program)",
-        "how": "built into internship_watch.py \u2014 needs a free API key from developer.usajobs.gov",
+        "how": "built into internship_watch.py — needs a free API key from developer.usajobs.gov",
         "url": "https://www.usajobs.gov/"
       },
       {
         "name": "NYC Jobs (all city agencies)",
-        "how": "NYC Open Data publishes current job postings as a dataset with a Socrata API \u2014 see resolve.py --gov",
+        "how": "NYC Open Data publishes current job postings as a dataset with a Socrata API — see resolve.py --gov",
         "url": "https://opendata.cityofnewyork.us/"
       }
     ],
@@ -1470,7 +1977,7 @@
       },
       {
         "name": "United Nations",
-        "note": "NYC HQ. UN internships are typically unpaid \u2014 check before investing time.",
+        "note": "NYC HQ. UN internships are typically unpaid — check before investing time.",
         "url": "https://careers.un.org/"
       },
       {
@@ -1482,6 +1989,6 @@
         "url": "https://www.worldbank.org/en/about/careers"
       }
     ],
-    "note_on_federal_digital": "18F and the U.S. Digital Service were the classic federal design-research entry points. Both were significantly restructured during 2025 \u2014 verify current status before building them into your pipeline. The private civic-tech contractors in the civic_tech category do much of the same work and hire more predictably."
+    "note_on_federal_digital": "18F and the U.S. Digital Service were the classic federal design-research entry points. Both were significantly restructured during 2025 — verify current status before building them into your pipeline. The private civic-tech contractors in the civic_tech category do much of the same work and hire more predictably."
   }
 }

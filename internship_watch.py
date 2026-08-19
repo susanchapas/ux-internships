@@ -20,6 +20,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlencode
 
+import html as htmlmod
+
 import requests
 
 HERE = Path(__file__).parent
@@ -29,13 +31,31 @@ STATE_PATH = HERE / "seen.json"
 UA = {"User-Agent": "internship-watch/1.0 (personal job search tool)"}
 TIMEOUT = 20
 
+PAY_RE = re.compile(
+    r"\$\s*[\d,]+(?:\.\d{2})?"
+    r"(?:\s*(?:[-–—/]|to)\s*\$?\s*[\d,]+(?:\.\d{2})?)?"
+    r"(?:\s*(?:per|/|an?)\s*(?:hour|hr|yr|year|month|week|annum|annually))?"
+    r"(?:\s*(?:USD|CAD))?"
+    r"(?:\s*(?:per|/|an?)\s*(?:hour|hr|yr|year|month|week|annum|annually))?",
+    re.I,
+)
+
+
+def extract_pay(text):
+    if not text:
+        return ""
+    text = htmlmod.unescape(text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    matches = PAY_RE.findall(text)
+    return "; ".join(dict.fromkeys(matches)) if matches else ""
+
 
 # ---------------------------------------------------------------- fetchers
-# Each fetcher yields dicts: {id, title, location, url, company, source}
+# Each fetcher yields dicts: {id, title, location, url, company, source, pay}
 
 
 def fetch_greenhouse(slug, company):
-    url = f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=false"
+    url = f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true"
     r = requests.get(url, headers=UA, timeout=TIMEOUT)
     r.raise_for_status()
     for j in r.json().get("jobs", []):
@@ -46,6 +66,8 @@ def fetch_greenhouse(slug, company):
             "url": j.get("absolute_url", ""),
             "company": company,
             "source": "greenhouse",
+            "pay": extract_pay(j.get("content", "")),
+            "posted_at": j.get("updated_at", ""),
         }
 
 
@@ -55,6 +77,13 @@ def fetch_lever(slug, company):
     r.raise_for_status()
     for j in r.json():
         cats = j.get("categories") or {}
+        text_blob = " ".join(filter(None, [
+            j.get("descriptionPlain", ""),
+            j.get("additionalPlain", ""),
+            j.get("openingPlain", ""),
+        ]))
+        for section in j.get("lists", []):
+            text_blob += " " + (section.get("content", "") if isinstance(section.get("content"), str) else "")
         yield {
             "id": f"lv:{slug}:{j['id']}",
             "title": j.get("text", ""),
@@ -62,6 +91,10 @@ def fetch_lever(slug, company):
             "url": j.get("hostedUrl", ""),
             "company": company,
             "source": "lever",
+            "pay": extract_pay(text_blob),
+            "posted_at": (datetime.fromtimestamp(j["createdAt"] / 1000, tz=timezone.utc).isoformat()
+                          if j.get("createdAt") else ""),
+            "commitment": cats.get("commitment", ""),
         }
 
 
@@ -70,6 +103,8 @@ def fetch_ashby(slug, company):
     r = requests.get(url, headers=UA, timeout=TIMEOUT)
     r.raise_for_status()
     for j in r.json().get("jobs", []):
+        desc = j.get("descriptionHtml", "") or j.get("description", "") or ""
+        comp = j.get("compensationTierSummary", "") or ""
         yield {
             "id": f"ab:{slug}:{j.get('id')}",
             "title": j.get("title", ""),
@@ -77,6 +112,9 @@ def fetch_ashby(slug, company):
             "url": j.get("jobUrl", ""),
             "company": company,
             "source": "ashby",
+            "pay": comp or extract_pay(desc),
+            "posted_at": j.get("publishedAt", ""),
+            "employment_type": j.get("employmentType", ""),
         }
 
 
@@ -92,6 +130,15 @@ def fetch_smartrecruiters(slug, company):
             loc = j.get("location") or {}
             city = loc.get("city", "")
             region = loc.get("region", "")
+            comp = j.get("compensation") or {}
+            pay = ""
+            if comp:
+                parts = []
+                if comp.get("min"):
+                    parts.append(f"${comp['min']:,.0f}")
+                if comp.get("max"):
+                    parts.append(f"${comp['max']:,.0f}")
+                pay = " - ".join(parts)
             yield {
                 "id": f"sr:{slug}:{j.get('id')}",
                 "title": j.get("name", ""),
@@ -99,6 +146,8 @@ def fetch_smartrecruiters(slug, company):
                 "url": f"https://jobs.smartrecruiters.com/{slug}/{j.get('id')}",
                 "company": company,
                 "source": "smartrecruiters",
+                "pay": pay,
+                "posted_at": j.get("releasedDate", ""),
             }
         offset += page
         if offset >= data.get("totalFound", 0) or not items:
@@ -134,6 +183,10 @@ def fetch_workday(cfg, company):
         posts = data.get("jobPostings", [])
         for j in posts:
             path = j.get("externalPath", "")
+            pay = ""
+            sal = j.get("compensationAmount") or j.get("salaryAmount") or ""
+            if sal:
+                pay = str(sal)
             yield {
                 "id": f"wd:{tenant}:{path}",
                 "title": j.get("title", ""),
@@ -141,6 +194,8 @@ def fetch_workday(cfg, company):
                 "url": f"{base}/en-US/{site}{path}",
                 "company": company,
                 "source": "workday",
+                "pay": pay,
+                "posted_at": j.get("postedOn", ""),
             }
         offset += 20
         if offset >= data.get("total", 0) or not posts:
@@ -169,6 +224,18 @@ def fetch_usajobs(cfg, company="US Federal Government"):
         for it in items:
             d = it.get("MatchedObjectDescriptor", {})
             locs = d.get("PositionLocation") or [{}]
+            sal = d.get("PositionRemuneration", [{}])
+            pay = ""
+            if sal and isinstance(sal, list) and sal[0]:
+                s = sal[0]
+                mn, mx = s.get("MinimumRange", ""), s.get("MaximumRange", "")
+                desc = s.get("Description", "")
+                if mn:
+                    pay = f"${float(mn):,.0f}"
+                    if mx and mx != mn:
+                        pay += f" - ${float(mx):,.0f}"
+                    if desc:
+                        pay += f" {desc}"
             yield {
                 "id": f"usa:{d.get('PositionID')}",
                 "title": d.get("PositionTitle", ""),
@@ -176,6 +243,8 @@ def fetch_usajobs(cfg, company="US Federal Government"):
                 "url": d.get("PositionURI", ""),
                 "company": d.get("OrganizationName", company),
                 "source": "usajobs",
+                "pay": pay,
+                "posted_at": d.get("PublicationStartDate", ""),
             }
         time.sleep(0.5)
 
@@ -214,10 +283,11 @@ def matches(job, title_inc, title_exc, loc_inc):
 # ---------------------------------------------------------------- notify
 
 
-def notify(new_jobs, cfg):
+def notify(new_jobs):
     lines = []
     for j in new_jobs:
-        lines.append(f"{j['company']} — {j['title']}\n{j['location']}\n{j['url']}")
+        pay = f"\n💰 {j['pay']}" if j.get("pay") else ""
+        lines.append(f"{j['company']} — {j['title']}\n{j['location']}{pay}\n{j['url']}")
     body = "\n\n".join(lines)
     subject = f"{len(new_jobs)} new internship posting{'s' if len(new_jobs) != 1 else ''}"
 
@@ -311,11 +381,12 @@ def main():
 
     if args.dry_run:
         for j in new:
-            print(f"  {j['company']} | {j['title']} | {j['location']}\n    {j['url']}")
+            pay = f" | {j['pay']}" if j.get("pay") else ""
+            print(f"  {j['company']} | {j['title']} | {j['location']}{pay}\n    {j['url']}")
         return
 
     if new:
-        notify(new, cfg)
+        notify(new)
         seen |= {j["id"] for j in new}
         STATE_PATH.write_text(
             json.dumps({"updated": datetime.now(timezone.utc).isoformat(), "ids": sorted(seen)}, indent=1)
