@@ -5,6 +5,7 @@ import json
 import re
 import sys
 import time
+from http.cookie import SimpleCookie
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
@@ -14,6 +15,9 @@ from internship_watch import (
     fetch_workday, fetch_usajobs, BOARD_FETCHERS,
 )
 import db
+import auth as user_auth
+from models import Role
+from schemas import UserCreate, UserRead
 
 HERE = Path(__file__).parent
 DASHBOARD = HERE / "dashboard.html"
@@ -70,6 +74,33 @@ def classify(job):
 
 
 class Handler(BaseHTTPRequestHandler):
+
+    def _get_token(self):
+        cookie_header = self.headers.get("Cookie", "")
+        c = SimpleCookie(cookie_header)
+        return c["session"].value if "session" in c else None
+
+    def _current_user(self):
+        token = self._get_token()
+        if not token:
+            return None
+        return user_auth.get_current_user(token)
+
+    def _require_login(self):
+        user = self._current_user()
+        if not user:
+            self._json_response({"error": "Login required"}, 401)
+        return user
+
+    def _require_admin(self):
+        user = self._require_login()
+        if not user:
+            return None
+        if user.role != Role.admin:
+            self._json_response({"error": "Admin access required"}, 403)
+            return None
+        return user
+
     def do_GET(self):
         if self.path == "/":
             self._serve_dashboard()
@@ -77,11 +108,28 @@ class Handler(BaseHTTPRequestHandler):
             self._run_scan()
         elif self.path == "/api/applications":
             self._json_response(db.list_applications())
+        elif self.path == "/api/me":
+            user = self._require_login()
+            if user:
+                self._json_response(UserRead.model_validate(user).model_dump())
         else:
             self.send_error(404)
 
     def do_POST(self):
-        if self.path == "/api/applications":
+        if self.path == "/api/register":
+            self._handle_register()
+        elif self.path == "/api/login":
+            self._handle_login()
+        elif self.path == "/api/logout":
+            token = self._get_token()
+            if token:
+                user_auth.logout(token)
+            self._set_cookie("session", "", max_age=0)
+            self._json_response({"ok": True})
+        elif self.path == "/api/applications":
+            user = self._require_admin()
+            if not user:
+                return
             body = self._read_body()
             app_id = db.add_application(
                 company=body.get("company", ""),
@@ -100,6 +148,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_PUT(self):
         if self.path.startswith("/api/applications/"):
+            user = self._require_admin()
+            if not user:
+                return
             app_id = int(self.path.split("/")[-1])
             body = self._read_body()
             db.update_application(app_id, **body)
@@ -109,11 +160,45 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_DELETE(self):
         if self.path.startswith("/api/applications/"):
+            user = self._require_admin()
+            if not user:
+                return
             app_id = int(self.path.split("/")[-1])
             db.delete_application(app_id)
             self._json_response({"ok": True})
         else:
             self.send_error(404)
+
+    def _handle_register(self):
+        body = self._read_body()
+        try:
+            data = UserCreate(**body)
+        except Exception as e:
+            self._json_response({"error": str(e)}, 400)
+            return
+        if data.role == Role.admin:
+            self._json_response({"error": "Cannot self-register as admin"}, 403)
+            return
+        try:
+            user = user_auth.register_user(data.username, data.email, data.password)
+        except Exception:
+            self._json_response({"error": "Username or email already taken"}, 409)
+            return
+        self._json_response(UserRead.model_validate(user).model_dump(), 201)
+
+    def _handle_login(self):
+        body = self._read_body()
+        result = user_auth.login_user(body.get("username", ""), body.get("password", ""))
+        if not result:
+            self._json_response({"error": "Invalid credentials"}, 401)
+            return
+        user, token = result
+        self._set_cookie("session", token)
+        self._json_response(UserRead.model_validate(user).model_dump())
+
+    def _set_cookie(self, name, value, max_age=86400 * 30):
+        cookie = f"{name}={value}; HttpOnly; SameSite=Strict; Path=/; Max-Age={max_age}"
+        self._pending_cookie = cookie
 
     def _read_body(self):
         length = int(self.headers.get("Content-Length", 0))
@@ -124,6 +209,9 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
+        if hasattr(self, "_pending_cookie"):
+            self.send_header("Set-Cookie", self._pending_cookie)
+            del self._pending_cookie
         self.end_headers()
         self.wfile.write(body)
 
@@ -217,6 +305,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     db.init_db()
+    user_auth.get_engine()
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     print(f"  http://localhost:{port}")

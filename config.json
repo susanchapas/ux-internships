@@ -42,14 +42,46 @@
   ],
   "companies": [
     {
+      "board": "workday",
+      "name": "AIG",
+      "tenant": "aig",
+      "wd": 1,
+      "site": "aig",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "akqa",
       "name": "AKQA"
     },
     {
+      "board": "workday",
+      "name": "AT&T",
+      "tenant": "att",
+      "wd": 1,
+      "site": "ATTGeneral",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Accenture",
+      "tenant": "accenture",
+      "wd": 103,
+      "site": "AccentureCareers",
+      "search": "intern"
+    },
+    {
       "board": "ashby",
       "slug": "acorns",
       "name": "Acorns"
+    },
+    {
+      "board": "workday",
+      "name": "Adobe",
+      "tenant": "adobe",
+      "wd": 5,
+      "site": "external_experienced",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -95,6 +127,14 @@
       "board": "greenhouse",
       "slug": "appsflyer",
       "name": "AppsFlyer"
+    },
+    {
+      "board": "workday",
+      "name": "AstraZeneca",
+      "tenant": "astrazeneca",
+      "wd": 3,
+      "site": "Careers",
+      "search": "intern"
     },
     {
       "board": "ashby",
@@ -147,6 +187,22 @@
       "name": "Brex"
     },
     {
+      "board": "workday",
+      "name": "Bristol Myers Squibb",
+      "tenant": "bristolmyerssquibb",
+      "wd": 5,
+      "site": "BMS",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Broadridge",
+      "tenant": "broadridge",
+      "wd": 5,
+      "site": "Careers",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "insider",
       "name": "Business Insider"
@@ -180,6 +236,14 @@
       "board": "greenhouse",
       "slug": "chime",
       "name": "Chime"
+    },
+    {
+      "board": "workday",
+      "name": "Church & Dwight",
+      "tenant": "churchdwight",
+      "wd": 1,
+      "site": "chdcareers",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -242,6 +306,14 @@
       "name": "Coupang"
     },
     {
+      "board": "workday",
+      "name": "CrowdStrike",
+      "tenant": "crowdstrike",
+      "wd": 5,
+      "site": "crowdstrikecareers",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "current",
       "name": "Current"
@@ -257,9 +329,33 @@
       "name": "Dave"
     },
     {
+      "board": "workday",
+      "name": "Deloitte",
+      "tenant": "deloitteie",
+      "wd": 3,
+      "site": "Experienced_Professionals",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Dentsu",
+      "tenant": "dentsuaegis",
+      "wd": 3,
+      "site": "DAN_GLOBAL",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "discord",
       "name": "Discord"
+    },
+    {
+      "board": "workday",
+      "name": "Discover",
+      "tenant": "capitalone",
+      "wd": 12,
+      "site": "Capital_One",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -312,6 +408,14 @@
       "name": "Hearst"
     },
     {
+      "board": "workday",
+      "name": "Henry Schein",
+      "tenant": "henryschein",
+      "wd": 1,
+      "site": "External_Careers",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "hugeinc",
       "name": "Huge"
@@ -357,6 +461,14 @@
       "name": "Landor"
     },
     {
+      "board": "workday",
+      "name": "LendingClub",
+      "tenant": "lendingclub",
+      "wd": 1,
+      "site": "External",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "levelaccess",
       "name": "Level Access"
@@ -372,9 +484,25 @@
       "name": "LinkedIn"
     },
     {
+      "board": "workday",
+      "name": "Lippincott",
+      "tenant": "mmc",
+      "wd": 1,
+      "site": "MMC",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "lithic",
       "name": "Lithic"
+    },
+    {
+      "board": "workday",
+      "name": "LiveRamp",
+      "tenant": "liveramp",
+      "wd": 5,
+      "site": "LiveRampCareers",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -387,6 +515,14 @@
       "name": "Marsh McLennan"
     },
     {
+      "board": "workday",
+      "name": "Mastercard",
+      "tenant": "mastercard",
+      "wd": 1,
+      "site": "CorporateCareers",
+      "search": "intern"
+    },
+    {
       "board": "lever",
       "slug": "matchgroup",
       "name": "Match Group"
@@ -395,6 +531,14 @@
       "board": "greenhouse",
       "slug": "melio",
       "name": "Melio"
+    },
+    {
+      "board": "workday",
+      "name": "Merck",
+      "tenant": "msd",
+      "wd": 5,
+      "site": "SearchJobs",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -442,6 +586,14 @@
       "name": "Mozilla"
     },
     {
+      "board": "workday",
+      "name": "Nasdaq",
+      "tenant": "nasdaq",
+      "wd": 1,
+      "site": "Global_External_Site",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "new",
       "name": "New York Life"
@@ -462,6 +614,14 @@
       "name": "Nova Credit"
     },
     {
+      "board": "workday",
+      "name": "Novartis",
+      "tenant": "novartis",
+      "wd": 3,
+      "site": "Internal_Careers_for_Acquired_Entities",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "ogilvy",
       "name": "Ogilvy"
@@ -475,6 +635,22 @@
       "board": "greenhouse",
       "slug": "oscar",
       "name": "Oscar Health"
+    },
+    {
+      "board": "workday",
+      "name": "Otis",
+      "tenant": "otis",
+      "wd": 504,
+      "site": "REC_Ext_Gateway",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Palo Alto Networks",
+      "tenant": "paloaltonetworks",
+      "wd": 5,
+      "site": "panwexternalcareers",
+      "search": "intern"
     },
     {
       "board": "ashby",
@@ -522,6 +698,14 @@
       "name": "Public"
     },
     {
+      "board": "workday",
+      "name": "PwC",
+      "tenant": "pwc",
+      "wd": 3,
+      "site": "US_Experienced_Careers",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "rga",
       "name": "R/GA"
@@ -535,6 +719,14 @@
       "board": "greenhouse",
       "slug": "reddit",
       "name": "Reddit"
+    },
+    {
+      "board": "workday",
+      "name": "Regeneron",
+      "tenant": "regeneron",
+      "wd": 1,
+      "site": "Careers",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -555,6 +747,22 @@
       "board": "greenhouse",
       "slug": "roku",
       "name": "Roku"
+    },
+    {
+      "board": "workday",
+      "name": "Salesforce",
+      "tenant": "salesforce",
+      "wd": 12,
+      "site": "External_Career_Site",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Scholastic",
+      "tenant": "scholastic",
+      "wd": 5,
+      "site": "External",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -592,6 +800,38 @@
       "name": "Stripe"
     },
     {
+      "board": "workday",
+      "name": "T-Mobile",
+      "tenant": "tmobile",
+      "wd": 1,
+      "site": "External",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "TIAA",
+      "tenant": "tiaa",
+      "wd": 1,
+      "site": "Search",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Takeda",
+      "tenant": "takeda",
+      "wd": 502,
+      "site": "External",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Tapestry",
+      "tenant": "tapestry",
+      "wd": 108,
+      "site": "Tapestry_Careers",
+      "search": "intern"
+    },
+    {
       "board": "lever",
       "slug": "theathletic",
       "name": "The Athletic"
@@ -605,6 +845,14 @@
       "board": "greenhouse",
       "slug": "toast",
       "name": "Toast"
+    },
+    {
+      "board": "workday",
+      "name": "Travelers",
+      "tenant": "travelers",
+      "wd": 5,
+      "site": "External",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -652,6 +900,22 @@
       "name": "Vox Media"
     },
     {
+      "board": "workday",
+      "name": "Warner Music",
+      "tenant": "wmg",
+      "wd": 1,
+      "site": "WMGUS",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "WeWork",
+      "tenant": "wework",
+      "wd": 1,
+      "site": "WeWork",
+      "search": "intern"
+    },
+    {
       "board": "lever",
       "slug": "wealthfront",
       "name": "Wealthfront"
@@ -677,6 +941,14 @@
       "name": "Wise"
     },
     {
+      "board": "workday",
+      "name": "Workday",
+      "tenant": "workday",
+      "wd": 5,
+      "site": "Workday",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "yext",
       "name": "Yext"
@@ -690,6 +962,14 @@
       "board": "greenhouse",
       "slug": "zetaglobal",
       "name": "Zeta Global"
+    },
+    {
+      "board": "workday",
+      "name": "iHeartMedia",
+      "tenant": "iheartmedia",
+      "wd": 5,
+      "site": "External_iHM",
+      "search": "intern"
     },
     {
       "board": "usajobs",

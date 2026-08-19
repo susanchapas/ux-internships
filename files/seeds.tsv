@@ -1,0 +1,277 @@
+Adobe	adobe.com	big_tech	1	workday
+AIG	aig.com	banks_insurance	1	workday
+Ally	ally.com	banks_insurance	1	workday
+Amazon	amazon.com	big_tech	1	custom
+American Express	americanexpress.com	banks_insurance	1	
+Apple	apple.com	big_tech	1	custom
+Bank of America	bankofamerica.com	banks_insurance	1	custom
+BlackRock	blackrock.com	banks_insurance	1	workday
+Chubb	chubb.com	banks_insurance	1	workday
+Citi	citi.com	banks_insurance	1	custom
+Discover	discover.com	banks_insurance	1	workday
+Etsy	etsy.com	big_tech	1	greenhouse
+Federal Reserve Bank of New York	newyorkfed.org	banks_insurance	1	workday
+Goldman Sachs	goldmansachs.com	banks_insurance	1	custom
+Google	google.com	big_tech	1	custom
+IBM	ibm.com	big_tech	1	custom
+Intuit	intuit.com	big_tech	1	workday
+JPMorgan Chase	jpmorganchase.com	banks_insurance	1	custom
+Mastercard	mastercard.com	banks_insurance	1	workday
+Meta	meta.com	big_tech	1	custom
+Microsoft	microsoft.com	big_tech	1	custom
+Moody's	moodys.com	banks_insurance	1	workday
+Morgan Stanley	morganstanley.com	banks_insurance	1	custom
+Nasdaq	nasdaq.com	banks_insurance	1	workday
+Netflix	netflix.com	big_tech	1	eightfold
+Oracle	oracle.com	big_tech	1	oracle
+Prudential Financial	prudential.com	banks_insurance	1	workday
+S&P Global	spglobal.com	banks_insurance	1	workday
+Salesforce	salesforce.com	big_tech	1	workday
+Snap	snap.com	big_tech	1	greenhouse
+Synchrony	synchrony.com	banks_insurance	1	workday
+TIAA	tiaa.org	banks_insurance	1	workday
+Travelers	travelers.com	banks_insurance	1	workday
+Uber	uber.com	big_tech	1	custom
+Vanguard	vanguard.com	banks_insurance	1	workday
+Vimeo	vimeo.com	big_tech	1	greenhouse
+Warby Parker	warbyparker.com	big_tech	1	greenhouse
+Accion	accion.org	fintech_mission	1	
+Ad Hoc	adhocteam.us	civic_tech	1	greenhouse
+Addepar	addepar.com	fintech_core	1	greenhouse
+Aira	aira.io	accessibility	1	
+American Foundation for the Blind	afb.org	accessibility	1	
+Athletics	athleticsnyc.com	ux_agencies	1	
+Barrel	barrelny.com	ux_agencies	1	
+Be My Eyes	bemyeyes.com	accessibility	1	
+Big Human	bighuman.com	ux_agencies	1	
+Civilla	civilla.com	civic_tech	1	
+Coforma	coforma.io	civic_tech	1	greenhouse
+Collins	wearecollins.com	ux_agencies	1	
+Deel	deel.com	fintech_core	1	greenhouse
+Dentsu	dentsu.com	ux_agencies	1	
+Deque Systems	deque.com	accessibility	1	
+Designit	designit.com	ux_agencies	1	
+Droga5	droga5.com	ux_agencies	1	
+EPAM	epam.com	ux_agencies	1	
+Esusu	esusurent.com	fintech_mission	1	greenhouse
+Fearless	fearless.tech	civic_tech	1	greenhouse
+Flywire	flywire.com	fintech_core	1	greenhouse
+Grameen America	grameenamerica.org	fintech_mission	1	
+Greenwood	bankgreenwood.com	fintech_mission	1	
+Helen Keller Services	helenkeller.org	accessibility	1	
+Kiva	kiva.org	fintech_mission	1	greenhouse
+LendingClub	lendingclub.com	fintech_mission	1	greenhouse
+Lippincott	lippincott.com	ux_agencies	1	
+Local Projects	localprojects.net	ux_agencies	1	
+Marqeta	marqeta.com	fintech_core	1	greenhouse
+MoCaFi	mocafi.com	fintech_mission	1	
+MoneyLion	moneylion.com	fintech_mission	1	greenhouse
+Nava PBC	navapbc.com	civic_tech	1	greenhouse
+Navan	navan.com	fintech_core	1	greenhouse
+Pentagram	pentagram.com	ux_agencies	1	manual
+Petal	petalcard.com	fintech_mission	1	greenhouse
+Publicis Sapient	publicissapient.com	ux_agencies	1	
+Rangle	rangle.io	ux_agencies	1	
+Remitly	remitly.com	fintech_core	1	greenhouse
+Rippling	rippling.com	fintech_core	1	
+Siegel+Gale	siegelgale.com	ux_agencies	1	
+Skylight	skylight.digital	civic_tech	1	
+Slalom	slalom.com	ux_agencies	1	
+Stash	stash.com	fintech_mission	1	greenhouse
+Thoughtbot	thoughtbot.com	ux_agencies	1	
+TPGi	tpgi.com	accessibility	1	
+Truss	truss.works	civic_tech	1	greenhouse
+U.S. Digital Response	usdigitalresponse.org	civic_tech	1	
+ustwo	ustwo.com	ux_agencies	1	
+Varo	varomoney.com	fintech_mission	1	greenhouse
+Vispero	vispero.com	accessibility	1	
+Work and Co	work.co	ux_agencies	1	
+Accenture	accenture.com	consulting	2	
+ADP	adp.com	media_retail_cpg	2	workday
+AstraZeneca	astrazeneca.com	pharma_nj	2	workday
+Bain	bain.com	consulting	2	
+Bayer	bayer.com	pharma_nj	2	workday
+Becton Dickinson	bd.com	pharma_nj	2	workday
+Bloomberg	bloomberg.com	media_retail_cpg	2	custom
+Booking Holdings	bookingholdings.com	media_retail_cpg	2	workday
+Boston Consulting Group	bcg.com	consulting	2	workday
+Bristol Myers Squibb	bms.com	pharma_nj	2	workday
+Campbell's	campbellsoupcompany.com	media_retail_cpg	2	workday
+Church & Dwight	churchdwight.com	media_retail_cpg	2	workday
+Cognizant	cognizant.com	media_retail_cpg	2	workday
+Colgate-Palmolive	colgatepalmolive.com	media_retail_cpg	2	workday
+Comcast NBCUniversal	comcast.com	media_retail_cpg	2	
+Conde Nast	condenast.com	media_retail_cpg	2	greenhouse
+Deloitte	deloitte.com	consulting	2	
+Delta Air Lines	delta.com	media_retail_cpg	2	workday
+Eli Lilly	lilly.com	pharma_nj	2	workday
+Estee Lauder	elcompanies.com	media_retail_cpg	2	workday
+EY	ey.com	consulting	2	
+Foot Locker	footlocker.com	media_retail_cpg	2	workday
+Gartner	gartner.com	consulting	2	workday
+GSK	gsk.com	pharma_nj	2	workday
+Hilton	hilton.com	media_retail_cpg	2	workday
+JetBlue	jetblue.com	media_retail_cpg	2	workday
+Johnson & Johnson	jnj.com	pharma_nj	2	workday
+KPMG	kpmg.com	consulting	2	
+L'Oreal USA	loreal.com	media_retail_cpg	2	workday
+Macy's	macysinc.com	media_retail_cpg	2	workday
+Marriott	marriott.com	media_retail_cpg	2	workday
+McKinsey	mckinsey.com	consulting	2	
+Merck	merck.com	pharma_nj	2	workday
+Mondelez	mondelezinternational.com	media_retail_cpg	2	workday
+Novartis	novartis.com	pharma_nj	2	workday
+Novo Nordisk	novonordisk.com	pharma_nj	2	workday
+Organon	organon.com	pharma_nj	2	workday
+Paramount	paramount.com	media_retail_cpg	2	workday
+PepsiCo	pepsico.com	media_retail_cpg	2	workday
+Pfizer	pfizer.com	pharma_nj	2	workday
+PVH	pvh.com	media_retail_cpg	2	workday
+PwC	pwc.com	consulting	2	
+Ralph Lauren	ralphlauren.com	media_retail_cpg	2	workday
+Regeneron	regeneron.com	pharma_nj	2	workday
+Sanofi	sanofi.com	pharma_nj	2	workday
+Takeda	takeda.com	pharma_nj	2	workday
+Tapestry	tapestry.com	media_retail_cpg	2	workday
+The New York Times	nytco.com	media_retail_cpg	2	greenhouse
+The Walt Disney Company	disney.com	media_retail_cpg	2	custom
+Unilever	unilever.com	media_retail_cpg	2	workday
+United Airlines	united.com	media_retail_cpg	2	workday
+Verizon	verizon.com	media_retail_cpg	2	
+Warner Bros Discovery	wbd.com	media_retail_cpg	2	workday
+Wayfair	wayfair.com	media_retail_cpg	2	
+ZS Associates	zs.com	consulting	2	
+Airtable	airtable.com	product_saas	2	greenhouse
+Alma	helloalma.com	health_tech	2	greenhouse
+Amplitude	amplitude.com	product_saas	2	greenhouse
+Asana	asana.com	product_saas	2	greenhouse
+AT&T	att.com	fortune500_nycnj	2	
+Atlassian	atlassian.com	product_saas	2	
+Autodesk	autodesk.com	best_places_to_work	2	workday
+Avis Budget Group	avisbudgetgroup.com	fortune500_nycnj	2	
+Babylist	babylist.com	best_places_to_work	2	greenhouse
+Barnes & Noble	barnesandnoble.com	fortune500_nycnj	2	
+Bed Bath & Beyond	bedbathandbeyond.com	fortune500_nycnj	2	defunct
+Broadridge	broadridge.com	fortune500_nycnj	2	workday
+Bumble	bumble.com	product_saas	2	greenhouse
+Calm	calm.com	product_saas	2	greenhouse
+Canva	canva.com	product_saas	2	lever
+Casper	casper.com	best_places_to_work	2	greenhouse
+Cedar	cedar.com	health_tech	2	greenhouse
+Compass	compass.com	fortune500_nycnj	2	greenhouse
+Coty	coty.com	fortune500_nycnj	2	workday
+CrowdStrike	crowdstrike.com	best_places_to_work	2	greenhouse
+DocuSign	docusign.com	best_places_to_work	2	
+DoorDash	doordash.com	product_saas	2	greenhouse
+Dropbox	dropbox.com	product_saas	2	greenhouse
+Duolingo	duolingo.com	product_saas	2	greenhouse
+Elastic	elastic.co	best_places_to_work	2	greenhouse
+Epic Games	epicgames.com	best_places_to_work	2	greenhouse
+FactSet	factset.com	fortune500_nycnj	2	workday
+Figma	figma.com	product_saas	2	greenhouse
+Fiserv	fiserv.com	fortune500_nycnj	2	workday
+Flatiron Health	flatiron.com	health_tech	2	greenhouse
+Framer	framer.com	product_saas	2	ashby
+Glassdoor	glassdoor.com	best_places_to_work	2	greenhouse
+Glossier	glossier.com	best_places_to_work	2	greenhouse
+Grubhub	grubhub.com	fortune500_nycnj	2	greenhouse
+Hanes	hanes.com	fortune500_nycnj	2	
+Harry's	harrys.com	best_places_to_work	2	greenhouse
+Headspace	headspace.com	product_saas	2	greenhouse
+Headway	headway.co	health_tech	2	greenhouse
+Henry Schein	henryschein.com	fortune500_nycnj	2	
+Hess	hess.com	fortune500_nycnj	2	
+Hinge	hinge.co	product_saas	2	greenhouse
+Hinge Health	hingehealth.com	health_tech	2	greenhouse
+Honeywell	honeywell.com	fortune500_nycnj	2	workday
+HubSpot	hubspot.com	product_saas	2	greenhouse
+IFF	iff.com	fortune500_nycnj	2	workday
+iHeartMedia	iheartmedia.com	fortune500_nycnj	2	
+Included Health	includedhealth.com	health_tech	2	greenhouse
+Indeed	indeed.com	best_places_to_work	2	
+Instacart	instacart.com	product_saas	2	greenhouse
+Interpublic Group	interpublic.com	fortune500_nycnj	2	
+K Health	khealth.com	health_tech	2	greenhouse
+Kindbody	kindbody.com	health_tech	2	greenhouse
+Klaviyo	klaviyo.com	product_saas	2	greenhouse
+Komodo Health	komodohealth.com	health_tech	2	greenhouse
+Linear	linear.app	product_saas	2	ashby
+LiveRamp	liveramp.com	best_places_to_work	2	greenhouse
+Maven Clinic	mavenclinic.com	health_tech	2	greenhouse
+MediaMath	mediamath.com	best_places_to_work	2	defunct
+Mixpanel	mixpanel.com	product_saas	2	greenhouse
+MSCI	msci.com	fortune500_nycnj	2	workday
+MSG Entertainment	msg.com	fortune500_nycnj	2	
+NBCUniversal	nbcuniversal.com	fortune500_nycnj	2	
+Noom	noom.com	best_places_to_work	2	greenhouse
+Notion	notion.com	product_saas	2	greenhouse
+Okta	okta.com	best_places_to_work	2	greenhouse
+Omada Health	omadahealth.com	health_tech	2	greenhouse
+Omnicom Group	omnicomgroup.com	fortune500_nycnj	2	
+Otis	otis.com	fortune500_nycnj	2	workday
+Palo Alto Networks	paloaltonetworks.com	best_places_to_work	2	
+Patreon	patreon.com	product_saas	2	greenhouse
+Rent the Runway	renttherunway.com	best_places_to_work	2	greenhouse
+Retool	retool.com	product_saas	2	greenhouse
+Revlon	revlon.com	fortune500_nycnj	2	
+Ro	ro.co	health_tech	2	greenhouse
+Roblox	roblox.com	best_places_to_work	2	greenhouse
+Saks	saks.com	fortune500_nycnj	2	
+Scholastic	scholastic.com	fortune500_nycnj	2	
+Sealed Air	sealedair.com	fortune500_nycnj	2	workday
+ServiceNow	servicenow.com	best_places_to_work	2	
+Shopify	shopify.com	product_saas	2	
+Simon & Schuster	simonandschuster.com	fortune500_nycnj	2	
+Snowflake	snowflake.com	best_places_to_work	2	greenhouse
+Sony Music	sonymusic.com	fortune500_nycnj	2	
+Splunk	splunk.com	best_places_to_work	2	
+Spring Health	springhealth.com	health_tech	2	greenhouse
+Stitch Fix	stitchfix.com	best_places_to_work	2	greenhouse
+Substack	substack.com	product_saas	2	greenhouse
+T-Mobile	t-mobile.com	fortune500_nycnj	2	
+Take-Two Interactive	take2games.com	best_places_to_work	2	
+Talkspace	talkspace.com	health_tech	2	greenhouse
+The Trade Desk	thetradedesk.com	best_places_to_work	2	greenhouse
+Thirty Madison	thirtymadison.com	best_places_to_work	2	greenhouse
+ThredUp	thredup.com	best_places_to_work	2	greenhouse
+Tiffany & Co	tiffany.com	fortune500_nycnj	2	
+Twilio	twilio.com	product_saas	2	greenhouse
+Twitch	twitch.tv	best_places_to_work	2	greenhouse
+Unity	unity.com	best_places_to_work	2	greenhouse
+Vercel	vercel.com	product_saas	2	ashby
+Verisk	verisk.com	fortune500_nycnj	2	
+Vroom	vroom.com	best_places_to_work	2	defunct
+Warner Music	wmg.com	fortune500_nycnj	2	
+Webflow	webflow.com	product_saas	2	greenhouse
+WeWork	wework.com	fortune500_nycnj	2	
+Wix	wix.com	product_saas	2	
+Workday	workday.com	best_places_to_work	2	workday
+Zapier	zapier.com	product_saas	2	greenhouse
+Zillow	zillow.com	fortune500_nycnj	2	
+Zocdoc	zocdoc.com	health_tech	2	greenhouse
+Zoom	zoom.com	product_saas	2	
+Zscaler	zscaler.com	best_places_to_work	2	greenhouse
+2U	2u.com	edtech	3	
+Amplify	amplify.com	edtech	3	greenhouse
+AQR Capital	aqr.com	quant_trading	3	greenhouse
+Bridgewater Associates	bridgewater.com	quant_trading	3	greenhouse
+Citadel	citadel.com	quant_trading	3	greenhouse
+Codecademy	codecademy.com	edtech	3	greenhouse
+Coursera	coursera.org	edtech	3	greenhouse
+DE Shaw	deshaw.com	quant_trading	3	
+General Assembly	generalassemb.ly	edtech	3	greenhouse
+Guild	guild.com	edtech	3	greenhouse
+IMC Trading	imc.com	quant_trading	3	
+Jane Street	janestreet.com	quant_trading	3	custom
+Khan Academy	khanacademy.org	edtech	3	greenhouse
+MasterClass	masterclass.com	edtech	3	greenhouse
+Millennium	mlp.com	quant_trading	3	
+Newsela	newsela.com	edtech	3	greenhouse
+Optiver	optiver.com	quant_trading	3	greenhouse
+Point72	point72.com	quant_trading	3	greenhouse
+Quizlet	quizlet.com	edtech	3	greenhouse
+Skillshare	skillshare.com	edtech	3	greenhouse
+Susquehanna	sig.com	quant_trading	3	
+Two Sigma	twosigma.com	quant_trading	3	greenhouse
+Udemy	udemy.com	edtech	3	greenhouse
+Virtu Financial	virtu.com	quant_trading	3	

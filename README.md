@@ -1,11 +1,11 @@
 # internship-watch
 
-Polls company ATS APIs on a schedule, pushes you a notification when a new posting matches your filters.
+Polls company ATS APIs on a schedule, pushes you a notification when a new posting matches your filters. Includes an interactive REPL for scanning, filtering, and tracking applications.
 
 ## Setup
 
 ```bash
-pip install requests
+pip install requests selectolax
 python internship_watch.py --dry-run     # see what matches before wiring notifications
 python internship_watch.py --seed        # mark everything currently open as "seen"
 python internship_watch.py               # from here on, only new stuff notifies
@@ -13,6 +13,141 @@ python internship_watch.py               # from here on, only new stuff notifies
 
 Then drop `watch.yml` into `.github/workflows/` in a **private** repo and add your secrets under
 Settings → Secrets and variables → Actions. Free tier covers this easily.
+
+## Interactive REPL
+
+Launch the interactive shell for hands-on scanning, filtering, and application tracking:
+
+```bash
+python repl.py
+```
+
+### Available commands
+
+| Command | Description |
+|---|---|
+| `scan` | Run a scan across all configured companies |
+| `jobs` | Show results from the last scan |
+| `apps` | List tracked applications |
+| `save <job#> [notes]` | Save a matched job to your application tracker |
+| `status <app_id> <status>` | Update an application's status |
+| `delete <app_id>` | Remove a tracked application |
+| `undo` | Undo the last status change |
+| `filter [name]` | Show or switch the filter strategy |
+| `config` | Show configuration summary |
+| `help` | Show all commands |
+| `quit` | Exit |
+
+### Filter strategies
+
+Switch filtering logic at runtime with `filter <name>`:
+
+| Strategy | Description |
+|---|---|
+| `default` | Uses `title_include` / `title_exclude` / `location_include` from `config.json` |
+| `ux-only` | Strict: title must mention both a UX discipline and an internship-level role |
+| `paid` | Like default, but only jobs that list compensation |
+| `remote` | Like default, but only remote or hybrid locations |
+
+### Application statuses
+
+`saved` → `applied` → `phone_screen` → `interview` → `offer` → `accepted`
+
+Also: `rejected`, `withdrawn`
+
+### Example session
+
+```
+$ python repl.py
+Internship Watch — Interactive Mode
+Filter: default  |  166 companies loaded
+Type 'help' for commands.
+
+>>> filter ux-only
+  Filter → ux-only
+>>> scan
+  [1/166] AIG... 342 open, 0 match
+  [2/166] AKQA... 15 open, 2 match
+  NEW: AKQA | UX Design Intern | New York, NY
+       https://boards.greenhouse.io/akqa/jobs/...
+  ...
+>>> jobs
+  #     Company                  Title                                        Location                 Pay
+  ───── ─────────────────────── ───────────────────────────────────────────── ─────────────────────── ────────────────────
+  1     AKQA                    UX Design Intern                              New York, NY
+  2     Braze                   Product Design Intern, Summer 2027            New York, NY             $30/hr
+  ...
+>>> save 2 "Great company, applied via website"
+  Saved as application #1
+>>> apps
+  ID    Company                  Title                              Status          Updated
+  ───── ─────────────────────── ─────────────────────────────────── ─────────────── ────────────────────
+  1     Braze                   Product Design Intern, Summer 2027  saved           2026-08-19
+>>> status 1 applied
+  Updated #1 → 'applied'
+>>> undo
+  Undone: Braze — Product Design Intern, Summer 2027: 'saved' → 'applied'
+```
+
+## Architecture — design patterns
+
+The system uses five GoF design patterns, implemented in [`patterns.py`](patterns.py):
+
+### Observer (`EventBus`, `JobObserver`)
+
+Decouples scan events from notification channels. When new jobs are found, the
+`EventBus` broadcasts to all registered observers. Adding a new notification
+channel (e.g., Slack, email) means writing one class — no changes to scan logic.
+
+| Observer | Channel |
+|---|---|
+| `ConsoleObserver` | stdout |
+| `NtfyObserver` | ntfy.sh push notification |
+| `DiscordObserver` | Discord webhook |
+
+### Memento (`ApplicationMemento`, `ApplicationCaretaker`)
+
+Enables undo for application status changes. Before each update, a `Memento`
+snapshot is saved to the `Caretaker`'s stack. The `undo` command pops and
+restores the previous state.
+
+### Strategy (`FilterStrategy` subclasses)
+
+Swappable filtering algorithms. The active strategy can be changed at runtime
+via the REPL's `filter` command. Strategies compose: `PaidOnlyFilterStrategy`
+and `RemoteFilterStrategy` wrap an inner strategy (decorator pattern).
+
+### Factory (`FetcherFactory`)
+
+Creates the correct `Fetcher` subclass from a `config.json` company entry.
+Each ATS board (Greenhouse, Lever, Ashby, SmartRecruiters, Workday, USAJobs)
+has its own `Fetcher` class. The factory hides this selection behind
+`FetcherFactory.create(entry)`.
+
+### Facade (`InternshipFacade`)
+
+Single entry point that wires together scanning (Factory), filtering (Strategy),
+notifications (Observer), application tracking, and undo (Memento). Both the
+REPL and any future interface (web, API) use the facade rather than calling
+subsystems directly.
+
+## Project structure
+
+```
+├── repl.py              # Interactive REPL — the main user interface
+├── patterns.py          # Design patterns: Observer, Memento, Strategy, Factory, Facade
+├── internship_watch.py  # ATS fetchers and CLI scan runner
+├── config.json          # Filter regexes and company list (generated by resolve.py)
+├── resolve.py           # Discovers ATS slugs from company names
+├── targets.json         # 303 companies across 14 categories
+├── discover.py          # Probes a careers page to identify the ATS in use
+├── extractors.py        # Scrapers for sites not on a standard board
+├── db.py                # SQLite storage for scan history and applications
+├── web.py               # Browser dashboard (localhost)
+├── build_static.py      # Static dashboard builder for GitHub Pages
+├── dashboard.html       # Dashboard template
+└── README.md
+```
 
 ## Notifications
 

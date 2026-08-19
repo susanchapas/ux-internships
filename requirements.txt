@@ -1,0 +1,5 @@
+requests
+sqlalchemy>=2.0
+psycopg2-binary
+pydantic[email]>=2.0
+bcrypt

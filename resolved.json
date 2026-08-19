@@ -1,7 +1,11 @@
 {
  "AIG": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "aig",
+  "tenant": "aig",
+  "wd": 1
  },
  "AKQA": {
   "board": "greenhouse",
@@ -14,6 +18,22 @@
    "Account Executive "
   ],
   "slug": "akqa"
+ },
+ "AT&T": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "ATTGeneral",
+  "tenant": "att",
+  "wd": 1
+ },
+ "Accenture": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "AccentureCareers",
+  "tenant": "accenture",
+  "wd": 103
  },
  "Accion": {
   "board": null,
@@ -39,8 +59,12 @@
   "note": ""
  },
  "Adobe": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "external_experienced",
+  "tenant": "adobe",
+  "wd": 5
  },
  "Adyen": {
   "board": "greenhouse",
@@ -134,6 +158,14 @@
   "board": "greenhouse",
   "confidence": "verified",
   "slug": "appsflyer"
+ },
+ "AstraZeneca": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Careers",
+  "tenant": "astrazeneca",
+  "wd": 3
  },
  "Athletics": {
   "board": null,
@@ -248,6 +280,22 @@
   ],
   "slug": "brex"
  },
+ "Bristol Myers Squibb": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "BMS",
+  "tenant": "bristolmyerssquibb",
+  "wd": 5
+ },
+ "Broadridge": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Careers",
+  "tenant": "broadridge",
+  "wd": 5
+ },
  "Business Insider": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -311,6 +359,14 @@
  "Chubb": {
   "board": null,
   "note": "Jersey City / Warren NJ"
+ },
+ "Church & Dwight": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "chdcareers",
+  "tenant": "churchdwight",
+  "wd": 1
  },
  "Citi": {
   "board": null,
@@ -425,6 +481,14 @@
   "confidence": "verified",
   "slug": "coupang"
  },
+ "CrowdStrike": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "crowdstrikecareers",
+  "tenant": "crowdstrike",
+  "wd": 5
+ },
  "Current": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -464,9 +528,21 @@
   "board": null,
   "note": ""
  },
+ "Deloitte": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Experienced_Professionals",
+  "tenant": "deloitteie",
+  "wd": 3
+ },
  "Dentsu": {
-  "board": null,
-  "note": ""
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "DAN_GLOBAL",
+  "tenant": "dentsuaegis",
+  "wd": 3
  },
  "Deque Systems": {
   "board": null,
@@ -488,8 +564,12 @@
   "slug": "discord"
  },
  "Discover": {
-  "board": null,
-  "note": ""
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Capital_One",
+  "tenant": "capitalone",
+  "wd": 12
  },
  "DocuSign": {
   "board": null,
@@ -625,6 +705,14 @@
   "board": null,
   "note": "Brooklyn"
  },
+ "Henry Schein": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External_Careers",
+  "tenant": "henryschein",
+  "wd": 1
+ },
  "Huge": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -740,8 +828,12 @@
   "slug": "landor"
  },
  "LendingClub": {
-  "board": null,
-  "note": ""
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External",
+  "tenant": "lendingclub",
+  "wd": 1
  },
  "Level Access": {
   "board": "greenhouse",
@@ -779,8 +871,12 @@
   "slug": "linkedin"
  },
  "Lippincott": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "MMC",
+  "tenant": "mmc",
+  "wd": 1
  },
  "Lithic": {
   "board": "greenhouse",
@@ -793,6 +889,14 @@
    "Senior Dispute Analyst"
   ],
   "slug": "lithic"
+ },
+ "LiveRamp": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "LiveRampCareers",
+  "tenant": "liveramp",
+  "wd": 5
  },
  "Local Projects": {
   "board": null,
@@ -825,8 +929,12 @@
   "slug": "mm"
  },
  "Mastercard": {
-  "board": null,
-  "note": "Purchase NY / Harrison NY"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "CorporateCareers",
+  "tenant": "mastercard",
+  "wd": 1
  },
  "Match Group": {
   "board": "lever",
@@ -844,6 +952,14 @@
    "Data Scientist "
   ],
   "slug": "melio"
+ },
+ "Merck": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "SearchJobs",
+  "tenant": "msd",
+  "wd": 5
  },
  "Mercury": {
   "board": "greenhouse",
@@ -953,8 +1069,12 @@
   "slug": "mozilla"
  },
  "Nasdaq": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Global_External_Site",
+  "tenant": "nasdaq",
+  "wd": 1
  },
  "Nava PBC": {
   "board": null,
@@ -1006,6 +1126,14 @@
   ],
   "slug": "novacredit"
  },
+ "Novartis": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Internal_Careers_for_Acquired_Entities",
+  "tenant": "novartis",
+  "wd": 3
+ },
  "Ogilvy": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -1037,6 +1165,22 @@
   "board": "greenhouse",
   "confidence": "verified",
   "slug": "oscar"
+ },
+ "Otis": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "REC_Ext_Gateway",
+  "tenant": "otis",
+  "wd": 504
+ },
+ "Palo Alto Networks": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "panwexternalcareers",
+  "tenant": "paloaltonetworks",
+  "wd": 5
  },
  "Paxos": {
   "board": "ashby",
@@ -1151,6 +1295,14 @@
   "board": null,
   "note": ""
  },
+ "PwC": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "US_Experienced_Careers",
+  "tenant": "pwc",
+  "wd": 3
+ },
  "R/GA": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -1190,6 +1342,14 @@
    "Ads Conversion Modeling, Machine Learning Engineering Manage"
   ],
   "slug": "reddit"
+ },
+ "Regeneron": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Careers",
+  "tenant": "regeneron",
+  "wd": 1
  },
  "Remitly": {
   "board": null,
@@ -1237,8 +1397,20 @@
   "note": "NYC"
  },
  "Salesforce": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External_Career_Site",
+  "tenant": "salesforce",
+  "wd": 12
+ },
+ "Scholastic": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External",
+  "tenant": "scholastic",
+  "wd": 5
  },
  "SeatGeek": {
   "board": "greenhouse",
@@ -1336,13 +1508,41 @@
   "board": null,
   "note": ""
  },
+ "T-Mobile": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External",
+  "tenant": "tmobile",
+  "wd": 1
+ },
  "TIAA": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Search",
+  "tenant": "tiaa",
+  "wd": 1
  },
  "TPGi": {
   "board": null,
   "note": ""
+ },
+ "Takeda": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External",
+  "tenant": "takeda",
+  "wd": 502
+ },
+ "Tapestry": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Tapestry_Careers",
+  "tenant": "tapestry",
+  "wd": 108
  },
  "The Athletic": {
   "board": "lever",
@@ -1370,8 +1570,12 @@
   "slug": "toast"
  },
  "Travelers": {
-  "board": null,
-  "note": ""
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External",
+  "tenant": "travelers",
+  "wd": 5
  },
  "Truss": {
   "board": null,
@@ -1478,6 +1682,22 @@
   "board": null,
   "note": "wp on smartrecruiters is a test posting, not Warby Parker"
  },
+ "Warner Music": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "WMGUS",
+  "tenant": "wmg",
+  "wd": 1
+ },
+ "WeWork": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "WeWork",
+  "tenant": "wework",
+  "wd": 1
+ },
  "Wealthfront": {
   "board": "lever",
   "confidence": "verified",
@@ -1532,6 +1752,14 @@
   "board": null,
   "note": "slug collision with unrelated company on bamboohr"
  },
+ "Workday": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Workday",
+  "tenant": "workday",
+  "wd": 5
+ },
  "Yext": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -1553,6 +1781,14 @@
   "board": "greenhouse",
   "confidence": "verified",
   "slug": "zetaglobal"
+ },
+ "iHeartMedia": {
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External_iHM",
+  "tenant": "iheartmedia",
+  "wd": 5
  },
  "ustwo": {
   "board": null,

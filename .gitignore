@@ -4,3 +4,5 @@ __pycache__/
 data.db
 seen.json
 .DS_Store
+.env
+venv/

@@ -1,0 +1,4681 @@
+{
+  "AIG": {
+    "name": "AIG",
+    "domain": "aig.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.aig.com/home",
+      "https://www.aig.com:443/home/careers",
+      "https://www.aig.com:443/home/careers/experienced-professionals",
+      "https://www.aig.com:443/home/careers/students-and-graduates",
+      "https://www.aig.com:443/home/careers/military-and-veterans",
+      "https://www.aig.com:443/careers"
+    ],
+    "ats": "workday",
+    "tenant": "aig",
+    "host": "wd1",
+    "site": "aig",
+    "count": 464,
+    "api": "https://aig.wd1.myworkdayjobs.com/wday/cxs/aig/aig/jobs",
+    "human": "https://aig.wd1.myworkdayjobs.com/en-US/aig",
+    "resolve_url": "https://aig.wd1.myworkdayjobs.com/en-US/aig",
+    "method": "sniff"
+  },
+  "Discover": {
+    "name": "Discover",
+    "domain": "discover.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.discover.com/",
+      "https://www.capitalonecareers.com/discover?utm_source=WWW_Footer&utm_medium=Footer_DFS_Landing_Page&utm_campaign=Footer_DFS_Landing_Page%20",
+      "https://www.discover.com/careers/",
+      "https://www.discover.com/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "capitalone",
+    "host": "wd12",
+    "site": "Capital_One",
+    "count": 1862,
+    "api": "https://capitalone.wd12.myworkdayjobs.com/wday/cxs/capitalone/Capital_One/jobs",
+    "human": "https://capitalone.wd12.myworkdayjobs.com/en-US/Capital_One",
+    "resolve_url": "https://capitalone.wd12.myworkdayjobs.com/en-US/Capital_One",
+    "method": "sniff"
+  },
+  "Netflix": {
+    "name": "Netflix",
+    "domain": "netflix.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "eightfold",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "eightfold",
+    "slug": "netflix",
+    "count": 504,
+    "api": "https://netflix.eightfold.ai/api/apply/v2/jobs?domain=netflix.com&start=0&num=10&exclude_pid=&sort_by=relevance",
+    "human": "https://netflix.eightfold.ai/careers",
+    "method": "hint"
+  },
+  "Salesforce": {
+    "name": "Salesforce",
+    "domain": "salesforce.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.salesforce.com/?bc=OTH",
+      "https://trailhead.salesforce.com/career-path/",
+      "https://www.salesforce.com/company/careers/?bc=OTH",
+      "https://www.salesforce.com/company/careers/university/?bc=OTH",
+      "https://www.salesforce.com/company/careers/?bc=OTH",
+      "https://www.salesforce.com/company/careers/?bc=OTH"
+    ],
+    "ats": "workday",
+    "tenant": "salesforce",
+    "host": "wd12",
+    "site": "External_Career_Site",
+    "count": 1530,
+    "api": "https://salesforce.wd12.myworkdayjobs.com/wday/cxs/salesforce/External_Career_Site/jobs",
+    "human": "https://salesforce.wd12.myworkdayjobs.com/en-US/External_Career_Site",
+    "resolve_url": "https://salesforce.wd12.myworkdayjobs.com/en-US/External_Career_Site",
+    "method": "brute"
+  },
+  "Travelers": {
+    "name": "Travelers",
+    "domain": "travelers.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://careers.travelers.com/",
+      "https://careers.travelers.com/"
+    ],
+    "ats": "workday",
+    "tenant": "travelers",
+    "host": "wd5",
+    "site": "External",
+    "count": 332,
+    "api": "https://travelers.wd5.myworkdayjobs.com/wday/cxs/travelers/External/jobs",
+    "human": "https://travelers.wd5.myworkdayjobs.com/en-US/External",
+    "resolve_url": "https://travelers.wd5.myworkdayjobs.com/en-US/External",
+    "method": "sniff"
+  },
+  "Nasdaq": {
+    "name": "Nasdaq",
+    "domain": "nasdaq.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.nasdaq.com/",
+      "https://www.nasdaq.com/about/careers",
+      "https://www.nasdaq.com/about/careers",
+      "https://www.nasdaq.com/about/careers"
+    ],
+    "ats": "workday",
+    "tenant": "nasdaq",
+    "host": "wd1",
+    "site": "Global_External_Site",
+    "count": 182,
+    "api": "https://nasdaq.wd1.myworkdayjobs.com/wday/cxs/nasdaq/Global_External_Site/jobs",
+    "human": "https://nasdaq.wd1.myworkdayjobs.com/en-US/Global_External_Site",
+    "resolve_url": "https://nasdaq.wd1.myworkdayjobs.com/en-US/Global_External_Site",
+    "method": "sniff"
+  },
+  "Dentsu": {
+    "name": "Dentsu",
+    "domain": "dentsu.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.dentsu.com/",
+      "https://www.dentsu.com/us/en/careers/people-culture",
+      "https://www.dentsu.com/us/en/careers",
+      "https://www.dentsu.com/careers",
+      "https://www.dentsu.com/careers",
+      "https://www.dentsu.com/en/careers"
+    ],
+    "ats": "workday",
+    "tenant": "dentsuaegis",
+    "host": "wd3",
+    "site": "DAN_GLOBAL",
+    "count": 884,
+    "api": "https://dentsuaegis.wd3.myworkdayjobs.com/wday/cxs/dentsuaegis/DAN_GLOBAL/jobs",
+    "human": "https://dentsuaegis.wd3.myworkdayjobs.com/en-US/DAN_GLOBAL",
+    "resolve_url": "https://dentsuaegis.wd3.myworkdayjobs.com/en-US/DAN_GLOBAL",
+    "method": "sniff"
+  },
+  "LendingClub": {
+    "name": "LendingClub",
+    "domain": "lendingclub.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.happen.com/?b=13bca27f-f9aa-4b80-b83a-842348e7342b",
+      "https://www.happen.com/company/careers?b=deca9455-1eb2-4fc7-b1f4-5b8a0960b295",
+      "https://www.happen.com:443/company/careers",
+      "https://www.happen.com/",
+      "https://www.happen.com/",
+      "https://www.happen.com/"
+    ],
+    "ats": "workday",
+    "tenant": "lendingclub",
+    "host": "wd1",
+    "site": "External",
+    "count": 38,
+    "api": "https://lendingclub.wd1.myworkdayjobs.com/wday/cxs/lendingclub/External/jobs",
+    "human": "https://lendingclub.wd1.myworkdayjobs.com/en-US/External",
+    "resolve_url": "https://lendingclub.wd1.myworkdayjobs.com/en-US/External",
+    "method": "sniff"
+  },
+  "Lippincott": {
+    "name": "Lippincott",
+    "domain": "lippincott.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.lippincott.com:443/",
+      "https://www.lippincott.com:443/careers/",
+      "https://www.lippincott.com/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "mmc",
+    "host": "wd1",
+    "site": "MMC",
+    "count": 1953,
+    "api": "https://mmc.wd1.myworkdayjobs.com/wday/cxs/mmc/MMC/jobs",
+    "human": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC",
+    "resolve_url": "https://mmc.wd1.myworkdayjobs.com/en-US/MMC",
+    "method": "sniff"
+  },
+  "Nava PBC": {
+    "name": "Nava PBC",
+    "domain": "navapbc.com",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.navapbc.com/",
+      "https://www.navapbc.com/working-at-nava/careers-public-service",
+      "https://www.navapbc.com/careers",
+      "https://www.navapbc.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "navapbc",
+    "count": 16,
+    "api": "https://boards-api.greenhouse.io/v1/boards/navapbc/jobs",
+    "human": "https://job-boards.greenhouse.io/navapbc",
+    "method": "guess"
+  },
+  "MoneyLion": {
+    "name": "MoneyLion",
+    "domain": "moneylion.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.moneylion.com/",
+      "https://www.moneylion.com/careers/",
+      "https://www.moneylion.com/careers/"
+    ],
+    "ats": "ashby",
+    "slug": "gen-digital",
+    "count": 124,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/gen-digital",
+    "human": "https://jobs.ashbyhq.com/gen-digital",
+    "method": "sniff"
+  },
+  "Petal": {
+    "name": "Petal",
+    "domain": "petalcard.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://petalcard.com/",
+      "https://tilt.com/careers"
+    ],
+    "ats": "ashby",
+    "slug": "tilthq",
+    "count": 26,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/tilthq",
+    "human": "https://jobs.ashbyhq.com/tilthq",
+    "method": "sniff"
+  },
+  "Skylight": {
+    "name": "Skylight",
+    "domain": "skylight.digital",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://skylight.digital/",
+      "https://skylight.digital/careers/join/",
+      "https://skylight.digital/careers/career-pathways/",
+      "https://skylight.digital/careers/",
+      "https://skylight.digital/careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "skylighthq",
+    "count": 6,
+    "api": "https://boards-api.greenhouse.io/v1/boards/skylighthq/jobs",
+    "human": "https://job-boards.greenhouse.io/skylighthq",
+    "method": "sniff"
+  },
+  "Stash": {
+    "name": "Stash",
+    "domain": "stash.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.stash.com/",
+      "https://www.stash.com/careers",
+      "https://www.stash.com/careers/",
+      "https://www.stash.com/about",
+      "https://www.stash.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "stashinvest",
+    "count": 14,
+    "api": "https://boards-api.greenhouse.io/v1/boards/stashinvest/jobs",
+    "human": "https://job-boards.greenhouse.io/stashinvest",
+    "method": "sniff"
+  },
+  "Truss": {
+    "name": "Truss",
+    "domain": "truss.works",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://truss.works/",
+      "https://truss.works/jobs",
+      "https://truss.works/blog/pathways-to-impact-navigating-ux-careers-in-civic-tech"
+    ],
+    "ats": "greenhouse",
+    "slug": "trussworksinc",
+    "count": 1,
+    "api": "https://boards-api.greenhouse.io/v1/boards/trussworksinc/jobs",
+    "human": "https://job-boards.greenhouse.io/trussworksinc",
+    "method": "sniff"
+  },
+  "U.S. Digital Response": {
+    "name": "U.S. Digital Response",
+    "domain": "usdigitalresponse.org",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.usdigitalresponse.org/"
+    ],
+    "ats": "greenhouse",
+    "slug": "us",
+    "count": 1,
+    "api": "https://boards-api.greenhouse.io/v1/boards/us/jobs",
+    "human": "https://job-boards.greenhouse.io/us",
+    "method": "guess"
+  },
+  "Accenture": {
+    "name": "Accenture",
+    "domain": "accenture.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.accenture.com/us-en",
+      "https://www.accenture.com/us-en/careers",
+      "https://www.accenture.com/us-en/careers/jobsearch",
+      "https://www.accenture.com/us-en/careers/explore-careers/career-areas",
+      "https://www.accenture.com/us-en/careers/life-at-accenture/working-here",
+      "https://www.accenture.com/us-en/careers"
+    ],
+    "ats": "workday",
+    "tenant": "accenture",
+    "host": "wd103",
+    "site": "AccentureCareers",
+    "count": 2000,
+    "api": "https://accenture.wd103.myworkdayjobs.com/wday/cxs/accenture/AccentureCareers/jobs",
+    "human": "https://accenture.wd103.myworkdayjobs.com/en-US/AccentureCareers",
+    "resolve_url": "https://accenture.wd103.myworkdayjobs.com/en-US/AccentureCareers",
+    "method": "sniff"
+  },
+  "AstraZeneca": {
+    "name": "AstraZeneca",
+    "domain": "astrazeneca.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.astrazeneca.com",
+      "https://careers.astrazeneca.com/"
+    ],
+    "ats": "workday",
+    "tenant": "astrazeneca",
+    "host": "wd3",
+    "site": "Careers",
+    "count": 1213,
+    "api": "https://astrazeneca.wd3.myworkdayjobs.com/wday/cxs/astrazeneca/Careers/jobs",
+    "human": "https://astrazeneca.wd3.myworkdayjobs.com/en-US/Careers",
+    "resolve_url": "https://astrazeneca.wd3.myworkdayjobs.com/en-US/Careers",
+    "method": "brute"
+  },
+  "Church & Dwight": {
+    "name": "Church & Dwight",
+    "domain": "churchdwight.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://churchdwight.com/",
+      "https://careers.churchdwight.com/",
+      "https://careers.churchdwight.com/jobs/",
+      "https://careers.churchdwight.com/how-we-hire/",
+      "https://careers.churchdwight.com/our-culture/",
+      "https://churchdwight.com/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "churchdwight",
+    "host": "wd1",
+    "site": "chdcareers",
+    "count": 69,
+    "api": "https://churchdwight.wd1.myworkdayjobs.com/wday/cxs/churchdwight/chdcareers/jobs",
+    "human": "https://churchdwight.wd1.myworkdayjobs.com/en-US/chdcareers",
+    "resolve_url": "https://churchdwight.wd1.myworkdayjobs.com/en-US/chdcareers",
+    "method": "sniff"
+  },
+  "Bristol Myers Squibb": {
+    "name": "Bristol Myers Squibb",
+    "domain": "bms.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.bms.com/",
+      "https://careers.bms.com/",
+      "https://jobs.bms.com/careers"
+    ],
+    "ats": "workday",
+    "tenant": "bristolmyerssquibb",
+    "host": "wd5",
+    "site": "BMS",
+    "count": 693,
+    "api": "https://bristolmyerssquibb.wd5.myworkdayjobs.com/wday/cxs/bristolmyerssquibb/BMS/jobs",
+    "human": "https://bristolmyerssquibb.wd5.myworkdayjobs.com/en-US/BMS",
+    "resolve_url": "https://bristolmyerssquibb.wd5.myworkdayjobs.com/en-US/BMS",
+    "method": "sniff"
+  },
+  "Boston Consulting Group": {
+    "name": "Boston Consulting Group",
+    "domain": "bcg.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "greenhouse",
+    "slug": "boston",
+    "count": 1,
+    "api": "https://boards-api.greenhouse.io/v1/boards/boston/jobs",
+    "human": "https://job-boards.greenhouse.io/boston",
+    "method": "guess"
+  },
+  "Eli Lilly": {
+    "name": "Eli Lilly",
+    "domain": "lilly.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "ashby",
+    "slug": "eli",
+    "count": 1,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/eli",
+    "human": "https://jobs.ashbyhq.com/eli",
+    "method": "guess"
+  },
+  "Deloitte": {
+    "name": "Deloitte",
+    "domain": "deloitte.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.deloitte.com/us/en.html",
+      "https://www.deloitte.com/us/en/careers/deloitte-life/awards-and-recognition.html?icid=top_awards-and-recognition",
+      "https://www.deloitte.com/us/en/careers/careers.html?icid=top_careers",
+      "https://www.deloitte.com/us/en/careers/alumni.html?icid=top_alumni",
+      "https://www.deloitte.com/us/en/careers/student-careers.html?icid=top_student-careers",
+      "https://www.deloitte.com/global/en/careers/job-search.html"
+    ],
+    "ats": "workday",
+    "tenant": "deloitteie",
+    "host": "wd3",
+    "site": "Experienced_Professionals",
+    "count": 59,
+    "api": "https://deloitteie.wd3.myworkdayjobs.com/wday/cxs/deloitteie/Experienced_Professionals/jobs",
+    "human": "https://deloitteie.wd3.myworkdayjobs.com/en-US/Experienced_Professionals",
+    "resolve_url": "https://deloitteie.wd3.myworkdayjobs.com/en-US/Experienced_Professionals",
+    "method": "sniff"
+  },
+  "Novartis": {
+    "name": "Novartis",
+    "domain": "novartis.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.novartis.com/",
+      "https://www.novartis.com/careers",
+      "https://www.novartis.com/careers/career-search",
+      "https://www.novartis.com/careers/our-business-functions",
+      "https://www.novartis.com/careers/our-business-functions/careers-research-and-development",
+      "https://www.novartis.com/careers"
+    ],
+    "ats": "workday",
+    "tenant": "novartis",
+    "host": "wd3",
+    "site": "Internal_Careers_for_Acquired_Entities",
+    "count": 602,
+    "api": "https://novartis.wd3.myworkdayjobs.com/wday/cxs/novartis/Internal_Careers_for_Acquired_Entities/jobs",
+    "human": "https://novartis.wd3.myworkdayjobs.com/en-US/Internal_Careers_for_Acquired_Entities",
+    "resolve_url": "https://novartis.wd3.myworkdayjobs.com/en-US/Internal_Careers_for_Acquired_Entities",
+    "method": "sniff"
+  },
+  "Merck": {
+    "name": "Merck",
+    "domain": "merck.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.merck.com/",
+      "https://jobs.merck.com/us/en",
+      "https://jobs.merck.com/us/en",
+      "https://jobs.merck.com/us/en",
+      "https://www.merck.com/company-overview/"
+    ],
+    "ats": "workday",
+    "tenant": "msd",
+    "host": "wd5",
+    "site": "SearchJobs",
+    "count": 793,
+    "api": "https://msd.wd5.myworkdayjobs.com/wday/cxs/msd/SearchJobs/jobs",
+    "human": "https://msd.wd5.myworkdayjobs.com/en-US/SearchJobs",
+    "resolve_url": "https://msd.wd5.myworkdayjobs.com/en-US/SearchJobs",
+    "method": "sniff"
+  },
+  "Novo Nordisk": {
+    "name": "Novo Nordisk",
+    "domain": "novonordisk.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.novonordisk.com/",
+      "https://www.novonordisk.com/careers.html",
+      "https://www.novonordisk.com/careers/find-a-job.html"
+    ],
+    "ats": "ashby",
+    "slug": "novo",
+    "count": 7,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/novo",
+    "human": "https://jobs.ashbyhq.com/novo",
+    "method": "guess"
+  },
+  "PwC": {
+    "name": "PwC",
+    "domain": "pwc.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.pwc.com/us/en.html",
+      "https://www.pwc.com/us/en/careers.html",
+      "https://www.pwc.com/us/en/careers/why-pwc.html",
+      "https://jobs-us.pwc.com/us/en/entry-level",
+      "https://jobs-us.pwc.com/us/en/search-results",
+      "https://www.pwc.com/us/en/careers.html"
+    ],
+    "ats": "workday",
+    "tenant": "pwc",
+    "host": "wd3",
+    "site": "US_Experienced_Careers",
+    "count": 481,
+    "api": "https://pwc.wd3.myworkdayjobs.com/wday/cxs/pwc/US_Experienced_Careers/jobs",
+    "human": "https://pwc.wd3.myworkdayjobs.com/en-US/US_Experienced_Careers",
+    "resolve_url": "https://pwc.wd3.myworkdayjobs.com/en-US/US_Experienced_Careers",
+    "method": "sniff"
+  },
+  "Regeneron": {
+    "name": "Regeneron",
+    "domain": "regeneron.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.regeneron.com/",
+      "https://careers.regeneron.com/en/",
+      "https://careers.regeneron.com/en/"
+    ],
+    "ats": "workday",
+    "tenant": "regeneron",
+    "host": "wd1",
+    "site": "Careers",
+    "count": 602,
+    "api": "https://regeneron.wd1.myworkdayjobs.com/wday/cxs/regeneron/Careers/jobs",
+    "human": "https://regeneron.wd1.myworkdayjobs.com/en-US/Careers",
+    "resolve_url": "https://regeneron.wd1.myworkdayjobs.com/en-US/Careers",
+    "method": "brute"
+  },
+  "Tapestry": {
+    "name": "Tapestry",
+    "domain": "tapestry.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.tapestry.com/",
+      "https://www.tapestry.com/wp-content/themes/bootscore-child-main/js/blocks/src/careers/careers.css?ver=1786634405",
+      "https://www.tapestry.com/careers/",
+      "https://www.tapestry.com/careers/",
+      "https://www.tapestry.com/careers/",
+      "https://www.tapestry.com/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "tapestry",
+    "host": "wd108",
+    "site": "Tapestry_Careers",
+    "count": 1933,
+    "api": "https://tapestry.wd108.myworkdayjobs.com/wday/cxs/tapestry/Tapestry_Careers/jobs",
+    "human": "https://tapestry.wd108.myworkdayjobs.com/en-US/Tapestry_Careers",
+    "resolve_url": "https://tapestry.wd108.myworkdayjobs.com/en-US/Tapestry_Careers",
+    "method": "sniff"
+  },
+  "The New York Times": {
+    "name": "The New York Times",
+    "domain": "nytco.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.nytco.com/",
+      "https://www.nytco.com/careers/",
+      "https://www.nytco.com/careers/opportunities-by-department/the-newsroom-and-times-opinion-roles/",
+      "https://www.nytco.com/careers/early-career-opportunities/",
+      "https://www.nytco.com/careers/job-listings/",
+      "https://www.nytco.com/careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "thenewyorktimes",
+    "count": 172,
+    "api": "https://boards-api.greenhouse.io/v1/boards/thenewyorktimes/jobs",
+    "human": "https://job-boards.greenhouse.io/thenewyorktimes",
+    "method": "guess"
+  },
+  "Wayfair": {
+    "name": "Wayfair",
+    "domain": "wayfair.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "smartrecruiters",
+    "slug": "wayfair",
+    "count": 1,
+    "api": "https://api.smartrecruiters.com/v1/companies/wayfair/postings",
+    "human": "https://careers.smartrecruiters.com/wayfair",
+    "method": "guess"
+  },
+  "Airtable": {
+    "name": "Airtable",
+    "domain": "airtable.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.airtable.com/",
+      "https://airtable.com/careers",
+      "https://airtable.com/careers",
+      "https://airtable.com/careers",
+      "https://airtable.com/careers",
+      "https://airtable.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "airtable",
+    "count": 16,
+    "api": "https://boards-api.greenhouse.io/v1/boards/airtable/jobs",
+    "human": "https://job-boards.greenhouse.io/airtable",
+    "method": "guess"
+  },
+  "Amplitude": {
+    "name": "Amplitude",
+    "domain": "amplitude.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://amplitude.com/",
+      "https://amplitude.com/careers",
+      "https://amplitude.com/careers",
+      "https://amplitude.com/careers",
+      "https://amplitude.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "amplitude",
+    "count": 32,
+    "api": "https://boards-api.greenhouse.io/v1/boards/amplitude/jobs",
+    "human": "https://job-boards.greenhouse.io/amplitude",
+    "method": "sniff"
+  },
+  "Asana": {
+    "name": "Asana",
+    "domain": "asana.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://asana.com/",
+      "https://asana.com/jobs",
+      "https://asana.com/jobs",
+      "https://asana.com/jobs",
+      "https://asana.com/jobs"
+    ],
+    "ats": "greenhouse",
+    "slug": "asana",
+    "count": 129,
+    "api": "https://boards-api.greenhouse.io/v1/boards/asana/jobs",
+    "human": "https://job-boards.greenhouse.io/asana",
+    "method": "guess"
+  },
+  "AT&T": {
+    "name": "AT&T",
+    "domain": "att.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.att.com/",
+      "https://www.att.jobs/"
+    ],
+    "ats": "workday",
+    "tenant": "att",
+    "host": "wd1",
+    "site": "ATTGeneral",
+    "count": 1391,
+    "api": "https://att.wd1.myworkdayjobs.com/wday/cxs/att/ATTGeneral/jobs",
+    "human": "https://att.wd1.myworkdayjobs.com/en-US/ATTGeneral",
+    "resolve_url": "https://att.wd1.myworkdayjobs.com/en-US/ATTGeneral",
+    "method": "sniff"
+  },
+  "Babylist": {
+    "name": "Babylist",
+    "domain": "babylist.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.babylist.com/",
+      "https://www.babylist.com/about/careers",
+      "https://www.babylist.com/about/careers",
+      "https://www.babylist.com/about/careers",
+      "https://www.babylist.com/about/careers",
+      "https://www.babylist.com/about/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "babylist",
+    "count": 38,
+    "api": "https://boards-api.greenhouse.io/v1/boards/babylist/jobs",
+    "human": "https://job-boards.greenhouse.io/babylist",
+    "method": "guess"
+  },
+  "Broadridge": {
+    "name": "Broadridge",
+    "domain": "broadridge.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.broadridge.com/",
+      "https://broadridge.wd5.myworkdayjobs.com/Careers",
+      "https://broadridge.wd5.myworkdayjobs.com/Careers",
+      "https://broadridge.wd5.myworkdayjobs.com/Careers",
+      "https://broadridge.wd5.myworkdayjobs.com/Careers",
+      "https://broadridge.wd5.myworkdayjobs.com/Careers"
+    ],
+    "ats": "workday",
+    "tenant": "broadridge",
+    "host": "wd5",
+    "site": "Careers",
+    "count": 270,
+    "api": "https://broadridge.wd5.myworkdayjobs.com/wday/cxs/broadridge/Careers/jobs",
+    "human": "https://broadridge.wd5.myworkdayjobs.com/en-US/Careers",
+    "resolve_url": "https://broadridge.wd5.myworkdayjobs.com/en-US/Careers",
+    "method": "sniff"
+  },
+  "Canva": {
+    "name": "Canva",
+    "domain": "canva.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "lever",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.canva.com/",
+      "https://www.lifeatcanva.com/en/",
+      "https://www.lifeatcanva.com/en/",
+      "https://www.lifeatcanva.com/en/"
+    ],
+    "ats": "smartrecruiters",
+    "slug": "canva",
+    "count": 250,
+    "api": "https://api.smartrecruiters.com/v1/companies/canva/postings",
+    "human": "https://careers.smartrecruiters.com/canva",
+    "method": "guess"
+  },
+  "Cedar": {
+    "name": "Cedar",
+    "domain": "cedar.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.cedar.com/",
+      "https://www.cedar.com/",
+      "https://www.cedar.com/",
+      "https://www.cedar.com/",
+      "https://www.cedar.com/",
+      "https://www.cedar.com/"
+    ],
+    "ats": "ashby",
+    "slug": "cedar",
+    "count": 3,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/cedar",
+    "human": "https://jobs.ashbyhq.com/cedar",
+    "method": "guess"
+  },
+  "CrowdStrike": {
+    "name": "CrowdStrike",
+    "domain": "crowdstrike.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.crowdstrike.com/en-us/",
+      "https://www.crowdstrike.com/en-us/careers/",
+      "https://www.crowdstrike.com/en-us/careers/",
+      "https://www.crowdstrike.com/en-us/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "crowdstrike",
+    "host": "wd5",
+    "site": "crowdstrikecareers",
+    "count": 446,
+    "api": "https://crowdstrike.wd5.myworkdayjobs.com/wday/cxs/crowdstrike/crowdstrikecareers/jobs",
+    "human": "https://crowdstrike.wd5.myworkdayjobs.com/en-US/crowdstrikecareers",
+    "resolve_url": "https://crowdstrike.wd5.myworkdayjobs.com/en-US/crowdstrikecareers",
+    "method": "sniff"
+  },
+  "Barnes & Noble": {
+    "name": "Barnes & Noble",
+    "domain": "barnesandnoble.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.barnesandnoble.com/",
+      "https://careers.barnesandnoble.com/",
+      "https://careers.barnesandnoble.com/",
+      "https://careers.barnesandnoble.com/"
+    ],
+    "ats": "ashby",
+    "slug": "barnes",
+    "count": 87,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/barnes",
+    "human": "https://jobs.ashbyhq.com/barnes",
+    "method": "guess"
+  },
+  "Dropbox": {
+    "name": "Dropbox",
+    "domain": "dropbox.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.dropbox.com/",
+      "https://www.dropbox.jobs/en/"
+    ],
+    "ats": "greenhouse",
+    "slug": "dropbox",
+    "count": 39,
+    "api": "https://boards-api.greenhouse.io/v1/boards/dropbox/jobs",
+    "human": "https://job-boards.greenhouse.io/dropbox",
+    "method": "guess"
+  },
+  "Duolingo": {
+    "name": "Duolingo",
+    "domain": "duolingo.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.duolingo.com/",
+      "https://careers.duolingo.com",
+      "https://careers.duolingo.com"
+    ],
+    "ats": "greenhouse",
+    "slug": "duolingo",
+    "count": 64,
+    "api": "https://boards-api.greenhouse.io/v1/boards/duolingo/jobs",
+    "human": "https://job-boards.greenhouse.io/duolingo",
+    "method": "guess"
+  },
+  "Epic Games": {
+    "name": "Epic Games",
+    "domain": "epicgames.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.epicgames.com/site/careers",
+      "https://www.epicgames.com/site/careers",
+      "https://www.epicgames.com/site/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "epicgames",
+    "count": 158,
+    "api": "https://boards-api.greenhouse.io/v1/boards/epicgames/jobs",
+    "human": "https://job-boards.greenhouse.io/epicgames",
+    "method": "guess"
+  },
+  "Elastic": {
+    "name": "Elastic",
+    "domain": "elastic.co",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.elastic.co/",
+      "https://www.elastic.co/careers",
+      "https://jobs.elastic.co/",
+      "https://www.elastic.co/careers/how-we-hire",
+      "https://www.elastic.co/careers/",
+      "https://www.elastic.co/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "elastic",
+    "count": 264,
+    "api": "https://boards-api.greenhouse.io/v1/boards/elastic/jobs",
+    "human": "https://job-boards.greenhouse.io/elastic",
+    "method": "guess"
+  },
+  "Figma": {
+    "name": "Figma",
+    "domain": "figma.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.figma.com/",
+      "https://www.figma.com/careers/",
+      "https://www.figma.com/careers/",
+      "https://www.figma.com/careers/",
+      "https://www.figma.com/careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "figma",
+    "count": 162,
+    "api": "https://boards-api.greenhouse.io/v1/boards/figma/jobs",
+    "human": "https://job-boards.greenhouse.io/figma",
+    "method": "sniff"
+  },
+  "Headway": {
+    "name": "Headway",
+    "domain": "headway.co",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "ashby",
+    "slug": "headway",
+    "count": 82,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/headway",
+    "human": "https://jobs.ashbyhq.com/headway",
+    "method": "guess"
+  },
+  "Glossier": {
+    "name": "Glossier",
+    "domain": "glossier.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.glossier.com/",
+      "https://life.glossier.com/",
+      "https://life.glossier.com/",
+      "https://life.glossier.com/"
+    ],
+    "ats": "greenhouse",
+    "slug": "glossier",
+    "count": 22,
+    "api": "https://boards-api.greenhouse.io/v1/boards/glossier/jobs",
+    "human": "https://job-boards.greenhouse.io/glossier",
+    "method": "guess"
+  },
+  "Henry Schein": {
+    "name": "Henry Schein",
+    "domain": "henryschein.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.henryschein.com/",
+      "https://www.henryschein.com/us-en/Corporate/Career/Default.aspx?hsi_domain=www.henryschein.com&hsi_locale=us-en",
+      "https://www.henryschein.com/us-en/Corporate/Career/JobSearch.aspx?id=1&hsi_domain=www.henryschein.com&hsi_locale=us-en",
+      "https://www.henryschein.com/us-en/Corporate/Career/Default.aspx?hsi_domain=www.henryschein.com&hsi_locale=us-en",
+      "https://www.henryschein.com/us-en/Corporate/Career/Default.aspx?id=1",
+      "https://www.henryschein.com/us-en/Corporate/Career/Default.aspx"
+    ],
+    "ats": "workday",
+    "tenant": "henryschein",
+    "host": "wd1",
+    "site": "External_Careers",
+    "count": 257,
+    "api": "https://henryschein.wd1.myworkdayjobs.com/wday/cxs/henryschein/External_Careers/jobs",
+    "human": "https://henryschein.wd1.myworkdayjobs.com/en-US/External_Careers",
+    "resolve_url": "https://henryschein.wd1.myworkdayjobs.com/en-US/External_Careers",
+    "method": "sniff"
+  },
+  "Harry's": {
+    "name": "Harry's",
+    "domain": "harrys.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.harrys.com/en/"
+    ],
+    "ats": "greenhouse",
+    "slug": "harrys",
+    "count": 15,
+    "api": "https://boards-api.greenhouse.io/v1/boards/harrys/jobs",
+    "human": "https://job-boards.greenhouse.io/harrys",
+    "method": "sniff"
+  },
+  "Headspace": {
+    "name": "Headspace",
+    "domain": "headspace.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.headspace.com/",
+      "https://www.headspace.com/join-us?origin=navigation",
+      "https://www.headspace.com/join-us?origin=footer",
+      "https://www.headspace.com/join-us",
+      "https://www.headspace.com/join-us",
+      "https://www.headspace.com/join-us"
+    ],
+    "ats": "greenhouse",
+    "slug": "hs",
+    "count": 8,
+    "api": "https://boards-api.greenhouse.io/v1/boards/hs/jobs",
+    "human": "https://job-boards.greenhouse.io/hs",
+    "method": "sniff"
+  },
+  "Flatiron Health": {
+    "name": "Flatiron Health",
+    "domain": "flatiron.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://flatiron.com/",
+      "https://flatiron.com/careers",
+      "https://flatiron.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "flatironhealth",
+    "count": 37,
+    "api": "https://boards-api.greenhouse.io/v1/boards/flatironhealth/jobs",
+    "human": "https://job-boards.greenhouse.io/flatironhealth",
+    "method": "guess"
+  },
+  "Hinge Health": {
+    "name": "Hinge Health",
+    "domain": "hingehealth.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.hingehealth.com/",
+      "https://jobs.ashbyhq.com/hinge-health",
+      "https://jobs.ashbyhq.com/hinge-health",
+      "https://jobs.ashbyhq.com/hinge-health",
+      "https://jobs.ashbyhq.com/hinge-health"
+    ],
+    "ats": "ashby",
+    "slug": "hinge-health",
+    "count": 72,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/hinge-health",
+    "human": "https://jobs.ashbyhq.com/hinge-health",
+    "method": "sniff"
+  },
+  "iHeartMedia": {
+    "name": "iHeartMedia",
+    "domain": "iheartmedia.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.iheartmedia.com/",
+      "https://www.iheartmedia.com/careers",
+      "https://www.iheartmedia.com/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "iheartmedia",
+    "host": "wd5",
+    "site": "External_iHM",
+    "count": 288,
+    "api": "https://iheartmedia.wd5.myworkdayjobs.com/wday/cxs/iheartmedia/External_iHM/jobs",
+    "human": "https://iheartmedia.wd5.myworkdayjobs.com/en-US/External_iHM",
+    "resolve_url": "https://iheartmedia.wd5.myworkdayjobs.com/en-US/External_iHM",
+    "method": "sniff"
+  },
+  "Included Health": {
+    "name": "Included Health",
+    "domain": "includedhealth.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://includedhealth.com/",
+      "https://includedhealth.com/careers/",
+      "https://includedhealth.com/careers/",
+      "https://includedhealth.com/careers/",
+      "https://includedhealth.com/careers/",
+      "https://includedhealth.com/careers/"
+    ],
+    "ats": "lever",
+    "slug": "includedhealth",
+    "count": 147,
+    "api": "https://api.lever.co/v0/postings/includedhealth?mode=json",
+    "human": "https://jobs.lever.co/includedhealth",
+    "method": "sniff"
+  },
+  "K Health": {
+    "name": "K Health",
+    "domain": "khealth.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://khealth.com/",
+      "https://khealth.com/careers",
+      "https://khealth.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "khealthcareers",
+    "count": 24,
+    "api": "https://boards-api.greenhouse.io/v1/boards/khealthcareers/jobs",
+    "human": "https://job-boards.greenhouse.io/khealthcareers",
+    "method": "sniff"
+  },
+  "Instacart": {
+    "name": "Instacart",
+    "domain": "instacart.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.instacart.com/",
+      "https://www.instacart.careers/",
+      "https://www.instacart.careers/?_gl=1*w131cr*_ga*MjExNTE0MzMzNS4xNjc1OTc2NjY5*_ga_VL5WVTXMWP*MTY4MjcwNTI4",
+      "https://www.instacart.careers/",
+      "https://www.instacart.careers/",
+      "https://www.instacart.careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "instacart",
+    "count": 112,
+    "api": "https://boards-api.greenhouse.io/v1/boards/instacart/jobs",
+    "human": "https://job-boards.greenhouse.io/instacart",
+    "method": "guess"
+  },
+  "Klaviyo": {
+    "name": "Klaviyo",
+    "domain": "klaviyo.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.klaviyo.com/",
+      "https://www.klaviyo.com/careers",
+      "https://www.klaviyo.com/careers",
+      "https://www.klaviyo.com/careers/",
+      "https://www.klaviyo.com/"
+    ],
+    "ats": "greenhouse",
+    "slug": "klaviyo",
+    "count": 150,
+    "api": "https://boards-api.greenhouse.io/v1/boards/klaviyo/jobs",
+    "human": "https://job-boards.greenhouse.io/klaviyo",
+    "method": "guess"
+  },
+  "Linear": {
+    "name": "Linear",
+    "domain": "linear.app",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "ashby",
+    "status": "resolved",
+    "careers_seen": [
+      "https://linear.app/",
+      "https://linear.app/careers",
+      "https://linear.app/careers",
+      "https://linear.app/careers",
+      "https://linear.app/company/careers",
+      "https://linear.app/en/careers"
+    ],
+    "ats": "ashby",
+    "slug": "linear",
+    "count": 32,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/linear",
+    "human": "https://jobs.ashbyhq.com/linear",
+    "method": "sniff"
+  },
+  "LiveRamp": {
+    "name": "LiveRamp",
+    "domain": "liveramp.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://liveramp.com/",
+      "https://liveramp.com/careers",
+      "https://liveramp.com/careers",
+      "https://liveramp.com/careers"
+    ],
+    "ats": "workday",
+    "tenant": "liveramp",
+    "host": "wd5",
+    "site": "LiveRampCareers",
+    "count": 49,
+    "api": "https://liveramp.wd5.myworkdayjobs.com/wday/cxs/liveramp/LiveRampCareers/jobs",
+    "human": "https://liveramp.wd5.myworkdayjobs.com/en-US/LiveRampCareers",
+    "resolve_url": "https://liveramp.wd5.myworkdayjobs.com/en-US/LiveRampCareers",
+    "method": "sniff"
+  },
+  "Maven Clinic": {
+    "name": "Maven Clinic",
+    "domain": "mavenclinic.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.mavenclinic.com/",
+      "https://www.mavenclinic.com/careers",
+      "https://www.mavenclinic.com/careers/",
+      "https://job-boards.greenhouse.io/mavenclinic",
+      "https://www.mavenclinic.com/company/careers",
+      "https://www.mavenclinic.com/about/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "mavenclinic",
+    "count": 30,
+    "api": "https://boards-api.greenhouse.io/v1/boards/mavenclinic/jobs",
+    "human": "https://job-boards.greenhouse.io/mavenclinic",
+    "method": "sniff"
+  },
+  "Mixpanel": {
+    "name": "Mixpanel",
+    "domain": "mixpanel.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://mixpanel.com/home/",
+      "https://mixpanel.com/jobs/",
+      "https://mixpanel.com/jobs/",
+      "https://mixpanel.com/jobs/"
+    ],
+    "ats": "greenhouse",
+    "slug": "mixpanel",
+    "count": 69,
+    "api": "https://boards-api.greenhouse.io/v1/boards/mixpanel/jobs",
+    "human": "https://job-boards.greenhouse.io/mixpanel",
+    "method": "sniff"
+  },
+  "Komodo Health": {
+    "name": "Komodo Health",
+    "domain": "komodohealth.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.komodohealth.com/",
+      "https://www.komodohealth.com/careers/life-at-komodo/",
+      "https://job-boards.greenhouse.io/komodohealth",
+      "https://job-boards.greenhouse.io/komodohealth"
+    ],
+    "ats": "greenhouse",
+    "slug": "komodohealth",
+    "count": 36,
+    "api": "https://boards-api.greenhouse.io/v1/boards/komodohealth/jobs",
+    "human": "https://job-boards.greenhouse.io/komodohealth",
+    "method": "sniff"
+  },
+  "Notion": {
+    "name": "Notion",
+    "domain": "notion.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.notion.com/",
+      "https://www.notion.com/careers",
+      "https://www.notion.com/careers",
+      "https://www.notion.com/careers"
+    ],
+    "ats": "ashby",
+    "slug": "notion",
+    "count": 127,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/notion",
+    "human": "https://jobs.ashbyhq.com/notion",
+    "method": "sniff"
+  },
+  "Okta": {
+    "name": "Okta",
+    "domain": "okta.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.okta.com/",
+      "https://www.okta.com/company/careers/",
+      "https://www.okta.com/company/careers/",
+      "https://www.okta.com/company/careers/",
+      "https://www.okta.com/company/careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "okta",
+    "count": 347,
+    "api": "https://boards-api.greenhouse.io/v1/boards/okta/jobs",
+    "human": "https://job-boards.greenhouse.io/okta",
+    "method": "guess"
+  },
+  "Omada Health": {
+    "name": "Omada Health",
+    "domain": "omadahealth.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.omadahealth.com/",
+      "https://www.omadahealth.com/about-us/careers",
+      "https://www.omadahealth.com/about-us/careers",
+      "https://www.omadahealth.com/about-us/careers",
+      "https://www.omadahealth.com/about-us/careers",
+      "https://job-boards.greenhouse.io/omadahealth"
+    ],
+    "ats": "greenhouse",
+    "slug": "omadahealth",
+    "count": 29,
+    "api": "https://boards-api.greenhouse.io/v1/boards/omadahealth/jobs",
+    "human": "https://job-boards.greenhouse.io/omadahealth",
+    "method": "sniff"
+  },
+  "Omnicom Group": {
+    "name": "Omnicom Group",
+    "domain": "omnicomgroup.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.omc.com/"
+    ],
+    "ats": "smartrecruiters",
+    "slug": "omnicomgroup",
+    "count": 1,
+    "api": "https://api.smartrecruiters.com/v1/companies/omnicomgroup/postings",
+    "human": "https://careers.smartrecruiters.com/omnicomgroup",
+    "method": "guess"
+  },
+  "Palo Alto Networks": {
+    "name": "Palo Alto Networks",
+    "domain": "paloaltonetworks.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.paloaltonetworks.com",
+      "https://jobs.paloaltonetworks.com/en/",
+      "https://jobs.paloaltonetworks.com/en",
+      "https://jobs.paloaltonetworks.com/en",
+      "https://jobs.paloaltonetworks.com/en"
+    ],
+    "ats": "workday",
+    "tenant": "paloaltonetworks",
+    "host": "wd5",
+    "site": "panwexternalcareers",
+    "count": 1437,
+    "api": "https://paloaltonetworks.wd5.myworkdayjobs.com/wday/cxs/paloaltonetworks/panwexternalcareers/jobs",
+    "human": "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers",
+    "resolve_url": "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers",
+    "method": "sniff"
+  },
+  "Rent the Runway": {
+    "name": "Rent the Runway",
+    "domain": "renttherunway.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.renttherunway.com/",
+      "https://www.renttherunway.com/about-us/careers?action_type=footer_link",
+      "https://www.renttherunway.com/about-us/careers",
+      "https://www.renttherunway.com/about-us/careers",
+      "https://www.renttherunway.com/about-us/careers",
+      "https://www.renttherunway.com/about-us/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "renttherunway",
+    "count": 20,
+    "api": "https://boards-api.greenhouse.io/v1/boards/renttherunway/jobs",
+    "human": "https://job-boards.greenhouse.io/renttherunway",
+    "method": "sniff"
+  },
+  "Otis": {
+    "name": "Otis",
+    "domain": "otis.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.otis.com/en/us/",
+      "https://www.otis.com/en/us/careers",
+      "https://www.otis.com/en/us/careers",
+      "https://www.otis.com/en/us/careers",
+      "https://www.otis.com/en/careers"
+    ],
+    "ats": "workday",
+    "tenant": "otis",
+    "host": "wd504",
+    "site": "REC_Ext_Gateway",
+    "count": 1334,
+    "api": "https://otis.wd504.myworkdayjobs.com/wday/cxs/otis/REC_Ext_Gateway/jobs",
+    "human": "https://otis.wd504.myworkdayjobs.com/en-US/REC_Ext_Gateway",
+    "resolve_url": "https://otis.wd504.myworkdayjobs.com/en-US/REC_Ext_Gateway",
+    "method": "sniff"
+  },
+  "Patreon": {
+    "name": "Patreon",
+    "domain": "patreon.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.patreon.com/",
+      "https://www.patreon.com/careers",
+      "https://www.patreon.com/careers",
+      "https://www.patreon.com/careers",
+      "https://www.patreon.com/profile/creators?u=3177608",
+      "https://www.patreon.com/about"
+    ],
+    "ats": "ashby",
+    "slug": "patreon",
+    "count": 7,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/patreon",
+    "human": "https://jobs.ashbyhq.com/patreon",
+    "method": "sniff"
+  },
+  "Noom": {
+    "name": "Noom",
+    "domain": "noom.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.noom.com:443/",
+      "https://www.noom.com/careers/job-listings/",
+      "https://www.noom.com/careers/job-listings/"
+    ],
+    "ats": "greenhouse",
+    "slug": "noomgrowth",
+    "count": 9,
+    "api": "https://boards-api.greenhouse.io/v1/boards/noomgrowth/jobs",
+    "human": "https://job-boards.greenhouse.io/noomgrowth",
+    "method": "sniff"
+  },
+  "Ro": {
+    "name": "Ro",
+    "domain": "ro.co",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://ro.co/",
+      "https://ro.co/careers/",
+      "https://ro.co/careers/",
+      "https://ro.co/careers/"
+    ],
+    "ats": "lever",
+    "slug": "ro",
+    "count": 52,
+    "api": "https://api.lever.co/v0/postings/ro?mode=json",
+    "human": "https://jobs.lever.co/ro",
+    "method": "sniff"
+  },
+  "Roblox": {
+    "name": "Roblox",
+    "domain": "roblox.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.roblox.com/",
+      "https://careers.roblox.com/",
+      "https://careers.roblox.com/",
+      "https://careers.roblox.com/",
+      "https://careers.roblox.com/"
+    ],
+    "ats": "greenhouse",
+    "slug": "roblox",
+    "count": 221,
+    "api": "https://boards-api.greenhouse.io/v1/boards/roblox/jobs",
+    "human": "https://job-boards.greenhouse.io/roblox",
+    "method": "guess"
+  },
+  "Scholastic": {
+    "name": "Scholastic",
+    "domain": "scholastic.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.scholastic.com/home",
+      "https://www.scholastic.com/aboutscholastic/careers/",
+      "https://www.scholastic.com/aboutscholastic/careers/",
+      "https://www.scholastic.com/aboutscholastic/careers/",
+      "https://www.scholastic.com/jobs/index.html",
+      "https://www.scholastic.com/company/careers/index.html"
+    ],
+    "ats": "workday",
+    "tenant": "scholastic",
+    "host": "wd5",
+    "site": "External",
+    "count": 132,
+    "api": "https://scholastic.wd5.myworkdayjobs.com/wday/cxs/scholastic/External/jobs",
+    "human": "https://scholastic.wd5.myworkdayjobs.com/en-US/External",
+    "resolve_url": "https://scholastic.wd5.myworkdayjobs.com/en-US/External",
+    "method": "sniff"
+  },
+  "Spring Health": {
+    "name": "Spring Health",
+    "domain": "springhealth.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.springhealth.com/",
+      "https://www.springhealth.com/careers",
+      "https://www.springhealth.com/careers"
+    ],
+    "ats": "ashby",
+    "slug": "spring-health",
+    "count": 44,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/spring-health",
+    "human": "https://jobs.ashbyhq.com/spring-health",
+    "method": "guess"
+  },
+  "Snowflake": {
+    "name": "Snowflake",
+    "domain": "snowflake.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.snowflake.com/en/",
+      "https://careers.snowflake.com/us/en",
+      "https://careers.snowflake.com/us/en",
+      "https://careers.snowflake.com/us/en"
+    ],
+    "ats": "ashby",
+    "slug": "snowflake",
+    "count": 389,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/snowflake",
+    "human": "https://jobs.ashbyhq.com/snowflake",
+    "method": "guess"
+  },
+  "Stitch Fix": {
+    "name": "Stitch Fix",
+    "domain": "stitchfix.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.stitchfix.com/",
+      "https://www.stitchfix.com/careers",
+      "https://www.stitchfix.com/careers",
+      "https://www.stitchfix.com/careers/jobs",
+      "https://www.stitchfix.com/careers/jobs"
+    ],
+    "ats": "greenhouse",
+    "slug": "stitchfix",
+    "count": 13,
+    "api": "https://boards-api.greenhouse.io/v1/boards/stitchfix/jobs",
+    "human": "https://job-boards.greenhouse.io/stitchfix",
+    "method": "guess"
+  },
+  "Substack": {
+    "name": "Substack",
+    "domain": "substack.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://substack.com/",
+      "https://substack.com/jobs",
+      "https://substack.com/jobs",
+      "https://substack.com/jobs"
+    ],
+    "ats": "ashby",
+    "slug": "substack",
+    "count": 13,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/substack",
+    "human": "https://jobs.ashbyhq.com/substack",
+    "method": "guess"
+  },
+  "Talkspace": {
+    "name": "Talkspace",
+    "domain": "talkspace.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.talkspace.com/",
+      "https://www.talkspace.com/careers",
+      "https://www.talkspace.com/careers",
+      "https://www.talkspace.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "talkspacetherapist",
+    "count": 48,
+    "api": "https://boards-api.greenhouse.io/v1/boards/talkspacetherapist/jobs",
+    "human": "https://job-boards.greenhouse.io/talkspacetherapist",
+    "method": "sniff"
+  },
+  "The Trade Desk": {
+    "name": "The Trade Desk",
+    "domain": "thetradedesk.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.thetradedesk.com/",
+      "https://careers.thetradedesk.com/",
+      "https://careers.thetradedesk.com/",
+      "https://careers.thetradedesk.com/",
+      "https://careers.thetradedesk.com/",
+      "https://careers.thetradedesk.com/"
+    ],
+    "ats": "greenhouse",
+    "slug": "thetradedesk",
+    "count": 204,
+    "api": "https://boards-api.greenhouse.io/v1/boards/thetradedesk/jobs",
+    "human": "https://job-boards.greenhouse.io/thetradedesk",
+    "method": "guess"
+  },
+  "T-Mobile": {
+    "name": "T-Mobile",
+    "domain": "t-mobile.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.t-mobile.com/",
+      "https://www.t-mobile.com/resources/how-to-join-us?INTNAV=tNav%3AJoin",
+      "https://www.t-mobile.com/resources/how-to-join-us?INTNAV=tNav%3AJoinUs%3AHowToSwitch",
+      "https://www.t-mobile.com/resources/how-to-join-us?icid=MGPO_TMO_P_EVGHPDEALS_1DCFDD35858D2F5E45703",
+      "https://www.t-mobile.com/resources/how-to-join-us?INTNAV=fNav%3ASwitchToT-Mobile%3AHowToSwitchToT-Mobile",
+      "https://careers.t-mobile.com"
+    ],
+    "ats": "workday",
+    "tenant": "tmobile",
+    "host": "wd1",
+    "site": "External",
+    "count": 2000,
+    "api": "https://tmobile.wd1.myworkdayjobs.com/wday/cxs/tmobile/External/jobs",
+    "human": "https://tmobile.wd1.myworkdayjobs.com/en-US/External",
+    "resolve_url": "https://tmobile.wd1.myworkdayjobs.com/en-US/External",
+    "method": "sniff"
+  },
+  "Twitch": {
+    "name": "Twitch",
+    "domain": "twitch.tv",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.twitch.tv/",
+      "https://www.twitch.tv/careers",
+      "https://www.twitch.tv/careers/",
+      "https://careers.twitch.com",
+      "https://www.twitch.tv/company/careers",
+      "https://www.twitch.tv/en/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "twitch",
+    "count": 59,
+    "api": "https://boards-api.greenhouse.io/v1/boards/twitch/jobs",
+    "human": "https://job-boards.greenhouse.io/twitch",
+    "method": "guess"
+  },
+  "Webflow": {
+    "name": "Webflow",
+    "domain": "webflow.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://webflow.com/",
+      "https://webflow.com/company/careers",
+      "https://webflow.com/company/careers",
+      "https://webflow.com/company/careers",
+      "https://webflow.com/company/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "webflow",
+    "count": 29,
+    "api": "https://boards-api.greenhouse.io/v1/boards/webflow/jobs",
+    "human": "https://job-boards.greenhouse.io/webflow",
+    "method": "sniff"
+  },
+  "Twilio": {
+    "name": "Twilio",
+    "domain": "twilio.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.twilio.com/en-us",
+      "https://jobs.twilio.com/careers",
+      "https://jobs.twilio.com/careers",
+      "https://jobs.twilio.com/careers",
+      "https://jobs.twilio.com/careers",
+      "https://jobs.twilio.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "twilio",
+    "count": 151,
+    "api": "https://boards-api.greenhouse.io/v1/boards/twilio/jobs",
+    "human": "https://job-boards.greenhouse.io/twilio",
+    "method": "guess"
+  },
+  "Vercel": {
+    "name": "Vercel",
+    "domain": "vercel.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "ashby",
+    "status": "resolved",
+    "careers_seen": [
+      "https://vercel.com/",
+      "https://vercel.com/careers",
+      "https://vercel.com/careers",
+      "https://vercel.com/careers",
+      "https://vercel.com/company/careers",
+      "https://vercel.com/about/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "vercel",
+    "count": 85,
+    "api": "https://boards-api.greenhouse.io/v1/boards/vercel/jobs",
+    "human": "https://job-boards.greenhouse.io/vercel",
+    "method": "sniff"
+  },
+  "Warner Music": {
+    "name": "Warner Music",
+    "domain": "wmg.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.wmg.com/",
+      "https://www.wmg.com/careers",
+      "https://www.wmg.com/careers",
+      "https://www.wmg.com/careers"
+    ],
+    "ats": "workday",
+    "tenant": "wmg",
+    "host": "wd1",
+    "site": "WMGUS",
+    "count": 61,
+    "api": "https://wmg.wd1.myworkdayjobs.com/wday/cxs/wmg/WMGUS/jobs",
+    "human": "https://wmg.wd1.myworkdayjobs.com/en-US/WMGUS",
+    "resolve_url": "https://wmg.wd1.myworkdayjobs.com/en-US/WMGUS",
+    "method": "sniff"
+  },
+  "WeWork": {
+    "name": "WeWork",
+    "domain": "wework.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.wework.com/",
+      "https://www.wework.com/careers/",
+      "https://www.wework.com/careers/",
+      "https://www.wework.com/careers/",
+      "https://www.wework.com/careers/",
+      "https://www.wework.com/"
+    ],
+    "ats": "workday",
+    "tenant": "wework",
+    "host": "wd1",
+    "site": "WeWork",
+    "count": 77,
+    "api": "https://wework.wd1.myworkdayjobs.com/wday/cxs/wework/WeWork/jobs",
+    "human": "https://wework.wd1.myworkdayjobs.com/en-US/WeWork",
+    "resolve_url": "https://wework.wd1.myworkdayjobs.com/en-US/WeWork",
+    "method": "sniff"
+  },
+  "Zapier": {
+    "name": "Zapier",
+    "domain": "zapier.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://zapier.com/",
+      "https://zapier.com/jobs"
+    ],
+    "ats": "ashby",
+    "slug": "zapier",
+    "count": 10,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/zapier",
+    "human": "https://jobs.ashbyhq.com/zapier",
+    "method": "guess"
+  },
+  "Workday": {
+    "name": "Workday",
+    "domain": "workday.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.workday.com/",
+      "https://www.workday.com/en-us/company/careers/overview.html",
+      "https://www.workday.com/en-us/company/careers/life-at-workday.html",
+      "https://www.workday.com/en-us/company/careers/early-career.html",
+      "https://www.workday.com/en-us/company/careers/overview.html",
+      "https://www.workday.com/en-us/company/careers/overview.html"
+    ],
+    "ats": "workday",
+    "tenant": "workday",
+    "host": "wd5",
+    "site": "Workday",
+    "count": 339,
+    "api": "https://workday.wd5.myworkdayjobs.com/wday/cxs/workday/Workday/jobs",
+    "human": "https://workday.wd5.myworkdayjobs.com/en-US/Workday",
+    "resolve_url": "https://workday.wd5.myworkdayjobs.com/en-US/Workday",
+    "method": "sniff"
+  },
+  "Zocdoc": {
+    "name": "Zocdoc",
+    "domain": "zocdoc.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "greenhouse",
+    "slug": "zocdoc",
+    "count": 52,
+    "api": "https://boards-api.greenhouse.io/v1/boards/zocdoc/jobs",
+    "human": "https://job-boards.greenhouse.io/zocdoc",
+    "method": "guess"
+  },
+  "Zscaler": {
+    "name": "Zscaler",
+    "domain": "zscaler.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.zscaler.com:443/",
+      "https://www.zscaler.com:443/careers",
+      "https://www.zscaler.com:443/careers",
+      "https://www.zscaler.com:443/en/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "zscaler",
+    "count": 345,
+    "api": "https://boards-api.greenhouse.io/v1/boards/zscaler/jobs",
+    "human": "https://job-boards.greenhouse.io/zscaler",
+    "method": "guess"
+  },
+  "ServiceNow": {
+    "name": "ServiceNow",
+    "domain": "servicenow.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "smartrecruiters",
+    "slug": "servicenow",
+    "count": 502,
+    "api": "https://api.smartrecruiters.com/v1/companies/servicenow/postings",
+    "human": "https://careers.smartrecruiters.com/servicenow",
+    "method": "guess"
+  },
+  "2U": {
+    "name": "2U",
+    "domain": "2u.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://2u.com/",
+      "https://2u.com/careers/",
+      "https://2u.com/careers/jobs/",
+      "https://2u.com/careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "2u",
+    "count": 7,
+    "api": "https://boards-api.greenhouse.io/v1/boards/2u/jobs",
+    "human": "https://job-boards.greenhouse.io/2u",
+    "method": "guess"
+  },
+  "AQR Capital": {
+    "name": "AQR Capital",
+    "domain": "aqr.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.aqr.com/",
+      "https://www.aqr.com/Our-Firm/Careers",
+      "https://www.aqr.com/",
+      "https://www.aqr.com/",
+      "https://www.aqr.com/",
+      "https://www.aqr.com/"
+    ],
+    "ats": "greenhouse",
+    "slug": "aqr",
+    "count": 47,
+    "api": "https://boards-api.greenhouse.io/v1/boards/aqr/jobs",
+    "human": "https://job-boards.greenhouse.io/aqr",
+    "method": "guess"
+  },
+  "Amplify": {
+    "name": "Amplify",
+    "domain": "amplify.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://amplify.com/",
+      "https://amplify.com/careers/",
+      "https://amplify.com/careers/",
+      "https://amplify.com/careers/"
+    ],
+    "ats": "ashby",
+    "slug": "amplify",
+    "count": 37,
+    "api": "https://api.ashbyhq.com/posting-api/job-board/amplify",
+    "human": "https://jobs.ashbyhq.com/amplify",
+    "method": "sniff"
+  },
+  "Coursera": {
+    "name": "Coursera",
+    "domain": "coursera.org",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.coursera.org/",
+      "https://www.coursera.org/google-career-certificates",
+      "https://www.coursera.org/career-academy",
+      "https://www.coursera.org/google-career-certificates",
+      "https://www.coursera.org/resources/career-quiz",
+      "https://careers.coursera.com"
+    ],
+    "ats": "greenhouse",
+    "slug": "coursera",
+    "count": 22,
+    "api": "https://boards-api.greenhouse.io/v1/boards/coursera/jobs",
+    "human": "https://job-boards.greenhouse.io/coursera",
+    "method": "guess"
+  },
+  "Guild": {
+    "name": "Guild",
+    "domain": "guild.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://guild.com/",
+      "https://guild.com/careers",
+      "https://guild.com/careers",
+      "https://guild.com/jobs",
+      "https://guild.com/company/careers",
+      "https://guild.com/about/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "guild",
+    "count": 5,
+    "api": "https://boards-api.greenhouse.io/v1/boards/guild/jobs",
+    "human": "https://job-boards.greenhouse.io/guild",
+    "method": "guess"
+  },
+  "Khan Academy": {
+    "name": "Khan Academy",
+    "domain": "khanacademy.org",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.khanacademy.org/",
+      "https://www.khanacademy.org/careers",
+      "https://www.khanacademy.org/careers/",
+      "https://www.khanacademy.org/jobs",
+      "https://www.khanacademy.org/company/careers",
+      "https://www.khanacademy.org/about/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "khanacademy",
+    "count": 27,
+    "api": "https://boards-api.greenhouse.io/v1/boards/khanacademy/jobs",
+    "human": "https://job-boards.greenhouse.io/khanacademy",
+    "method": "guess"
+  },
+  "MasterClass": {
+    "name": "MasterClass",
+    "domain": "masterclass.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "greenhouse",
+    "slug": "masterclass",
+    "count": 4,
+    "api": "https://boards-api.greenhouse.io/v1/boards/masterclass/jobs",
+    "human": "https://job-boards.greenhouse.io/masterclass",
+    "method": "guess"
+  },
+  "Millennium": {
+    "name": "Millennium",
+    "domain": "mlp.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.mlp.com/",
+      "https://www.mlp.com/careers/",
+      "https://www.mlp.com/careers/life-at-millennium/",
+      "https://www.mlp.com/careers/students/",
+      "https://career.mlp.com/careers",
+      "https://www.mlp.com/careers/"
+    ],
+    "ats": "eightfold",
+    "slug": "mlp",
+    "count": 231,
+    "api": "https://mlp.eightfold.ai/api/apply/v2/jobs?domain=mlp.com&start=0&num=10&exclude_pid=&sort_by=relevance",
+    "human": "https://mlp.eightfold.ai/careers",
+    "method": "sniff"
+  },
+  "General Assembly": {
+    "name": "General Assembly",
+    "domain": "generalassemb.ly",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.generalassemb.ly/",
+      "https://www.generalassemb.ly/careers",
+      "https://www.generalassemb.ly/careers",
+      "https://www.generalassemb.ly/careers",
+      "https://www.generalassemb.ly/company/careers",
+      "https://www.generalassemb.ly/about/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "generalassembly",
+    "count": 18,
+    "api": "https://boards-api.greenhouse.io/v1/boards/generalassembly/jobs",
+    "human": "https://job-boards.greenhouse.io/generalassembly",
+    "method": "sniff"
+  },
+  "Newsela": {
+    "name": "Newsela",
+    "domain": "newsela.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://newsela.com/",
+      "https://newsela.com/careers",
+      "https://solutions.newsela.com/careers",
+      "https://newsela.com/careers",
+      "https://newsela.com/careers"
+    ],
+    "ats": "greenhouse",
+    "slug": "newsela",
+    "count": 21,
+    "api": "https://boards-api.greenhouse.io/v1/boards/newsela/jobs",
+    "human": "https://job-boards.greenhouse.io/newsela",
+    "method": "sniff"
+  },
+  "IMC Trading": {
+    "name": "IMC Trading",
+    "domain": "imc.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.imc.com:443/us/",
+      "https://www.imc.com:443/us/",
+      "https://www.imc.com:443/us/",
+      "https://www.imc.com:443/us/",
+      "https://www.imc.com:443/us/",
+      "https://www.imc.com:443/us/"
+    ],
+    "ats": "greenhouse",
+    "slug": "imc",
+    "count": 165,
+    "api": "https://boards-api.greenhouse.io/v1/boards/imc/jobs",
+    "human": "https://job-boards.greenhouse.io/imc",
+    "method": "guess"
+  },
+  "Point72": {
+    "name": "Point72",
+    "domain": "point72.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://point72.com/",
+      "https://careers.point72.com/",
+      "https://point72.com/students-early-career/",
+      "https://www.instagram.com/point72careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "point72",
+    "count": 227,
+    "api": "https://boards-api.greenhouse.io/v1/boards/point72/jobs",
+    "human": "https://job-boards.greenhouse.io/point72",
+    "method": "sniff"
+  },
+  "Virtu Financial": {
+    "name": "Virtu Financial",
+    "domain": "virtu.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.virtu.com/",
+      "https://www.virtu.com/careers/",
+      "https://www.virtu.com/careers/",
+      "https://www.virtu.com/careers/"
+    ],
+    "ats": "greenhouse",
+    "slug": "virtu",
+    "count": 47,
+    "api": "https://boards-api.greenhouse.io/v1/boards/virtu/jobs",
+    "human": "https://job-boards.greenhouse.io/virtu",
+    "method": "sniff"
+  },
+  "Udemy": {
+    "name": "Udemy",
+    "domain": "udemy.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.udemy.com/"
+    ],
+    "ats": "greenhouse",
+    "slug": "udemy",
+    "count": 14,
+    "api": "https://boards-api.greenhouse.io/v1/boards/udemy/jobs",
+    "human": "https://job-boards.greenhouse.io/udemy",
+    "method": "guess"
+  },
+  "Bank of America": {
+    "name": "Bank of America",
+    "domain": "bankofamerica.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://careers.bankofamerica.com/en-us/job-search",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Apple": {
+    "name": "Apple",
+    "domain": "apple.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://jobs.apple.com/en-us/search?team=Design-DES",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Amazon": {
+    "name": "Amazon",
+    "domain": "amazon.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.amazon.jobs/en/search?base_query=design+intern",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Citi": {
+    "name": "Citi",
+    "domain": "citi.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://jobs.citi.com/search-jobs",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "BlackRock": {
+    "name": "BlackRock",
+    "domain": "blackrock.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.blackrock.com/us/individual",
+      "https://careers.blackrock.com/",
+      "https://careers.blackrock.com/",
+      "https://careers.blackrock.com",
+      "https://careers.blackrock.com"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Etsy": {
+    "name": "Etsy",
+    "domain": "etsy.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://careers.etsy.com",
+      "https://careers.etsy.com/",
+      "https://careers.etsy.com",
+      "https://careers.etsy.com/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Ally": {
+    "name": "Ally",
+    "domain": "ally.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.ally.com/",
+      "https://www.ally.com/about/careers/",
+      "https://www.ally.com/about/careers/",
+      "https://www.ally.com/about/careers/",
+      "https://www.ally.com/about/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Goldman Sachs": {
+    "name": "Goldman Sachs",
+    "domain": "goldmansachs.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://higher.gs.com/roles",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Google": {
+    "name": "Google",
+    "domain": "google.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.google.com/about/careers/applications/jobs/results/?employment_type=INTERN",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "IBM": {
+    "name": "IBM",
+    "domain": "ibm.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.ibm.com/careers/search",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "JPMorgan Chase": {
+    "name": "JPMorgan Chase",
+    "domain": "jpmorganchase.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://careers.jpmorgan.com/us/en/students/programs",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Chubb": {
+    "name": "Chubb",
+    "domain": "chubb.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.chubb.com/us-en/",
+      "https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001"
+    },
+    "ats": "oracle",
+    "human": "https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "Mastercard": {
+    "name": "Mastercard",
+    "domain": "mastercard.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "workday",
+    "tenant": "mastercard",
+    "host": "wd1",
+    "site": "CorporateCareers",
+    "count": 1123,
+    "api": "https://mastercard.wd1.myworkdayjobs.com/wday/cxs/mastercard/CorporateCareers/jobs",
+    "human": "https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers",
+    "resolve_url": "https://mastercard.wd1.myworkdayjobs.com/en-US/CorporateCareers",
+    "method": "brute"
+  },
+  "Meta": {
+    "name": "Meta",
+    "domain": "meta.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.metacareers.com/jobs?roles[0]=Internship",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here (URL did not load, re-check)"
+  },
+  "Microsoft": {
+    "name": "Microsoft",
+    "domain": "microsoft.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://jobs.careers.microsoft.com/global/en/search?lc=United%20States",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Morgan Stanley": {
+    "name": "Morgan Stanley",
+    "domain": "morganstanley.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.morganstanley.com/careers/career-opportunities-search",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Adobe": {
+    "name": "Adobe",
+    "domain": "adobe.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "workday",
+    "tenant": "adobe",
+    "host": "wd5",
+    "site": "external_experienced",
+    "count": 767,
+    "api": "https://adobe.wd5.myworkdayjobs.com/wday/cxs/adobe/external_experienced/jobs",
+    "human": "https://adobe.wd5.myworkdayjobs.com/en-US/external_experienced",
+    "resolve_url": "https://adobe.wd5.myworkdayjobs.com/en-US/external_experienced",
+    "method": "brute"
+  },
+  "American Express": {
+    "name": "American Express",
+    "domain": "americanexpress.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.americanexpress.com/",
+      "https://www.americanexpress.com/en-us/careers/?inav=en_us_footer_About_Careers",
+      "https://www.americanexpress.com/en-us/careers/",
+      "https://careers.americanexpress.com/en/sites/CX_1?vanity=americanexpress.com/careers",
+      "https://careers.americanexpress.com/en/sites/CX_1?vanity=americanexpress.com/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Intuit": {
+    "name": "Intuit",
+    "domain": "intuit.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.intuit.com/",
+      "https://jobs.intuit.com/",
+      "https://www.intuit.com/careers/working-at-intuit/",
+      "https://www.intuit.com/careers/teams/software-engineering/",
+      "https://www.intuit.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Moody's": {
+    "name": "Moody's",
+    "domain": "moodys.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.moodys.com/",
+      "https://careers.moodys.com/en",
+      "https://careers.moodys.com/en",
+      "https://www.moodys.com/error",
+      "https://careers.moodys.com/en",
+      "https://www.moodys.com/error"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Oracle": {
+    "name": "Oracle",
+    "domain": "oracle.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "oracle",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.oracle.com/careers/",
+      "https://www.oracle.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Federal Reserve Bank of New York": {
+    "name": "Federal Reserve Bank of New York",
+    "domain": "newyorkfed.org",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.newyorkfed.org/",
+      "https://www.newyorkfed.org/careers",
+      "https://www.newyorkfed.org/careers/",
+      "https://www.newyorkfed.org/errors/404",
+      "https://www.newyorkfed.org/errors/404",
+      "https://www.newyorkfed.org/errors/404"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Uber": {
+    "name": "Uber",
+    "domain": "uber.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.uber.com/us/en/careers/list/?department=Design",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Snap": {
+    "name": "Snap",
+    "domain": "snap.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.snap.com/",
+      "https://careers.snap.com/?lang=en-US",
+      "https://careers.snap.com/?utm_source=snap_com&amp;utm_medium=referral&amp;utm_campaign=universal_navigation&amp;utm_content=footer_item_link&amp;lang=en-US",
+      "https://careers.snap.com/jobs?lang=en-US"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Synchrony": {
+    "name": "Synchrony",
+    "domain": "synchrony.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.synchrony.com/",
+      "https://www.synchronycareers.com/?intlnk=synfin&intcmp=home_header-topnav_synchronycareers_ext",
+      "https://www.synchronycareers.com/",
+      "https://www.synchronycareers.com/",
+      "https://www.synchronycareers.com/?intlnk=synfin&intcmp=home_footer_synchronycareers_ext"
+    ],
+    "scrape_candidate": {
+      "ats": "phenom",
+      "url": "https://www.synchrony.com/search-results?keyword={search_term_string}"
+    },
+    "ats": "phenom",
+    "human": "https://www.synchrony.com/search-results?keyword={search_term_string}",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "TIAA": {
+    "name": "TIAA",
+    "domain": "tiaa.org",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "workday",
+    "tenant": "tiaa",
+    "host": "wd1",
+    "site": "Search",
+    "count": 189,
+    "api": "https://tiaa.wd1.myworkdayjobs.com/wday/cxs/tiaa/Search/jobs",
+    "human": "https://tiaa.wd1.myworkdayjobs.com/en-US/Search",
+    "resolve_url": "https://tiaa.wd1.myworkdayjobs.com/en-US/Search",
+    "method": "brute"
+  },
+  "Vanguard": {
+    "name": "Vanguard",
+    "domain": "vanguard.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://investor.vanguard.com/corporate-portal",
+      "https://www.vanguard.com/careers",
+      "https://logon.vanguard.com/logon?TYPE=33554433&REALMOID=06-00023c87-8db7-16c8-88f6-3da60a490000&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=personalprd02&TARGET=$SM$%2fus%2fen%2fcareers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "S&P Global": {
+    "name": "S&P Global",
+    "domain": "spglobal.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Vimeo": {
+    "name": "Vimeo",
+    "domain": "vimeo.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://vimeo.com/",
+      "https://vimeo.com/careers",
+      "https://vimeo.com/careers/culture",
+      "https://vimeo.com/careers",
+      "https://vimeo.com/careers",
+      "https://vimeo.com/en/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Accion": {
+    "name": "Accion",
+    "domain": "accion.org",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.accion.org/",
+      "https://www.accion.org/about-accion/careers/",
+      "https://www.accion.org/join-us/",
+      "https://www.accion.org/join-us/ways-to-give/",
+      "https://www.accion.org/join-us/partner-with-us/"
+    ],
+    "scrape_candidate": {
+      "ats": "icims",
+      "url": "https://jobs-accion.icims.com/jobs/search?ss=1&amp;hashed=-435834682"
+    },
+    "ats": "icims",
+    "human": "https://jobs-accion.icims.com/jobs/search?ss=1&amp;hashed=-435834682",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "Prudential Financial": {
+    "name": "Prudential Financial",
+    "domain": "prudential.com",
+    "category": "banks_insurance",
+    "priority": 1,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Addepar": {
+    "name": "Addepar",
+    "domain": "addepar.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://addepar.com/",
+      "https://addepar.com/careers",
+      "https://addepar.com/careers/",
+      "https://addepar.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Aira": {
+    "name": "Aira",
+    "domain": "aira.io",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://aira.io/",
+      "https://aira.io/careers/",
+      "https://aira.io/careers/",
+      "https://aira.io/careers/",
+      "https://aira.io/careers/",
+      "https://aira.io/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Warby Parker": {
+    "name": "Warby Parker",
+    "domain": "warbyparker.com",
+    "category": "big_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.warbyparker.com/",
+      "https://www.warbyparker.com/careers",
+      "https://www.warbyparker.com/company/careers",
+      "https://www.warbyparker.com/about/careers",
+      "https://www.warbyparker.com/en/careers",
+      "https://www.warbyparker.com/us/en/careers"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://fa-evdi-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/WarbyParkerCareers\\\\\\\\n\\\\\\"
+    },
+    "ats": "oracle",
+    "human": "https://fa-evdi-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/WarbyParkerCareers\\\\\\\\n\\\\\\",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "Ad Hoc": {
+    "name": "Ad Hoc",
+    "domain": "adhocteam.us",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://adhoc.team/index.html",
+      "https://adhoc.team/careers/",
+      "https://adhoc.team/careers/",
+      "https://adhoc.team/careers/jobs/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Athletics": {
+    "name": "Athletics",
+    "domain": "athleticsnyc.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://athleticsnyc.com/",
+      "https://athleticsnyc.com/careers",
+      "https://athleticsnyc.com/careers",
+      "https://athleticsnyc.com/careers",
+      "https://athleticsnyc.com/en/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Barrel": {
+    "name": "Barrel",
+    "domain": "barrelny.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.barrelny.com/",
+      "https://www.barrelny.com/careers",
+      "https://www.barrelny.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "American Foundation for the Blind": {
+    "name": "American Foundation for the Blind",
+    "domain": "afb.org",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://afb.org/",
+      "https://afb.org/about-afb/leadership/careers-afb"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Civilla": {
+    "name": "Civilla",
+    "domain": "civilla.com",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://civilla.org/",
+      "https://civilla.org/careers",
+      "https://civilla.org/careers",
+      "https://civilla.org/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Coforma": {
+    "name": "Coforma",
+    "domain": "coforma.io",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Big Human": {
+    "name": "Big Human",
+    "domain": "bighuman.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.bighuman.com/",
+      "https://www.bighuman.com/careers",
+      "https://www.bighuman.com/careers",
+      "https://www.bighuman.com/careers",
+      "https://www.bighuman.com/careers/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Be My Eyes": {
+    "name": "Be My Eyes",
+    "domain": "bemyeyes.com",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.bemyeyes.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Deel": {
+    "name": "Deel",
+    "domain": "deel.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.deel.com/",
+      "https://www.deel.com/careers/",
+      "https://www.deel.com/careers/",
+      "https://www.deel.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Collins": {
+    "name": "Collins",
+    "domain": "wearecollins.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://wearecollins.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Designit": {
+    "name": "Designit",
+    "domain": "designit.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.designit.com/",
+      "https://www.designit.com/jobs",
+      "https://www.designit.com/jobs",
+      "https://www.designit.com/jobs",
+      "https://www.designit.com/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "EPAM": {
+    "name": "EPAM",
+    "domain": "epam.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Droga5": {
+    "name": "Droga5",
+    "domain": "droga5.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://droga5.com/",
+      "https://droga5.com/careers/",
+      "https://droga5.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Deque Systems": {
+    "name": "Deque Systems",
+    "domain": "deque.com",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.deque.com/",
+      "https://www.deque.com/company/careers/",
+      "https://www.deque.com/company/careers/",
+      "https://www.deque.com/company/careers/",
+      "https://www.deque.com/company/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Fearless": {
+    "name": "Fearless",
+    "domain": "fearless.tech",
+    "category": "civic_tech",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://fearless.com/",
+      "https://jobs.fearless.com/us/en",
+      "https://fearless.com/case-studies/my-career",
+      "https://fearless.com/careers",
+      "https://fearless.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Esusu": {
+    "name": "Esusu",
+    "domain": "esusurent.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.esusurent.com/",
+      "https://www.esusurent.com/careers",
+      "https://www.esusurent.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Flywire": {
+    "name": "Flywire",
+    "domain": "flywire.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.flywire.com/",
+      "https://www.flywire.com/company/careers",
+      "https://www.flywire.com/company/careers/learning-development",
+      "https://www.flywire.com/company/careers/inside-flywire",
+      "https://www.flywire.com/company/careers",
+      "https://www.flywire.com/company/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Greenwood": {
+    "name": "Greenwood",
+    "domain": "bankgreenwood.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://gogreenwood.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Kiva": {
+    "name": "Kiva",
+    "domain": "kiva.org",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.kiva.org:443/",
+      "https://www.careers.kiva.org/",
+      "https://www.careers.kiva.org/fellowships"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Grameen America": {
+    "name": "Grameen America",
+    "domain": "grameenamerica.org",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.grameenamerica.org/",
+      "https://www.grameenamerica.org/careers",
+      "https://www.grameenamerica.org/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Pentagram": {
+    "name": "Pentagram",
+    "domain": "pentagram.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "manual",
+    "status": "manual",
+    "careers_seen": [],
+    "note": "no ATS; apply direct",
+    "human": "https://www.pentagram.com/careers"
+  },
+  "Marqeta": {
+    "name": "Marqeta",
+    "domain": "marqeta.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.marqeta.com/",
+      "https://www.marqeta.com/company/careers",
+      "https://www.marqeta.com/company/careers",
+      "https://www.marqeta.com/company/careers",
+      "https://www.marqeta.com/en/careers",
+      "https://www.marqeta.com/company/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Helen Keller Services": {
+    "name": "Helen Keller Services",
+    "domain": "helenkeller.org",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.helenkeller.org/",
+      "https://www.helenkeller.org/careers/",
+      "https://www.helenkeller.org/hksb/career-development/",
+      "https://www.helenkeller.org/careers/",
+      "https://www.helenkeller.org/careers/",
+      "https://www.helenkeller.org/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "MoCaFi": {
+    "name": "MoCaFi",
+    "domain": "mocafi.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://mocafi.com/",
+      "https://mocafi.com/careers",
+      "https://mocafi.com/careers/",
+      "https://mocafi.com/jobs",
+      "https://mocafi.com/company/careers",
+      "https://mocafi.com/about/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Navan": {
+    "name": "Navan",
+    "domain": "navan.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://navan.com/",
+      "https://navan.com/careers",
+      "https://navan.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Rangle": {
+    "name": "Rangle",
+    "domain": "rangle.io",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://rangle.io/",
+      "https://rangle.io/careers",
+      "https://rangle.io/careers/",
+      "https://rangle.io/careers/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Local Projects": {
+    "name": "Local Projects",
+    "domain": "localprojects.net",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Remitly": {
+    "name": "Remitly",
+    "domain": "remitly.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.remitly.com/",
+      "https://careers.remitly.com/",
+      "https://careers.remitly.com/",
+      "https://careers.remitly.com/",
+      "https://careers.remitly.com/",
+      "https://careers.remitly.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Rippling": {
+    "name": "Rippling",
+    "domain": "rippling.com",
+    "category": "fintech_core",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.rippling.com/",
+      "https://www.rippling.com/careers",
+      "https://www.rippling.com/careers",
+      "https://www.rippling.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Publicis Sapient": {
+    "name": "Publicis Sapient",
+    "domain": "publicissapient.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.publicissapient.com/",
+      "https://careers.publicissapient.com/",
+      "https://careers.publicissapient.com/job-search",
+      "https://careers.publicissapient.com/",
+      "https://careers.publicissapient.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Siegel+Gale": {
+    "name": "Siegel+Gale",
+    "domain": "siegelgale.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.siegelgale.com/",
+      "https://www.siegelgale.com/careers/",
+      "https://www.siegelgale.com/careers/",
+      "https://www.siegelgale.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Slalom": {
+    "name": "Slalom",
+    "domain": "slalom.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.slalom.com/us/en",
+      "https://www.slalom.com/us/en/careers",
+      "https://jobs.slalom.com/en_US/careersmarketplace",
+      "https://www.slalom.com/us/en/careers",
+      "https://www.slalom.com/us/en/careers",
+      "https://jobs.slalom.com/en_US/careersmarketplace"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Thoughtbot": {
+    "name": "Thoughtbot",
+    "domain": "thoughtbot.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://thoughtbot.com/",
+      "https://thoughtbot.com/jobs",
+      "https://thoughtbot.com/our-company"
+    ],
+    "note": "check careers page by hand"
+  },
+  "TPGi": {
+    "name": "TPGi",
+    "domain": "tpgi.com",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://vispero.com/",
+      "https://vispero.com/careers/",
+      "https://vispero.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "ustwo": {
+    "name": "ustwo",
+    "domain": "ustwo.com",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://ustwo.com/",
+      "https://ustwo.com/join-us/",
+      "https://ustwo.com/jobs/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Vispero": {
+    "name": "Vispero",
+    "domain": "vispero.com",
+    "category": "accessibility",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://vispero.com/",
+      "https://vispero.com/careers/",
+      "https://vispero.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "ADP": {
+    "name": "ADP",
+    "domain": "adp.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Bloomberg": {
+    "name": "Bloomberg",
+    "domain": "bloomberg.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://careers.bloomberg.com/job/search",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here (URL did not load, re-check)"
+  },
+  "Varo": {
+    "name": "Varo",
+    "domain": "varomoney.com",
+    "category": "fintech_mission",
+    "priority": 1,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.varomoney.com/",
+      "https://www.varomoney.com/careers/",
+      "https://www.varomoney.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Bain": {
+    "name": "Bain",
+    "domain": "bain.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Bayer": {
+    "name": "Bayer",
+    "domain": "bayer.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Work and Co": {
+    "name": "Work and Co",
+    "domain": "work.co",
+    "category": "ux_agencies",
+    "priority": 1,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://work.co/",
+      "https://work.co/careers/",
+      "https://work.co/careers/offices/brooklyn/",
+      "https://work.co/careers/offices/portland/",
+      "https://work.co/careers/offices/sao-paulo/",
+      "https://work.co/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Becton Dickinson": {
+    "name": "Becton Dickinson",
+    "domain": "bd.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Cognizant": {
+    "name": "Cognizant",
+    "domain": "cognizant.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://careers.cognizant.com/global-en/",
+      "https://careers.cognizant.com/global-en/",
+      "https://www.cognizant.com/us/en",
+      "https://www.cognizant.com/us/en",
+      "https://www.cognizant.com/us/en",
+      "https://careers.cognizant.com/global-en/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Campbell's": {
+    "name": "Campbell's",
+    "domain": "campbellsoupcompany.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Booking Holdings": {
+    "name": "Booking Holdings",
+    "domain": "bookingholdings.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.bookingholdings.com/",
+      "https://www.bookingholdings.com/careers/careers/",
+      "https://www.bookingholdings.com/careers/careers-at-our-brands/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Colgate-Palmolive": {
+    "name": "Colgate-Palmolive",
+    "domain": "colgatepalmolive.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Comcast NBCUniversal": {
+    "name": "Comcast NBCUniversal",
+    "domain": "comcast.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "EY": {
+    "name": "EY",
+    "domain": "ey.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.ey.com/en_us",
+      "https://www.ey.com/en_us/careers",
+      "https://www.ey.com/en_us/careers/what-you-can-do-here",
+      "https://www.ey.com/en_us/careers/technology",
+      "https://www.ey.com/en_us/careers/assurance",
+      "https://www.ey.com/en_gl/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Delta Air Lines": {
+    "name": "Delta Air Lines",
+    "domain": "delta.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Estee Lauder": {
+    "name": "Estee Lauder",
+    "domain": "elcompanies.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.elcompanies.com/en/",
+      "https://www.elcompanies.com/en/careers",
+      "https://www.elcompanies.com/en/careers/retail-jobs",
+      "https://www.elcompanies.com/en/careers/corporate-jobs",
+      "https://www.elcompanies.com/en/careers/supply-chain-jobs",
+      "https://www.elcompanies.com/en/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Conde Nast": {
+    "name": "Conde Nast",
+    "domain": "condenast.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.condenast.com/",
+      "https://www.condenast.com/",
+      "https://www.condenast.com/",
+      "https://www.condenast.com/",
+      "https://www.condenast.com/",
+      "https://www.condenast.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Gartner": {
+    "name": "Gartner",
+    "domain": "gartner.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Foot Locker": {
+    "name": "Foot Locker",
+    "domain": "footlocker.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "GSK": {
+    "name": "GSK",
+    "domain": "gsk.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.gsk.com:443/en-gb/",
+      "https://www.gsk.com:443/en-gb/careers/",
+      "https://jobs.gsk.com/gb/en",
+      "https://www.gsk.com:443/en-gb/careers/featured-careers/",
+      "https://www.gsk.com:443/en-gb/careers/featured-careers/a-career-in-data/",
+      "https://www.gsk.com/en-gb/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "JetBlue": {
+    "name": "JetBlue",
+    "domain": "jetblue.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.jetblue.com/",
+      "https://careers.jetblue.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "KPMG": {
+    "name": "KPMG",
+    "domain": "kpmg.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://kpmg.com/xx/en.html",
+      "https://kpmg.com/xx/en/careers.html",
+      "https://kpmg.com/xx/en/careers/job-search.html",
+      "https://kpmg.com/xx/en/careers/working-at-kpmg.html",
+      "https://kpmg.com/xx/en/careers/working-at-kpmg.html",
+      "https://kpmg.com/xx/en/careers.html"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Hilton": {
+    "name": "Hilton",
+    "domain": "hilton.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "scrape",
+    "careers_seen": [
+      "https://jobs.hilton.com/"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://efet.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/my-profile/sign-in"
+    },
+    "ats": "oracle",
+    "human": "https://efet.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/my-profile/sign-in",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "Johnson & Johnson": {
+    "name": "Johnson & Johnson",
+    "domain": "jnj.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.jnj.com/",
+      "https://www.jnj.com/careers",
+      "https://www.jnj.com/careers/",
+      "https://www.jnj.com/jobs",
+      "https://www.jnj.com/company/careers",
+      "https://www.jnj.com/about/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Marriott": {
+    "name": "Marriott",
+    "domain": "marriott.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "scrape",
+    "careers_seen": [
+      "https://careers.marriott.com/"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/my-profile/sign-in"
+    },
+    "ats": "oracle",
+    "human": "https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/my-profile/sign-in",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "Macy's": {
+    "name": "Macy's",
+    "domain": "macysinc.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.macysinc.com:443/work-with-us/careers/default.aspx",
+      "https://www.macysinc.com:443/work-with-us/careers/default.aspx",
+      "https://www.macysinc.com/company/about/default.aspx"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://ebwh.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/"
+    },
+    "ats": "oracle",
+    "human": "https://ebwh.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "L'Oreal USA": {
+    "name": "L'Oreal USA",
+    "domain": "loreal.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.loreal.com/en/",
+      "https://www.loreal.com/en/careers/limitless-opportunities-for-you/",
+      "https://www.loreal.com/en/careers/",
+      "https://www.loreal.com/en/careers/",
+      "https://www.loreal.com/en/careers/",
+      "https://www.loreal.com/en/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Organon": {
+    "name": "Organon",
+    "domain": "organon.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.organon.com/",
+      "https://www.organon.com/careers/",
+      "https://jobs.organon.com/us/en/home",
+      "https://www.organon.com/careers/",
+      "https://www.organon.com/careers/",
+      "https://www.organon.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Paramount": {
+    "name": "Paramount",
+    "domain": "paramount.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Mondelez": {
+    "name": "Mondelez",
+    "domain": "mondelezinternational.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.mondelezinternational.com/",
+      "https://www.mondelezinternational.com/careers/",
+      "https://www.mondelezinternational.com/careers/early-careers/",
+      "https://www.mondelezinternational.com/careers/early-careers/australia-and-new-zealand/",
+      "https://www.mondelezinternational.com/careers/early-careers/central-europe/",
+      "https://www.mondelezinternational.com/careers/index.html"
+    ],
+    "note": "check careers page by hand"
+  },
+  "PepsiCo": {
+    "name": "PepsiCo",
+    "domain": "pepsico.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.pepsico.com/",
+      "https://www.pepsico.com/en/careers",
+      "https://www.pepsico.com/en/careers",
+      "https://www.pepsico.com/en/careers",
+      "https://www.pepsico.com/en/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "McKinsey": {
+    "name": "McKinsey",
+    "domain": "mckinsey.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "The Walt Disney Company": {
+    "name": "The Walt Disney Company",
+    "domain": "disney.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://jobs.disneycareers.com/search-jobs",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Pfizer": {
+    "name": "Pfizer",
+    "domain": "pfizer.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.pfizer.com/",
+      "https://www.pfizer.com/about/careers",
+      "https://www.pfizer.com/about/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "PVH": {
+    "name": "PVH",
+    "domain": "pvh.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.pvh.com:443/",
+      "https://careers.pvh.com/?utm_source=pvh&amp%3Butm_medium=navigation_header&amp%3Butm_campaign=careers",
+      "https://careers.pvh.com/?utm_source=pvh&amp%3Butm_medium=navigation_header&amp%3Butm_campaign=careers_search",
+      "https://careers.pvh.com/why-work-with-us?utm_source=pvh&amp%3Butm_medium=navigation_header&amp%3Butm_campaign=why_work_with_us",
+      "https://careers.pvh.com/our-benefits?utm_source=pvh&amp%3Butm_medium=navigation_header&amp%3Butm_campaign=our_benefits"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Takeda": {
+    "name": "Takeda",
+    "domain": "takeda.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "resolved",
+    "careers_seen": [
+      "https://www.takeda.com/",
+      "https://www.takeda.com/careers/",
+      "https://www.takeda.com/careers/",
+      "https://www.takeda.com/careers/"
+    ],
+    "ats": "workday",
+    "tenant": "takeda",
+    "host": "wd502",
+    "site": "External",
+    "count": 1764,
+    "api": "https://takeda.wd502.myworkdayjobs.com/wday/cxs/takeda/External/jobs",
+    "human": "https://takeda.wd502.myworkdayjobs.com/en-US/External",
+    "resolve_url": "https://takeda.wd502.myworkdayjobs.com/en-US/External",
+    "method": "brute"
+  },
+  "Sanofi": {
+    "name": "Sanofi",
+    "domain": "sanofi.com",
+    "category": "pharma_nj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.sanofi.com/en",
+      "https://jobs.sanofi.com/en",
+      "https://jobs.sanofi.com/en",
+      "https://jobs.sanofi.com/en",
+      "https://jobs.sanofi.com/en",
+      "https://jobs.sanofi.com/en"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Unilever": {
+    "name": "Unilever",
+    "domain": "unilever.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Ralph Lauren": {
+    "name": "Ralph Lauren",
+    "domain": "ralphlauren.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Verizon": {
+    "name": "Verizon",
+    "domain": "verizon.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.verizon.com",
+      "https://mycareer.verizon.com/",
+      "https://mycareer.verizon.com/?CMP=DMC-CSVCS_ZZ_ZZ_Z_ZZ_N_Z00001",
+      "https://mycareer.verizon.com/?CMP=DMC-CSVCS_ZZ_ZZ_Z_ZZ_N_Z00001",
+      "https://mycareer.verizon.com/career-paths/sales/?CMP=OTC_NA_OTH_22222_NA_20130916_NA_NM20121307_00001",
+      "https://www.verizon.com/content/wcms/404.html"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Alma": {
+    "name": "Alma",
+    "domain": "helloalma.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://helloalma.com/",
+      "https://helloalma.com/careers/",
+      "https://helloalma.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Warner Bros Discovery": {
+    "name": "Warner Bros Discovery",
+    "domain": "wbd.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.wbd.com:443/",
+      "https://careers.wbd.com/global/en",
+      "https://careers.wbd.com/global/en",
+      "https://careers.wbd.com:443/global/en",
+      "https://careers.wbd.com:443/global/en"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Bed Bath & Beyond": {
+    "name": "Bed Bath & Beyond",
+    "domain": "bedbathandbeyond.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "defunct",
+    "status": "skip",
+    "careers_seen": [],
+    "note": "company likely defunct/acquired \u2014 verify before spending time"
+  },
+  "Atlassian": {
+    "name": "Atlassian",
+    "domain": "atlassian.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.atlassian.com/",
+      "https://www.atlassian.com/company/careers",
+      "https://www.atlassian.com/company/careers",
+      "https://www.atlassian.com/company/careers",
+      "https://www.atlassian.com/company/careers",
+      "https://www.atlassian.com/company/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Autodesk": {
+    "name": "Autodesk",
+    "domain": "autodesk.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "ZS Associates": {
+    "name": "ZS Associates",
+    "domain": "zs.com",
+    "category": "consulting",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.zs.com/",
+      "https://www.zs.com/careers",
+      "https://jobs.zs.com/all/jobs",
+      "https://www.zs.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "United Airlines": {
+    "name": "United Airlines",
+    "domain": "united.com",
+    "category": "media_retail_cpg",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Calm": {
+    "name": "Calm",
+    "domain": "calm.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://job-boards.greenhouse.io/calm"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Casper": {
+    "name": "Casper",
+    "domain": "casper.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://casper.com/",
+      "https://casper.com/pages/jobs",
+      "https://casper.com/pages/jobs",
+      "https://casper.com/pages/jobs",
+      "https://casper.com/pages/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Compass": {
+    "name": "Compass",
+    "domain": "compass.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.compass.com/",
+      "https://www.compass.com/careers/",
+      "https://www.compass.com/careers/",
+      "https://www.compass.com/careers/",
+      "https://www.compass.com/careers/jobs"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Avis Budget Group": {
+    "name": "Avis Budget Group",
+    "domain": "avisbudgetgroup.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Coty": {
+    "name": "Coty",
+    "domain": "coty.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.coty.com/",
+      "https://www.coty.com/your-career",
+      "https://careers.coty.com/go/Open-Positions/8765801",
+      "https://careers.coty.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Bumble": {
+    "name": "Bumble",
+    "domain": "bumble.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://bumble.com/",
+      "https://bumble.wd3.myworkdayjobs.com/Bumble_Careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "DocuSign": {
+    "name": "DocuSign",
+    "domain": "docusign.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.docusign.com/",
+      "https://careers.docusign.com/careers-home",
+      "https://careers.docusign.com/careers-home",
+      "https://careers.docusign.com/careers-home"
+    ],
+    "note": "check careers page by hand"
+  },
+  "FactSet": {
+    "name": "FactSet",
+    "domain": "factset.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.factset.com/",
+      "https://www.factset.com/careers",
+      "https://www.factset.com/careers",
+      "https://www.factset.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "DoorDash": {
+    "name": "DoorDash",
+    "domain": "doordash.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Fiserv": {
+    "name": "Fiserv",
+    "domain": "fiserv.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.fiserv.com/",
+      "https://careers.fiserv.com/us/en",
+      "https://careers.fiserv.com/us/en",
+      "https://careers.fiserv.com/us/en",
+      "https://careers.fiserv.com/us/en"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Glassdoor": {
+    "name": "Glassdoor",
+    "domain": "glassdoor.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Framer": {
+    "name": "Framer",
+    "domain": "framer.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "ashby",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.framer.com/",
+      "https://www.framer.com/careers/",
+      "https://www.framer.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Hanes": {
+    "name": "Hanes",
+    "domain": "hanes.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Grubhub": {
+    "name": "Grubhub",
+    "domain": "grubhub.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.grubhub.com/",
+      "https://www.grubhub.com/about/careers",
+      "https://www.grubhub.com/about/careers",
+      "https://www.grubhub.com/jobs",
+      "https://www.grubhub.com/company/careers",
+      "https://www.grubhub.com/about/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Hess": {
+    "name": "Hess",
+    "domain": "hess.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://hess.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Hinge": {
+    "name": "Hinge",
+    "domain": "hinge.co",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://hinge.co/",
+      "https://hinge.co/careers",
+      "https://hinge.co/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Honeywell": {
+    "name": "Honeywell",
+    "domain": "honeywell.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.honeywell.com/us/en",
+      "https://www.honeywell.com/us/en/careers",
+      "https://www.honeywell.com/us/en/careers/life-at-honeywell",
+      "https://www.honeywell.com/us/en/careers/your-career-journey",
+      "https://www.honeywell.com/us/en/careers/community",
+      "https://www.honeywell.com/us/en/careers"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://ibqbjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/Honeywell/jobs"
+    },
+    "ats": "oracle",
+    "human": "https://ibqbjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/Honeywell/jobs",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "MediaMath": {
+    "name": "MediaMath",
+    "domain": "mediamath.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "defunct",
+    "status": "skip",
+    "careers_seen": [],
+    "note": "company likely defunct/acquired \u2014 verify before spending time"
+  },
+  "HubSpot": {
+    "name": "HubSpot",
+    "domain": "hubspot.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.hubspot.com/",
+      "https://www.hubspot.com/careers",
+      "https://www.hubspot.com/careers",
+      "https://www.hubspot.com/careers",
+      "https://www.hubspot.com/careers",
+      "https://www.hubspot.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Indeed": {
+    "name": "Indeed",
+    "domain": "indeed.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "IFF": {
+    "name": "IFF",
+    "domain": "iff.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Kindbody": {
+    "name": "Kindbody",
+    "domain": "kindbody.com",
+    "category": "health_tech",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://kindbody.com/",
+      "https://kindbody.com/careers/",
+      "https://kindbody.com/careers/",
+      "https://kindbody.com/careers/",
+      "https://kindbody.com/careers/",
+      "https://kindbody.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "MSCI": {
+    "name": "MSCI",
+    "domain": "msci.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.msci.com/",
+      "https://careers.msci.com/",
+      "https://careers.msci.com/",
+      "https://careers.msci.com/",
+      "https://careers.msci.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Retool": {
+    "name": "Retool",
+    "domain": "retool.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://retool.com/",
+      "https://retool.com/careers",
+      "https://retool.com/careers",
+      "https://retool.com/careers",
+      "https://retool.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "NBCUniversal": {
+    "name": "NBCUniversal",
+    "domain": "nbcuniversal.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.nbcuniversal.com/",
+      "https://www.nbcuniversal.com/careers",
+      "https://www.nbcunicareers.com/",
+      "https://www.nbcunicareers.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Interpublic Group": {
+    "name": "Interpublic Group",
+    "domain": "interpublic.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.omc.com/",
+      "https://www.omc.com/",
+      "https://www.omc.com/",
+      "https://www.omc.com/",
+      "https://www.omc.com/",
+      "https://www.omc.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "MSG Entertainment": {
+    "name": "MSG Entertainment",
+    "domain": "msg.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.msg.com:443/madison-square-garden"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Revlon": {
+    "name": "Revlon",
+    "domain": "revlon.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.revlon.com/",
+      "https://www.revloncorp.com/",
+      "https://www.revloncorp.com/",
+      "https://www.revloncorp.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Saks": {
+    "name": "Saks",
+    "domain": "saks.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Shopify": {
+    "name": "Shopify",
+    "domain": "shopify.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.shopify.com/",
+      "https://www.shopify.com/careers",
+      "https://www.shopify.com/careers",
+      "https://www.shopify.com/careers",
+      "https://www.shopify.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Splunk": {
+    "name": "Splunk",
+    "domain": "splunk.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.splunk.com/",
+      "https://careers.cisco.com/global/en/splunk",
+      "https://careers.cisco.com/global/en/splunk"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Simon & Schuster": {
+    "name": "Simon & Schuster",
+    "domain": "simonandschuster.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Sealed Air": {
+    "name": "Sealed Air",
+    "domain": "sealedair.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "workday",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.sealedair.com/",
+      "https://jobs.sealedair.com/",
+      "https://jobs.sealedair.com",
+      "https://jobs.sealedair.com",
+      "https://jobs.sealedair.com",
+      "https://jobs.sealedair.com"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Sony Music": {
+    "name": "Sony Music",
+    "domain": "sonymusic.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Take-Two Interactive": {
+    "name": "Take-Two Interactive",
+    "domain": "take2games.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.take2games.com",
+      "https://careers.take2games.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Vroom": {
+    "name": "Vroom",
+    "domain": "vroom.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "defunct",
+    "status": "skip",
+    "careers_seen": [],
+    "note": "company likely defunct/acquired \u2014 verify before spending time"
+  },
+  "Thirty Madison": {
+    "name": "Thirty Madison",
+    "domain": "thirtymadison.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://thirtymadison.com/",
+      "https://thirtymadison.com/careers",
+      "https://thirtymadison.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "ThredUp": {
+    "name": "ThredUp",
+    "domain": "thredup.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://careers.thredup.com/us/en",
+      "https://careers.thredup.com/us/en",
+      "https://careers.thredup.com/us/en"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Unity": {
+    "name": "Unity",
+    "domain": "unity.com",
+    "category": "best_places_to_work",
+    "priority": 2,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://unity.com/",
+      "https://unity.com/careers",
+      "https://unity.com/careers",
+      "https://unity.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Tiffany & Co": {
+    "name": "Tiffany & Co",
+    "domain": "tiffany.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Verisk": {
+    "name": "Verisk",
+    "domain": "verisk.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "scrape",
+    "careers_seen": [
+      "https://www.verisk.com/",
+      "https://www.verisk.com/company/careers/",
+      "https://www.verisk.com/company/careers/learning-and-development/talent-opportunities/",
+      "https://www.verisk.com/company/careers/culture/",
+      "https://www.verisk.com/company/careers/people/",
+      "https://www.verisk.com/company/careers/"
+    ],
+    "scrape_candidate": {
+      "ats": "oracle",
+      "url": "https://fa-ewmy-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions"
+    },
+    "ats": "oracle",
+    "human": "https://fa-ewmy-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions",
+    "note": "no public JSON API \u2014 use change-detection on this URL"
+  },
+  "Wix": {
+    "name": "Wix",
+    "domain": "wix.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.wix.com/",
+      "https://careers.wix.com/",
+      "https://careers.wix.com",
+      "https://careers.wix.com/",
+      "https://careers.wix.com"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Zillow": {
+    "name": "Zillow",
+    "domain": "zillow.com",
+    "category": "fortune500_nycnj",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Jane Street": {
+    "name": "Jane Street",
+    "domain": "janestreet.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "custom",
+    "status": "scrape",
+    "careers_seen": [],
+    "ats": "custom",
+    "human": "https://www.janestreet.com/join-jane-street/open-roles/",
+    "note": "in-house ATS, no public JSON board \u2014 point change-detection here"
+  },
+  "Zoom": {
+    "name": "Zoom",
+    "domain": "zoom.com",
+    "category": "product_saas",
+    "priority": 2,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.zoom.com",
+      "https://careers.zoom.us/home",
+      "https://explore.zoom.us/en/careers/",
+      "https://explore.zoom.us/en/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Citadel": {
+    "name": "Citadel",
+    "domain": "citadel.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [],
+    "note": "check careers page by hand"
+  },
+  "Codecademy": {
+    "name": "Codecademy",
+    "domain": "codecademy.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.codecademy.com/",
+      "https://static-assets.codecademy.com/assets/homepage/hero/v3/career-mobile.webp",
+      "https://static-assets.codecademy.com/assets/homepage/hero/v3/career-desktop.webp",
+      "https://www.codecademy.com/about/careers",
+      "https://www.codecademy.com/career-center",
+      "https://www.codecademy.com/about/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Skillshare": {
+    "name": "Skillshare",
+    "domain": "skillshare.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "resolved",
+    "careers_seen": [],
+    "ats": "workable",
+    "slug": "skillshare",
+    "count": 2,
+    "api": "https://apply.workable.com/api/v1/widget/accounts/skillshare",
+    "human": "https://apply.workable.com/skillshare/",
+    "method": "guess"
+  },
+  "Bridgewater Associates": {
+    "name": "Bridgewater Associates",
+    "domain": "bridgewater.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.bridgewater.com/",
+      "https://www.bridgewater.com/investment-careers",
+      "https://www.bridgewater.com/careers",
+      "https://www.bridgewater.com/working-at-bridgewater"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Optiver": {
+    "name": "Optiver",
+    "domain": "optiver.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.optiver.com/",
+      "https://www.optiver.com/join-us/jobs/",
+      "https://www.optiver.com/join-us/locations/amsterdam/",
+      "https://www.optiver.com/join-us/locations/austin/",
+      "https://www.optiver.com/join-us/locations/chicago/",
+      "https://www.optiver.com/join-us/jobs/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Quizlet": {
+    "name": "Quizlet",
+    "domain": "quizlet.com",
+    "category": "edtech",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://quizlet.com/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "DE Shaw": {
+    "name": "DE Shaw",
+    "domain": "deshaw.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.deshaw.com/",
+      "https://www.deshaw.com/careers",
+      "https://www.deshaw.com/careers/career-development",
+      "https://www.deshaw.com/careers/choose-your-path",
+      "https://www.deshaw.com/careers/interviewing",
+      "https://www.deshaw.com/careers"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Susquehanna": {
+    "name": "Susquehanna",
+    "domain": "sig.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://sig.com/",
+      "https://sig.com/careers/",
+      "https://sig.com/careers/trading/",
+      "https://sig.com/careers/technology/",
+      "https://sig.com/careers/quant/",
+      "https://sig.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  },
+  "Two Sigma": {
+    "name": "Two Sigma",
+    "domain": "twosigma.com",
+    "category": "quant_trading",
+    "priority": 3,
+    "hint": "greenhouse",
+    "status": "unresolved",
+    "careers_seen": [
+      "https://www.twosigma.com/",
+      "https://www.twosigma.com/careers/",
+      "https://www.twosigma.com/careers/internships/",
+      "https://www.twosigma.com/careers/engineering/",
+      "https://www.twosigma.com/careers/quantitative-research-data-science/",
+      "https://www.twosigma.com/careers/"
+    ],
+    "note": "check careers page by hand"
+  }
+}
