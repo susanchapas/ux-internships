@@ -726,6 +726,12 @@ let sortDir = 1;
 let trackedIds = new Set();
 let applications = [];
 const jobsById = new Map();
+const STATIC = typeof STATIC_DATA !== 'undefined';
+
+const LS_KEY = 'ux-internship-tracker';
+function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch { return []; } }
+function lsSave(arr) { localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
+let _nextId = Date.now();
 
 function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -738,7 +744,35 @@ function switchTab(tab) {
   if (tab === 'tracker') loadApplications();
 }
 
+function loadStaticData() {
+  allJobs = STATIC_DATA.jobs || [];
+  scanErrors = STATIC_DATA.errors || [];
+  allJobs.forEach(j => jobsById.set(j.id, j));
+
+  document.getElementById('empty').style.display = 'none';
+  document.getElementById('stats').style.display = 'grid';
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('s-companies').textContent = STATIC_DATA.companies_scanned || 0;
+  updateStats();
+  renderTable();
+  buildHighlights();
+  buildSourceFilter();
+
+  if (scanErrors.length) {
+    document.getElementById('errors').style.display = 'block';
+    document.getElementById('error-summary').textContent = scanErrors.length + ' error(s)';
+    document.getElementById('error-list').innerHTML =
+      scanErrors.map(e => '<li style="margin:4px 0">' + esc(e.company) + ': ' + esc(e.error) + '</li>').join('');
+  }
+
+  const btn = document.getElementById('scan-btn');
+  const d = new Date(STATIC_DATA.updated_at);
+  btn.disabled = true;
+  btn.querySelector('span').textContent = 'Updated ' + d.toLocaleDateString();
+}
+
 function startScan() {
+  if (STATIC) return;
   if (scanning) return;
   scanning = true;
   allJobs = [];
@@ -947,6 +981,27 @@ function trackJob(btn, jobId) {
   if (!job) return;
   btn.disabled = true;
   btn.textContent = 'Saving…';
+
+  if (STATIC) {
+    const app = {
+      id: _nextId++,
+      job_id: job.id,
+      company: job.company,
+      title: job.title,
+      url: job.url || '',
+      location: job.location || '',
+      pay: job.pay || '',
+      status: 'saved',
+      applied_at: '',
+      notes: '',
+    };
+    applications.push(app);
+    lsSave(applications);
+    trackedIds.add(job.id);
+    btn.textContent = 'Tracked';
+    return;
+  }
+
   fetch('/api/applications', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -974,6 +1029,13 @@ function trackJob(btn, jobId) {
 // ---------- TRACKER ----------
 
 function loadApplications() {
+  if (STATIC) {
+    applications = lsLoad();
+    trackedIds = new Set(applications.filter(a => a.job_id).map(a => a.job_id));
+    updateTrackerStats();
+    renderTracker();
+    return;
+  }
   fetch('/api/applications')
     .then(r => r.json())
     .then(data => {
@@ -1044,20 +1106,34 @@ function renderTracker() {
 }
 
 function updateApp(id, field, value) {
+  const app = applications.find(a => a.id === id);
+  if (app) app[field] = value;
+
+  if (STATIC) {
+    lsSave(applications);
+    updateTrackerStats();
+    return;
+  }
+
   const body = {};
   body[field] = value;
   fetch('/api/applications/' + id, {
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(body),
-  }).then(() => {
-    const app = applications.find(a => a.id === id);
-    if (app) app[field] = value;
-    updateTrackerStats();
-  });
+  }).then(() => updateTrackerStats());
 }
 
 function deleteApp(id) {
+  if (STATIC) {
+    const app = applications.find(a => a.id === id);
+    if (app && app.job_id) trackedIds.delete(app.job_id);
+    applications = applications.filter(a => a.id !== id);
+    lsSave(applications);
+    updateTrackerStats();
+    renderTracker();
+    return;
+  }
   fetch('/api/applications/' + id, { method: 'DELETE' })
     .then(() => {
       const app = applications.find(a => a.id === id);
@@ -1090,6 +1166,17 @@ function submitAdd(e) {
     applied_at: document.getElementById('m-applied').value,
     notes: document.getElementById('m-notes').value,
   };
+
+  if (STATIC) {
+    body.id = _nextId++;
+    body.job_id = null;
+    applications.push(body);
+    lsSave(applications);
+    closeAddModal();
+    loadApplications();
+    return;
+  }
+
   fetch('/api/applications', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -1135,6 +1222,7 @@ function escAttr(s) {
   return s.replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+if (STATIC) loadStaticData();
 loadApplications();
 
 </script>
