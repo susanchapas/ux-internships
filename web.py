@@ -9,10 +9,11 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
 from internship_watch import (
-    load_json, compile_filters, matches, CONFIG_PATH, STATE_PATH,
+    load_json, compile_filters, matches, CONFIG_PATH,
     fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters,
     fetch_workday, fetch_usajobs, BOARD_FETCHERS,
 )
+import db
 
 HERE = Path(__file__).parent
 DASHBOARD = HERE / "dashboard.html"
@@ -74,8 +75,57 @@ class Handler(BaseHTTPRequestHandler):
             self._serve_dashboard()
         elif self.path == "/api/scan":
             self._run_scan()
+        elif self.path == "/api/applications":
+            self._json_response(db.list_applications())
         else:
             self.send_error(404)
+
+    def do_POST(self):
+        if self.path == "/api/applications":
+            body = self._read_body()
+            app_id = db.add_application(
+                company=body.get("company", ""),
+                title=body.get("title", ""),
+                url=body.get("url", ""),
+                location=body.get("location", ""),
+                pay=body.get("pay", ""),
+                status=body.get("status", "saved"),
+                notes=body.get("notes", ""),
+                job_id=body.get("job_id"),
+                applied_at=body.get("applied_at", ""),
+            )
+            self._json_response({"id": app_id})
+        else:
+            self.send_error(404)
+
+    def do_PUT(self):
+        if self.path.startswith("/api/applications/"):
+            app_id = int(self.path.split("/")[-1])
+            body = self._read_body()
+            db.update_application(app_id, **body)
+            self._json_response({"ok": True})
+        else:
+            self.send_error(404)
+
+    def do_DELETE(self):
+        if self.path.startswith("/api/applications/"):
+            app_id = int(self.path.split("/")[-1])
+            db.delete_application(app_id)
+            self._json_response({"ok": True})
+        else:
+            self.send_error(404)
+
+    def _read_body(self):
+        length = int(self.headers.get("Content-Length", 0))
+        return json.loads(self.rfile.read(length)) if length else {}
+
+    def _json_response(self, data, status=200):
+        body = json.dumps(data, default=str).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
 
     def _serve_dashboard(self):
         html = DASHBOARD.read_bytes()
@@ -98,7 +148,7 @@ class Handler(BaseHTTPRequestHandler):
             self._sse("done", {"total_matches": 0, "new": 0, "companies_scanned": 0, "errors": 1})
             return
 
-        seen = set(load_json(STATE_PATH, {"ids": []})["ids"])
+        seen = db.get_seen_ids()
         title_inc, title_exc, loc_inc = compile_filters(cfg)
         companies = cfg["companies"]
         total_matches = 0
@@ -135,6 +185,7 @@ class Handler(BaseHTTPRequestHandler):
             total_new += new_count
 
             if hits:
+                db.upsert_jobs(hits)
                 self._sse("matches", {
                     "company": company,
                     "jobs": hits,
@@ -165,6 +216,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
+    db.init_db()
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
     server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
     print(f"  http://localhost:{port}")
