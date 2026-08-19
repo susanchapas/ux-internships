@@ -4,172 +4,339 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UX Internship Watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#fafaf9;--surface:#fff;--border:#e2e8f0;
-  --text:#1e293b;--muted:#64748b;--faint:#94a3b8;
-  --primary:#4f46e5;--primary-hover:#4338ca;
-  --accent:#f59e0b;--accent-bg:#fffbeb;
-  --green:#10b981;--green-bg:#ecfdf5;
-  --red:#ef4444;--red-bg:#fef2f2;
-  --radius:8px;
-  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --midnight:#102f5d;
+  --midnight-deep:#091a35;
+  --paper:#f4f4f5;
+  --mint:#6fcd9d;
+  --sky:#bbcdf3;
+  --clay:#e09f7d;
+  --danger:#f87171;
+
+  --sky-a05:rgba(187,205,243,0.05);
+  --sky-a10:rgba(187,205,243,0.10);
+  --sky-a15:rgba(187,205,243,0.15);
+  --sky-a20:rgba(187,205,243,0.20);
+  --sky-a30:rgba(187,205,243,0.30);
+  --mint-a10:rgba(111,205,157,0.10);
+  --mint-a20:rgba(111,205,157,0.20);
+  --mint-a30:rgba(111,205,157,0.30);
+  --paper-a05:rgba(244,244,245,0.05);
+  --paper-a40:rgba(244,244,245,0.40);
+  --paper-a70:rgba(244,244,245,0.70);
+  --paper-a80:rgba(244,244,245,0.80);
+  --ink-a25:rgba(0,0,0,0.25);
+
+  --surface-page:var(--midnight);
+  --surface-card:var(--sky-a05);
+  --surface-card-hover:var(--sky-a10);
+  --surface-panel:var(--midnight-deep);
+  --surface-glass:rgba(16,47,93,0.70);
+
+  --text-body:var(--paper);
+  --text-muted:var(--paper-a70);
+  --text-faint:var(--paper-a40);
+  --text-accent:var(--mint);
+  --text-on-accent:var(--midnight);
+
+  --border-subtle:var(--sky-a10);
+  --border-default:var(--sky-a20);
+  --border-hover:var(--mint-a30);
+
+  --focus-ring:var(--mint);
+  --gradient-text:linear-gradient(135deg,var(--mint) 0%,var(--clay) 100%);
+  --gradient-mesh:radial-gradient(ellipse at 20% 80%,rgba(187,205,243,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(111,205,157,0.08) 0%,transparent 50%),radial-gradient(ellipse at 40% 40%,rgba(224,159,125,0.10) 0%,transparent 50%),var(--midnight);
+
+  --font-display:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Hanken Grotesk",system-ui,-apple-system,sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,monospace;
+
+  --radius-sm:0.375rem;
+  --radius-md:0.5rem;
+  --radius-lg:0.75rem;
+  --radius-xl:1rem;
+  --radius-pill:9999px;
+  --radius-field:0.75rem;
+
+  --shadow-sticky:0 12px 30px -12px rgba(0,0,0,0.6);
+
+  --ease-smooth:cubic-bezier(0.22,1,0.36,1);
+  --duration-fast:200ms;
+  --duration-base:300ms;
 }
-body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5}
-a{color:var(--primary);text-decoration:none}
-a:hover{text-decoration:underline}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--surface-page);
+  color:var(--text-body);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-wrap:pretty;
+}
+::selection{background:var(--mint);color:var(--midnight)}
+:focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--surface-page)}
+::-webkit-scrollbar-thumb{background:var(--sky);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--mint)}
+
+a{
+  color:var(--text-accent);
+  text-decoration-color:var(--mint-a30);
+  text-underline-offset:4px;
+  transition:color var(--duration-fast) var(--ease-smooth),text-decoration-color var(--duration-fast) var(--ease-smooth);
+}
+a:hover{color:rgba(111,205,157,0.8);text-decoration-color:var(--mint)}
+
+#skip-link{
+  position:absolute;top:-100%;left:50%;transform:translateX(-50%);
+  background:var(--mint);color:var(--text-on-accent);
+  padding:1rem 2rem;z-index:9999;
+  font-family:var(--font-body);font-weight:600;
+  border-radius:0 0 8px 8px;text-decoration:none;
+}
+#skip-link:focus{top:0}
 
 header{
   position:sticky;top:0;z-index:10;
-  background:var(--surface);border-bottom:1px solid var(--border);
-  padding:12px 24px;display:flex;align-items:center;justify-content:space-between;
+  background:var(--surface-glass);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border-subtle);
+  padding:0.75rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
 }
-header h1{font-size:18px;font-weight:600;letter-spacing:-.3px}
-header h1 span{color:var(--primary)}
+header h1{
+  font-family:var(--font-display);
+  font-size:1.125rem;font-weight:700;letter-spacing:-0.02em;
+}
+header h1 span{color:var(--text-accent)}
+
 #scan-btn{
-  background:var(--primary);color:#fff;border:none;
-  padding:8px 20px;border-radius:var(--radius);font-size:14px;font-weight:500;
-  cursor:pointer;display:flex;align-items:center;gap:6px;
-  transition:background .15s;
+  font-family:var(--font-display);
+  background:var(--mint);color:var(--text-on-accent);border:none;
+  padding:0.5rem 1.25rem;border-radius:var(--radius-pill);
+  font-size:0.875rem;font-weight:600;
+  cursor:pointer;display:inline-flex;align-items:center;gap:0.5rem;
+  transition:background var(--duration-fast) var(--ease-smooth),transform var(--duration-fast) var(--ease-smooth);
 }
-#scan-btn:hover{background:var(--primary-hover)}
-#scan-btn:disabled{opacity:.6;cursor:not-allowed}
+#scan-btn:hover{background:rgba(111,205,157,0.9);transform:scale(1.02)}
+#scan-btn:active{transform:scale(0.98)}
+#scan-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 .spinner{
-  width:14px;height:14px;border:2px solid rgba(255,255,255,.3);
-  border-top-color:#fff;border-radius:50%;display:none;
-  animation:spin .6s linear infinite;
+  width:14px;height:14px;border:2px solid rgba(16,47,93,0.3);
+  border-top-color:var(--midnight);border-radius:50%;display:none;
+  animation:spin 0.6s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 #scan-btn.loading .spinner{display:block}
 
 #progress-bar{
-  height:3px;background:var(--border);position:sticky;top:49px;z-index:9;
+  height:3px;background:var(--border-subtle);
+  position:sticky;top:3.25rem;z-index:9;
 }
 #progress-fill{
-  height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));
-  transition:width .3s ease;
+  height:100%;width:0;
+  background:var(--gradient-text);
+  transition:width var(--duration-base) var(--ease-smooth);
 }
 #progress-text{
-  text-align:center;padding:6px;font-size:13px;color:var(--muted);
-  background:var(--surface);border-bottom:1px solid var(--border);
+  text-align:center;padding:0.375rem;font-size:0.8125rem;
+  color:var(--text-muted);
+  background:var(--surface-panel);
+  border-bottom:1px solid var(--border-subtle);
   display:none;
 }
 
-main{max-width:1100px;margin:0 auto;padding:24px 16px 80px}
+main{max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 5rem}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.75rem}
 .stat{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px 18px;
-  border-left:3px solid var(--border);
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);
+  padding:1rem 1.25rem;
+  transition:border-color var(--duration-fast) var(--ease-smooth);
 }
-.stat.primary{border-left-color:var(--primary)}
-.stat.green{border-left-color:var(--green)}
-.stat.muted-stat{border-left-color:var(--muted)}
-.stat.accent{border-left-color:var(--accent)}
-.stat .n{font-size:28px;font-weight:700;line-height:1}
-.stat .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.stat:hover{border-color:var(--border-hover)}
+.stat .n{
+  font-family:var(--font-display);
+  font-size:1.75rem;font-weight:700;line-height:1;
+  color:var(--text-body);
+}
+.stat.primary .n{color:var(--text-accent)}
+.stat .label{
+  font-size:0.75rem;color:var(--text-faint);
+  text-transform:uppercase;letter-spacing:0.1em;margin-top:0.25rem;
+}
 
 .section-title{
-  font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;
-  color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:6px;
+  font-family:var(--font-body);
+  font-size:0.875rem;font-weight:400;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--text-accent);
+  margin-bottom:1rem;
 }
 
-#highlights{margin-bottom:32px;display:none}
-.hl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+#highlights{margin-bottom:2rem;display:none}
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(20rem,1fr));gap:0.75rem}
 .hl-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:16px 18px;border-left:3px solid var(--accent);
-  display:flex;flex-direction:column;gap:6px;
-  transition:box-shadow .15s;
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xl);
+  padding:1.25rem;
+  display:flex;flex-direction:column;gap:0.375rem;
+  transition:border-color var(--duration-fast) var(--ease-smooth);
 }
-.hl-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.hl-company{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-.hl-title{font-size:15px;font-weight:600}
-.hl-title a{color:var(--text)}
-.hl-title a:hover{color:var(--primary)}
-.hl-meta{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted)}
+.hl-card:hover{border-color:var(--border-hover)}
+.hl-company{
+  font-size:0.75rem;font-weight:600;color:var(--text-faint);
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+.hl-title{font-family:var(--font-display);font-size:0.9375rem;font-weight:600}
+.hl-title a{color:var(--text-body);text-decoration:none}
+.hl-title a:hover{color:var(--text-accent)}
+.hl-meta{display:flex;flex-wrap:wrap;gap:0.5rem;font-size:0.8125rem;color:var(--text-muted);align-items:center}
+
 .badge{
-  display:inline-flex;align-items:center;padding:2px 8px;
-  border-radius:99px;font-size:11px;font-weight:600;
+  display:inline-flex;align-items:center;
+  padding:0.125rem 0.5rem;
+  border-radius:var(--radius-pill);
+  font-size:0.6875rem;font-weight:600;
+  font-family:var(--font-body);
 }
-.badge-new{background:var(--green-bg);color:var(--green)}
-.badge-pay{background:var(--accent-bg);color:#b45309}
-.badge-source{background:#f1f5f9;color:var(--muted)}
-.badge-level{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
-.badge-intern{background:#eef2ff;color:#4338ca}
-.badge-fellow{background:#f5f3ff;color:#7c3aed}
-.badge-apprentice{background:#fdf4ff;color:#a21caf}
-.badge-entry{background:#eff6ff;color:#2563eb}
-.badge-mid{background:#f1f5f9;color:var(--muted)}
-.badge-senior{background:#fff7ed;color:#c2410c}
-.badge-manager{background:var(--red-bg);color:var(--red)}
+.badge-new{background:var(--mint-a10);color:var(--mint)}
+.badge-pay{background:rgba(224,159,125,0.15);color:var(--clay)}
+.badge-source{background:var(--sky-a10);color:var(--sky)}
+.badge-level{
+  font-size:0.625rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.1em;
+  font-family:var(--font-mono);
+}
+.badge-intern{background:var(--mint-a10);color:var(--mint)}
+.badge-fellow{background:rgba(187,205,243,0.15);color:var(--sky)}
+.badge-apprentice{background:rgba(224,159,125,0.10);color:var(--clay)}
+.badge-entry{background:var(--sky-a10);color:var(--sky)}
+.badge-mid{background:var(--paper-a05);color:var(--text-muted)}
+.badge-senior{background:rgba(224,159,125,0.10);color:var(--clay)}
+.badge-manager{background:rgba(248,113,113,0.12);color:var(--danger)}
 
 #results{display:none}
 .toolbar{
-  display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap;
+  display:flex;gap:0.625rem;align-items:center;margin-bottom:0.75rem;flex-wrap:wrap;
 }
 #search{
-  flex:1;min-width:200px;padding:8px 12px;border:1px solid var(--border);
-  border-radius:var(--radius);font-size:14px;font-family:var(--font);
-  background:var(--surface);
+  flex:1;min-width:200px;
+  padding:0.5rem 0.75rem;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  font-size:0.875rem;font-family:var(--font-body);
+  background:var(--sky-a05);color:var(--text-body);
 }
-#search:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
-.filter-select{
-  padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);
-  font-size:14px;background:var(--surface);font-family:var(--font);
-}
-.result-count{font-size:13px;color:var(--muted);margin-left:auto}
+#search::placeholder{color:var(--text-faint)}
+#search:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
 
-.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{
-  background:#f8fafc;text-align:left;padding:10px 14px;
-  font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;
-  border-bottom:1px solid var(--border);cursor:pointer;user-select:none;
-  position:sticky;top:0;white-space:nowrap;
+.filter-select{
+  padding:0.5rem 0.75rem;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  font-size:0.875rem;font-family:var(--font-body);
+  background:var(--sky-a05);color:var(--text-body);
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23bbcdf3' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 0.75rem center;
+  padding-right:2rem;
 }
-th:hover{color:var(--text)}
-th .arrow{margin-left:4px;font-size:10px;opacity:.4}
-th.active .arrow{opacity:1;color:var(--primary)}
-td{padding:10px 14px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.filter-select:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+
+.result-count{font-size:0.8125rem;color:var(--text-faint);margin-left:auto}
+
+.table-wrap{
+  overflow-x:auto;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);
+  background:var(--surface-card);
+}
+table{width:100%;border-collapse:collapse;font-size:0.875rem}
+th{
+  background:var(--sky-a05);
+  text-align:left;padding:0.625rem 0.875rem;
+  font-family:var(--font-body);
+  font-size:0.6875rem;font-weight:600;
+  color:var(--text-faint);
+  text-transform:uppercase;letter-spacing:0.1em;
+  border-bottom:1px solid var(--border-subtle);
+  cursor:pointer;user-select:none;
+  position:sticky;top:0;white-space:nowrap;
+  transition:color var(--duration-fast) var(--ease-smooth);
+}
+th:hover{color:var(--text-body)}
+th .arrow{margin-left:0.25rem;font-size:0.625rem;opacity:0.4}
+th.active .arrow{opacity:1;color:var(--text-accent)}
+td{
+  padding:0.625rem 0.875rem;
+  border-bottom:1px solid rgba(187,205,243,0.05);
+  vertical-align:top;
+}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:#fafaf9}
-td.title-cell{max-width:320px}
-td.title-cell a{color:var(--text);font-weight:500}
-td.title-cell a:hover{color:var(--primary)}
-td.loc-cell{color:var(--muted);max-width:180px}
+tr:hover td{background:var(--sky-a05)}
+td.title-cell{max-width:20rem}
+td.title-cell a{color:var(--text-body);font-weight:500;text-decoration:none}
+td.title-cell a:hover{color:var(--text-accent)}
+td.loc-cell{color:var(--text-muted);max-width:11.25rem}
 td.pay-cell{white-space:nowrap}
-td.time-cell{white-space:nowrap;color:var(--muted);font-size:13px}
-td.source-cell{font-size:13px}
-.pay-text{color:#b45309;font-weight:500}
+td.time-cell{white-space:nowrap;color:var(--text-muted);font-size:0.8125rem}
+td.source-cell{font-size:0.8125rem}
+.pay-text{color:var(--clay);font-weight:500}
 
 #empty{
-  text-align:center;padding:60px 20px;color:var(--muted);display:block;
+  text-align:center;padding:5rem 1.25rem;color:var(--text-muted);display:block;
 }
-#empty h2{font-size:20px;margin-bottom:8px;color:var(--text);font-weight:600}
-#empty p{font-size:14px;max-width:400px;margin:0 auto}
+#empty h2{
+  font-family:var(--font-display);
+  font-size:1.25rem;margin-bottom:0.5rem;
+  color:var(--text-body);font-weight:700;
+}
+#empty p{font-size:0.875rem;max-width:25rem;margin:0 auto}
 
-#errors{display:none;margin-bottom:20px}
+#errors{display:none;margin-bottom:1.25rem}
 .error-list{
-  background:var(--red-bg);border:1px solid #fecaca;border-radius:var(--radius);
-  padding:12px 16px;font-size:13px;color:#991b1b;
+  background:rgba(248,113,113,0.08);
+  border:1px solid rgba(248,113,113,0.2);
+  border-radius:var(--radius-lg);
+  padding:0.75rem 1rem;font-size:0.8125rem;color:rgba(248,113,113,0.9);
 }
-.error-list summary{cursor:pointer;font-weight:500;color:var(--red)}
+.error-list summary{cursor:pointer;font-weight:500;color:var(--danger)}
 
 @media(max-width:700px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .hl-grid{grid-template-columns:1fr}
   .toolbar{flex-direction:column}
-  #search,.result-count{width:100%}
+  #search,.result-count,.filter-select{width:100%}
   .result-count{text-align:left;margin-left:0}
-  header{padding:10px 14px}
-  main{padding:16px 10px 60px}
+  header{padding:0.625rem 0.875rem}
+  main{padding:1rem 0.625rem 3.75rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
 }
 </style>
 </head>
 <body>
+
+<a href="#main" id="skip-link">Skip to main content</a>
 
 <header>
   <h1><span>UX</span> Internship Watch</h1>
@@ -182,7 +349,7 @@ td.source-cell{font-size:13px}
 <div id="progress-bar"><div id="progress-fill"></div></div>
 <div id="progress-text"></div>
 
-<main>
+<main id="main" tabindex="-1">
   <div id="empty">
     <h2>Ready to scan</h2>
     <p>Click <strong>Scan Now</strong> to check all companies for matching internship postings.</p>
@@ -190,9 +357,9 @@ td.source-cell{font-size:13px}
 
   <div class="stats" id="stats" style="display:none">
     <div class="stat primary"><div class="n" id="s-matches">0</div><div class="label">Matches</div></div>
-    <div class="stat green"><div class="n" id="s-new">0</div><div class="label">New</div></div>
-    <div class="stat muted-stat"><div class="n" id="s-companies">0</div><div class="label">Companies</div></div>
-    <div class="stat accent"><div class="n" id="s-pay">0</div><div class="label">With Pay</div></div>
+    <div class="stat"><div class="n" id="s-new">0</div><div class="label">New</div></div>
+    <div class="stat"><div class="n" id="s-companies">0</div><div class="label">Companies</div></div>
+    <div class="stat"><div class="n" id="s-pay">0</div><div class="label">With Pay</div></div>
   </div>
 
   <div id="errors">
@@ -210,7 +377,7 @@ td.source-cell{font-size:13px}
   <div id="results">
     <div class="section-title">All Findings</div>
     <div class="toolbar">
-      <input type="text" id="search" placeholder="Search company, title, or location…" oninput="renderTable()">
+      <input type="text" id="search" placeholder="Search company, title, or location..." oninput="renderTable()">
       <select id="level-filter" class="filter-select" onchange="renderTable()">
         <option value="">All levels</option>
         <option value="intern">Intern / Co-op</option>
@@ -242,12 +409,12 @@ td.source-cell{font-size:13px}
     <div class="table-wrap">
       <table>
         <thead><tr>
-          <th onclick="sortBy('company')">Company <span class="arrow">▼</span></th>
-          <th onclick="sortBy('title')">Title <span class="arrow">▼</span></th>
-          <th onclick="sortBy('location')">Location <span class="arrow">▼</span></th>
-          <th onclick="sortBy('pay')">Pay <span class="arrow">▼</span></th>
-          <th onclick="sortBy('posted_at')">Posted <span class="arrow">▼</span></th>
-          <th onclick="sortBy('source')">Source <span class="arrow">▼</span></th>
+          <th onclick="sortBy('company')">Company <span class="arrow"></span></th>
+          <th onclick="sortBy('title')">Title <span class="arrow"></span></th>
+          <th onclick="sortBy('location')">Location <span class="arrow"></span></th>
+          <th onclick="sortBy('pay')">Pay <span class="arrow"></span></th>
+          <th onclick="sortBy('posted_at')">Posted <span class="arrow"></span></th>
+          <th onclick="sortBy('source')">Source <span class="arrow"></span></th>
         </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
@@ -292,7 +459,7 @@ function startScan() {
     const pct = (d.index / d.total * 100).toFixed(0);
     document.getElementById('progress-fill').style.width = pct + '%';
     document.getElementById('progress-text').textContent =
-      `Scanning ${d.company}… (${d.index}/${d.total})`;
+      'Scanning ' + d.company + '… (' + d.index + '/' + d.total + ')';
   });
 
   source.addEventListener('matches', e => {
@@ -318,7 +485,7 @@ function startScan() {
 
     document.getElementById('progress-fill').style.width = '100%';
     document.getElementById('progress-text').textContent =
-      `Done — ${d.total_matches} matches across ${d.companies_scanned} companies`;
+      'Done — ' + d.total_matches + ' matches across ' + d.companies_scanned + ' companies';
 
     document.getElementById('s-companies').textContent = d.companies_scanned;
     updateStats();
@@ -329,7 +496,7 @@ function startScan() {
       document.getElementById('errors').style.display = 'block';
       document.getElementById('error-summary').textContent = scanErrors.length + ' error(s)';
       document.getElementById('error-list').innerHTML =
-        scanErrors.map(e => `<li style="margin:4px 0">${esc(e.company)}: ${esc(e.error)}</li>`).join('');
+        scanErrors.map(e => '<li style="margin:4px 0">' + esc(e.company) + ': ' + esc(e.error) + '</li>').join('');
     }
 
     setTimeout(() => {
@@ -366,27 +533,27 @@ function buildHighlights() {
 
   if (!hl.length) return;
   document.getElementById('highlights').style.display = 'block';
-  document.getElementById('hl-grid').innerHTML = hl.map(j => `
-    <div class="hl-card">
-      <div class="hl-company">${esc(j.company)}</div>
-      <div class="hl-title"><a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a></div>
-      <div class="hl-meta">
-        ${levelBadge(j.level)}
-        ${j.location ? `<span>${esc(j.location)}</span>` : ''}
-        ${j.pay ? `<span class="badge badge-pay">${esc(j.pay)}</span>` : ''}
-        ${j.is_new ? '<span class="badge badge-new">NEW</span>' : ''}
-        ${j.schedule ? `<span class="badge badge-source">${j.schedule}</span>` : ''}
-        ${j.posted_at ? `<span>${timeAgo(j.posted_at)}</span>` : ''}
-      </div>
-    </div>
-  `).join('');
+  document.getElementById('hl-grid').innerHTML = hl.map(j =>
+    '<div class="hl-card">' +
+      '<div class="hl-company">' + esc(j.company) + '</div>' +
+      '<div class="hl-title"><a href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">' + esc(j.title) + ' <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">(opens in new tab)</span></a></div>' +
+      '<div class="hl-meta">' +
+        levelBadge(j.level) +
+        (j.location ? '<span>' + esc(j.location) + '</span>' : '') +
+        (j.pay ? '<span class="badge badge-pay">' + esc(j.pay) + '</span>' : '') +
+        (j.is_new ? '<span class="badge badge-new">NEW</span>' : '') +
+        (j.schedule ? '<span class="badge badge-source">' + j.schedule + '</span>' : '') +
+        (j.posted_at ? '<span>' + timeAgo(j.posted_at) + '</span>' : '') +
+      '</div>' +
+    '</div>'
+  ).join('');
 }
 
 function buildSourceFilter() {
   const sources = [...new Set(allJobs.map(j => j.source))].sort();
   const sel = document.getElementById('source-filter');
   sel.innerHTML = '<option value="">All sources</option>' +
-    sources.map(s => `<option value="${s}">${s}</option>`).join('');
+    sources.map(s => '<option value="' + s + '">' + s + '</option>').join('');
 }
 
 function levelBadge(lvl) {
@@ -398,7 +565,7 @@ function levelBadge(lvl) {
     'intern':'intern','fellow':'fellow','apprentice':'apprentice',
     'entry':'entry','mid':'mid','senior+':'senior','manager+':'manager'
   };
-  return `<span class="badge badge-level badge-${cls[lvl]||'mid'}">${labels[lvl]||lvl}</span>`;
+  return '<span class="badge badge-level badge-' + (cls[lvl]||'mid') + '">' + (labels[lvl]||lvl) + '</span>';
 }
 
 function getFiltered() {
@@ -432,7 +599,7 @@ function renderTable() {
   });
 
   document.getElementById('result-count').textContent =
-    jobs.length === allJobs.length ? `${jobs.length} results` : `${jobs.length} of ${allJobs.length}`;
+    jobs.length === allJobs.length ? jobs.length + ' results' : jobs.length + ' of ' + allJobs.length;
 
   document.querySelectorAll('th').forEach(th => th.classList.remove('active'));
   const cols = ['company','title','location','pay','posted_at','source'];
@@ -443,14 +610,16 @@ function renderTable() {
     th.querySelector('.arrow').textContent = sortDir === 1 ? '▲' : '▼';
   }
 
-  document.getElementById('tbody').innerHTML = jobs.map(j => `<tr>
-    <td>${esc(j.company)}${j.is_new ? ' <span class="badge badge-new">NEW</span>' : ''}</td>
-    <td class="title-cell">${levelBadge(j.level)} <a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a></td>
-    <td class="loc-cell">${esc(j.location || '—')}</td>
-    <td class="pay-cell">${j.pay ? `<span class="pay-text">${esc(j.pay)}</span>${j.pay_type ? ` <span style="color:var(--faint);font-size:11px">${j.pay_type}</span>` : ''}` : '<span style="color:var(--faint)">—</span>'}</td>
-    <td class="time-cell">${j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--faint)">—</span>'}</td>
-    <td class="source-cell"><span class="badge badge-source">${esc(j.source)}</span>${j.schedule ? ` <span class="badge badge-source">${j.schedule}</span>` : ''}</td>
-  </tr>`).join('');
+  document.getElementById('tbody').innerHTML = jobs.map(j =>
+    '<tr>' +
+    '<td>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
+    '<td class="title-cell">' + levelBadge(j.level) + ' <a href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">' + esc(j.title) + '<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">(opens in new tab)</span></a></td>' +
+    '<td class="loc-cell">' + esc(j.location || '—') + '</td>' +
+    '<td class="pay-cell">' + (j.pay ? '<span class="pay-text">' + esc(j.pay) + '</span>' + (j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
+    '<td class="time-cell">' + (j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
+    '<td class="source-cell"><span class="badge badge-source">' + esc(j.source) + '</span>' + (j.schedule ? ' <span class="badge badge-source">' + j.schedule + '</span>' : '') + '</td>' +
+    '</tr>'
+  ).join('');
 }
 
 function sortBy(col) {
