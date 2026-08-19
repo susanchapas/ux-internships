@@ -5,7 +5,7 @@ import json
 import re
 import sys
 import time
-from http.cookie import SimpleCookie
+from http.cookies import SimpleCookie
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
