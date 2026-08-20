@@ -10,7 +10,7 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
 from internship_watch import (
-    load_json, compile_filters, matches, CONFIG_PATH,
+    load_json, compile_filters, matches, CONFIG_PATH, HIDDEN_PATH,
     fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters,
     fetch_workday, fetch_usajobs, BOARD_FETCHERS,
 )
@@ -108,6 +108,8 @@ class Handler(BaseHTTPRequestHandler):
             self._run_scan()
         elif self.path == "/api/applications":
             self._json_response(db.list_applications())
+        elif self.path == "/api/hidden":
+            self._json_response(sorted(db.get_hidden_ids()))
         elif self.path == "/api/me":
             user = self._require_login()
             if user:
@@ -125,6 +127,11 @@ class Handler(BaseHTTPRequestHandler):
             if token:
                 user_auth.logout(token)
             self._set_cookie("session", "", max_age=0)
+            self._json_response({"ok": True})
+        elif self.path.startswith("/api/hidden/"):
+            job_id = self.path[len("/api/hidden/"):]
+            db.hide_job(job_id)
+            self._sync_hidden_json()
             self._json_response({"ok": True})
         elif self.path == "/api/applications":
             user = self._require_admin()
@@ -159,7 +166,12 @@ class Handler(BaseHTTPRequestHandler):
             self.send_error(404)
 
     def do_DELETE(self):
-        if self.path.startswith("/api/applications/"):
+        if self.path.startswith("/api/hidden/"):
+            job_id = self.path[len("/api/hidden/"):]
+            db.unhide_job(job_id)
+            self._sync_hidden_json()
+            self._json_response({"ok": True})
+        elif self.path.startswith("/api/applications/"):
             user = self._require_admin()
             if not user:
                 return
@@ -214,6 +226,9 @@ class Handler(BaseHTTPRequestHandler):
             del self._pending_cookie
         self.end_headers()
         self.wfile.write(body)
+
+    def _sync_hidden_json(self):
+        HIDDEN_PATH.write_text(json.dumps(sorted(db.get_hidden_ids()), indent=1))
 
     def _serve_dashboard(self):
         html = DASHBOARD.read_bytes()

@@ -1167,8 +1167,13 @@ function toggleFavEmployerByJob(jobId) {
   saveFavEmployers(); renderTable(); buildHighlights();
 }
 function toggleHideJob(id) {
-  hiddenJobs.has(id) ? hiddenJobs.delete(id) : hiddenJobs.add(id);
-  saveHidden(); renderTable(); buildHighlights(); updateStats();
+  const hiding = !hiddenJobs.has(id);
+  hiding ? hiddenJobs.add(id) : hiddenJobs.delete(id);
+  saveHidden();
+  if (!STATIC) {
+    fetch('/api/hidden/' + encodeURIComponent(id), { method: hiding ? 'POST' : 'DELETE' });
+  }
+  renderTable(); buildHighlights(); updateStats();
 }
 function toggleShowFav() {
   showFavOnly = !showFavOnly;

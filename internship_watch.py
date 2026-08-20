@@ -30,6 +30,7 @@ import requests
 HERE = Path(__file__).parent
 CONFIG_PATH = HERE / "config.json"
 STATE_PATH = HERE / "seen.json"
+HIDDEN_PATH = HERE / "hidden.json"
 
 UA = {"User-Agent": "internship-watch/1.0 (personal job search tool)"}
 TIMEOUT = 20
@@ -394,7 +395,8 @@ def main():
         for e in errors:
             print("  -", e)
 
-    new = [j for j in found if j["id"] not in seen]
+    hidden = set(load_json(HIDDEN_PATH, []))
+    new = [j for j in found if j["id"] not in seen and j["id"] not in hidden]
     print(f"\n{len(found)} matches, {len(new)} new")
 
     if args.seed:

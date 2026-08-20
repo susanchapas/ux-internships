@@ -38,6 +38,11 @@ def init_db():
             last_seen TEXT NOT NULL
         );
 
+        CREATE TABLE IF NOT EXISTS hidden_jobs (
+            id TEXT PRIMARY KEY,
+            hidden_at TEXT NOT NULL
+        );
+
         CREATE TABLE IF NOT EXISTS applications (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             job_id TEXT REFERENCES jobs(id) ON DELETE SET NULL,
@@ -87,6 +92,30 @@ def upsert_jobs(jobs):
 def get_seen_ids():
     conn = _connect()
     ids = {r["id"] for r in conn.execute("SELECT id FROM jobs").fetchall()}
+    conn.close()
+    return ids
+
+
+def hide_job(job_id):
+    conn = _connect()
+    conn.execute(
+        "INSERT OR IGNORE INTO hidden_jobs (id, hidden_at) VALUES (?, ?)",
+        (job_id, _now()),
+    )
+    conn.commit()
+    conn.close()
+
+
+def unhide_job(job_id):
+    conn = _connect()
+    conn.execute("DELETE FROM hidden_jobs WHERE id = ?", (job_id,))
+    conn.commit()
+    conn.close()
+
+
+def get_hidden_ids():
+    conn = _connect()
+    ids = {r["id"] for r in conn.execute("SELECT id FROM hidden_jobs").fetchall()}
     conn.close()
     return ids
 
