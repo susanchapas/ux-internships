@@ -674,6 +674,28 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 }
 .auth-submit:hover{background:var(--mint-vivid)}
 .auth-submit:disabled{opacity:0.5;cursor:not-allowed}
+.auth-divider{
+  display:flex;align-items:center;gap:0.75rem;
+  margin:1.25rem 0;
+  font-size:0.75rem;color:var(--text-faint);
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+.auth-divider::before,.auth-divider::after{
+  content:"";flex:1;height:1px;background:var(--border-subtle);
+}
+.auth-google{
+  width:100%;
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+  font-family:var(--font-display);
+  background:var(--surface-card);color:var(--text-body);
+  border:1px solid var(--border-subtle);
+  padding:0.625rem;border-radius:var(--radius-pill);
+  font-size:0.875rem;font-weight:600;cursor:pointer;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.auth-google:hover{background:var(--surface-panel);border-color:var(--sky-a30)}
+.auth-google:disabled{opacity:0.5;cursor:not-allowed}
+.auth-google svg{width:1.125rem;height:1.125rem;flex-shrink:0}
 .auth-error{
   font-size:0.8125rem;color:var(--danger);
   margin-top:0.75rem;display:none;
@@ -757,6 +779,19 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <button type="submit" class="auth-submit">Create Account</button>
       <div class="auth-error" id="register-error"></div>
     </form>
+    <div id="google-auth">
+      <div class="auth-divider">or</div>
+      <button type="button" class="auth-google" id="google-btn" onclick="handleGoogleAuth()">
+        <svg viewBox="0 0 18 18" aria-hidden="true">
+          <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/>
+          <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z"/>
+          <path fill="#FBBC05" d="M3.97 10.72a5.41 5.41 0 0 1 0-3.44V4.95H.96a9 9 0 0 0 0 8.1l3.01-2.33z"/>
+          <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.95l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58z"/>
+        </svg>
+        Continue with Google
+      </button>
+      <div class="auth-error" id="google-error"></div>
+    </div>
   </div>
 </div>
 
@@ -1082,6 +1117,27 @@ async function handleRegister(e) {
   } catch { errEl.textContent = 'Connection error'; errEl.style.display = 'block'; }
 }
 
+async function handleGoogleAuth() {
+  const errEl = document.getElementById('google-error');
+  const btn = document.getElementById('google-btn');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  try {
+    await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  } catch (err) {
+    const msg = {
+      'auth/popup-closed-by-user': '',
+      'auth/cancelled-popup-request': '',
+      'auth/popup-blocked': 'Popup blocked \u2014 allow popups for this site and try again',
+      'auth/account-exists-with-different-credential': 'That email is already registered with a password. Sign in with your password instead.',
+    }[err.code];
+    const text = msg === undefined ? err.message : msg;
+    if (text) { errEl.textContent = text; errEl.style.display = 'block'; }
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 async function handleLogout() {
   const STATIC = typeof STATIC_DATA !== 'undefined';
   if (STATIC) {
@@ -1111,6 +1167,7 @@ function showApp() {
 
 async function checkAuth() {
   const STATIC = typeof STATIC_DATA !== 'undefined';
+  if (!STATIC) document.getElementById('google-auth').style.display = 'none';
 
   if (STATIC) {
     firebase.auth().onAuthStateChanged(user => {
