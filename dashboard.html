@@ -583,6 +583,93 @@ tr.hidden-row td{opacity:0.4}
 
 td.notes-cell{min-width:10rem;max-width:16rem}
 
+.auth-screen{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--gradient-mesh);
+  padding:1.5rem;
+}
+.auth-card{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xl);
+  padding:2.5rem;width:100%;max-width:24rem;
+  box-shadow:0 28px 55px -12px rgba(0,0,0,0.12);
+}
+.auth-card h1{
+  font-family:var(--font-display);
+  font-size:1.5rem;font-weight:700;
+  margin-bottom:0.25rem;color:var(--text-body);
+}
+.auth-card h1 span{color:var(--text-accent)}
+.auth-subtitle{font-size:0.875rem;color:var(--text-muted);margin-bottom:1.5rem}
+.auth-tabs{
+  display:flex;gap:0.25rem;
+  background:var(--surface-panel);
+  border-radius:var(--radius-pill);
+  padding:0.1875rem;margin-bottom:1.5rem;
+}
+.auth-tab{
+  flex:1;text-align:center;
+  font-family:var(--font-display);
+  font-size:0.8125rem;font-weight:600;
+  padding:0.5rem;border-radius:var(--radius-pill);
+  border:none;cursor:pointer;
+  background:transparent;color:var(--text-muted);
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.auth-tab.active{
+  background:var(--surface-card);color:var(--text-body);
+  box-shadow:var(--shadow-card);
+}
+.auth-field{margin-bottom:1rem}
+.auth-field label{
+  display:block;font-size:0.8125rem;font-weight:500;
+  color:var(--text-body);margin-bottom:0.25rem;
+}
+.auth-field input{
+  width:100%;padding:0.625rem 0.75rem;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  font-size:0.875rem;font-family:var(--font-body);
+  background:var(--surface-page);color:var(--text-body);
+}
+.auth-field input:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.auth-field input::placeholder{color:var(--text-faint)}
+.auth-submit{
+  width:100%;margin-top:0.5rem;
+  font-family:var(--font-display);
+  background:var(--mint);color:var(--text-on-accent);border:none;
+  padding:0.625rem;border-radius:var(--radius-pill);
+  font-size:0.875rem;font-weight:600;cursor:pointer;
+  box-shadow:0 1px 4px rgba(42,157,110,0.25);
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.auth-submit:hover{background:var(--mint-vivid)}
+.auth-submit:disabled{opacity:0.5;cursor:not-allowed}
+.auth-error{
+  font-size:0.8125rem;color:var(--danger);
+  margin-top:0.75rem;display:none;
+}
+.auth-form{display:none}
+.auth-form.active{display:block}
+#app-shell{display:none}
+.user-info{
+  font-size:0.8125rem;color:var(--text-muted);
+  display:flex;align-items:center;gap:0.5rem;
+}
+.logout-btn{
+  font-family:var(--font-display);
+  font-size:0.75rem;font-weight:600;
+  padding:0.375rem 0.875rem;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-subtle);
+  background:transparent;color:var(--text-muted);
+  cursor:pointer;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.logout-btn:hover{border-color:var(--danger);color:var(--danger)}
+
 @media(max-width:700px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .hl-grid{grid-template-columns:1fr}
@@ -607,6 +694,46 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 </head>
 <body>
 
+<div id="auth-screen" class="auth-screen">
+  <div class="auth-card">
+    <h1><span>UX</span> Internship Watch</h1>
+    <p class="auth-subtitle">Sign in to access your dashboard</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuth('login')">Sign In</button>
+      <button class="auth-tab" onclick="switchAuth('register')">Register</button>
+    </div>
+    <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
+      <div class="auth-field">
+        <label for="auth-username">Username</label>
+        <input id="auth-username" required autocomplete="username" placeholder="your username">
+      </div>
+      <div class="auth-field">
+        <label for="auth-password">Password</label>
+        <input id="auth-password" type="password" required autocomplete="current-password" placeholder="your password">
+      </div>
+      <button type="submit" class="auth-submit">Sign In</button>
+      <div class="auth-error" id="login-error"></div>
+    </form>
+    <form id="register-form" class="auth-form" onsubmit="handleRegister(event)">
+      <div class="auth-field">
+        <label for="reg-username">Username</label>
+        <input id="reg-username" required autocomplete="username" placeholder="choose a username">
+      </div>
+      <div class="auth-field">
+        <label for="reg-email">Email</label>
+        <input id="reg-email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="auth-field">
+        <label for="reg-password">Password</label>
+        <input id="reg-password" type="password" required autocomplete="new-password" placeholder="choose a password">
+      </div>
+      <button type="submit" class="auth-submit">Create Account</button>
+      <div class="auth-error" id="register-error"></div>
+    </form>
+  </div>
+</div>
+
+<div id="app-shell">
 <a href="#main" id="skip-link">Skip to main content</a>
 
 <header>
@@ -620,6 +747,8 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <div class="spinner"></div>
       <span>Scan Now</span>
     </button>
+    <span class="user-info" id="user-info"></span>
+    <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
   </div>
 </header>
 
@@ -812,7 +941,97 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   </div>
 </div>
 
+</div><!-- /app-shell -->
+
 <script>
+let currentUser = null;
+
+function switchAuth(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.querySelectorAll('.auth-error').forEach(e => e.style.display = 'none');
+  if (tab === 'login') {
+    document.querySelectorAll('.auth-tab')[0].classList.add('active');
+    document.getElementById('login-form').classList.add('active');
+  } else {
+    document.querySelectorAll('.auth-tab')[1].classList.add('active');
+    document.getElementById('register-form').classList.add('active');
+  }
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  const body = {
+    username: document.getElementById('auth-username').value,
+    password: document.getElementById('auth-password').value,
+  };
+  try {
+    const r = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body),
+    });
+    const data = await r.json();
+    if (!r.ok) { errEl.textContent = data.error || 'Login failed'; errEl.style.display = 'block'; return; }
+    currentUser = data;
+    showApp();
+  } catch { errEl.textContent = 'Connection error'; errEl.style.display = 'block'; }
+}
+
+async function handleRegister(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('register-error');
+  errEl.style.display = 'none';
+  const body = {
+    username: document.getElementById('reg-username').value,
+    email: document.getElementById('reg-email').value,
+    password: document.getElementById('reg-password').value,
+  };
+  try {
+    const r = await fetch('/api/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body),
+    });
+    const data = await r.json();
+    if (!r.ok) { errEl.textContent = data.error || 'Registration failed'; errEl.style.display = 'block'; return; }
+    switchAuth('login');
+    document.getElementById('auth-username').value = body.username;
+    document.getElementById('auth-password').focus();
+  } catch { errEl.textContent = 'Connection error'; errEl.style.display = 'block'; }
+}
+
+async function handleLogout() {
+  await fetch('/api/logout', { method: 'POST' });
+  currentUser = null;
+  document.getElementById('app-shell').style.display = 'none';
+  document.getElementById('auth-screen').style.display = 'flex';
+}
+
+function showApp() {
+  document.getElementById('auth-screen').style.display = 'none';
+  document.getElementById('app-shell').style.display = 'block';
+  if (currentUser) {
+    document.getElementById('user-info').textContent = currentUser.username;
+  }
+  if (typeof STATIC_DATA !== 'undefined') loadStaticData();
+  loadApplications();
+}
+
+async function checkAuth() {
+  try {
+    const r = await fetch('/api/me');
+    if (r.ok) {
+      currentUser = await r.json();
+      showApp();
+      return;
+    }
+  } catch {}
+  document.getElementById('auth-screen').style.display = 'flex';
+}
+
 let allJobs = [];
 let scanErrors = [];
 let scanning = false;
@@ -1582,8 +1801,7 @@ function escAttr(s) {
   return s.replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-if (STATIC) loadStaticData();
-loadApplications();
+checkAuth();
 
 </script>
 </body>

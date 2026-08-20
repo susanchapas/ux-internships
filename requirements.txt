@@ -1,4 +1,5 @@
 requests
+python-dotenv
 sqlalchemy>=2.0
 psycopg2-binary
 pydantic[email]>=2.0
