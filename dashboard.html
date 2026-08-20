@@ -1001,32 +1001,6 @@ const BOARD_FETCH = {
     }
     return out;
   },
-  workday: async (e) => {
-    const base = 'https://' + e.tenant + '.wd' + (e.wd||5) + '.myworkdayjobs.com';
-    const ep = base + '/wday/cxs/' + e.tenant + '/' + e.site + '/jobs';
-    const out = []; let off = 0;
-    while (true) {
-      const r = await fetch(ep, {
-        method: 'POST', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ appliedFacets: {}, limit: 20, offset: off, searchText: e.search || 'intern' }),
-      });
-      if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
-      const d = await r.json();
-      for (const j of d.jobPostings || []) {
-        const path = j.externalPath || '';
-        out.push({
-          id: 'wd:' + e.tenant + ':' + path, title: j.title || '',
-          location: j.locationsText || '', url: base + '/en-US/' + e.site + path,
-          company: e.name, source: 'workday',
-          pay: String(j.compensationAmount || j.salaryAmount || ''),
-          posted_at: j.postedOn || '',
-        });
-      }
-      off += 20;
-      if (off >= (d.total || 0) || !(d.jobPostings || []).length) break;
-    }
-    return out;
-  },
 };
 
 async function clientScan() {
@@ -1034,6 +1008,13 @@ async function clientScan() {
   const titleInc = new RegExp(cfg.title_include.join('|'), 'i');
   const titleExc = cfg.title_exclude.length ? new RegExp(cfg.title_exclude.join('|'), 'i') : null;
   const locInc = new RegExp(cfg.location_include.join('|'), 'i');
+
+  const prebaked = (STATIC_DATA.jobs || []).filter(j => !BOARD_FETCH[j.source]);
+  prebaked.forEach(j => { j.is_new = false; classifyJob(j); });
+  allJobs.push(...prebaked);
+  prebaked.forEach(j => jobsById.set(j.id, j));
+  updateStats(); renderTable();
+
   const seen = new Set(allJobs.map(j => j.id));
   const myId = scanId;
 

@@ -28,6 +28,10 @@ jobs:
 
       - run: pip install requests
 
+      - run: python internship_watch.py
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+
       - run: python build_static.py
 
       - uses: actions/upload-pages-artifact@v3

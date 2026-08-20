@@ -13,6 +13,9 @@ State lives in seen.json. Config lives in config.json.
 import argparse
 import json
 import os
+
+from dotenv import load_dotenv
+load_dotenv()
 import re
 import sys
 import time
@@ -303,16 +306,34 @@ def notify(new_jobs):
 
     discord = os.environ.get("DISCORD_WEBHOOK")
     if discord:
-        # Discord caps at 2000 chars; chunk it.
-        chunks, cur = [], f"**{subject}**\n\n"
-        for block in lines:
-            if len(cur) + len(block) > 1800:
-                chunks.append(cur)
-                cur = ""
-            cur += block + "\n\n"
-        chunks.append(cur)
-        for c in chunks:
-            requests.post(discord, json={"content": c}, timeout=TIMEOUT)
+        by_company = {}
+        for j in new_jobs:
+            by_company.setdefault(j["company"], []).append(j)
+        embeds = []
+        for company, postings in by_company.items():
+            desc_lines = []
+            for j in postings:
+                parts = [f"[{j['title']}]({j.get('url', '')})"]
+                if j.get("location"):
+                    parts.append(f"📍 {j['location']}")
+                if j.get("pay"):
+                    parts.append(f"💰 {j['pay']}")
+                desc_lines.append(" · ".join(parts))
+            embeds.append({
+                "title": f"{company} ({len(postings)})",
+                "description": "\n".join(desc_lines),
+                "color": 0x5865F2,
+            })
+        summary = (
+            f"🔔 **{len(new_jobs)}** new posting{'s' if len(new_jobs) != 1 else ''} "
+            f"across **{len(by_company)}** compan{'ies' if len(by_company) != 1 else 'y'}"
+        )
+        for i in range(0, len(embeds), 10):
+            batch = embeds[i:i + 10]
+            payload = {"embeds": batch}
+            if i == 0:
+                payload["content"] = summary
+            requests.post(discord, json=payload, timeout=TIMEOUT)
             time.sleep(0.5)
         print("  -> posted to Discord")
 

@@ -101,38 +101,64 @@ class NtfyObserver(JobObserver):
 
 
 class DiscordObserver(JobObserver):
-    """Posts new-job alerts to a Discord webhook."""
+    """Posts new-job alerts to a Discord webhook as rich embeds."""
+
+    EMBED_COLOR = 0x5865F2  # Discord blurple
 
     def __init__(self):
         self.webhook = os.environ.get("DISCORD_WEBHOOK")
+        self._new_jobs = []
 
     def on_new_jobs(self, jobs):
         if not self.webhook or not jobs:
             return
-        header = f"**{len(jobs)} new internship posting{'s' if len(jobs) != 1 else ''}**\n\n"
-        lines = []
-        for j in jobs:
-            pay = f"\n💰 {j['pay']}" if j.get("pay") else ""
-            lines.append(
-                f"{j['company']} — {j['title']}\n"
-                f"{j.get('location', '')}{pay}\n{j.get('url', '')}"
-            )
-        chunks, cur = [], header
-        for block in lines:
-            if len(cur) + len(block) > 1800:
-                chunks.append(cur)
-                cur = ""
-            cur += block + "\n\n"
-        chunks.append(cur)
-        try:
-            for c in chunks:
-                requests.post(self.webhook, json={"content": c}, timeout=TIMEOUT)
-                time.sleep(0.5)
-        except requests.RequestException:
-            pass
+        self._new_jobs.extend(jobs)
 
     def on_scan_complete(self, stats):
-        pass
+        if not self.webhook:
+            return
+        jobs = self._new_jobs
+        self._new_jobs = []
+
+        if not jobs:
+            return
+
+        by_company = {}
+        for j in jobs:
+            by_company.setdefault(j["company"], []).append(j)
+
+        embeds = []
+        for company, postings in by_company.items():
+            lines = []
+            for j in postings:
+                parts = [f"[{j['title']}]({j.get('url', '')})"]
+                if j.get("location"):
+                    parts.append(f"📍 {j['location']}")
+                if j.get("pay"):
+                    parts.append(f"💰 {j['pay']}")
+                lines.append(" · ".join(parts))
+            embeds.append({
+                "title": f"{company} ({len(postings)})",
+                "description": "\n".join(lines),
+                "color": self.EMBED_COLOR,
+            })
+
+        summary = (
+            f"**{len(jobs)}** new posting{'s' if len(jobs) != 1 else ''} "
+            f"across **{len(by_company)}** compan{'ies' if len(by_company) != 1 else 'y'}"
+        )
+
+        # Discord allows max 10 embeds per message
+        for i in range(0, len(embeds), 10):
+            batch = embeds[i:i + 10]
+            payload = {"embeds": batch}
+            if i == 0:
+                payload["content"] = f"🔔 {summary}"
+            try:
+                requests.post(self.webhook, json=payload, timeout=TIMEOUT)
+                time.sleep(0.5)
+            except requests.RequestException:
+                pass
 
     def on_scan_error(self, company, error):
         pass
