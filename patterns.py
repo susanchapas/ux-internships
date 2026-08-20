@@ -15,6 +15,7 @@ import re
 import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from urllib.parse import quote
 
 import requests
 
@@ -103,7 +104,8 @@ class NtfyObserver(JobObserver):
 class DiscordObserver(JobObserver):
     """Posts new-job alerts to a Discord webhook as rich embeds."""
 
-    EMBED_COLOR = 0x5865F2  # Discord blurple
+    EMBED_COLOR = 0x5865F2
+    DASHBOARD = "https://susanchapas.github.io/ux-internships/"
 
     def __init__(self):
         self.webhook = os.environ.get("DISCORD_WEBHOOK")
@@ -131,7 +133,8 @@ class DiscordObserver(JobObserver):
         for company, postings in by_company.items():
             lines = []
             for j in postings:
-                parts = [f"[{j['title']}]({j.get('url', '')})"]
+                modal_url = f"{self.DASHBOARD}#job={quote(j['id'], safe='')}"
+                parts = [f"[{j['title']}]({modal_url})"]
                 if j.get("location"):
                     parts.append(f"📍 {j['location']}")
                 if j.get("pay"):

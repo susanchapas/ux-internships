@@ -7,6 +7,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+// TODO: Replace with your Firebase project config
+// Firebase Console → Project Settings → Your apps → Config
+firebase.initializeApp({
+  apiKey: "AIzaSyAC1aXUkAuVGUQNMqczvYR8NJeHbs37HJ8",
+  authDomain: "ux-internships.firebaseapp.com",
+  projectId: "ux-internships",
+});
+</script>
 <style>
 :root{
   --midnight:#1a2332;
@@ -572,6 +583,22 @@ tr.hidden-row td{opacity:0.4}
 }
 .modal-cancel:hover{background:var(--sky-a20)}
 
+.job-detail-modal{position:relative;max-width:28rem;text-align:center;padding:2.5rem 2rem 2rem}
+.jm-close{position:absolute;top:0.75rem;right:0.75rem;background:none;border:none;font-size:1.5rem;color:var(--text-faint);cursor:pointer;line-height:1;padding:0.25rem}
+.jm-close:hover{color:var(--text-body)}
+.job-detail-modal h2{font-size:1.25rem;margin-bottom:0.25rem}
+.jm-company{font-size:0.9375rem;color:var(--text-faint);margin-bottom:1rem}
+.jm-tags{display:flex;flex-wrap:wrap;gap:0.375rem;justify-content:center;margin-bottom:1.25rem}
+.jm-fields{text-align:left;display:grid;grid-template-columns:auto 1fr;gap:0.375rem 0.75rem;font-size:0.8125rem;margin-bottom:1.5rem}
+.jm-field-label{color:var(--text-faint);font-weight:600}
+.jm-field-value{color:var(--text-body);word-break:break-word}
+.jm-actions{display:flex;gap:0.75rem;justify-content:center}
+.jm-btn{font-family:var(--font-display);font-size:0.875rem;font-weight:600;padding:0.5rem 1.5rem;border-radius:var(--radius-pill);border:none;cursor:pointer;transition:background var(--duration-fast) var(--ease-smooth)}
+.jm-btn-primary{background:var(--sky);color:#fff}
+.jm-btn-primary:hover{filter:brightness(1.1)}
+.jm-btn-secondary{background:var(--surface-panel);color:var(--text-body)}
+.jm-btn-secondary:hover{background:var(--sky-a20)}
+
 #tracker-empty{
   text-align:center;padding:4rem 1.25rem;color:var(--text-muted);
 }
@@ -704,8 +731,8 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     </div>
     <form id="login-form" class="auth-form active" onsubmit="handleLogin(event)">
       <div class="auth-field">
-        <label for="auth-username">Username</label>
-        <input id="auth-username" required autocomplete="username" placeholder="your username">
+        <label for="auth-username">Email</label>
+        <input id="auth-username" type="email" required autocomplete="email" placeholder="you@example.com">
       </div>
       <div class="auth-field">
         <label for="auth-password">Password</label>
@@ -943,6 +970,19 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
 </div><!-- /app-shell -->
 
+<!-- Job Detail Modal -->
+<div class="modal-overlay" id="job-modal">
+  <div class="modal job-detail-modal" role="dialog" aria-modal="true" aria-labelledby="jm-title">
+    <button class="jm-close" onclick="closeJobModal()" aria-label="Close">&times;</button>
+    <div id="jm-badge"></div>
+    <h2 id="jm-title"></h2>
+    <p class="jm-company" id="jm-company"></p>
+    <div class="jm-tags" id="jm-tags"></div>
+    <div class="jm-fields" id="jm-fields"></div>
+    <div class="jm-actions" id="jm-actions"></div>
+  </div>
+</div>
+
 <script>
 let currentUser = null;
 
@@ -963,6 +1003,25 @@ async function handleLogin(e) {
   e.preventDefault();
   const errEl = document.getElementById('login-error');
   errEl.style.display = 'none';
+  const STATIC = typeof STATIC_DATA !== 'undefined';
+
+  if (STATIC) {
+    const email = document.getElementById('auth-username').value;
+    const password = document.getElementById('auth-password').value;
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (err) {
+      const msg = {
+        'auth/user-not-found': 'No account with that email',
+        'auth/wrong-password': 'Incorrect password',
+        'auth/invalid-email': 'Invalid email address',
+        'auth/invalid-credential': 'Invalid email or password',
+      }[err.code] || err.message;
+      errEl.textContent = msg; errEl.style.display = 'block';
+    }
+    return;
+  }
+
   const body = {
     username: document.getElementById('auth-username').value,
     password: document.getElementById('auth-password').value,
@@ -984,6 +1043,26 @@ async function handleRegister(e) {
   e.preventDefault();
   const errEl = document.getElementById('register-error');
   errEl.style.display = 'none';
+  const STATIC = typeof STATIC_DATA !== 'undefined';
+
+  if (STATIC) {
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    try {
+      const cred = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const displayName = document.getElementById('reg-username').value;
+      if (displayName) await cred.user.updateProfile({ displayName });
+    } catch (err) {
+      const msg = {
+        'auth/email-already-in-use': 'Email already registered',
+        'auth/weak-password': 'Password must be at least 6 characters',
+        'auth/invalid-email': 'Invalid email address',
+      }[err.code] || err.message;
+      errEl.textContent = msg; errEl.style.display = 'block';
+    }
+    return;
+  }
+
   const body = {
     username: document.getElementById('reg-username').value,
     email: document.getElementById('reg-email').value,
@@ -1004,7 +1083,12 @@ async function handleRegister(e) {
 }
 
 async function handleLogout() {
-  await fetch('/api/logout', { method: 'POST' });
+  const STATIC = typeof STATIC_DATA !== 'undefined';
+  if (STATIC) {
+    await firebase.auth().signOut();
+  } else {
+    await fetch('/api/logout', { method: 'POST' });
+  }
   currentUser = null;
   document.getElementById('app-shell').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
@@ -1013,14 +1097,33 @@ async function handleLogout() {
 function showApp() {
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app-shell').style.display = 'block';
+  const isStatic = typeof STATIC_DATA !== 'undefined';
   if (currentUser) {
     document.getElementById('user-info').textContent = currentUser.username;
   }
-  if (typeof STATIC_DATA !== 'undefined') loadStaticData();
+  if (isStatic) {
+    document.querySelector('.logout-btn').style.display = 'none';
+    document.getElementById('user-info').style.display = 'none';
+    loadStaticData();
+  }
   loadApplications();
 }
 
 async function checkAuth() {
+  const STATIC = typeof STATIC_DATA !== 'undefined';
+
+  if (STATIC) {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        currentUser = { username: user.displayName || user.email, email: user.email };
+        showApp();
+      } else {
+        document.getElementById('auth-screen').style.display = 'flex';
+      }
+    });
+    return;
+  }
+
   try {
     const r = await fetch('/api/me');
     if (r.ok) {
@@ -1393,7 +1496,7 @@ function buildHighlights() {
   document.getElementById('hl-grid').innerHTML = hl.map(j =>
     '<div class="hl-card">' +
       '<div class="hl-company">' + esc(j.company) + '</div>' +
-      '<div class="hl-title"><a href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">' + esc(j.title) + ' <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">(opens in new tab)</span></a></div>' +
+      '<div class="hl-title"><a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a></div>' +
       '<div class="hl-meta">' +
         levelBadge(j.level) +
         (j.location ? '<span>' + esc(j.location) + '</span>' : '') +
@@ -1481,7 +1584,7 @@ function renderTable() {
     return '<tr' + (isHidden ? ' class="hidden-row"' : '') + '>' +
     '<td><button class="fav-btn' + (isFav ? ' active' : '') + '" onclick="toggleFavJob(\'' + escAttr(j.id) + '\')" title="Favorite job">' + (isFav ? '★' : '☆') + '</button></td>' +
     '<td><button class="fav-employer' + (isEmpFav ? ' active' : '') + '" onclick="toggleFavEmployerByJob(\'' + escAttr(j.id) + '\')" title="Favorite employer">♥</button>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
-    '<td class="title-cell">' + levelBadge(j.level) + ' <a href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">' + esc(j.title) + '<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">(opens in new tab)</span></a></td>' +
+    '<td class="title-cell">' + levelBadge(j.level) + ' <a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a></td>' +
     '<td class="loc-cell">' + esc(j.location || '—') + '</td>' +
     '<td class="pay-cell">' + (j.pay ? '<span class="pay-text">' + esc(j.pay) + '</span>' + (j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
     '<td class="time-cell">' + (j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
@@ -1801,7 +1904,66 @@ function escAttr(s) {
   return s.replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-checkAuth();
+function openJobModal(jobId) {
+  const j = jobsById.get(jobId);
+  if (!j) return;
+  document.getElementById('jm-badge').innerHTML = levelBadge(j.level);
+  document.getElementById('jm-title').textContent = j.title;
+  document.getElementById('jm-company').textContent = j.company;
+
+  const tags = [];
+  if (j.is_new) tags.push('<span class="badge badge-new">NEW</span>');
+  if (j.source) tags.push('<span class="badge badge-source">' + esc(j.source) + '</span>');
+  if (j.schedule) tags.push('<span class="badge badge-source">' + esc(j.schedule) + '</span>');
+  document.getElementById('jm-tags').innerHTML = tags.join('');
+
+  const fields = [];
+  const addField = (label, val) => {
+    if (!val) return;
+    fields.push('<span class="jm-field-label">' + label + '</span><span class="jm-field-value">' + esc(val) + '</span>');
+  };
+  addField('Location', j.location);
+  addField('Pay', j.pay);
+  addField('Posted', j.posted_at ? timeAgo(j.posted_at) : '');
+  document.getElementById('jm-fields').innerHTML = fields.join('');
+
+  const tracked = trackedIds.has(j.id);
+  document.getElementById('jm-actions').innerHTML =
+    '<a class="jm-btn jm-btn-primary" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">View Posting ↗</a>' +
+    (tracked
+      ? '<button class="jm-btn jm-btn-secondary" disabled>Tracked</button>'
+      : '<button class="jm-btn jm-btn-secondary" onclick="trackJob(this,\'' + escAttr(j.id) + '\');closeJobModal()">Track</button>');
+
+  history.replaceState(null, '', '#job=' + encodeURIComponent(j.id));
+  document.getElementById('job-modal').classList.add('open');
+}
+
+function closeJobModal() {
+  document.getElementById('job-modal').classList.remove('open');
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
+document.getElementById('job-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeJobModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('job-modal').classList.contains('open'))
+    closeJobModal();
+});
+
+window.addEventListener('hashchange', () => {
+  const m = location.hash.match(/^#job=(.+)/);
+  if (m) openJobModal(decodeURIComponent(m[1]));
+});
+
+const _origCheckAuth = checkAuth;
+checkAuth = function() {
+  _origCheckAuth();
+  setTimeout(() => {
+    const m = location.hash.match(/^#job=(.+)/);
+    if (m) openJobModal(decodeURIComponent(m[1]));
+  }, 500);
+};
 
 </script>
 </body>

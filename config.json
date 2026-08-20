@@ -1,8 +1,7 @@
 {
   "title_include": [
-    "\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bapprentice\\b|\\bfellow(?:ship)?\\b",
-    "(UX|user experience|design|research|product).*(\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bfellow(?:ship)?\\b|\\bapprentice\\b)",
-    "(\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bfellow(?:ship)?\\b|\\bapprentice\\b).*(UX|user experience|design|research|product)"
+    "(UX|UI|user experience|user interface|design|research|product|content strateg|interaction|usability|human factors|accessibility|information architecture|service design|HCI|visual design|brand design|creative).*(\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bfellow(?:ship)?\\b|\\bapprentice\\b)",
+    "(\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bfellow(?:ship)?\\b|\\bapprentice\\b).*(UX|UI|user experience|user interface|design|research|product|content strateg|interaction|usability|human factors|accessibility|information architecture|service design|HCI|visual design|brand design|creative)"
   ],
   "title_exclude": [
     "senior",
@@ -20,25 +19,35 @@
     "devops",
     "firmware",
     "network engineer",
-    "international"
+    "international",
+    "sales",
+    "talent acquisition",
+    "recruiting",
+    "recruiter",
+    "clinical",
+    "supply chain",
+    "manufacturing",
+    "hardware",
+    "software engineer",
+    "data engineer",
+    "machine learning",
+    "human resources",
+    "\\bhr\\b",
+    "legal",
+    "compliance",
+    "audit",
+    "accounting"
   ],
   "location_include": [
     "new york",
     "nyc",
-    "\\bny\\b",
-    "brooklyn",
     "manhattan",
-    "queens",
-    "new jersey",
-    "newark",
+    "new york city",
+    "bayonne",
     "jersey city",
     "hoboken",
-    "stamford",
-    "greenwich",
-    "remote",
-    "united states",
-    "\\bUS\\b",
-    "hybrid"
+    "newark",
+    "remote"
   ],
   "companies": [
     {

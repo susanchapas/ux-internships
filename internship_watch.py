@@ -21,7 +21,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 
 import html as htmlmod
 
@@ -33,6 +33,7 @@ STATE_PATH = HERE / "seen.json"
 
 UA = {"User-Agent": "internship-watch/1.0 (personal job search tool)"}
 TIMEOUT = 20
+DASHBOARD_URL = "https://susanchapas.github.io/ux-internships/"
 
 PAY_RE = re.compile(
     r"\$\s*[\d,]+(?:\.\d{2})?"
@@ -313,7 +314,8 @@ def notify(new_jobs):
         for company, postings in by_company.items():
             desc_lines = []
             for j in postings:
-                parts = [f"[{j['title']}]({j.get('url', '')})"]
+                modal_url = f"{DASHBOARD_URL}#job={quote(j['id'], safe='')}"
+                parts = [f"[{j['title']}]({modal_url})"]
                 if j.get("location"):
                     parts.append(f"📍 {j['location']}")
                 if j.get("pay"):
