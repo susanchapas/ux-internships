@@ -123,15 +123,31 @@ header{
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border-subtle);
   padding:0.75rem 1.5rem;
-  display:flex;align-items:center;gap:1rem;
+  display:flex;align-items:center;justify-content:center;
   box-shadow:0 1px 3px rgba(0,0,0,0.04);
 }
-header h1{
+.nav-logo{
   font-family:var(--font-display);
   font-size:1.125rem;font-weight:700;letter-spacing:-0.02em;
-  color:var(--midnight);
+  color:var(--midnight);text-decoration:none;
 }
-header h1 span{color:var(--text-accent)}
+.nav-logo span{color:var(--text-accent)}
+.nav-logo:hover{color:var(--midnight);text-decoration-color:transparent}
+.profile-icon-btn{
+  position:absolute;right:1.5rem;
+  background:none;border:none;cursor:pointer;
+  color:var(--text-muted);
+  width:2rem;height:2rem;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  transition:color var(--duration-fast) var(--ease-smooth),background var(--duration-fast) var(--ease-smooth);
+}
+.profile-icon-btn:hover{color:var(--text-body);background:var(--sky-a10)}
+.profile-icon-btn.active{color:var(--text-accent)}
+.sub-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.5rem 1.5rem;
+}
 
 .header-tabs{
   display:flex;gap:0.25rem;
@@ -331,11 +347,11 @@ td{
 }
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(0,0,0,0.02)}
-td.title-cell{max-width:20rem}
+td.title-cell{max-width:14rem;overflow:hidden;text-overflow:ellipsis}
 td.title-cell a{color:var(--text-body);font-weight:500;text-decoration:none}
 td.title-cell a:hover{color:var(--text-accent)}
-td.loc-cell{color:var(--text-muted);max-width:11.25rem}
-td.pay-cell{white-space:nowrap}
+td.loc-cell{color:var(--text-muted);max-width:8rem;overflow:hidden;text-overflow:ellipsis}
+td.pay-cell{max-width:9rem}
 td.time-cell{white-space:nowrap;color:var(--text-muted);font-size:0.8125rem}
 td.source-cell{font-size:0.8125rem}
 .pay-text{color:var(--clay);font-weight:500}
@@ -719,6 +735,45 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 }
 .logout-btn:hover{border-color:var(--danger);color:var(--danger)}
 
+.profile-tabs{
+  display:flex;gap:0.25rem;
+  background:var(--surface-panel);
+  border-radius:var(--radius-pill);
+  padding:0.1875rem;
+  margin-bottom:1.25rem;
+  max-width:32rem;
+}
+.profile-tab-btn{
+  flex:1;text-align:center;
+  font-family:var(--font-display);
+  font-size:0.8125rem;font-weight:600;
+  padding:0.5rem;border-radius:var(--radius-pill);
+  border:none;cursor:pointer;
+  background:transparent;color:var(--text-muted);
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.profile-tab-btn:hover{color:var(--text-body)}
+.profile-tab-btn.active{
+  background:var(--surface-card);color:var(--text-body);
+  box-shadow:var(--shadow-card);
+}
+.profile-pane{display:none}
+.profile-pane.active{display:block}
+.tag-group{display:flex;flex-wrap:wrap;gap:0.375rem;margin-bottom:1.25rem}
+.tag-chip{
+  font-family:var(--font-display);
+  font-size:0.8125rem;font-weight:600;
+  padding:0.375rem 0.875rem;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-subtle);
+  background:var(--surface-card);color:var(--text-muted);
+  cursor:pointer;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.tag-chip:hover{border-color:var(--border-hover);color:var(--text-body)}
+.tag-chip.active{
+  background:var(--mint-a10);border-color:var(--mint-a30);color:var(--mint);
+}
 .profile-section{
   background:var(--surface-card);
   border:1px solid var(--border-subtle);
@@ -804,9 +859,10 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   .toolbar{flex-direction:column}
   #search,.tracker-search,.result-count,.filter-select,.toolbar-toggle{width:100%}
   .result-count{text-align:left;margin-left:0}
-  header{padding:0.625rem 0.875rem;flex-wrap:wrap}
+  header{padding:0.625rem 0.875rem}
+  .profile-icon-btn{right:0.875rem}
+  .sub-bar{padding:0.5rem 0.875rem}
   main{padding:1rem 0.625rem 3.75rem}
-  .header-tabs{order:10;width:100%}
   .header-tab{flex:1;text-align:center}
 }
 
@@ -878,21 +934,22 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 <a href="#main" id="skip-link">Skip to main content</a>
 
 <header>
-  <h1><span>UX</span> Internship Watch</h1>
+  <a href="#" class="nav-logo" onclick="switchTab('scanner'); return false;"><span>UX</span> Internship Watch</a>
+  <button class="profile-icon-btn" onclick="switchTab('profile')" id="tab-profile" aria-label="Profile">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+  </button>
+</header>
+
+<div class="sub-bar">
   <div class="header-tabs">
     <button class="header-tab active" onclick="switchTab('scanner')" id="tab-scanner">Scanner</button>
     <button class="header-tab" onclick="switchTab('tracker')" id="tab-tracker">Tracker</button>
-    <button class="header-tab" onclick="switchTab('profile')" id="tab-profile">Profile</button>
   </div>
-  <div class="header-right">
-    <button id="scan-btn" onclick="startScan()">
-      <div class="spinner"></div>
-      <span>Scan Now</span>
-    </button>
-    <span class="user-info" id="user-info"></span>
-    <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
-  </div>
-</header>
+  <button id="scan-btn" onclick="startScan()">
+    <div class="spinner"></div>
+    <span>Scan Now</span>
+  </button>
+</div>
 
 <div id="progress-bar"><div id="progress-fill"></div></div>
 <div id="progress-text"></div>
@@ -1029,134 +1086,113 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
   <!-- PROFILE TAB -->
   <div id="profile-tab" class="tab-content">
-    <div class="profile-section">
-      <h3>Account</h3>
-      <div class="profile-info" id="profile-info"></div>
-      <button class="profile-signout" onclick="handleLogout()">Sign Out</button>
+    <div class="profile-tabs">
+      <button class="profile-tab-btn active" onclick="switchProfileTab('account')">Account</button>
+      <button class="profile-tab-btn" onclick="switchProfileTab('settings')">Settings</button>
+      <button class="profile-tab-btn" onclick="switchProfileTab('search-prefs')">Search Preferences</button>
     </div>
 
-    <div class="profile-section">
-      <h3>Update Username</h3>
-      <form onsubmit="updateUsername(event)">
-        <div class="profile-field">
-          <label for="p-username">New Username</label>
-          <input id="p-username" required placeholder="Enter new username" autocomplete="username">
-        </div>
-        <div class="profile-actions">
-          <button type="submit" class="profile-save" id="p-username-btn">Save</button>
-          <span class="profile-msg" id="p-username-msg"></span>
-        </div>
-      </form>
-    </div>
-
-    <div class="profile-section">
-      <h3>Update Email</h3>
-      <form onsubmit="updateEmail(event)">
-        <div class="profile-field">
-          <label for="p-email">New Email</label>
-          <input id="p-email" type="email" required placeholder="Enter new email" autocomplete="email">
-        </div>
-        <div class="profile-actions">
-          <button type="submit" class="profile-save" id="p-email-btn">Save</button>
-          <span class="profile-msg" id="p-email-msg"></span>
-        </div>
-      </form>
-    </div>
-
-    <div class="profile-section">
-      <h3>Update Password</h3>
-      <form onsubmit="updatePassword(event)">
-        <div class="profile-field">
-          <label for="p-cur-pw">Current Password</label>
-          <input id="p-cur-pw" type="password" required placeholder="Enter current password" autocomplete="current-password">
-        </div>
-        <div class="profile-field">
-          <label for="p-new-pw">New Password</label>
-          <input id="p-new-pw" type="password" required placeholder="Enter new password" autocomplete="new-password" minlength="6">
-        </div>
-        <div class="profile-actions">
-          <button type="submit" class="profile-save" id="p-pw-btn">Save</button>
-          <span class="profile-msg" id="p-pw-msg"></span>
-        </div>
-      </form>
-    </div>
-
-    <div class="profile-section">
-      <h3>Preferences</h3>
-      <div class="pref-row">
-        <div>
-          <div class="pref-label">Auto-scan on load</div>
-          <div class="pref-desc">Automatically start scanning when you open the dashboard</div>
-        </div>
-        <button class="pref-toggle" id="pref-autoscan" onclick="togglePref('autoscan',this)"></button>
+    <div id="ptab-account" class="profile-pane active">
+      <div class="profile-section">
+        <h3>Account</h3>
+        <div class="profile-info" id="profile-info"></div>
+        <button class="profile-signout" onclick="handleLogout()">Sign Out</button>
       </div>
-      <div class="pref-row">
-        <div>
-          <div class="pref-label">Show hidden jobs count</div>
-          <div class="pref-desc">Display the hidden jobs toggle in the scanner toolbar</div>
-        </div>
-        <button class="pref-toggle" id="pref-show-hidden" onclick="togglePref('showHiddenToggle',this)"></button>
+      <div class="profile-section">
+        <h3>Update Username</h3>
+        <form onsubmit="updateUsername(event)">
+          <div class="profile-field">
+            <label for="p-username">New Username</label>
+            <input id="p-username" required placeholder="Enter new username" autocomplete="username">
+          </div>
+          <div class="profile-actions">
+            <button type="submit" class="profile-save" id="p-username-btn">Save</button>
+            <span class="profile-msg" id="p-username-msg"></span>
+          </div>
+        </form>
       </div>
-      <div class="pref-row">
-        <div>
-          <div class="pref-label">Default to Tracker tab</div>
-          <div class="pref-desc">Open the Tracker tab instead of Scanner on load</div>
-        </div>
-        <button class="pref-toggle" id="pref-default-tracker" onclick="togglePref('defaultTracker',this)"></button>
+      <div class="profile-section">
+        <h3>Update Email</h3>
+        <form onsubmit="updateEmail(event)">
+          <div class="profile-field">
+            <label for="p-email">New Email</label>
+            <input id="p-email" type="email" required placeholder="Enter new email" autocomplete="email">
+          </div>
+          <div class="profile-actions">
+            <button type="submit" class="profile-save" id="p-email-btn">Save</button>
+            <span class="profile-msg" id="p-email-msg"></span>
+          </div>
+        </form>
+      </div>
+      <div class="profile-section">
+        <h3>Update Password</h3>
+        <form onsubmit="updatePassword(event)">
+          <div class="profile-field">
+            <label for="p-cur-pw">Current Password</label>
+            <input id="p-cur-pw" type="password" required placeholder="Enter current password" autocomplete="current-password">
+          </div>
+          <div class="profile-field">
+            <label for="p-new-pw">New Password</label>
+            <input id="p-new-pw" type="password" required placeholder="Enter new password" autocomplete="new-password" minlength="6">
+          </div>
+          <div class="profile-actions">
+            <button type="submit" class="profile-save" id="p-pw-btn">Save</button>
+            <span class="profile-msg" id="p-pw-msg"></span>
+          </div>
+        </form>
       </div>
     </div>
 
-    <div class="profile-section">
-      <h3>Search Preferences</h3>
-      <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faint);margin-bottom:0.375rem">Levels</div>
-      <div class="pref-row">
-        <div class="pref-label">Intern / Co-op</div>
-        <button class="pref-toggle" id="pref-level-intern" onclick="toggleSearchPref('level_intern',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Fellow</div>
-        <button class="pref-toggle" id="pref-level-fellow" onclick="toggleSearchPref('level_fellow',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Apprentice</div>
-        <button class="pref-toggle" id="pref-level-apprentice" onclick="toggleSearchPref('level_apprentice',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Entry / Associate</div>
-        <button class="pref-toggle" id="pref-level-entry" onclick="toggleSearchPref('level_entry',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Mid-level</div>
-        <button class="pref-toggle" id="pref-level-mid" onclick="toggleSearchPref('level_mid',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Senior+</div>
-        <button class="pref-toggle" id="pref-level-senior" onclick="toggleSearchPref('level_senior',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Manager+</div>
-        <button class="pref-toggle" id="pref-level-manager" onclick="toggleSearchPref('level_manager',this)"></button>
-      </div>
-      <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faint);margin-bottom:0.375rem;margin-top:1rem">Schedule</div>
-      <div class="pref-row">
-        <div class="pref-label">Full-time</div>
-        <button class="pref-toggle" id="pref-sched-fulltime" onclick="toggleSearchPref('sched_fulltime',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Part-time</div>
-        <button class="pref-toggle" id="pref-sched-parttime" onclick="toggleSearchPref('sched_parttime',this)"></button>
-      </div>
-      <div class="pref-row">
-        <div class="pref-label">Contract</div>
-        <button class="pref-toggle" id="pref-sched-contract" onclick="toggleSearchPref('sched_contract',this)"></button>
-      </div>
-      <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faint);margin-bottom:0.375rem;margin-top:1rem">Other</div>
-      <div class="pref-row">
-        <div>
-          <div class="pref-label">Paid positions only</div>
-          <div class="pref-desc">Only show jobs with listed compensation</div>
+    <div id="ptab-settings" class="profile-pane">
+      <div class="profile-section">
+        <h3>Settings</h3>
+        <div class="pref-row">
+          <div>
+            <div class="pref-label">Auto-scan on load</div>
+            <div class="pref-desc">Automatically start scanning when you open the dashboard</div>
+          </div>
+          <button class="pref-toggle" id="pref-autoscan" onclick="togglePref('autoscan',this)"></button>
         </div>
-        <button class="pref-toggle" id="pref-paid-only" onclick="toggleSearchPref('paid_only',this)"></button>
+        <div class="pref-row">
+          <div>
+            <div class="pref-label">Show hidden jobs count</div>
+            <div class="pref-desc">Display the hidden jobs toggle in the scanner toolbar</div>
+          </div>
+          <button class="pref-toggle" id="pref-show-hidden" onclick="togglePref('showHiddenToggle',this)"></button>
+        </div>
+        <div class="pref-row">
+          <div>
+            <div class="pref-label">Default to Tracker tab</div>
+            <div class="pref-desc">Open the Tracker tab instead of Scanner on load</div>
+          </div>
+          <button class="pref-toggle" id="pref-default-tracker" onclick="togglePref('defaultTracker',this)"></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ptab-search-prefs" class="profile-pane">
+      <div class="profile-section">
+        <h3>Search Preferences</h3>
+        <div class="section-title">Levels</div>
+        <div class="tag-group">
+          <button class="tag-chip" data-key="level_intern" onclick="toggleSearchTag(this)">Intern / Co-op</button>
+          <button class="tag-chip" data-key="level_fellow" onclick="toggleSearchTag(this)">Fellow</button>
+          <button class="tag-chip" data-key="level_apprentice" onclick="toggleSearchTag(this)">Apprentice</button>
+          <button class="tag-chip" data-key="level_entry" onclick="toggleSearchTag(this)">Entry / Associate</button>
+          <button class="tag-chip" data-key="level_mid" onclick="toggleSearchTag(this)">Mid-level</button>
+          <button class="tag-chip" data-key="level_senior" onclick="toggleSearchTag(this)">Senior+</button>
+          <button class="tag-chip" data-key="level_manager" onclick="toggleSearchTag(this)">Manager+</button>
+        </div>
+        <div class="section-title">Schedule</div>
+        <div class="tag-group">
+          <button class="tag-chip" data-key="sched_fulltime" onclick="toggleSearchTag(this)">Full-time</button>
+          <button class="tag-chip" data-key="sched_parttime" onclick="toggleSearchTag(this)">Part-time</button>
+          <button class="tag-chip" data-key="sched_contract" onclick="toggleSearchTag(this)">Contract</button>
+        </div>
+        <div class="section-title">Other</div>
+        <div class="tag-group">
+          <button class="tag-chip" data-key="paid_only" onclick="toggleSearchTag(this)">Paid positions only</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1368,12 +1404,7 @@ function showApp() {
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app-shell').style.display = 'block';
   const isStatic = typeof STATIC_DATA !== 'undefined';
-  if (currentUser) {
-    document.getElementById('user-info').textContent = currentUser.username;
-  }
   if (isStatic) {
-    document.querySelector('.logout-btn').style.display = 'none';
-    document.getElementById('user-info').style.display = 'none';
     loadStaticData();
   }
   loadApplications();
@@ -1465,8 +1496,10 @@ let _nextId = Date.now();
 function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.header-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-profile').classList.remove('active');
   document.getElementById(tab + '-tab').classList.add('active');
-  document.getElementById('tab-' + tab).classList.add('active');
+  if (tab === 'profile') document.getElementById('tab-profile').classList.add('active');
+  else document.getElementById('tab-' + tab).classList.add('active');
 
   document.getElementById('scan-btn').style.display = tab === 'scanner' ? '' : 'none';
 
@@ -2268,7 +2301,6 @@ async function updateUsername(e) {
     try {
       await user.updateProfile({ displayName: val });
       currentUser.username = val;
-      document.getElementById('user-info').textContent = val;
       renderProfile();
       showMsg('p-username-msg', 'Username updated', true);
     } catch (err) {
@@ -2287,7 +2319,6 @@ async function updateUsername(e) {
     const data = await r.json();
     if (!r.ok) { showMsg('p-username-msg', data.error, false); btn.disabled = false; return; }
     currentUser = data;
-    document.getElementById('user-info').textContent = data.username;
     renderProfile();
     showMsg('p-username-msg', 'Username updated', true);
   } catch {
@@ -2408,12 +2439,13 @@ function getSearchPrefs() {
   return sp;
 }
 
-function toggleSearchPref(key, btn) {
+function toggleSearchTag(el) {
+  const key = el.dataset.key;
   const prefs = loadPrefs();
   const cur = key in prefs ? prefs[key] : SEARCH_DEFAULTS[key];
   prefs[key] = !cur;
   savePrefs(prefs);
-  btn.classList.toggle('on', prefs[key]);
+  el.classList.toggle('active', prefs[key]);
 }
 
 function matchesSearchPrefs(j, sp) {
@@ -2432,16 +2464,22 @@ function togglePref(key, btn) {
   btn.classList.toggle('on', prefs[key]);
 }
 
+function switchProfileTab(tab) {
+  document.querySelectorAll('.profile-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.profile-pane').forEach(p => p.classList.remove('active'));
+  document.querySelector('.profile-tab-btn[onclick*="' + tab + '"]').classList.add('active');
+  document.getElementById('ptab-' + tab).classList.add('active');
+}
+
 function initPrefs() {
   const prefs = loadPrefs();
   document.getElementById('pref-autoscan').classList.toggle('on', !!prefs.autoscan);
   document.getElementById('pref-show-hidden').classList.toggle('on', !!prefs.showHiddenToggle);
   document.getElementById('pref-default-tracker').classList.toggle('on', !!prefs.defaultTracker);
   const sp = getSearchPrefs();
-  for (const key of Object.keys(SEARCH_DEFAULTS)) {
-    const el = document.getElementById('pref-' + key.replace(/_/g, '-'));
-    if (el) el.classList.toggle('on', sp[key]);
-  }
+  document.querySelectorAll('.tag-chip[data-key]').forEach(el => {
+    el.classList.toggle('active', sp[el.dataset.key]);
+  });
 }
 
 const _origShowApp = showApp;
