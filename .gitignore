@@ -2,6 +2,9 @@ _site/
 __pycache__/
 *.pyc
 data.db
+data.db-shm
+data.db-wal
+files/out/
 seen.json
 .DS_Store
 .env

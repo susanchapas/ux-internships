@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UX Internship Watch</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232a9d6e' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M3 8V5a2 2 0 0 1 2-2h3'/%3E%3Cpath d='M16 3h3a2 2 0 0 1 2 2v3'/%3E%3Cpath d='M21 16v3a2 2 0 0 1-2 2h-3'/%3E%3Cpath d='M8 21H5a2 2 0 0 1-2-2v-3'/%3E%3Ccircle cx='12' cy='12' r='2.5' fill='%232a9d6e' stroke='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -130,7 +131,9 @@ header{
   font-family:var(--font-display);
   font-size:1.125rem;font-weight:700;letter-spacing:-0.02em;
   color:var(--midnight);text-decoration:none;
+  display:inline-flex;align-items:center;gap:0.45rem;
 }
+.nav-logo-icon{flex-shrink:0}
 .nav-logo span{color:var(--text-accent)}
 .nav-logo:hover{color:var(--midnight);text-decoration-color:transparent}
 .profile-icon-btn{
@@ -171,18 +174,59 @@ header{
 }
 .header-right{margin-left:auto;display:flex;align-items:center;gap:0.75rem}
 
+.scan-group{position:relative;display:inline-flex}
 #scan-btn{
   font-family:var(--font-display);
   background:var(--mint);color:var(--text-on-accent);border:none;
-  padding:0.5rem 1.25rem;border-radius:var(--radius-pill);
+  padding:0.5rem 1.25rem;border-radius:var(--radius-pill) 0 0 var(--radius-pill);
   font-size:0.875rem;font-weight:600;
   cursor:pointer;display:inline-flex;align-items:center;gap:0.5rem;
   box-shadow:0 1px 4px rgba(42,157,110,0.25);
   transition:background var(--duration-fast) var(--ease-smooth),transform var(--duration-fast) var(--ease-smooth),box-shadow var(--duration-fast) var(--ease-smooth);
 }
-#scan-btn:hover{background:var(--mint-vivid);transform:scale(1.02);box-shadow:0 3px 10px rgba(42,157,110,0.30)}
+#scan-btn:hover{background:var(--mint-vivid);box-shadow:0 3px 10px rgba(42,157,110,0.30)}
 #scan-btn:active{transform:scale(0.98)}
 #scan-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.scan-dropdown-toggle{
+  background:var(--mint);color:var(--text-on-accent);border:none;
+  border-left:1px solid rgba(255,255,255,0.25);
+  padding:0.5rem 0.5rem;border-radius:0 var(--radius-pill) var(--radius-pill) 0;
+  cursor:pointer;display:inline-flex;align-items:center;
+  box-shadow:0 1px 4px rgba(42,157,110,0.25);
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.scan-dropdown-toggle:hover{background:var(--mint-vivid)}
+.scan-dropdown-toggle svg{transition:transform var(--duration-fast) var(--ease-smooth)}
+.scan-dropdown-toggle.open svg{transform:rotate(180deg)}
+.scan-dropdown{
+  display:none;position:absolute;top:calc(100% + 0.375rem);right:0;
+  min-width:12rem;max-width:18rem;
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);
+  box-shadow:0 8px 24px -4px rgba(0,0,0,0.15);
+  z-index:20;overflow:hidden;
+  animation:scanDropIn var(--duration-fast) var(--ease-smooth);
+}
+.scan-dropdown.open{display:block}
+@keyframes scanDropIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.scan-dropdown-header{
+  font-size:0.6875rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--text-faint);padding:0.5rem 0.75rem 0.25rem;
+}
+.scan-dropdown-item{
+  display:block;width:100%;text-align:left;
+  font-family:var(--font-body);font-size:0.8125rem;
+  padding:0.5rem 0.75rem;border:none;background:none;
+  color:var(--text-body);cursor:pointer;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.scan-dropdown-item:hover{background:var(--mint-a10);color:var(--mint)}
+.scan-dropdown-empty{
+  font-size:0.8125rem;color:var(--text-faint);
+  padding:0.75rem;text-align:center;
+}
 .spinner{
   width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);
   border-top-color:#ffffff;border-radius:50%;display:none;
@@ -535,6 +579,43 @@ th.fav-col{width:2rem;min-width:2rem;cursor:default !important}
   background:var(--mint-a10);border-color:var(--mint-a30);color:var(--mint);
 }
 
+.saved-filter-group{display:flex;gap:0.375rem;align-items:center}
+.saved-filter-select{
+  padding:0.375rem 0.75rem;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  font-size:0.8125rem;font-family:var(--font-body);
+  background:var(--surface-card);color:var(--text-body);
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%236b83b0' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 0.5rem center;
+  padding-right:1.75rem;
+  max-width:10rem;
+}
+.saved-filter-select:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.save-filter-btn{
+  font-family:var(--font-display);
+  font-size:0.75rem;font-weight:600;
+  padding:0.3125rem 0.625rem;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-subtle);
+  background:var(--surface-card);color:var(--text-muted);
+  cursor:pointer;white-space:nowrap;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.save-filter-btn:hover{border-color:var(--border-hover);color:var(--mint)}
+.delete-filter-btn{
+  font-size:0.75rem;padding:0.25rem 0.375rem;
+  border:none;background:none;color:var(--text-faint);cursor:pointer;
+  border-radius:var(--radius-sm);
+  transition:color var(--duration-fast) var(--ease-smooth);
+}
+.delete-filter-btn:hover{color:var(--danger)}
+
+.save-filter-modal{max-width:20rem;padding:1.5rem}
+.save-filter-modal h2{font-size:1rem;margin-bottom:1rem}
+
 tr.hidden-row td{opacity:0.4}
 
 .add-btn{
@@ -857,7 +938,8 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   .stats{grid-template-columns:repeat(2,1fr)}
   .hl-grid{grid-template-columns:1fr}
   .toolbar{flex-direction:column}
-  #search,.tracker-search,.result-count,.filter-select,.toolbar-toggle{width:100%}
+  #search,.tracker-search,.result-count,.filter-select,.toolbar-toggle,.saved-filter-group{width:100%}
+  .saved-filter-select{max-width:none;flex:1}
   .result-count{text-align:left;margin-left:0}
   header{padding:0.625rem 0.875rem}
   .profile-icon-btn{right:0.875rem}
@@ -934,7 +1016,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 <a href="#main" id="skip-link">Skip to main content</a>
 
 <header>
-  <a href="#" class="nav-logo" onclick="switchTab('scanner'); return false;"><span>UX</span> Internship Watch</a>
+  <a href="#" class="nav-logo" onclick="switchTab('scanner'); return false;"><svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.5" fill="var(--mint)" stroke="none"/></svg><span>UX</span> Internship Watch</a>
   <button class="profile-icon-btn" onclick="switchTab('profile')" id="tab-profile" aria-label="Profile">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
   </button>
@@ -945,10 +1027,15 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     <button class="header-tab active" onclick="switchTab('scanner')" id="tab-scanner">Scanner</button>
     <button class="header-tab" onclick="switchTab('tracker')" id="tab-tracker">Tracker</button>
   </div>
-  <button id="scan-btn" onclick="startScan()">
-    <div class="spinner"></div>
-    <span>Scan Now</span>
-  </button>
+  <div class="scan-group">
+    <button id="scan-btn" onclick="startScan()">
+      <div class="spinner"></div>
+      <span>Scan Now</span>
+    </button><button class="scan-dropdown-toggle" id="scan-dropdown-toggle" onclick="toggleScanDropdown(event)" aria-label="Scan with saved filter">
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 4.5 6 7.5 9 4.5"/></svg>
+    </button>
+    <div class="scan-dropdown" id="scan-dropdown"></div>
+  </div>
 </div>
 
 <div id="progress-bar"><div id="progress-fill"></div></div>
@@ -1014,6 +1101,13 @@ td.notes-cell{min-width:10rem;max-width:16rem}
         </select>
         <button class="toolbar-toggle" id="fav-toggle" onclick="toggleShowFav()">★ Favorites</button>
         <button class="toolbar-toggle" id="hidden-toggle" onclick="toggleShowHidden()">Hidden (0)</button>
+        <div class="saved-filter-group">
+          <select id="saved-filter-select" class="saved-filter-select" onchange="loadSavedFilter(this.value)" title="Saved filters">
+            <option value="">Saved filters</option>
+          </select>
+          <button class="save-filter-btn" onclick="openSaveFilterModal()" title="Save current filters">+ Save</button>
+          <button class="delete-filter-btn" id="delete-filter-btn" onclick="deleteSavedFilter()" title="Delete selected filter" style="display:none">&times;</button>
+        </div>
         <div class="result-count" id="result-count"></div>
       </div>
       <div class="table-wrap">
@@ -1268,6 +1362,20 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   </div>
 </div>
 
+<div class="modal-overlay" id="save-filter-modal">
+  <div class="modal save-filter-modal" role="dialog" aria-modal="true">
+    <h2>Save Current Filters</h2>
+    <div class="modal-field">
+      <label for="filter-name-input">Name</label>
+      <input type="text" id="filter-name-input" placeholder="e.g. Remote interns, Paid only..." maxlength="40">
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="modal-cancel" onclick="closeSaveFilterModal()">Cancel</button>
+      <button type="button" class="add-btn" onclick="saveCurrentFilter()" style="font-size:0.8125rem;padding:0.4rem 1rem">Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
 let currentUser = null;
 
@@ -1458,6 +1566,95 @@ function saveHidden() { localStorage.setItem('ux-internship-hidden', JSON.string
 function saveFavJobs() { localStorage.setItem('ux-internship-fav-jobs', JSON.stringify([...favJobs])); }
 function saveFavEmployers() { localStorage.setItem('ux-internship-fav-employers', JSON.stringify([...favEmployers])); }
 
+const SAVED_FILTERS_KEY = 'ux-internship-saved-filters';
+function getSavedFilters() {
+  try { return JSON.parse(localStorage.getItem(SAVED_FILTERS_KEY)) || []; } catch { return []; }
+}
+function setSavedFilters(filters) { localStorage.setItem(SAVED_FILTERS_KEY, JSON.stringify(filters)); }
+
+function getCurrentFilterState() {
+  return {
+    search: document.getElementById('search').value,
+    level: document.getElementById('level-filter').value,
+    payType: document.getElementById('pay-type-filter').value,
+    schedule: document.getElementById('schedule-filter').value,
+    source: document.getElementById('source-filter').value,
+    favOnly: showFavOnly,
+    showHidden: showHidden,
+  };
+}
+
+function applyFilterState(f) {
+  _loadingFilter = true;
+  document.getElementById('search').value = f.search || '';
+  document.getElementById('level-filter').value = f.level || '';
+  document.getElementById('pay-type-filter').value = f.payType || '';
+  document.getElementById('schedule-filter').value = f.schedule || '';
+  const srcEl = document.getElementById('source-filter');
+  srcEl.value = f.source && [...srcEl.options].some(o => o.value === f.source) ? f.source : '';
+  if (f.favOnly !== showFavOnly) toggleShowFav();
+  if (f.showHidden !== showHidden) toggleShowHidden();
+  renderTable();
+  _loadingFilter = false;
+}
+
+function openSaveFilterModal() {
+  document.getElementById('filter-name-input').value = '';
+  document.getElementById('save-filter-modal').classList.add('open');
+  document.getElementById('filter-name-input').focus();
+}
+function closeSaveFilterModal() {
+  document.getElementById('save-filter-modal').classList.remove('open');
+}
+document.getElementById('save-filter-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeSaveFilterModal();
+});
+document.getElementById('filter-name-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') saveCurrentFilter();
+  if (e.key === 'Escape') closeSaveFilterModal();
+});
+
+function saveCurrentFilter() {
+  const name = document.getElementById('filter-name-input').value.trim();
+  if (!name) return;
+  const filters = getSavedFilters();
+  const existing = filters.findIndex(f => f.name === name);
+  const entry = { name, state: getCurrentFilterState() };
+  if (existing >= 0) filters[existing] = entry;
+  else filters.push(entry);
+  setSavedFilters(filters);
+  closeSaveFilterModal();
+  buildSavedFilterSelect();
+  document.getElementById('saved-filter-select').value = name;
+  document.getElementById('delete-filter-btn').style.display = '';
+}
+
+function loadSavedFilter(name) {
+  const btn = document.getElementById('delete-filter-btn');
+  if (!name) { btn.style.display = 'none'; return; }
+  const filters = getSavedFilters();
+  const f = filters.find(f => f.name === name);
+  if (f) applyFilterState(f.state);
+  btn.style.display = '';
+}
+
+function deleteSavedFilter() {
+  const sel = document.getElementById('saved-filter-select');
+  const name = sel.value;
+  if (!name) return;
+  const filters = getSavedFilters().filter(f => f.name !== name);
+  setSavedFilters(filters);
+  buildSavedFilterSelect();
+  document.getElementById('delete-filter-btn').style.display = 'none';
+}
+
+function buildSavedFilterSelect() {
+  const sel = document.getElementById('saved-filter-select');
+  const filters = getSavedFilters();
+  sel.innerHTML = '<option value="">Saved filters</option>' +
+    filters.map(f => '<option value="' + f.name.replace(/"/g, '&quot;') + '">' + f.name.replace(/</g, '&lt;') + '</option>').join('');
+}
+
 function toggleFavJob(id) {
   favJobs.has(id) ? favJobs.delete(id) : favJobs.add(id);
   saveFavJobs(); renderTable(); buildHighlights();
@@ -1501,7 +1698,7 @@ function switchTab(tab) {
   if (tab === 'profile') document.getElementById('tab-profile').classList.add('active');
   else document.getElementById('tab-' + tab).classList.add('active');
 
-  document.getElementById('scan-btn').style.display = tab === 'scanner' ? '' : 'none';
+  document.querySelector('.scan-group').style.display = tab === 'scanner' ? '' : 'none';
 
   if (tab === 'tracker') loadApplications();
   if (tab === 'profile') renderProfile();
@@ -1862,7 +2059,12 @@ function getFiltered() {
   });
 }
 
+let _loadingFilter = false;
 function renderTable() {
+  if (!_loadingFilter) {
+    const sel = document.getElementById('saved-filter-select');
+    if (sel) { sel.value = ''; document.getElementById('delete-filter-btn').style.display = 'none'; }
+  }
   const jobs = getFiltered();
 
   jobs.sort((a, b) => {
@@ -2480,6 +2682,7 @@ function initPrefs() {
   document.querySelectorAll('.tag-chip[data-key]').forEach(el => {
     el.classList.toggle('active', sp[el.dataset.key]);
   });
+  buildSavedFilterSelect();
 }
 
 const _origShowApp = showApp;
@@ -2499,6 +2702,51 @@ checkAuth = function() {
     if (m) openJobModal(decodeURIComponent(m[1]));
   }, 500);
 };
+
+function toggleScanDropdown(e) {
+  e.stopPropagation();
+  const dd = document.getElementById('scan-dropdown');
+  const tog = document.getElementById('scan-dropdown-toggle');
+  const opening = !dd.classList.contains('open');
+  dd.classList.toggle('open');
+  tog.classList.toggle('open');
+  if (opening) buildScanDropdown();
+}
+
+function closeScanDropdown() {
+  document.getElementById('scan-dropdown').classList.remove('open');
+  document.getElementById('scan-dropdown-toggle').classList.remove('open');
+}
+
+function buildScanDropdown() {
+  const dd = document.getElementById('scan-dropdown');
+  const filters = getSavedFilters();
+  if (!filters.length) {
+    dd.innerHTML = '<div class="scan-dropdown-empty">No saved filters yet</div>';
+    return;
+  }
+  dd.innerHTML =
+    '<div class="scan-dropdown-header">Scan with filter</div>' +
+    filters.map(f =>
+      '<button class="scan-dropdown-item" onclick="scanWithFilter(\'' + escAttr(f.name) + '\')">' +
+        esc(f.name) + '</button>'
+    ).join('');
+}
+
+function scanWithFilter(name) {
+  closeScanDropdown();
+  const filters = getSavedFilters();
+  const f = filters.find(f => f.name === name);
+  if (f) applyFilterState(f.state);
+  document.getElementById('saved-filter-select').value = name;
+  document.getElementById('delete-filter-btn').style.display = '';
+  startScan();
+}
+
+document.addEventListener('click', e => {
+  const dd = document.getElementById('scan-dropdown');
+  if (dd.classList.contains('open') && !e.target.closest('.scan-group')) closeScanDropdown();
+});
 
 checkAuth();
 
