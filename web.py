@@ -102,7 +102,7 @@ class Handler(BaseHTTPRequestHandler):
         return user
 
     def do_GET(self):
-        if self.path in ("/", "/scanner", "/tracker", "/profile"):
+        if self.path == "/":
             self._serve_dashboard()
         elif self.path == "/api/scan":
             self._run_scan()
