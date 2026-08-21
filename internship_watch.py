@@ -387,10 +387,10 @@ def main():
             elif board == "usajobs":
                 jobs = list(fetch_usajobs(entry))
             else:
-                errors.append(f"{company}: unknown board '{board}'")
+                errors.append({"company": company, "error": f"unknown board '{board}'"})
                 continue
         except Exception as e:
-            errors.append(f"{company} ({board}): {type(e).__name__} {e}")
+            errors.append({"company": company, "error": f"{type(e).__name__}: {e}"})
             continue
 
         hits = [j for j in jobs if matches(j, title_inc, title_exc, loc_inc)]
@@ -401,7 +401,7 @@ def main():
     if errors:
         print("\nerrors:")
         for e in errors:
-            print("  -", e)
+            print(f"  - {e['company']}: {e['error']}")
 
     hidden = set(load_json(HIDDEN_PATH, []))
     new = [j for j in found if j["id"] not in seen and j["id"] not in hidden]
