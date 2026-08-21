@@ -3171,6 +3171,11 @@ function buildBentoGrid() {
   ).join('');
 }
 
+function openJobFromHash() {
+  const m = location.hash.match(/^#job=(.+)/);
+  if (m) openJobModal(decodeURIComponent(m[1]));
+}
+
 const _origShowApp = showApp;
 showApp = function() {
   _origShowApp();
@@ -3179,16 +3184,10 @@ showApp = function() {
   const prefs = loadPrefs();
   if (prefs.defaultTracker) switchTab('tracker');
   if (prefs.autoscan && !STATIC) setTimeout(startScan, 300);
+  openJobFromHash();
 };
 
-const _origCheckAuth = checkAuth;
-checkAuth = function() {
-  _origCheckAuth();
-  setTimeout(() => {
-    const m = location.hash.match(/^#job=(.+)/);
-    if (m) openJobModal(decodeURIComponent(m[1]));
-  }, 500);
-};
+window.addEventListener('hashchange', openJobFromHash);
 
 function toggleScanDropdown(e) {
   e.stopPropagation();
