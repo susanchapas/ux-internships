@@ -51,12 +51,18 @@
   "slug": "acorns"
  },
  "Ad Hoc": {
-  "board": null,
-  "note": "VA.gov, healthcare.gov"
+  "board": "workable",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "adhocteam"
  },
  "Addepar": {
-  "board": null,
-  "note": ""
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 123,
+  "samples": [],
+  "slug": "addepar1"
  },
  "Adobe": {
   "board": "workday",
@@ -187,8 +193,12 @@
   "slug": "bark"
  },
  "Bank of America": {
-  "board": null,
-  "note": "NYC offices"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Lateral-US",
+  "tenant": "ghr",
+  "wd": 1
  },
  "Barrel": {
   "board": null,
@@ -226,8 +236,12 @@
   "slug": "billcom"
  },
  "BlackRock": {
-  "board": null,
-  "note": "slug collision with unrelated company on bamboohr"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "BlackRock_Professional",
+  "tenant": "blackrock",
+  "wd": 1
  },
  "Block": {
   "board": "greenhouse",
@@ -369,8 +383,12 @@
   "wd": 1
  },
  "Citi": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "2",
+  "tenant": "citi",
+  "wd": 5
  },
  "Civilla": {
   "board": null,
@@ -525,8 +543,11 @@
   "slug": "dave"
  },
  "Deel": {
-  "board": null,
-  "note": ""
+  "board": "ashby",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "deel"
  },
  "Deloitte": {
   "board": "workday",
@@ -588,20 +609,31 @@
   "slug": "doubleverify"
  },
  "Droga5": {
-  "board": null,
-  "note": "NYC, part of Accenture Song"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "AccentureCareers",
+  "tenant": "accenture",
+  "wd": 103
  },
  "EPAM": {
   "board": null,
   "note": "EPAM Continuum does design consulting"
  },
  "Esusu": {
-  "board": null,
-  "note": "Rent reporting for credit building. NYC."
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 8,
+  "samples": [],
+  "slug": "esusu"
  },
  "Etsy": {
-  "board": null,
-  "note": "Brooklyn HQ"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Etsy_Careers",
+  "tenant": "etsy",
+  "wd": 5
  },
  "Fable": {
   "board": "ashby",
@@ -631,8 +663,12 @@
   "note": "Baltimore"
  },
  "Federal Reserve Bank of New York": {
-  "board": null,
-  "note": "NYC. Directly relevant to your CDFI background."
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "FRS",
+  "tenant": "rb",
+  "wd": 5
  },
  "Fidelity Investments": {
   "board": "lever",
@@ -808,8 +844,11 @@
   "slug": "kickstarter"
  },
  "Kiva": {
-  "board": null,
-  "note": ""
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 2,
+  "samples": [],
+  "slug": "kivaorg"
  },
  "Kustomer": {
   "board": "ashby",
@@ -899,8 +938,11 @@
   "wd": 5
  },
  "Local Projects": {
-  "board": null,
-  "note": "NYC. Museum/exhibit UX."
+  "board": "workable",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "local-projects-llc-1"
  },
  "Lyft": {
   "board": "greenhouse",
@@ -915,8 +957,11 @@
   "slug": "lyft"
  },
  "Marqeta": {
-  "board": null,
-  "note": ""
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 2,
+  "samples": [],
+  "slug": "marqeta"
  },
  "Marsh McLennan": {
   "board": "greenhouse",
@@ -1009,8 +1054,11 @@
   "slug": "miro"
  },
  "MoCaFi": {
-  "board": null,
-  "note": "Banking for underserved. Jersey City."
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "mocafi"
  },
  "Modern Treasury": {
   "board": "ashby",
@@ -1024,8 +1072,12 @@
   "slug": "moderntreasury"
  },
  "MoneyLion": {
-  "board": null,
-  "note": "NYC."
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "careers",
+  "tenant": "gen",
+  "wd": 1
  },
  "MongoDB": {
   "board": "greenhouse",
@@ -1044,8 +1096,12 @@
   "note": "NYC"
  },
  "Morgan Stanley": {
-  "board": null,
-  "note": "slug collision with unrelated company on recruitee"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "External",
+  "tenant": "ms",
+  "wd": 5
  },
  "Morning Brew": {
   "board": "lever",
@@ -1077,16 +1133,23 @@
   "wd": 1
  },
  "Nava PBC": {
-  "board": null,
-  "note": "Public benefit corp. Medicare/VA work."
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 16,
+  "samples": [],
+  "slug": "navapbc"
  },
  "Navan": {
   "board": null,
   "note": ""
  },
  "Netflix": {
-  "board": null,
-  "note": "NYC office"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Netflix",
+  "tenant": "netflix",
+  "wd": 108
  },
  "New York Life": {
   "board": "greenhouse",
@@ -1277,8 +1340,12 @@
   "slug": "prophet"
  },
  "Prudential Financial": {
-  "board": null,
-  "note": "Newark NJ HQ"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Careers",
+  "tenant": "pru",
+  "wd": 5
  },
  "Public": {
   "board": "greenhouse",
@@ -1292,8 +1359,11 @@
   "slug": "public"
  },
  "Publicis Sapient": {
-  "board": null,
-  "note": ""
+  "board": "smartrecruiters",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "PublicisSapient12"
  },
  "PwC": {
   "board": "workday",
@@ -1352,8 +1422,12 @@
   "wd": 1
  },
  "Remitly": {
-  "board": null,
-  "note": ""
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "Remitly_Careers",
+  "tenant": "remitly",
+  "wd": 5
  },
  "Rippling": {
   "board": null,
@@ -1393,8 +1467,12 @@
   "slug": "roku"
  },
  "S&P Global": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "SPGI_Careers",
+  "tenant": "spgi",
+  "wd": 5
  },
  "Salesforce": {
   "board": "workday",
@@ -1443,16 +1521,23 @@
   "note": "slug collision with unrelated company on bamboohr"
  },
  "Skylight": {
-  "board": null,
-  "note": ""
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 4,
+  "samples": [],
+  "slug": "skylighthq"
  },
  "Slalom": {
   "board": null,
   "note": ""
  },
  "Snap": {
-  "board": null,
-  "note": "NYC"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "snap",
+  "tenant": "snapchat",
+  "wd": 1
  },
  "SoFi": {
   "board": "greenhouse",
@@ -1490,8 +1575,11 @@
   "slug": "squarespace"
  },
  "Stash": {
-  "board": null,
-  "note": "NYC. Financial literacy focus."
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 13,
+  "samples": [],
+  "slug": "stashinvest"
  },
  "Stripe": {
   "board": "greenhouse",
@@ -1505,8 +1593,12 @@
   "slug": "stripe"
  },
  "Synchrony": {
-  "board": null,
-  "note": ""
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "careers",
+  "tenant": "synchronyfinancial",
+  "wd": 5
  },
  "T-Mobile": {
   "board": "workday",
@@ -1555,8 +1647,11 @@
   "slug": "theknotworldwide"
  },
  "Thoughtbot": {
-  "board": null,
-  "note": ""
+  "board": "workable",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "thoughtbot"
  },
  "Toast": {
   "board": "greenhouse",
@@ -1617,8 +1712,12 @@
   "slug": "upstart"
  },
  "Vanguard": {
-  "board": null,
-  "note": "Malvern PA"
+  "board": "workday",
+  "confidence": "parsed-from-url",
+  "search": "intern",
+  "site": "vanguard_external",
+  "tenant": "vanguard",
+  "wd": 5
  },
  "Varo": {
   "board": null,

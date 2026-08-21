@@ -2067,7 +2067,6 @@ function getFiltered() {
   const lvl = document.getElementById('level-filter').value;
   const pt = document.getElementById('pay-type-filter').value;
   const sched = document.getElementById('schedule-filter').value;
-  const sf = getScanFilters();
   return allJobs.filter(j => {
     if (!showHidden && hiddenJobs.has(j.id)) return false;
     if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
@@ -2079,15 +2078,6 @@ function getFiltered() {
     if (pt === 'listed' && !j.pay) return false;
     if (pt === 'unlisted' && j.pay) return false;
     if (sched && j.schedule !== sched) return false;
-    if (sf.levels.length < 7 && !sf.levels.includes(j.level)) return false;
-    if (sf.schedules.length < 4) {
-      if (!sf.schedules.includes(j.schedule || 'other')) return false;
-    }
-    if (sf.payListed && !j.pay) return false;
-    if (sf.minHourly && j.pay_type === 'hourly' && parsePayNum(j.pay) < parseFloat(sf.minHourly)) return false;
-    if (sf.minSalary && j.pay_type === 'salary' && parsePayNum(j.pay) < parseFloat(sf.minSalary)) return false;
-    if (sf.favoritesOnly && !favEmployers.has(j.company)) return false;
-    if (sf.location && !(j.location || '').toLowerCase().includes(sf.location.toLowerCase())) return false;
     return true;
   });
 }

@@ -106,6 +106,9 @@ class DiscordObserver(JobObserver):
 
     EMBED_COLOR = 0x5865F2
     DASHBOARD = "https://susanchapas.github.io/ux-internships/"
+    _ALERT_RE = re.compile(
+        r"\bintern\b|\bapprentice|\bfellow\b|\bfellowship\b|\bstudent\b", re.I,
+    )
 
     def __init__(self):
         self.webhook = os.environ.get("DISCORD_WEBHOOK")
@@ -114,7 +117,9 @@ class DiscordObserver(JobObserver):
     def on_new_jobs(self, jobs):
         if not self.webhook or not jobs:
             return
-        self._new_jobs.extend(jobs)
+        self._new_jobs.extend(
+            j for j in jobs if self._ALERT_RE.search(j.get("title", ""))
+        )
 
     def on_scan_complete(self, stats):
         if not self.webhook:

@@ -308,37 +308,45 @@ def notify(new_jobs):
 
     discord = os.environ.get("DISCORD_WEBHOOK")
     if discord:
-        by_company = {}
-        for j in new_jobs:
-            by_company.setdefault(j["company"], []).append(j)
-        embeds = []
-        for company, postings in by_company.items():
-            desc_lines = []
-            for j in postings:
-                modal_url = f"{DASHBOARD_URL}#job={quote(j['id'], safe='')}"
-                parts = [f"[{j['title']}]({modal_url})"]
-                if j.get("location"):
-                    parts.append(f"📍 {j['location']}")
-                if j.get("pay"):
-                    parts.append(f"💰 {j['pay']}")
-                desc_lines.append(" · ".join(parts))
-            embeds.append({
-                "title": f"{company} ({len(postings)})",
-                "description": "\n".join(desc_lines),
-                "color": 0x5865F2,
-            })
-        summary = (
-            f"🔔 **{len(new_jobs)}** new posting{'s' if len(new_jobs) != 1 else ''} "
-            f"across **{len(by_company)}** compan{'ies' if len(by_company) != 1 else 'y'}"
+        discord_re = re.compile(
+            r"\bintern\b|\bapprentice|\bfellow\b|\bfellowship\b|\bstudent\b",
+            re.I,
         )
-        for i in range(0, len(embeds), 10):
-            batch = embeds[i:i + 10]
-            payload = {"embeds": batch}
-            if i == 0:
-                payload["content"] = summary
-            requests.post(discord, json=payload, timeout=TIMEOUT)
-            time.sleep(0.5)
-        print("  -> posted to Discord")
+        discord_jobs = [j for j in new_jobs if discord_re.search(j.get("title", ""))]
+        if not discord_jobs:
+            print("  -> no intern/apprentice/fellow/student postings for Discord")
+        else:
+            by_company = {}
+            for j in discord_jobs:
+                by_company.setdefault(j["company"], []).append(j)
+            embeds = []
+            for company, postings in by_company.items():
+                desc_lines = []
+                for j in postings:
+                    modal_url = f"{DASHBOARD_URL}#job={quote(j['id'], safe='')}"
+                    parts = [f"[{j['title']}]({modal_url})"]
+                    if j.get("location"):
+                        parts.append(f"📍 {j['location']}")
+                    if j.get("pay"):
+                        parts.append(f"💰 {j['pay']}")
+                    desc_lines.append(" · ".join(parts))
+                embeds.append({
+                    "title": f"{company} ({len(postings)})",
+                    "description": "\n".join(desc_lines),
+                    "color": 0x5865F2,
+                })
+            summary = (
+                f"🔔 **{len(discord_jobs)}** new posting{'s' if len(discord_jobs) != 1 else ''} "
+                f"across **{len(by_company)}** compan{'ies' if len(by_company) != 1 else 'y'}"
+            )
+            for i in range(0, len(embeds), 10):
+                batch = embeds[i:i + 10]
+                payload = {"embeds": batch}
+                if i == 0:
+                    payload["content"] = summary
+                requests.post(discord, json=payload, timeout=TIMEOUT)
+                time.sleep(0.5)
+            print("  -> posted to Discord")
 
     if not (ntfy_topic or discord):
         print("  ! no notification channel configured; printing instead\n")
