@@ -616,10 +616,6 @@
   "tenant": "accenture",
   "wd": 103
  },
- "EPAM": {
-  "board": null,
-  "note": "EPAM Continuum does design consulting"
- },
  "Esusu": {
   "board": "greenhouse",
   "confidence": "verified",
@@ -660,7 +656,7 @@
  },
  "Fearless": {
   "board": null,
-  "note": "Baltimore"
+  "note": "Baltimore civic tech"
  },
  "Federal Reserve Bank of New York": {
   "board": "workday",
@@ -1140,8 +1136,11 @@
   "slug": "navapbc"
  },
  "Navan": {
-  "board": null,
-  "note": ""
+  "board": "greenhouse",
+  "confidence": "verified",
+  "open_jobs": 207,
+  "samples": [],
+  "slug": "tripactions"
  },
  "Netflix": {
   "board": "workday",
@@ -1527,10 +1526,6 @@
   "samples": [],
   "slug": "skylighthq"
  },
- "Slalom": {
-  "board": null,
-  "note": ""
- },
  "Snap": {
   "board": "workday",
   "confidence": "parsed-from-url",
@@ -1720,8 +1715,11 @@
   "wd": 5
  },
  "Varo": {
-  "board": null,
-  "note": ""
+  "board": "lever",
+  "confidence": "verified",
+  "open_jobs": 0,
+  "samples": [],
+  "slug": "varomoney"
  },
  "VaynerMedia": {
   "board": "greenhouse",

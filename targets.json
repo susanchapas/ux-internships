@@ -582,18 +582,9 @@
           "hint": "dentsu"
         },
         {
-          "name": "EPAM",
-          "hint": "epam",
-          "note": "EPAM Continuum does design consulting"
-        },
-        {
           "name": "Designit",
           "hint": "designit",
           "note": "Wipro-owned"
-        },
-        {
-          "name": "Slalom",
-          "hint": "slalom"
         }
       ]
     },
@@ -1188,7 +1179,7 @@
           "note": "NYC. Large design org."
         },
         {
-          "name": "Condé Nast",
+          "name": "Cond\u00e9 Nast",
           "note": "NYC"
         },
         {
@@ -1212,7 +1203,7 @@
           "note": "Englewood Cliffs NJ"
         },
         {
-          "name": "Estée Lauder",
+          "name": "Est\u00e9e Lauder",
           "note": "NYC"
         },
         {
@@ -1391,7 +1382,7 @@
       ]
     },
     "fortune500_nycnj": {
-      "label": "Fortune 500 — NYC/NJ area (not covered elsewhere)",
+      "label": "Fortune 500 \u2014 NYC/NJ area (not covered elsewhere)",
       "note": "Additional F500 companies HQ'd or with major offices in NYC/NJ metro. Many on Workday.",
       "priority": 2,
       "companies": [
@@ -1410,7 +1401,7 @@
         {
           "name": "Omnicom Group",
           "hint": "omnicom",
-          "note": "NYC HQ. Owns BBDO, DDB, TBWA — design/advertising."
+          "note": "NYC HQ. Owns BBDO, DDB, TBWA \u2014 design/advertising."
         },
         {
           "name": "Interpublic Group",
@@ -1460,7 +1451,7 @@
         {
           "name": "Scholastic",
           "hint": "scholastic",
-          "note": "NYC HQ. Children's content/publishing — design-heavy."
+          "note": "NYC HQ. Children's content/publishing \u2014 design-heavy."
         },
         {
           "name": "Hess",
@@ -1533,7 +1524,7 @@
         {
           "name": "Zillow",
           "hint": "zillow",
-          "note": "NYC office. Real estate tech — strong design."
+          "note": "NYC office. Real estate tech \u2014 strong design."
         },
         {
           "name": "Compass",
@@ -1558,7 +1549,7 @@
       ]
     },
     "best_places_to_work": {
-      "label": "Best Places to Work (Glassdoor/Fortune/LinkedIn) — NYC/NJ",
+      "label": "Best Places to Work (Glassdoor/Fortune/LinkedIn) \u2014 NYC/NJ",
       "note": "Companies consistently ranked highly on workplace lists that are not already in other categories.",
       "priority": 2,
       "companies": [
@@ -1723,7 +1714,7 @@
         {
           "name": "Handshake",
           "hint": "handshake",
-          "note": "NYC. Career platform — directly relevant."
+          "note": "NYC. Career platform \u2014 directly relevant."
         },
         {
           "name": "Adyen",
@@ -1903,12 +1894,12 @@
     "automated": [
       {
         "name": "USAJOBS (federal, incl. Pathways Internship Program)",
-        "how": "built into internship_watch.py — needs a free API key from developer.usajobs.gov",
+        "how": "built into internship_watch.py \u2014 needs a free API key from developer.usajobs.gov",
         "url": "https://www.usajobs.gov/"
       },
       {
         "name": "NYC Jobs (all city agencies)",
-        "how": "NYC Open Data publishes current job postings as a dataset with a Socrata API — see resolve.py --gov",
+        "how": "NYC Open Data publishes current job postings as a dataset with a Socrata API \u2014 see resolve.py --gov",
         "url": "https://opendata.cityofnewyork.us/"
       }
     ],
@@ -1977,7 +1968,7 @@
       },
       {
         "name": "United Nations",
-        "note": "NYC HQ. UN internships are typically unpaid — check before investing time.",
+        "note": "NYC HQ. UN internships are typically unpaid \u2014 check before investing time.",
         "url": "https://careers.un.org/"
       },
       {
@@ -1989,6 +1980,6 @@
         "url": "https://www.worldbank.org/en/about/careers"
       }
     ],
-    "note_on_federal_digital": "18F and the U.S. Digital Service were the classic federal design-research entry points. Both were significantly restructured during 2025 — verify current status before building them into your pipeline. The private civic-tech contractors in the civic_tech category do much of the same work and hire more predictably."
+    "note_on_federal_digital": "18F and the U.S. Digital Service were the classic federal design-research entry points. Both were significantly restructured during 2025 \u2014 verify current status before building them into your pipeline. The private civic-tech contractors in the civic_tech category do much of the same work and hire more predictably."
   }
 }

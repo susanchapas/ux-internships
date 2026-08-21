@@ -384,6 +384,43 @@ main{max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 5rem}
 }
 .filter-select:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
 
+.filter-multi{position:relative;display:inline-block}
+.filter-multi-btn{
+  padding:0.5rem 0.75rem;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  font-size:0.875rem;font-family:var(--font-body);
+  background:var(--surface-card);color:var(--text-body);
+  cursor:pointer;white-space:nowrap;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%236b83b0' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 0.75rem center;
+  padding-right:2rem;
+  transition:border-color var(--duration-fast) var(--ease-smooth);
+}
+.filter-multi-btn:hover{border-color:var(--border-hover)}
+.filter-multi-btn.active{border-color:var(--focus-ring);color:var(--text-heading)}
+.filter-multi-panel{
+  display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:100;
+  min-width:180px;
+  background:var(--surface-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  box-shadow:0 4px 16px rgba(0,0,0,0.12);
+  padding:0.375rem 0;
+}
+.filter-multi-panel.open{display:block}
+.filter-multi-panel label{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:0.375rem 0.75rem;
+  font-size:0.8125rem;color:var(--text-body);
+  cursor:pointer;user-select:none;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.filter-multi-panel label:hover{background:var(--surface-panel)}
+.filter-multi-panel input[type="checkbox"]{
+  accent-color:var(--mint);width:14px;height:14px;margin:0;cursor:pointer;
+}
+
 .result-count{font-size:0.8125rem;color:var(--text-faint);margin-left:auto}
 
 .table-wrap{
@@ -959,11 +996,172 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 .pref-toggle.on{background:var(--mint)}
 .pref-toggle.on::after{transform:translateX(1.125rem)}
 
+.bento-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+.bento-card{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:1.25rem;
+  padding:1.5rem;
+  box-shadow:var(--shadow-card);
+  transition:border-color var(--duration-fast) var(--ease-smooth),
+             box-shadow var(--duration-fast) var(--ease-smooth),
+             transform var(--duration-fast) var(--ease-smooth);
+  overflow:hidden;
+  min-width:0;
+}
+.bento-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-sticky)}
+
+.bento-scanner{grid-column:1/3;position:relative}
+.bento-tracker{grid-column:3}
+.bento-highlights{grid-column:1;grid-row:2/4}
+.bento-stats{grid-column:2/4}
+.bento-favorites{grid-column:2/4}
+.bento-manual{grid-column:1/4}
+
+.bento-link{
+  cursor:pointer;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.bento-link:hover{transform:translateY(-2px)}
+
+.bento-scanner.bento-link{
+  background:linear-gradient(135deg,var(--mint) 0%,#1a7a52 100%);
+  color:#fff;border-color:transparent;padding:2rem 1.75rem;
+}
+.bento-scanner.bento-link:hover{border-color:transparent;box-shadow:0 8px 24px rgba(42,157,110,0.3)}
+.bento-scanner .bento-title{
+  font-family:var(--font-display);font-size:1.625rem;font-weight:700;line-height:1.2;
+}
+.bento-scanner .bento-subtitle{opacity:0.85;font-size:0.9375rem;margin-top:0.375rem}
+.bento-scanner .bento-arrow{
+  position:absolute;right:1.75rem;top:50%;transform:translateY(-50%);
+  font-size:2rem;opacity:0.3;transition:opacity var(--duration-fast) var(--ease-smooth);
+}
+.bento-scanner.bento-link:hover .bento-arrow{opacity:0.6}
+
+.bento-tracker.bento-link{
+  background:linear-gradient(135deg,var(--sky) 0%,#4a6a9a 100%);
+  color:#fff;border-color:transparent;padding:1.75rem 1.5rem;
+}
+.bento-tracker.bento-link:hover{border-color:transparent;box-shadow:0 8px 24px rgba(107,131,176,0.3)}
+.bento-tracker .bento-title{font-family:var(--font-display);font-size:1.25rem;font-weight:700}
+.bento-tracker .bento-subtitle{opacity:0.85;font-size:0.875rem;margin-top:0.25rem}
+.bento-tracker .bento-arrow{
+  position:absolute;right:1.5rem;bottom:1.5rem;
+  font-size:1.5rem;opacity:0.3;transition:opacity var(--duration-fast) var(--ease-smooth);
+}
+.bento-tracker.bento-link{position:relative}
+.bento-tracker.bento-link:hover .bento-arrow{opacity:0.6}
+
+.bento-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:0.875rem;
+}
+.bento-header h3{
+  font-family:var(--font-display);font-size:1rem;font-weight:600;
+  color:var(--text-body);margin:0;
+}
+.bento-header .bento-count{
+  font-family:var(--font-mono);font-size:0.75rem;color:var(--text-faint);
+}
+.bento-view-all{
+  font-size:0.75rem;color:var(--text-accent);text-decoration:none;
+  cursor:pointer;border:none;background:none;font-family:var(--font-body);
+}
+.bento-view-all:hover{text-decoration:underline}
+
+.bento-hl-list{display:flex;flex-direction:column;gap:0.5rem}
+.bento-hl-item{
+  padding:0.625rem 0.75rem;border-radius:var(--radius-md);
+  background:var(--surface-panel);border:1px solid var(--border-subtle);
+  transition:border-color var(--duration-fast) var(--ease-smooth);
+}
+.bento-hl-item:hover{border-color:var(--border-hover)}
+.bento-hl-company{font-size:0.6875rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em}
+.bento-hl-title{font-size:0.8125rem;font-weight:500}
+.bento-hl-title a{color:var(--text-body);text-decoration:none}
+.bento-hl-title a:hover{color:var(--text-accent)}
+.bento-hl-badges{display:flex;gap:0.25rem;margin-top:0.25rem;flex-wrap:wrap}
+.bento-hl-empty{font-size:0.8125rem;color:var(--text-faint);padding:1rem 0}
+
+.bento-stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-bottom:1rem}
+.bento-stat-item{
+  text-align:center;padding:0.75rem;
+  background:var(--surface-panel);border-radius:var(--radius-md);
+  border:1px solid var(--border-subtle);
+}
+.bento-stat-n{font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--text-accent)}
+.bento-stat-label{font-size:0.6875rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em}
+.bento-pipeline{display:flex;flex-direction:column;gap:0.375rem}
+.bento-pipe-row{display:flex;align-items:center;gap:0.5rem;font-size:0.75rem}
+.bento-pipe-label{min-width:5rem;color:var(--text-muted);text-align:right}
+.bento-pipe-track{flex:1;height:0.5rem;background:var(--surface-panel);border-radius:var(--radius-pill);overflow:hidden}
+.bento-pipe-bar{height:100%;border-radius:var(--radius-pill);transition:width 0.5s var(--ease-smooth)}
+.bento-pipe-count{min-width:1.5rem;color:var(--text-faint);font-family:var(--font-mono);font-size:0.6875rem}
+
+.bento-fav-list{display:flex;flex-wrap:wrap;gap:0.375rem}
+.bento-fav-pill{
+  display:inline-flex;align-items:center;gap:0.375rem;
+  padding:0.3rem 0.75rem;border-radius:var(--radius-pill);
+  background:var(--surface-panel);border:1px solid var(--border-subtle);
+  font-size:0.8125rem;color:var(--text-body);
+  transition:border-color var(--duration-fast) var(--ease-smooth);
+}
+.bento-fav-pill:hover{border-color:var(--border-hover)}
+.bento-fav-pill .fav-heart{color:var(--danger);font-size:0.625rem}
+.bento-fav-empty{font-size:0.8125rem;color:var(--text-faint)}
+
+.bento-checks-wrap{max-height:16rem;overflow-y:auto}
+.bento-checks-list{
+  display:flex;flex-wrap:wrap;gap:0.375rem;list-style:none;
+}
+.bento-checks-list a{
+  display:inline-flex;align-items:center;gap:0.375rem;
+  padding:0.3rem 0.75rem;border-radius:var(--radius-pill);
+  background:var(--surface-panel);border:1px solid var(--border-subtle);
+  font-size:0.8125rem;color:var(--text-body);text-decoration:none;
+  transition:background var(--duration-fast) var(--ease-smooth),
+             border-color var(--duration-fast) var(--ease-smooth),
+             color var(--duration-fast) var(--ease-smooth);
+}
+.bento-checks-list a:hover{background:var(--mint-a10);border-color:var(--border-hover);color:var(--text-accent)}
+.bento-checks-list .check-cat{
+  font-size:0.625rem;color:var(--text-faint);
+  padding:0.125rem 0.375rem;border-radius:var(--radius-pill);
+  background:var(--sky-a10);
+}
+.bento-checks-list .no-link{
+  display:inline-flex;align-items:center;gap:0.375rem;
+  padding:0.3rem 0.75rem;border-radius:var(--radius-pill);
+  background:var(--surface-panel);border:1px solid var(--border-subtle);
+  font-size:0.8125rem;color:var(--text-faint);
+}
+
+@media(min-width:701px) and (max-width:1024px){
+  .bento-grid{grid-template-columns:repeat(2,1fr)}
+  .bento-scanner{grid-column:1/3}
+  .bento-tracker{grid-column:1/3}
+  .bento-highlights{grid-column:1;grid-row:auto}
+  .bento-stats{grid-column:2}
+  .bento-favorites{grid-column:1/3}
+  .bento-manual{grid-column:1/3}
+}
+
 @media(max-width:700px){
+  .bento-grid{grid-template-columns:1fr}
+  .bento-scanner,.bento-tracker,.bento-highlights,.bento-stats,.bento-favorites,.bento-manual{grid-column:auto;grid-row:auto}
+  .bento-scanner .bento-title{font-size:1.25rem}
+  .bento-stats-grid{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
   .hl-grid{grid-template-columns:1fr}
   .toolbar{flex-direction:column}
-  #search,.tracker-search,.result-count,.filter-select,.toolbar-toggle,.saved-filter-group{width:100%}
+  #search,.tracker-search,.result-count,.filter-select,.filter-multi,.toolbar-toggle,.saved-filter-group{width:100%}
+  .filter-multi-btn{width:100%}
+  .filter-multi-panel{left:0;right:0}
   .saved-filter-select{max-width:none;flex:1}
   .result-count{text-align:left;margin-left:0}
   header{padding:0.625rem 0.875rem}
@@ -1041,7 +1239,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 <a href="#main" id="skip-link">Skip to main content</a>
 
 <header>
-  <a href="#" class="nav-logo" onclick="switchTab('scanner'); return false;"><svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.5" fill="var(--mint)" stroke="none"/></svg><span>UX</span> Internship Watch</a>
+  <a href="#" class="nav-logo" onclick="switchTab('landing'); return false;"><svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.5" fill="var(--mint)" stroke="none"/></svg><span>UX</span> Internship Watch</a>
   <button class="profile-icon-btn" onclick="switchTab('profile')" id="tab-profile" aria-label="Profile">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
   </button>
@@ -1049,10 +1247,11 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
 <div class="sub-bar">
   <div class="header-tabs">
-    <button class="header-tab active" onclick="switchTab('scanner')" id="tab-scanner">Scanner</button>
+    <button class="header-tab active" onclick="switchTab('landing')" id="tab-landing">Home</button>
+    <button class="header-tab" onclick="switchTab('scanner')" id="tab-scanner">Scanner</button>
     <button class="header-tab" onclick="switchTab('tracker')" id="tab-tracker">Tracker</button>
   </div>
-  <div class="scan-group">
+  <div class="scan-group" style="display:none">
     <button id="scan-btn" onclick="startScan()">
       <div class="spinner"></div>
       <span>Scan Now</span>
@@ -1068,8 +1267,66 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
 <main id="main" tabindex="-1">
 
+  <!-- LANDING TAB -->
+  <div id="landing-tab" class="tab-content active">
+    <div class="bento-grid">
+      <a class="bento-card bento-scanner bento-link" href="#" onclick="switchTab('scanner'); return false;">
+        <div class="bento-title">Job Scanner</div>
+        <div class="bento-subtitle">Scan 195+ companies for matching UX postings</div>
+        <div class="bento-arrow">&rarr;</div>
+      </a>
+      <a class="bento-card bento-tracker bento-link" href="#" onclick="switchTab('tracker'); return false;">
+        <div class="bento-title">Tracker</div>
+        <div class="bento-subtitle">Track your applications &amp; pipeline</div>
+        <div class="bento-arrow">&rarr;</div>
+      </a>
+      <div class="bento-card bento-highlights">
+        <div class="bento-header">
+          <h3>Recent Highlights</h3>
+          <button class="bento-view-all" onclick="switchTab('scanner')">View all &rarr;</button>
+        </div>
+        <div id="bento-hl-list" class="bento-hl-list">
+          <div class="bento-hl-empty">Run a scan to see recent postings</div>
+        </div>
+      </div>
+      <div class="bento-card bento-stats">
+        <div class="bento-header">
+          <h3>Application Stats</h3>
+          <button class="bento-view-all" onclick="switchTab('tracker')">Open tracker &rarr;</button>
+        </div>
+        <div id="bento-stats-content">
+          <div class="bento-stats-grid">
+            <div class="bento-stat-item"><div class="bento-stat-n" id="bs-tracked">0</div><div class="bento-stat-label">Tracked</div></div>
+            <div class="bento-stat-item"><div class="bento-stat-n" id="bs-applied">0</div><div class="bento-stat-label">Applied</div></div>
+            <div class="bento-stat-item"><div class="bento-stat-n" id="bs-interview">0</div><div class="bento-stat-label">Interviewing</div></div>
+            <div class="bento-stat-item"><div class="bento-stat-n" id="bs-offers">0</div><div class="bento-stat-label">Offers</div></div>
+          </div>
+          <div id="bento-pipeline" class="bento-pipeline"></div>
+        </div>
+      </div>
+      <div class="bento-card bento-favorites">
+        <div class="bento-header">
+          <h3>Favorite Companies</h3>
+          <span class="bento-count" id="bento-fav-count"></span>
+        </div>
+        <div id="bento-fav-list" class="bento-fav-list">
+          <div class="bento-fav-empty">Star companies in the scanner to add favorites</div>
+        </div>
+      </div>
+      <div class="bento-card bento-manual">
+        <div class="bento-header">
+          <h3>Manual Check</h3>
+          <span class="bento-count" id="bento-manual-count"></span>
+        </div>
+        <div class="bento-checks-wrap">
+          <div id="bento-checks-list" class="bento-checks-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SCANNER TAB -->
-  <div id="scanner-tab" class="tab-content active">
+  <div id="scanner-tab" class="tab-content">
     <div id="empty">
       <h2>Ready to scan</h2>
       <p>Click <strong>Scan Now</strong> to check all companies for matching UX postings.</p>
@@ -1098,32 +1355,39 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <div class="section-title">All Findings</div>
       <div class="toolbar">
         <input type="text" id="search" placeholder="Search company, title, or location..." oninput="renderTable()">
-        <select id="level-filter" class="filter-select" onchange="renderTable()">
-          <option value="">All levels</option>
-          <option value="intern">Intern / Co-op</option>
-          <option value="fellow">Fellow</option>
-          <option value="apprentice">Apprentice</option>
-          <option value="entry">Entry / Associate</option>
-          <option value="mid">Mid</option>
-          <option value="senior+">Senior+</option>
-          <option value="manager+">Manager+</option>
-        </select>
-        <select id="pay-type-filter" class="filter-select" onchange="renderTable()">
-          <option value="">All pay types</option>
-          <option value="hourly">Hourly</option>
-          <option value="salary">Salary</option>
-          <option value="listed">Any listed</option>
-          <option value="unlisted">Not listed</option>
-        </select>
-        <select id="schedule-filter" class="filter-select" onchange="renderTable()">
-          <option value="">All schedules</option>
-          <option value="full-time">Full-time</option>
-          <option value="part-time">Part-time</option>
-          <option value="contract">Contract</option>
-        </select>
-        <select id="source-filter" class="filter-select" onchange="renderTable()">
-          <option value="">All sources</option>
-        </select>
+        <div class="filter-multi" id="level-filter">
+          <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Level</button>
+          <div class="filter-multi-panel">
+            <label><input type="checkbox" value="intern" checked onchange="onFilterCheck(this)">Intern / Co-op</label>
+            <label><input type="checkbox" value="fellow" checked onchange="onFilterCheck(this)">Fellow</label>
+            <label><input type="checkbox" value="apprentice" checked onchange="onFilterCheck(this)">Apprentice</label>
+            <label><input type="checkbox" value="entry" checked onchange="onFilterCheck(this)">Entry / Associate</label>
+            <label><input type="checkbox" value="mid" checked onchange="onFilterCheck(this)">Mid</label>
+            <label><input type="checkbox" value="senior+" checked onchange="onFilterCheck(this)">Senior+</label>
+            <label><input type="checkbox" value="manager+" checked onchange="onFilterCheck(this)">Manager+</label>
+          </div>
+        </div>
+        <div class="filter-multi" id="pay-type-filter">
+          <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Pay type</button>
+          <div class="filter-multi-panel">
+            <label><input type="checkbox" value="hourly" checked onchange="onFilterCheck(this)">Hourly</label>
+            <label><input type="checkbox" value="salary" checked onchange="onFilterCheck(this)">Salary</label>
+            <label><input type="checkbox" value="listed" checked onchange="onFilterCheck(this)">Any listed</label>
+            <label><input type="checkbox" value="unlisted" checked onchange="onFilterCheck(this)">Not listed</label>
+          </div>
+        </div>
+        <div class="filter-multi" id="schedule-filter">
+          <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Schedule</button>
+          <div class="filter-multi-panel">
+            <label><input type="checkbox" value="full-time" checked onchange="onFilterCheck(this)">Full-time</label>
+            <label><input type="checkbox" value="part-time" checked onchange="onFilterCheck(this)">Part-time</label>
+            <label><input type="checkbox" value="contract" checked onchange="onFilterCheck(this)">Contract</label>
+          </div>
+        </div>
+        <div class="filter-multi" id="source-filter">
+          <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Source</button>
+          <div class="filter-multi-panel"></div>
+        </div>
         <button class="toolbar-toggle" id="fav-toggle" onclick="toggleShowFav()">★ Favorites</button>
         <button class="toolbar-toggle" id="hidden-toggle" onclick="toggleShowHidden()">Hidden (0)</button>
         <div class="saved-filter-group">
@@ -1591,6 +1855,52 @@ function saveHidden() { localStorage.setItem('ux-internship-hidden', JSON.string
 function saveFavJobs() { localStorage.setItem('ux-internship-fav-jobs', JSON.stringify([...favJobs])); }
 function saveFavEmployers() { localStorage.setItem('ux-internship-fav-employers', JSON.stringify([...favEmployers])); }
 
+const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source'};
+
+function toggleFilterPanel(btn) {
+  const panel = btn.nextElementSibling;
+  const wasOpen = panel.classList.contains('open');
+  document.querySelectorAll('.filter-multi-panel.open').forEach(p => {
+    p.classList.remove('open');
+    p.parentElement.querySelector('.filter-multi-btn').classList.remove('active');
+  });
+  if (!wasOpen) {
+    panel.classList.add('open');
+    btn.classList.add('active');
+  }
+}
+
+function onFilterCheck(cb) {
+  const container = cb.closest('.filter-multi');
+  const boxes = container.querySelectorAll('input[type="checkbox"]');
+  const checked = [...boxes].filter(c => c.checked);
+  if (checked.length === 0) { cb.checked = true; return; }
+  updateFilterBtnLabel(container.id);
+  renderTable();
+}
+
+function updateFilterBtnLabel(filterId) {
+  const el = document.getElementById(filterId);
+  const btn = el.querySelector('.filter-multi-btn');
+  const boxes = el.querySelectorAll('input[type="checkbox"]');
+  const checked = [...boxes].filter(c => c.checked);
+  const base = FILTER_LABELS[filterId] || 'Filter';
+  if (checked.length === boxes.length || boxes.length === 0) {
+    btn.textContent = base;
+  } else {
+    btn.textContent = base + ' (' + checked.length + ')';
+  }
+}
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.filter-multi')) {
+    document.querySelectorAll('.filter-multi-panel.open').forEach(p => {
+      p.classList.remove('open');
+      p.parentElement.querySelector('.filter-multi-btn').classList.remove('active');
+    });
+  }
+});
+
 const SAVED_FILTERS_KEY = 'ux-internship-saved-filters';
 function getSavedFilters() {
   try { return JSON.parse(localStorage.getItem(SAVED_FILTERS_KEY)) || []; } catch { return []; }
@@ -1600,23 +1910,38 @@ function setSavedFilters(filters) { localStorage.setItem(SAVED_FILTERS_KEY, JSON
 function getCurrentFilterState() {
   return {
     search: document.getElementById('search').value,
-    level: document.getElementById('level-filter').value,
-    payType: document.getElementById('pay-type-filter').value,
-    schedule: document.getElementById('schedule-filter').value,
-    source: document.getElementById('source-filter').value,
+    level: getCheckedValues('level-filter'),
+    payType: getCheckedValues('pay-type-filter'),
+    schedule: getCheckedValues('schedule-filter'),
+    source: getCheckedValues('source-filter'),
     favOnly: showFavOnly,
     showHidden: showHidden,
   };
 }
 
+function applyMultiFilter(filterId, values) {
+  const boxes = document.querySelectorAll('#' + filterId + ' input[type="checkbox"]');
+  if (!values) {
+    boxes.forEach(c => c.checked = true);
+  } else if (typeof values === 'string') {
+    if (!values) { boxes.forEach(c => c.checked = true); }
+    else { boxes.forEach(c => c.checked = c.value === values); }
+  } else {
+    const set = new Set(values);
+    boxes.forEach(c => c.checked = set.has(c.value));
+  }
+  const checked = [...boxes].filter(c => c.checked);
+  if (checked.length === 0) boxes.forEach(c => c.checked = true);
+  updateFilterBtnLabel(filterId);
+}
+
 function applyFilterState(f) {
   _loadingFilter = true;
   document.getElementById('search').value = f.search || '';
-  document.getElementById('level-filter').value = f.level || '';
-  document.getElementById('pay-type-filter').value = f.payType || '';
-  document.getElementById('schedule-filter').value = f.schedule || '';
-  const srcEl = document.getElementById('source-filter');
-  srcEl.value = f.source && [...srcEl.options].some(o => o.value === f.source) ? f.source : '';
+  applyMultiFilter('level-filter', f.level);
+  applyMultiFilter('pay-type-filter', f.payType);
+  applyMultiFilter('schedule-filter', f.schedule);
+  applyMultiFilter('source-filter', f.source);
   if (f.favOnly !== showFavOnly) toggleShowFav();
   if (f.showHidden !== showHidden) toggleShowHidden();
   renderTable();
@@ -1721,10 +2046,11 @@ function switchTab(tab) {
   document.getElementById('tab-profile').classList.remove('active');
   document.getElementById(tab + '-tab').classList.add('active');
   if (tab === 'profile') document.getElementById('tab-profile').classList.add('active');
-  else document.getElementById('tab-' + tab).classList.add('active');
+  else if (document.getElementById('tab-' + tab)) document.getElementById('tab-' + tab).classList.add('active');
 
   document.querySelector('.scan-group').style.display = tab === 'scanner' ? '' : 'none';
 
+  if (tab === 'landing') buildBentoGrid();
   if (tab === 'tracker') loadApplications();
   if (tab === 'profile') renderProfile();
 }
@@ -2044,9 +2370,11 @@ function buildHighlights() {
 
 function buildSourceFilter() {
   const sources = [...new Set(allJobs.map(j => j.source))].sort();
-  const sel = document.getElementById('source-filter');
-  sel.innerHTML = '<option value="">All sources</option>' +
-    sources.map(s => '<option value="' + s + '">' + s + '</option>').join('');
+  const panel = document.querySelector('#source-filter .filter-multi-panel');
+  panel.innerHTML = sources.map(s =>
+    '<label><input type="checkbox" value="' + s + '" checked onchange="onFilterCheck(this)">' + s + '</label>'
+  ).join('');
+  updateFilterBtnLabel('source-filter');
 }
 
 function levelBadge(lvl) {
@@ -2061,23 +2389,35 @@ function levelBadge(lvl) {
   return '<span class="badge badge-level badge-' + (cls[lvl]||'mid') + '">' + (labels[lvl]||lvl) + '</span>';
 }
 
+function getCheckedValues(filterId) {
+  return [...document.querySelectorAll('#' + filterId + ' input[type="checkbox"]:checked')].map(c => c.value);
+}
+
 function getFiltered() {
   const q = document.getElementById('search').value.toLowerCase();
-  const src = document.getElementById('source-filter').value;
-  const lvl = document.getElementById('level-filter').value;
-  const pt = document.getElementById('pay-type-filter').value;
-  const sched = document.getElementById('schedule-filter').value;
+  const srcVals = new Set(getCheckedValues('source-filter'));
+  const lvlVals = new Set(getCheckedValues('level-filter'));
+  const ptVals = new Set(getCheckedValues('pay-type-filter'));
+  const schedVals = new Set(getCheckedValues('schedule-filter'));
+  const srcAll = srcVals.size === document.querySelectorAll('#source-filter input[type="checkbox"]').length;
+  const lvlAll = lvlVals.size === document.querySelectorAll('#level-filter input[type="checkbox"]').length;
+  const ptAll = ptVals.size === document.querySelectorAll('#pay-type-filter input[type="checkbox"]').length;
+  const schedAll = schedVals.size === document.querySelectorAll('#schedule-filter input[type="checkbox"]').length;
   return allJobs.filter(j => {
     if (!showHidden && hiddenJobs.has(j.id)) return false;
     if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
     if (q && !(j.title + j.company + j.location).toLowerCase().includes(q)) return false;
-    if (src && j.source !== src) return false;
-    if (lvl && j.level !== lvl) return false;
-    if (pt === 'hourly' && j.pay_type !== 'hourly') return false;
-    if (pt === 'salary' && j.pay_type !== 'salary') return false;
-    if (pt === 'listed' && !j.pay) return false;
-    if (pt === 'unlisted' && j.pay) return false;
-    if (sched && j.schedule !== sched) return false;
+    if (!srcAll && !srcVals.has(j.source)) return false;
+    if (!lvlAll && !lvlVals.has(j.level)) return false;
+    if (!schedAll && !schedVals.has(j.schedule)) return false;
+    if (!ptAll) {
+      let match = false;
+      if (ptVals.has('hourly') && j.pay_type === 'hourly') match = true;
+      if (ptVals.has('salary') && j.pay_type === 'salary') match = true;
+      if (ptVals.has('listed') && j.pay) match = true;
+      if (ptVals.has('unlisted') && !j.pay) match = true;
+      if (!match) return false;
+    }
     return true;
   });
 }
@@ -2708,10 +3048,134 @@ function initPrefs() {
   buildSavedFilterSelect();
 }
 
+const MANUAL_CHECKS = [
+  {name:'Amazon',url:'https://amazon.jobs',cat:'Big Tech'},
+  {name:'Apple',url:'https://jobs.apple.com',cat:'Big Tech'},
+  {name:'Deque Systems',url:'https://deque.com/company/careers/',cat:'Accessibility'},
+  {name:'Goldman Sachs',url:'https://higher.gs.com',cat:'Banking'},
+  {name:'Google',url:'https://careers.google.com',cat:'Big Tech'},
+  {name:'IBM',url:'https://careers.ibm.com',cat:'Big Tech'},
+  {name:'Intuit',url:'https://jobs.intuit.com',cat:'Big Tech'},
+  {name:'Meta',url:'https://metacareers.com',cat:'Big Tech'},
+  {name:'Microsoft',url:'https://careers.microsoft.com',cat:'Big Tech'},
+  {name:'Rippling',url:'https://rippling.com/careers',cat:'Fintech'},
+  {name:'Uber',url:'https://uber.com/careers',cat:'Big Tech'},
+  {name:'Vimeo',url:'https://vimeo.com/careers',cat:'Big Tech'},
+  {name:'American Express',url:'https://egug.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1',cat:'Banking'},
+  {name:'Chubb',url:'https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com',cat:'Insurance'},
+  {name:'JPMorgan Chase',url:'https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001',cat:'Banking'},
+  {name:'Oracle',url:'https://eeho.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch',cat:'Big Tech'},
+  {name:'Warby Parker',url:'https://jobs.warbyparker.com',cat:'Big Tech'},
+  {name:'Accion',url:'https://jobs-accion.icims.com',cat:'Mission'},
+  {name:'Ally',url:'https://ally.avature.net/careers',cat:'Banking'},
+  {name:'Coforma',url:'https://coforma.pinpointhq.com',cat:'Civic Tech'},
+  {name:'DocuSign',url:'https://uscareers-docusign.icims.com',cat:'Tech'},
+  {name:'Grameen America',url:'https://app.trinethire.com/companies/924509-grameen-america-inc',cat:'Mission'},
+  {name:"Moody's",url:'https://career8.successfactors.com/career?career_company=MoodysProd',cat:'Banking'},
+  {name:'U.S. Digital Response',url:'https://us-digital-response.breezy.hr',cat:'Civic Tech'},
+  {name:'Fearless',url:'https://jobs.fearless.com',cat:'Civic Tech'},
+  {name:'Aira',url:'https://aira.io/careers',cat:'Accessibility'},
+  {name:'American Foundation for the Blind',url:'https://afb.org/about-afb/leadership/careers-afb',cat:'Accessibility'},
+  {name:'Be My Eyes',url:'https://bemyeyes.com/business/join-our-team',cat:'Accessibility'},
+  {name:'Collins',url:'https://wearecollins.com/careers',cat:'Agency'},
+  {name:'Pentagram',url:'https://pentagram.com/careers',cat:'Agency'},
+  {name:'NYC Office of Technology & Innovation',url:'https://www.nyc.gov/content/oti/pages/',cat:'Government'},
+  {name:'NYC Economic Development Corporation',url:'https://edc.nyc/careers',cat:'Government'},
+  {name:'MTA',url:'https://new.mta.info/careers',cat:'Government'},
+  {name:'Port Authority of NY & NJ',url:'https://www.panynj.gov/corporate/en/careers.html',cat:'Government'},
+  {name:'NJ Office of Innovation',url:'https://innovation.nj.gov/',cat:'Government'},
+  {name:'NJ Civil Service Commission',url:'https://www.nj.gov/csc/',cat:'Government'},
+  {name:'NJ Transit',url:'https://www.njtransit.com/careers',cat:'Government'},
+  {name:'NJ Economic Development Authority',url:'https://www.njeda.gov/careers/',cat:'Government'},
+  {name:'New York State ITS',url:'https://statejobs.ny.gov/',cat:'Government'},
+  {name:'Federal Reserve Bank of New York',url:'https://www.newyorkfed.org/careers',cat:'Government'},
+  {name:'FDIC',url:'https://www.fdic.gov/about/careers/',cat:'Government'},
+  {name:'OCC',url:'https://www.occ.gov/careers/',cat:'Government'},
+  {name:'SEC',url:'https://www.sec.gov/careers',cat:'Government'},
+  {name:'FINRA',url:'https://www.finra.org/careers',cat:'Government'},
+  {name:'United Nations',url:'https://careers.un.org/',cat:'Government'},
+  {name:'UNICEF',url:'https://www.unicef.org/careers/',cat:'Government'},
+  {name:'World Bank',url:'https://www.worldbank.org/en/about/careers',cat:'Government'},
+];
+
+function buildBentoGrid() {
+  const sp = getSearchPrefs();
+  const hl = allJobs
+    .filter(j => j.is_new && !hiddenJobs.has(j.id) && matchesSearchPrefs(j, sp))
+    .sort((a, b) => {
+      if (a.pay && !b.pay) return -1;
+      if (!a.pay && b.pay) return 1;
+      return (b.posted_at || '').localeCompare(a.posted_at || '');
+    })
+    .slice(0, 5);
+
+  const hlEl = document.getElementById('bento-hl-list');
+  if (hl.length) {
+    hlEl.innerHTML = hl.map(j =>
+      '<div class="bento-hl-item" onclick="switchTab(\'scanner\');setTimeout(()=>{openJobModal(\'' + escAttr(j.id) + '\')},100)">' +
+        '<div class="bento-hl-company">' + esc(j.company) + '</div>' +
+        '<div class="bento-hl-title">' + esc(j.title) + '</div>' +
+        '<div class="bento-hl-badges">' +
+          levelBadge(j.level) +
+          (j.pay ? '<span class="badge badge-pay">' + esc(j.pay) + '</span>' : '') +
+          (j.is_new ? '<span class="badge badge-new">NEW</span>' : '') +
+        '</div>' +
+      '</div>'
+    ).join('');
+  } else {
+    hlEl.innerHTML = '<div class="bento-hl-empty">Run a scan to see recent postings</div>';
+  }
+
+  const appData = applications || [];
+  document.getElementById('bs-tracked').textContent = appData.length;
+  document.getElementById('bs-applied').textContent =
+    appData.filter(a => ['applied','phone_screen','interview','offer','accepted'].includes(a.status)).length;
+  document.getElementById('bs-interview').textContent =
+    appData.filter(a => ['phone_screen','interview'].includes(a.status)).length;
+  document.getElementById('bs-offers').textContent =
+    appData.filter(a => ['offer','accepted'].includes(a.status)).length;
+
+  const pipeEl = document.getElementById('bento-pipeline');
+  const stages = ['saved','applied','phone_screen','interview','offer'];
+  const counts = {};
+  stages.forEach(s => counts[s] = 0);
+  appData.forEach(a => { if (counts[a.status] !== undefined) counts[a.status]++; });
+  const maxP = Math.max(1, ...stages.map(s => counts[s]));
+  if (appData.length) {
+    pipeEl.innerHTML = stages.map(s => {
+      const pct = Math.max(2, counts[s] / maxP * 100).toFixed(1);
+      return '<div class="bento-pipe-row">' +
+        '<div class="bento-pipe-label">' + STATUS_LABELS[s] + '</div>' +
+        '<div class="bento-pipe-track"><div class="bento-pipe-bar" style="width:' + pct + '%;background:' + PIPELINE_COLORS[s] + '"></div></div>' +
+        '<div class="bento-pipe-count">' + counts[s] + '</div></div>';
+    }).join('');
+  }
+
+  const favEl = document.getElementById('bento-fav-list');
+  const favCount = document.getElementById('bento-fav-count');
+  if (favEmployers.size) {
+    favCount.textContent = favEmployers.size + ' companies';
+    favEl.innerHTML = [...favEmployers].sort().map(name =>
+      '<span class="bento-fav-pill"><span class="fav-heart">&hearts;</span>' + esc(name) + '</span>'
+    ).join('');
+  } else {
+    favCount.textContent = '';
+    favEl.innerHTML = '<div class="bento-fav-empty">Star companies in the scanner to add favorites</div>';
+  }
+
+  const checksEl = document.getElementById('bento-checks-list');
+  document.getElementById('bento-manual-count').textContent = MANUAL_CHECKS.length + ' companies';
+  checksEl.innerHTML = MANUAL_CHECKS.map(c =>
+    '<a href="' + esc(c.url) + '" target="_blank" rel="noopener">' +
+      esc(c.name) + '<span class="check-cat">' + esc(c.cat) + '</span></a>'
+  ).join('');
+}
+
 const _origShowApp = showApp;
 showApp = function() {
   _origShowApp();
   initPrefs();
+  buildBentoGrid();
   const prefs = loadPrefs();
   if (prefs.defaultTracker) switchTab('tracker');
   if (prefs.autoscan && !STATIC) setTimeout(startScan, 300);
