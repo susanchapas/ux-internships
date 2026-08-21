@@ -425,6 +425,10 @@ def main():
             json.dumps({"updated": datetime.now(timezone.utc).isoformat(), "ids": sorted(seen)}, indent=1)
         )
 
+    (HERE / "_scan_results.json").write_text(json.dumps({
+        "jobs": found, "errors": errors, "companies_scanned": len(cfg["companies"]),
+    }, default=str))
+
 
 if __name__ == "__main__":
     main()

@@ -6,6 +6,7 @@ data.db-shm
 data.db-wal
 files/out/
 seen.json
+_scan_results.json
 .DS_Store
 .env
 venv/

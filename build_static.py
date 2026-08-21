@@ -56,7 +56,19 @@ def classify(job):
             job["pay_type"] = ""
 
 
+SCAN_CACHE = HERE / "_scan_results.json"
+
+
 def run_scan():
+    cached = load_json(SCAN_CACHE, None)
+    if cached:
+        jobs = cached["jobs"]
+        for j in jobs:
+            j["is_new"] = False
+            classify(j)
+        print(f"Loaded {len(jobs)} jobs from cached scan results")
+        return jobs, cached.get("errors", []), cached["companies_scanned"]
+
     cfg = load_json(CONFIG_PATH, None)
     if cfg is None:
         sys.exit("missing config.json")
