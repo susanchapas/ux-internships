@@ -2493,7 +2493,7 @@ function buildHighlights() {
     .sort((a, b) => {
       if (a.pay && !b.pay) return -1;
       if (!a.pay && b.pay) return 1;
-      return (b.posted_at || '').localeCompare(a.posted_at || '');
+      return (parsePostedDate(b.posted_at) || 0) - (parsePostedDate(a.posted_at) || 0);
     })
     .slice(0, 6);
 
@@ -2554,8 +2554,8 @@ function getFiltered() {
   const autoClearCutoff = autoClearDays > 0 ? Date.now() - autoClearDays * 86400000 : 0;
   return allJobs.filter(j => {
     if (autoClearCutoff && j.posted_at) {
-      const posted = new Date(j.posted_at).getTime();
-      if (!isNaN(posted) && posted < autoClearCutoff) return false;
+      const pd = parsePostedDate(j.posted_at);
+      if (pd && pd.getTime() < autoClearCutoff) return false;
     }
     if (!showHidden && hiddenJobs.has(j.id)) return false;
     if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
@@ -2584,6 +2584,11 @@ function renderTable() {
   const jobs = getFiltered();
 
   jobs.sort((a, b) => {
+    if (sortCol === 'posted_at') {
+      const da = parsePostedDate(a.posted_at), db = parsePostedDate(b.posted_at);
+      const ta = da ? da.getTime() : 0, tb = db ? db.getTime() : 0;
+      return (ta - tb) * sortDir;
+    }
     let av = (a[sortCol] || '').toString().toLowerCase();
     let bv = (b[sortCol] || '').toString().toLowerCase();
     if (av < bv) return -1 * sortDir;
@@ -3019,18 +3024,34 @@ document.addEventListener('keydown', e => {
     closeAddModal();
 });
 
-function timeAgo(s) {
-  if (!s) return '';
+function parsePostedDate(s) {
+  if (!s) return null;
   const d = new Date(s);
-  if (isNaN(d.getTime())) return esc(s);
-  const sec = Math.floor((Date.now() - d) / 1000);
-  if (sec < 0) return 'just now';
-  if (sec < 60) return 'just now';
-  if (sec < 3600) return Math.floor(sec / 60) + 'm ago';
-  if (sec < 86400) return Math.floor(sec / 3600) + 'h ago';
-  if (sec < 604800) return Math.floor(sec / 86400) + 'd ago';
-  if (sec < 2592000) return Math.floor(sec / 604800) + 'w ago';
-  return Math.floor(sec / 2592000) + 'mo ago';
+  if (!isNaN(d.getTime())) return d;
+  const lower = s.toLowerCase().replace(/posted\s+/i, '').trim();
+  if (/^(today|just now|0 days?)/.test(lower)) return new Date();
+  if (/^yesterday|^1 day/.test(lower)) { const t = new Date(); t.setDate(t.getDate() - 1); return t; }
+  const m = lower.match(/^(\d+)\s*(day|week|month|hour|minute)s?\s*ago/);
+  if (m) {
+    const n = parseInt(m[1]), unit = m[2], t = new Date();
+    if (unit === 'day') t.setDate(t.getDate() - n);
+    else if (unit === 'week') t.setDate(t.getDate() - n * 7);
+    else if (unit === 'month') t.setMonth(t.getMonth() - n);
+    else if (unit === 'hour') t.setHours(t.getHours() - n);
+    else if (unit === 'minute') t.setMinutes(t.getMinutes() - n);
+    return t;
+  }
+  return null;
+}
+
+function timeAgo(s) {
+  const d = parsePostedDate(s);
+  if (!d) return esc(s);
+  const days = Math.max(0, Math.floor((Date.now() - d) / 86400000));
+  if (days < 7) return days + (days === 1 ? ' day ago' : ' days ago');
+  if (days < 30) { const w = Math.floor(days / 7); return w + (w === 1 ? ' week ago' : ' weeks ago'); }
+  const mo = Math.floor(days / 30);
+  return mo + (mo === 1 ? ' month ago' : ' months ago');
 }
 
 function esc(s) {
@@ -3372,7 +3393,7 @@ function buildBentoGrid() {
     .sort((a, b) => {
       if (a.pay && !b.pay) return -1;
       if (!a.pay && b.pay) return 1;
-      return (b.posted_at || '').localeCompare(a.posted_at || '');
+      return (parsePostedDate(b.posted_at) || 0) - (parsePostedDate(a.posted_at) || 0);
     })
     .slice(0, 5);
 
