@@ -154,7 +154,53 @@ class Handler(BaseHTTPRequestHandler):
             self.send_error(404)
 
     def do_PUT(self):
-        if self.path.startswith("/api/applications/"):
+        if self.path == "/api/me/username":
+            user = self._require_login()
+            if not user:
+                return
+            body = self._read_body()
+            new_username = body.get("username", "").strip()
+            if not new_username:
+                self._json_response({"error": "Username required"}, 400)
+                return
+            try:
+                updated = user_auth.update_username(user.id, new_username)
+            except Exception:
+                self._json_response({"error": "Username already taken"}, 409)
+                return
+            self._json_response(UserRead.model_validate(updated).model_dump())
+        elif self.path == "/api/me/email":
+            user = self._require_login()
+            if not user:
+                return
+            body = self._read_body()
+            new_email = body.get("email", "").strip()
+            if not new_email:
+                self._json_response({"error": "Email required"}, 400)
+                return
+            try:
+                updated = user_auth.update_email(user.id, new_email)
+            except Exception:
+                self._json_response({"error": "Email already taken"}, 409)
+                return
+            self._json_response(UserRead.model_validate(updated).model_dump())
+        elif self.path == "/api/me/password":
+            user = self._require_login()
+            if not user:
+                return
+            body = self._read_body()
+            current = body.get("current_password", "")
+            new_pw = body.get("new_password", "")
+            if not current or not new_pw:
+                self._json_response({"error": "Both current and new password required"}, 400)
+                return
+            try:
+                user_auth.update_password(user.id, current, new_pw)
+            except PermissionError:
+                self._json_response({"error": "Current password is incorrect"}, 403)
+                return
+            self._json_response({"ok": True})
+        elif self.path.startswith("/api/applications/"):
             user = self._require_admin()
             if not user:
                 return

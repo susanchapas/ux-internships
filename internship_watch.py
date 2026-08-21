@@ -294,7 +294,7 @@ def notify(new_jobs):
         pay = f"\n💰 {j['pay']}" if j.get("pay") else ""
         lines.append(f"{j['company']} — {j['title']}\n{j['location']}{pay}\n{j['url']}")
     body = "\n\n".join(lines)
-    subject = f"{len(new_jobs)} new internship posting{'s' if len(new_jobs) != 1 else ''}"
+    subject = f"{len(new_jobs)} new UX posting{'s' if len(new_jobs) != 1 else ''}"
 
     ntfy_topic = os.environ.get("NTFY_TOPIC")
     if ntfy_topic:

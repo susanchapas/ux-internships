@@ -83,7 +83,7 @@ class NtfyObserver(JobObserver):
                 f"{j.get('location', '')}{pay}\n{j.get('url', '')}"
             )
         body = "\n\n".join(lines)
-        subject = f"{len(jobs)} new internship posting{'s' if len(jobs) != 1 else ''}"
+        subject = f"{len(jobs)} new UX posting{'s' if len(jobs) != 1 else ''}"
         try:
             requests.post(
                 f"https://ntfy.sh/{self.topic}",
@@ -260,21 +260,20 @@ class DefaultFilterStrategy(FilterStrategy):
 
 
 class UXOnlyFilterStrategy(FilterStrategy):
-    """Strict filter: title must mention both a UX discipline and an internship-level role."""
+    """Strict filter: title must mention a UX discipline."""
 
     _UX = re.compile(
-        r"(UX|user experience|design|research|product|content strategy"
-        r"|interaction|usability|human factors)",
+        r"\bUX\b|\bUI\b|user experience|user interface|product design"
+        r"|interaction design|usability|human factors|accessibility"
+        r"|information architecture|service design|\bHCI\b|visual design"
+        r"|brand design|content strateg|design research|\bUXR\b",
         re.I,
-    )
-    _INTERN = re.compile(
-        r"\bintern(?:ship)?\b|\bco-?op\b|\bfellow(?:ship)?\b|\bapprentice\b", re.I
     )
 
     def apply(self, jobs):
         return [
             j for j in jobs
-            if self._UX.search(j.get("title", "")) and self._INTERN.search(j.get("title", ""))
+            if self._UX.search(j.get("title", ""))
         ]
 
     @property

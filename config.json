@@ -1,17 +1,9 @@
 {
   "title_include": [
-    "(UX|UI|user experience|user interface|design|research|product|content strateg|interaction|usability|human factors|accessibility|information architecture|service design|HCI|visual design|brand design|creative).*(\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bfellow(?:ship)?\\b|\\bapprentice\\b)",
-    "(\\bintern(?:ship)?\\b|\\bco-?op\\b|\\bfellow(?:ship)?\\b|\\bapprentice\\b).*(UX|UI|user experience|user interface|design|research|product|content strateg|interaction|usability|human factors|accessibility|information architecture|service design|HCI|visual design|brand design|creative)"
+    "\\bUX\\b|\\bUI\\b|\\buser experience\\b|\\buser interface\\b|\\bproduct design|\\binteraction design|\\busability\\b|\\bhuman factors\\b|\\baccessibility\\b|\\binformation architecture\\b|\\bservice design\\b|\\bHCI\\b|\\bvisual design|\\bbrand design|\\bcontent strateg|\\bdesign research|\\bUXR\\b|\\bUX research",
+    "\\b(design|research|creative)\\b.*(\\bintern|\\bco-?op\\b|\\bfellow|\\bapprentice|\\bjunior\\b|\\bassociate\\b|\\bmanager\\b|\\bdirector\\b|\\blead\\b|\\bhead\\b|\\bsenior\\b|\\bstaff\\b|\\bprincipal\\b|\\bvp\\b)"
   ],
   "title_exclude": [
-    "senior",
-    "staff",
-    "principal",
-    "director",
-    "lead",
-    "head of",
-    "vp ",
-    "vice president",
     "mechanical",
     "electrical",
     "chemical",
@@ -56,7 +48,7 @@
       "tenant": "aig",
       "wd": 1,
       "site": "aig",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -69,7 +61,7 @@
       "tenant": "att",
       "wd": 1,
       "site": "ATTGeneral",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -77,7 +69,7 @@
       "tenant": "accenture",
       "wd": 103,
       "site": "AccentureCareers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "ashby",
@@ -90,7 +82,7 @@
       "tenant": "adobe",
       "wd": 5,
       "site": "external_experienced",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -143,7 +135,7 @@
       "tenant": "astrazeneca",
       "wd": 3,
       "site": "Careers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "ashby",
@@ -201,7 +193,7 @@
       "tenant": "bristolmyerssquibb",
       "wd": 5,
       "site": "BMS",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -209,7 +201,7 @@
       "tenant": "broadridge",
       "wd": 5,
       "site": "Careers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -252,7 +244,7 @@
       "tenant": "churchdwight",
       "wd": 1,
       "site": "chdcareers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -320,7 +312,7 @@
       "tenant": "crowdstrike",
       "wd": 5,
       "site": "crowdstrikecareers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -343,7 +335,7 @@
       "tenant": "deloitteie",
       "wd": 3,
       "site": "Experienced_Professionals",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -351,7 +343,7 @@
       "tenant": "dentsuaegis",
       "wd": 3,
       "site": "DAN_GLOBAL",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -364,7 +356,7 @@
       "tenant": "capitalone",
       "wd": 12,
       "site": "Capital_One",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -422,7 +414,7 @@
       "tenant": "henryschein",
       "wd": 1,
       "site": "External_Careers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -475,7 +467,7 @@
       "tenant": "lendingclub",
       "wd": 1,
       "site": "External",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -498,7 +490,7 @@
       "tenant": "mmc",
       "wd": 1,
       "site": "MMC",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -511,7 +503,7 @@
       "tenant": "liveramp",
       "wd": 5,
       "site": "LiveRampCareers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -529,7 +521,7 @@
       "tenant": "mastercard",
       "wd": 1,
       "site": "CorporateCareers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "lever",
@@ -547,7 +539,7 @@
       "tenant": "msd",
       "wd": 5,
       "site": "SearchJobs",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -600,7 +592,7 @@
       "tenant": "nasdaq",
       "wd": 1,
       "site": "Global_External_Site",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -628,7 +620,7 @@
       "tenant": "novartis",
       "wd": 3,
       "site": "Internal_Careers_for_Acquired_Entities",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -651,7 +643,7 @@
       "tenant": "otis",
       "wd": 504,
       "site": "REC_Ext_Gateway",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -659,7 +651,7 @@
       "tenant": "paloaltonetworks",
       "wd": 5,
       "site": "panwexternalcareers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "ashby",
@@ -712,7 +704,7 @@
       "tenant": "pwc",
       "wd": 3,
       "site": "US_Experienced_Careers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -735,7 +727,7 @@
       "tenant": "regeneron",
       "wd": 1,
       "site": "Careers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -763,7 +755,7 @@
       "tenant": "salesforce",
       "wd": 12,
       "site": "External_Career_Site",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -771,7 +763,7 @@
       "tenant": "scholastic",
       "wd": 5,
       "site": "External",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -814,7 +806,7 @@
       "tenant": "tmobile",
       "wd": 1,
       "site": "External",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -822,7 +814,7 @@
       "tenant": "tiaa",
       "wd": 1,
       "site": "Search",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -830,7 +822,7 @@
       "tenant": "takeda",
       "wd": 502,
       "site": "External",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -838,7 +830,7 @@
       "tenant": "tapestry",
       "wd": 108,
       "site": "Tapestry_Careers",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "lever",
@@ -861,7 +853,7 @@
       "tenant": "travelers",
       "wd": 5,
       "site": "External",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -914,7 +906,7 @@
       "tenant": "wmg",
       "wd": 1,
       "site": "WMGUS",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "workday",
@@ -922,7 +914,7 @@
       "tenant": "wework",
       "wd": 1,
       "site": "WeWork",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "lever",
@@ -955,7 +947,7 @@
       "tenant": "workday",
       "wd": 5,
       "site": "Workday",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "greenhouse",
@@ -978,11 +970,11 @@
       "tenant": "iheartmedia",
       "wd": 5,
       "site": "External_iHM",
-      "search": "intern"
+      "search": "design"
     },
     {
       "board": "usajobs",
-      "keyword": "intern",
+      "keyword": "design",
       "name": "US Federal",
       "locations": [
         "New York, New York",

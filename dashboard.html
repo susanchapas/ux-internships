@@ -719,6 +719,85 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 }
 .logout-btn:hover{border-color:var(--danger);color:var(--danger)}
 
+.profile-section{
+  background:var(--surface-card);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-xl);
+  padding:1.5rem 2rem;
+  margin-bottom:1.25rem;
+  box-shadow:var(--shadow-card);
+  max-width:32rem;
+}
+.profile-section h3{
+  font-family:var(--font-display);
+  font-size:0.9375rem;font-weight:700;
+  margin-bottom:1rem;color:var(--text-body);
+}
+.profile-field{margin-bottom:1rem}
+.profile-field label{
+  display:block;font-size:0.8125rem;font-weight:500;
+  color:var(--text-muted);margin-bottom:0.25rem;
+}
+.profile-field input{
+  width:100%;padding:0.5rem 0.75rem;
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-field);
+  font-size:0.875rem;font-family:var(--font-body);
+  background:var(--surface-page);color:var(--text-body);
+}
+.profile-field input:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.profile-field input::placeholder{color:var(--text-faint)}
+.profile-field input:disabled{opacity:0.5;cursor:not-allowed}
+.profile-actions{display:flex;gap:0.75rem;align-items:center}
+.profile-save{
+  font-family:var(--font-display);
+  background:var(--mint);color:var(--text-on-accent);border:none;
+  padding:0.5rem 1.25rem;border-radius:var(--radius-pill);
+  font-size:0.8125rem;font-weight:600;cursor:pointer;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.profile-save:hover{background:var(--mint-vivid)}
+.profile-save:disabled{opacity:0.5;cursor:not-allowed}
+.profile-msg{font-size:0.8125rem;display:none}
+.profile-msg.success{color:var(--mint);display:inline}
+.profile-msg.error{color:var(--danger);display:inline}
+.profile-info{
+  display:grid;grid-template-columns:auto 1fr;gap:0.375rem 1rem;
+  font-size:0.875rem;margin-bottom:1rem;
+}
+.profile-info-label{color:var(--text-faint);font-weight:600;font-size:0.8125rem}
+.profile-info-value{color:var(--text-body)}
+.profile-signout{
+  font-family:var(--font-display);
+  background:transparent;color:var(--danger);
+  border:1px solid rgba(220,69,69,0.3);
+  padding:0.5rem 1.5rem;border-radius:var(--radius-pill);
+  font-size:0.875rem;font-weight:600;cursor:pointer;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.profile-signout:hover{background:rgba(220,69,69,0.08);border-color:var(--danger)}
+.pref-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.625rem 0;border-bottom:1px solid var(--border-subtle);
+}
+.pref-row:last-child{border-bottom:none}
+.pref-label{font-size:0.875rem;color:var(--text-body)}
+.pref-desc{font-size:0.75rem;color:var(--text-faint)}
+.pref-toggle{
+  position:relative;width:2.5rem;height:1.375rem;
+  background:var(--sky-a20);border-radius:var(--radius-pill);
+  border:none;cursor:pointer;flex-shrink:0;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.pref-toggle::after{
+  content:"";position:absolute;top:0.1875rem;left:0.1875rem;
+  width:1rem;height:1rem;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.15);
+  transition:transform var(--duration-fast) var(--ease-smooth);
+}
+.pref-toggle.on{background:var(--mint)}
+.pref-toggle.on::after{transform:translateX(1.125rem)}
+
 @media(max-width:700px){
   .stats{grid-template-columns:repeat(2,1fr)}
   .hl-grid{grid-template-columns:1fr}
@@ -803,6 +882,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   <div class="header-tabs">
     <button class="header-tab active" onclick="switchTab('scanner')" id="tab-scanner">Scanner</button>
     <button class="header-tab" onclick="switchTab('tracker')" id="tab-tracker">Tracker</button>
+    <button class="header-tab" onclick="switchTab('profile')" id="tab-profile">Profile</button>
   </div>
   <div class="header-right">
     <button id="scan-btn" onclick="startScan()">
@@ -823,7 +903,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   <div id="scanner-tab" class="tab-content active">
     <div id="empty">
       <h2>Ready to scan</h2>
-      <p>Click <strong>Scan Now</strong> to check all companies for matching internship postings.</p>
+      <p>Click <strong>Scan Now</strong> to check all companies for matching UX postings.</p>
     </div>
 
     <div class="stats" id="stats" style="display:none">
@@ -944,6 +1024,140 @@ td.notes-cell{min-width:10rem;max-width:16rem}
         </tr></thead>
         <tbody id="tracker-tbody"></tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- PROFILE TAB -->
+  <div id="profile-tab" class="tab-content">
+    <div class="profile-section">
+      <h3>Account</h3>
+      <div class="profile-info" id="profile-info"></div>
+      <button class="profile-signout" onclick="handleLogout()">Sign Out</button>
+    </div>
+
+    <div class="profile-section">
+      <h3>Update Username</h3>
+      <form onsubmit="updateUsername(event)">
+        <div class="profile-field">
+          <label for="p-username">New Username</label>
+          <input id="p-username" required placeholder="Enter new username" autocomplete="username">
+        </div>
+        <div class="profile-actions">
+          <button type="submit" class="profile-save" id="p-username-btn">Save</button>
+          <span class="profile-msg" id="p-username-msg"></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="profile-section">
+      <h3>Update Email</h3>
+      <form onsubmit="updateEmail(event)">
+        <div class="profile-field">
+          <label for="p-email">New Email</label>
+          <input id="p-email" type="email" required placeholder="Enter new email" autocomplete="email">
+        </div>
+        <div class="profile-actions">
+          <button type="submit" class="profile-save" id="p-email-btn">Save</button>
+          <span class="profile-msg" id="p-email-msg"></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="profile-section">
+      <h3>Update Password</h3>
+      <form onsubmit="updatePassword(event)">
+        <div class="profile-field">
+          <label for="p-cur-pw">Current Password</label>
+          <input id="p-cur-pw" type="password" required placeholder="Enter current password" autocomplete="current-password">
+        </div>
+        <div class="profile-field">
+          <label for="p-new-pw">New Password</label>
+          <input id="p-new-pw" type="password" required placeholder="Enter new password" autocomplete="new-password" minlength="6">
+        </div>
+        <div class="profile-actions">
+          <button type="submit" class="profile-save" id="p-pw-btn">Save</button>
+          <span class="profile-msg" id="p-pw-msg"></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="profile-section">
+      <h3>Preferences</h3>
+      <div class="pref-row">
+        <div>
+          <div class="pref-label">Auto-scan on load</div>
+          <div class="pref-desc">Automatically start scanning when you open the dashboard</div>
+        </div>
+        <button class="pref-toggle" id="pref-autoscan" onclick="togglePref('autoscan',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div>
+          <div class="pref-label">Show hidden jobs count</div>
+          <div class="pref-desc">Display the hidden jobs toggle in the scanner toolbar</div>
+        </div>
+        <button class="pref-toggle" id="pref-show-hidden" onclick="togglePref('showHiddenToggle',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div>
+          <div class="pref-label">Default to Tracker tab</div>
+          <div class="pref-desc">Open the Tracker tab instead of Scanner on load</div>
+        </div>
+        <button class="pref-toggle" id="pref-default-tracker" onclick="togglePref('defaultTracker',this)"></button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h3>Search Preferences</h3>
+      <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faint);margin-bottom:0.375rem">Levels</div>
+      <div class="pref-row">
+        <div class="pref-label">Intern / Co-op</div>
+        <button class="pref-toggle" id="pref-level-intern" onclick="toggleSearchPref('level_intern',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Fellow</div>
+        <button class="pref-toggle" id="pref-level-fellow" onclick="toggleSearchPref('level_fellow',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Apprentice</div>
+        <button class="pref-toggle" id="pref-level-apprentice" onclick="toggleSearchPref('level_apprentice',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Entry / Associate</div>
+        <button class="pref-toggle" id="pref-level-entry" onclick="toggleSearchPref('level_entry',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Mid-level</div>
+        <button class="pref-toggle" id="pref-level-mid" onclick="toggleSearchPref('level_mid',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Senior+</div>
+        <button class="pref-toggle" id="pref-level-senior" onclick="toggleSearchPref('level_senior',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Manager+</div>
+        <button class="pref-toggle" id="pref-level-manager" onclick="toggleSearchPref('level_manager',this)"></button>
+      </div>
+      <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faint);margin-bottom:0.375rem;margin-top:1rem">Schedule</div>
+      <div class="pref-row">
+        <div class="pref-label">Full-time</div>
+        <button class="pref-toggle" id="pref-sched-fulltime" onclick="toggleSearchPref('sched_fulltime',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Part-time</div>
+        <button class="pref-toggle" id="pref-sched-parttime" onclick="toggleSearchPref('sched_parttime',this)"></button>
+      </div>
+      <div class="pref-row">
+        <div class="pref-label">Contract</div>
+        <button class="pref-toggle" id="pref-sched-contract" onclick="toggleSearchPref('sched_contract',this)"></button>
+      </div>
+      <div style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-faint);margin-bottom:0.375rem;margin-top:1rem">Other</div>
+      <div class="pref-row">
+        <div>
+          <div class="pref-label">Paid positions only</div>
+          <div class="pref-desc">Only show jobs with listed compensation</div>
+        </div>
+        <button class="pref-toggle" id="pref-paid-only" onclick="toggleSearchPref('paid_only',this)"></button>
+      </div>
     </div>
   </div>
 
@@ -1257,6 +1471,7 @@ function switchTab(tab) {
   document.getElementById('scan-btn').style.display = tab === 'scanner' ? '' : 'none';
 
   if (tab === 'tracker') loadApplications();
+  if (tab === 'profile') renderProfile();
 }
 
 function loadStaticData() {
@@ -1544,8 +1759,9 @@ function updateStats() {
 }
 
 function buildHighlights() {
+  const sp = getSearchPrefs();
   const hl = allJobs
-    .filter(j => j.is_new && !hiddenJobs.has(j.id))
+    .filter(j => j.is_new && !hiddenJobs.has(j.id) && matchesSearchPrefs(j, sp))
     .sort((a, b) => {
       if (a.pay && !b.pay) return -1;
       if (!a.pay && b.pay) return 1;
@@ -1596,7 +1812,9 @@ function getFiltered() {
   const lvl = document.getElementById('level-filter').value;
   const pt = document.getElementById('pay-type-filter').value;
   const sched = document.getElementById('schedule-filter').value;
+  const sp = getSearchPrefs();
   return allJobs.filter(j => {
+    if (!matchesSearchPrefs(j, sp)) return false;
     if (!showHidden && hiddenJobs.has(j.id)) return false;
     if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
     if (q && !(j.title + j.company + j.location).toLowerCase().includes(q)) return false;
@@ -2017,6 +2235,223 @@ window.addEventListener('hashchange', () => {
   const m = location.hash.match(/^#job=(.+)/);
   if (m) openJobModal(decodeURIComponent(m[1]));
 });
+
+function renderProfile() {
+  if (!currentUser) return;
+  const info = document.getElementById('profile-info');
+  info.innerHTML =
+    '<span class="profile-info-label">Username</span><span class="profile-info-value">' + esc(currentUser.username) + '</span>' +
+    '<span class="profile-info-label">Email</span><span class="profile-info-value">' + esc(currentUser.email || '') + '</span>' +
+    '<span class="profile-info-label">Role</span><span class="profile-info-value">' + esc(currentUser.role || '') + '</span>';
+  document.getElementById('p-username').value = '';
+  document.getElementById('p-email').value = '';
+}
+
+function showMsg(id, text, ok) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'profile-msg ' + (ok ? 'success' : 'error');
+  setTimeout(() => { el.className = 'profile-msg'; }, 4000);
+}
+
+async function updateUsername(e) {
+  e.preventDefault();
+  const val = document.getElementById('p-username').value.trim();
+  if (!val) return;
+  const btn = document.getElementById('p-username-btn');
+  btn.disabled = true;
+
+  const isStatic = typeof STATIC_DATA !== 'undefined';
+  if (isStatic) {
+    const user = firebase.auth().currentUser;
+    if (!user) { showMsg('p-username-msg', 'Not signed in', false); btn.disabled = false; return; }
+    try {
+      await user.updateProfile({ displayName: val });
+      currentUser.username = val;
+      document.getElementById('user-info').textContent = val;
+      renderProfile();
+      showMsg('p-username-msg', 'Username updated', true);
+    } catch (err) {
+      showMsg('p-username-msg', err.message, false);
+    }
+    btn.disabled = false;
+    return;
+  }
+
+  try {
+    const r = await fetch('/api/me/username', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: val }),
+    });
+    const data = await r.json();
+    if (!r.ok) { showMsg('p-username-msg', data.error, false); btn.disabled = false; return; }
+    currentUser = data;
+    document.getElementById('user-info').textContent = data.username;
+    renderProfile();
+    showMsg('p-username-msg', 'Username updated', true);
+  } catch {
+    showMsg('p-username-msg', 'Connection error', false);
+  }
+  btn.disabled = false;
+}
+
+async function updateEmail(e) {
+  e.preventDefault();
+  const val = document.getElementById('p-email').value.trim();
+  if (!val) return;
+  const btn = document.getElementById('p-email-btn');
+  btn.disabled = true;
+
+  const isStatic = typeof STATIC_DATA !== 'undefined';
+  if (isStatic) {
+    const user = firebase.auth().currentUser;
+    if (!user) { showMsg('p-email-msg', 'Not signed in', false); btn.disabled = false; return; }
+    try {
+      await user.verifyBeforeUpdateEmail(val);
+      showMsg('p-email-msg', 'Verification email sent to ' + val, true);
+    } catch (err) {
+      const msg = {
+        'auth/requires-recent-login': 'Please sign out and sign back in, then try again',
+        'auth/invalid-email': 'Invalid email address',
+        'auth/email-already-in-use': 'Email already in use',
+      }[err.code] || err.message;
+      showMsg('p-email-msg', msg, false);
+    }
+    btn.disabled = false;
+    return;
+  }
+
+  try {
+    const r = await fetch('/api/me/email', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: val }),
+    });
+    const data = await r.json();
+    if (!r.ok) { showMsg('p-email-msg', data.error, false); btn.disabled = false; return; }
+    currentUser = data;
+    renderProfile();
+    showMsg('p-email-msg', 'Email updated', true);
+  } catch {
+    showMsg('p-email-msg', 'Connection error', false);
+  }
+  btn.disabled = false;
+}
+
+async function updatePassword(e) {
+  e.preventDefault();
+  const curPw = document.getElementById('p-cur-pw').value;
+  const newPw = document.getElementById('p-new-pw').value;
+  if (!curPw || !newPw) return;
+  const btn = document.getElementById('p-pw-btn');
+  btn.disabled = true;
+
+  const isStatic = typeof STATIC_DATA !== 'undefined';
+  if (isStatic) {
+    const user = firebase.auth().currentUser;
+    if (!user) { showMsg('p-pw-msg', 'Not signed in', false); btn.disabled = false; return; }
+    try {
+      const cred = firebase.auth.EmailAuthProvider.credential(user.email, curPw);
+      await user.reauthenticateWithCredential(cred);
+      await user.updatePassword(newPw);
+      document.getElementById('p-cur-pw').value = '';
+      document.getElementById('p-new-pw').value = '';
+      showMsg('p-pw-msg', 'Password updated', true);
+    } catch (err) {
+      const msg = {
+        'auth/wrong-password': 'Current password is incorrect',
+        'auth/weak-password': 'Password must be at least 6 characters',
+        'auth/requires-recent-login': 'Please sign out and sign back in, then try again',
+      }[err.code] || err.message;
+      showMsg('p-pw-msg', msg, false);
+    }
+    btn.disabled = false;
+    return;
+  }
+
+  try {
+    const r = await fetch('/api/me/password', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ current_password: curPw, new_password: newPw }),
+    });
+    const data = await r.json();
+    if (!r.ok) { showMsg('p-pw-msg', data.error, false); btn.disabled = false; return; }
+    document.getElementById('p-cur-pw').value = '';
+    document.getElementById('p-new-pw').value = '';
+    showMsg('p-pw-msg', 'Password updated', true);
+  } catch {
+    showMsg('p-pw-msg', 'Connection error', false);
+  }
+  btn.disabled = false;
+}
+
+const PREF_KEY = 'ux-internship-prefs';
+function loadPrefs() {
+  try { return JSON.parse(localStorage.getItem(PREF_KEY)) || {}; } catch { return {}; }
+}
+function savePrefs(p) { localStorage.setItem(PREF_KEY, JSON.stringify(p)); }
+
+const SEARCH_DEFAULTS = {
+  level_intern:true, level_fellow:true, level_apprentice:true,
+  level_entry:true, level_mid:true, level_senior:true, level_manager:true,
+  sched_fulltime:true, sched_parttime:true, sched_contract:true,
+  paid_only:false,
+};
+const LEVEL_PREF = {intern:'level_intern', fellow:'level_fellow', apprentice:'level_apprentice', entry:'level_entry', mid:'level_mid', 'senior+':'level_senior', 'manager+':'level_manager'};
+
+function getSearchPrefs() {
+  const prefs = loadPrefs();
+  const sp = {};
+  for (const [k, d] of Object.entries(SEARCH_DEFAULTS)) sp[k] = k in prefs ? prefs[k] : d;
+  return sp;
+}
+
+function toggleSearchPref(key, btn) {
+  const prefs = loadPrefs();
+  const cur = key in prefs ? prefs[key] : SEARCH_DEFAULTS[key];
+  prefs[key] = !cur;
+  savePrefs(prefs);
+  btn.classList.toggle('on', prefs[key]);
+}
+
+function matchesSearchPrefs(j, sp) {
+  if (!sp[LEVEL_PREF[j.level]]) return false;
+  if (j.schedule === 'full-time' && !sp.sched_fulltime) return false;
+  if (j.schedule === 'part-time' && !sp.sched_parttime) return false;
+  if (j.schedule === 'contract' && !sp.sched_contract) return false;
+  if (sp.paid_only && !j.pay) return false;
+  return true;
+}
+
+function togglePref(key, btn) {
+  const prefs = loadPrefs();
+  prefs[key] = !prefs[key];
+  savePrefs(prefs);
+  btn.classList.toggle('on', prefs[key]);
+}
+
+function initPrefs() {
+  const prefs = loadPrefs();
+  document.getElementById('pref-autoscan').classList.toggle('on', !!prefs.autoscan);
+  document.getElementById('pref-show-hidden').classList.toggle('on', !!prefs.showHiddenToggle);
+  document.getElementById('pref-default-tracker').classList.toggle('on', !!prefs.defaultTracker);
+  const sp = getSearchPrefs();
+  for (const key of Object.keys(SEARCH_DEFAULTS)) {
+    const el = document.getElementById('pref-' + key.replace(/_/g, '-'));
+    if (el) el.classList.toggle('on', sp[key]);
+  }
+}
+
+const _origShowApp = showApp;
+showApp = function() {
+  _origShowApp();
+  initPrefs();
+  const prefs = loadPrefs();
+  if (prefs.defaultTracker) switchTab('tracker');
+  if (prefs.autoscan && !STATIC) setTimeout(startScan, 300);
+};
 
 const _origCheckAuth = checkAuth;
 checkAuth = function() {

@@ -73,3 +73,41 @@ def get_current_user(token: str) -> User | None:
 
 def logout(token: str) -> None:
     _sessions.pop(token, None)
+
+
+def update_username(user_id: int, new_username: str) -> User:
+    with get_db() as session:
+        user = session.get(User, user_id)
+        if not user:
+            raise ValueError("User not found")
+        user.username = new_username
+        session.commit()
+        session.refresh(user)
+        session.expunge(user)
+        return user
+
+
+def update_email(user_id: int, new_email: str) -> User:
+    with get_db() as session:
+        user = session.get(User, user_id)
+        if not user:
+            raise ValueError("User not found")
+        user.email = new_email
+        session.commit()
+        session.refresh(user)
+        session.expunge(user)
+        return user
+
+
+def update_password(user_id: int, current_password: str, new_password: str) -> User:
+    with get_db() as session:
+        user = session.get(User, user_id)
+        if not user:
+            raise ValueError("User not found")
+        if not verify_password(current_password, user.password_hash):
+            raise PermissionError("Current password is incorrect")
+        user.password_hash = hash_password(new_password)
+        session.commit()
+        session.refresh(user)
+        session.expunge(user)
+        return user
