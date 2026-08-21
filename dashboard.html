@@ -139,7 +139,7 @@ header{
 .profile-icon-btn{
   position:absolute;right:1.5rem;
   background:none;border:none;cursor:pointer;
-  color:var(--text-muted);
+  color:var(--text-muted);text-decoration:none;
   width:2rem;height:2rem;
   display:flex;align-items:center;justify-content:center;
   border-radius:50%;
@@ -165,6 +165,7 @@ header{
   border-radius:var(--radius-pill);
   border:none;cursor:pointer;
   background:transparent;color:var(--text-muted);
+  text-decoration:none;
   transition:all var(--duration-fast) var(--ease-smooth);
 }
 .header-tab:hover{color:var(--text-body)}
@@ -283,6 +284,7 @@ main{max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 5rem}
 .tab-content.active{display:block}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.75rem}
+#stats{position:sticky;top:0;z-index:90;background:var(--surface-page);padding:0.75rem 0;margin:-0.75rem 0 1rem}
 .stat{
   background:var(--surface-card);
   border:1px solid var(--border-subtle);
@@ -680,6 +682,65 @@ th.fav-col{width:2rem;min-width:2rem;cursor:default !important}
 
 tr.hidden-row td{opacity:0.4}
 
+.companies-modal{max-width:40rem;max-height:80vh;display:flex;flex-direction:column;padding:0}
+.companies-modal h2{padding:1.5rem 1.5rem 0;margin-bottom:0.75rem}
+.cm-toolbar{display:flex;gap:0.5rem;padding:0 1.5rem 0.75rem;align-items:center;flex-wrap:wrap}
+.cm-search{
+  flex:1;min-width:10rem;padding:0.4rem 0.75rem;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-field);
+  font-size:0.8125rem;font-family:var(--font-body);
+  background:var(--surface-page);color:var(--text-body);
+}
+.cm-search:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.cm-search::placeholder{color:var(--text-faint)}
+.cm-count{font-size:0.75rem;color:var(--text-faint);white-space:nowrap}
+.cm-list{flex:1;overflow-y:auto;padding:0 1.5rem 1.5rem;margin:0;list-style:none}
+.cm-item{
+  display:flex;align-items:center;gap:0.625rem;
+  padding:0.5rem 0.375rem;border-bottom:1px solid var(--border-subtle);
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.cm-item:last-child{border-bottom:none}
+.cm-item:hover{background:var(--surface-card-hover)}
+.cm-item.cm-hidden{opacity:0.4}
+.cm-name{flex:1;font-size:0.875rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cm-board{font-size:0.6875rem;color:var(--text-faint);font-family:var(--font-mono);flex-shrink:0}
+.cm-actions{display:flex;gap:0.25rem;flex-shrink:0}
+.cm-btn{
+  background:none;border:none;cursor:pointer;font-size:0.8125rem;padding:0.25rem 0.375rem;
+  color:var(--text-faint);border-radius:var(--radius-sm);line-height:1;
+  transition:color var(--duration-fast) var(--ease-smooth),background var(--duration-fast) var(--ease-smooth);
+}
+.cm-btn:hover{color:var(--text-body);background:var(--sky-a10)}
+.cm-btn.cm-fav-active{color:var(--danger)}
+.cm-btn.cm-hide-active{color:var(--text-faint)}
+.cm-btn[title="Remove"]:hover{color:var(--danger);background:rgba(220,69,69,0.08)}
+.cm-add-row{display:flex;gap:0.5rem;padding:0.75rem 1.5rem;border-top:1px solid var(--border-subtle)}
+.cm-add-input{
+  flex:1;padding:0.4rem 0.75rem;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-field);
+  font-size:0.8125rem;font-family:var(--font-body);
+  background:var(--surface-page);color:var(--text-body);
+}
+.cm-add-input:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.cm-add-input::placeholder{color:var(--text-faint)}
+.cm-add-btn{
+  font-family:var(--font-display);font-size:0.75rem;font-weight:600;
+  padding:0.375rem 0.75rem;border-radius:var(--radius-pill);
+  border:none;background:var(--mint);color:#fff;cursor:pointer;white-space:nowrap;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.cm-add-btn:hover{background:var(--mint-vivid)}
+.cm-edit-input{
+  width:8rem;padding:0.2rem 0.4rem;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-sm);
+  font-size:0.8125rem;font-family:var(--font-body);
+  background:var(--surface-page);color:var(--text-body);
+}
+.cm-edit-input:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.stat.clickable{cursor:pointer}
+.stat.clickable:hover{border-color:var(--mint-a30);box-shadow:var(--shadow-sticky)}
+
 .add-btn{
   font-family:var(--font-display);
   background:var(--mint);color:var(--text-on-accent);border:none;
@@ -1015,6 +1076,12 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 }
 .pref-toggle.on{background:var(--mint)}
 .pref-toggle.on::after{transform:translateX(1.125rem)}
+.pref-select{
+  padding:0.25rem 0.5rem;font-size:0.8125rem;
+  background:var(--bg-card);color:var(--text-body);
+  border:1px solid var(--border-subtle);border-radius:var(--radius-sm);
+  cursor:pointer;flex-shrink:0;
+}
 
 .bento-grid{
   display:grid;
@@ -1259,17 +1326,17 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 <a href="#main" id="skip-link">Skip to main content</a>
 
 <header>
-  <a href="#" class="nav-logo" onclick="switchTab('landing'); return false;"><svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.5" fill="var(--mint)" stroke="none"/></svg><span>UX</span> Internship Watch</a>
-  <button class="profile-icon-btn" onclick="switchTab('profile')" id="tab-profile" aria-label="Profile">
+  <a href="/" class="nav-logo" onclick="switchTab('landing'); return false;"><svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.5" fill="var(--mint)" stroke="none"/></svg><span>UX</span> Internship Watch</a>
+  <a href="/profile" class="profile-icon-btn" onclick="switchTab('profile'); return false;" id="tab-profile" aria-label="Profile">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
-  </button>
+  </a>
 </header>
 
 <div class="sub-bar">
   <div class="header-tabs">
-    <button class="header-tab active" onclick="switchTab('landing')" id="tab-landing">Home</button>
-    <button class="header-tab" onclick="switchTab('scanner')" id="tab-scanner">Scanner</button>
-    <button class="header-tab" onclick="switchTab('tracker')" id="tab-tracker">Tracker</button>
+    <a href="/" class="header-tab active" onclick="switchTab('landing'); return false;" id="tab-landing">Home</a>
+    <a href="/scanner" class="header-tab" onclick="switchTab('scanner'); return false;" id="tab-scanner">Scanner</a>
+    <a href="/tracker" class="header-tab" onclick="switchTab('tracker'); return false;" id="tab-tracker">Tracker</a>
   </div>
   <div class="scan-group" style="display:none">
     <button id="scan-btn" onclick="startScan()">
@@ -1290,12 +1357,12 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   <!-- LANDING TAB -->
   <div id="landing-tab" class="tab-content active">
     <div class="bento-grid">
-      <a class="bento-card bento-scanner bento-link" href="#" onclick="switchTab('scanner'); return false;">
+      <a class="bento-card bento-scanner bento-link" href="/scanner" onclick="switchTab('scanner'); return false;">
         <div class="bento-title">Job Scanner</div>
         <div class="bento-subtitle">Scan 195+ companies for matching UX postings</div>
         <div class="bento-arrow">&rarr;</div>
       </a>
-      <a class="bento-card bento-tracker bento-link" href="#" onclick="switchTab('tracker'); return false;">
+      <a class="bento-card bento-tracker bento-link" href="/tracker" onclick="switchTab('tracker'); return false;">
         <div class="bento-title">Tracker</div>
         <div class="bento-subtitle">Track your applications &amp; pipeline</div>
         <div class="bento-arrow">&rarr;</div>
@@ -1303,7 +1370,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <div class="bento-card bento-highlights">
         <div class="bento-header">
           <h3>Recent Highlights</h3>
-          <button class="bento-view-all" onclick="switchTab('scanner')">View all &rarr;</button>
+          <a class="bento-view-all" href="/scanner" onclick="switchTab('scanner'); return false;">View all &rarr;</a>
         </div>
         <div id="bento-hl-list" class="bento-hl-list">
           <div class="bento-hl-empty">Run a scan to see recent postings</div>
@@ -1312,7 +1379,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <div class="bento-card bento-stats">
         <div class="bento-header">
           <h3>Application Stats</h3>
-          <button class="bento-view-all" onclick="switchTab('tracker')">Open tracker &rarr;</button>
+          <a class="bento-view-all" href="/tracker" onclick="switchTab('tracker'); return false;">Open tracker &rarr;</a>
         </div>
         <div id="bento-stats-content">
           <div class="bento-stats-grid">
@@ -1355,7 +1422,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     <div class="stats" id="stats" style="display:none">
       <div class="stat primary"><div class="n" id="s-matches">0</div><div class="label">Matches</div></div>
       <div class="stat"><div class="n" id="s-new">0</div><div class="label">New</div></div>
-      <div class="stat"><div class="n" id="s-companies">0</div><div class="label">Companies</div></div>
+      <div class="stat clickable" onclick="openCompaniesModal()" title="View company list"><div class="n" id="s-companies">0</div><div class="label">Companies</div></div>
       <div class="stat"><div class="n" id="s-pay">0</div><div class="label">With Pay</div></div>
     </div>
 
@@ -1492,7 +1559,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     <div class="profile-tabs">
       <button class="profile-tab-btn active" onclick="switchProfileTab('account')">Account</button>
       <button class="profile-tab-btn" onclick="switchProfileTab('settings')">Settings</button>
-      <button class="profile-tab-btn" onclick="switchProfileTab('search-prefs')">Search Preferences</button>
+      <button class="profile-tab-btn" onclick="switchProfileTab('search-prefs')">Alert Preferences</button>
     </div>
 
     <div id="ptab-account" class="profile-pane active">
@@ -1570,12 +1637,26 @@ td.notes-cell{min-width:10rem;max-width:16rem}
           </div>
           <button class="pref-toggle" id="pref-default-tracker" onclick="togglePref('defaultTracker',this)"></button>
         </div>
+        <div class="pref-row">
+          <div>
+            <div class="pref-label">Auto-clear old postings</div>
+            <div class="pref-desc">Hide job postings older than the selected time period</div>
+          </div>
+          <select class="pref-select" id="pref-autoclear" onchange="setAutoClear(this.value)">
+            <option value="0">Never</option>
+            <option value="14">2 weeks</option>
+            <option value="30">1 month</option>
+            <option value="90">3 months</option>
+            <option value="180">6 months</option>
+            <option value="365">1 year</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div id="ptab-search-prefs" class="profile-pane">
       <div class="profile-section">
-        <h3>Search Preferences</h3>
+        <h3>Alert Preferences</h3>
         <div class="section-title">Levels</div>
         <div class="tag-group">
           <button class="tag-chip" data-key="level_intern" onclick="toggleSearchTag(this)">Intern / Co-op</button>
@@ -1595,6 +1676,13 @@ td.notes-cell{min-width:10rem;max-width:16rem}
         <div class="section-title">Other</div>
         <div class="tag-group">
           <button class="tag-chip" data-key="paid_only" onclick="toggleSearchTag(this)">Paid positions only</button>
+        </div>
+        <div class="pref-row" style="margin-top:1.25rem">
+          <div>
+            <div class="pref-label">New alerts only</div>
+            <div class="pref-desc">Only show results found since last scan. Turn off to see all matching results.</div>
+          </div>
+          <button class="pref-toggle" id="pref-new-alerts-only" onclick="togglePref('newAlertsOnly',this)"></button>
         </div>
       </div>
     </div>
@@ -1686,6 +1774,30 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     <div class="modal-actions">
       <button type="button" class="modal-cancel" onclick="closeSaveFilterModal()">Cancel</button>
       <button type="button" class="add-btn" onclick="saveCurrentFilter()" style="font-size:0.8125rem;padding:0.4rem 1rem">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="companies-modal">
+  <div class="modal companies-modal" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+    <h2 id="cm-title">Companies</h2>
+    <div class="cm-toolbar">
+      <input type="text" class="cm-search" id="cm-search" placeholder="Search companies..." oninput="renderCompanyList()">
+      <span class="cm-count" id="cm-count"></span>
+    </div>
+    <ul class="cm-list" id="cm-list"></ul>
+    <div class="cm-add-row">
+      <input type="text" class="cm-add-input" id="cm-add-name" placeholder="Company name">
+      <select class="cm-add-input" id="cm-add-board" style="flex:none;width:8rem">
+        <option value="greenhouse">Greenhouse</option>
+        <option value="lever">Lever</option>
+        <option value="ashby">Ashby</option>
+        <option value="smartrecruiters">SmartRecruiters</option>
+        <option value="workday">Workday</option>
+        <option value="workable">Workable</option>
+      </select>
+      <input type="text" class="cm-add-input" id="cm-add-slug" placeholder="Board slug" style="flex:0.6">
+      <button class="cm-add-btn" onclick="addCompanyFromModal()">Add</button>
     </div>
   </div>
 </div>
@@ -2065,7 +2177,7 @@ function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || [];
 function lsSave(arr) { localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
 let _nextId = Date.now();
 
-function switchTab(tab) {
+function switchTab(tab, pushHistory) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.header-tab').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-profile').classList.remove('active');
@@ -2078,7 +2190,22 @@ function switchTab(tab) {
   if (tab === 'landing') buildBentoGrid();
   if (tab === 'tracker') loadApplications();
   if (tab === 'profile') renderProfile();
+
+  if (pushHistory !== false) {
+    const path = tab === 'landing' ? '/' : '/' + tab;
+    if (location.pathname !== path) history.pushState({tab: tab}, '', path);
+  }
 }
+
+const TAB_ROUTES = {'/': 'landing', '/scanner': 'scanner', '/tracker': 'tracker', '/profile': 'profile'};
+
+function getTabFromPath() {
+  return TAB_ROUTES[location.pathname] || 'landing';
+}
+
+window.addEventListener('popstate', function() {
+  switchTab(getTabFromPath(), false);
+});
 
 function loadStaticData() {
   allJobs = STATIC_DATA.jobs || [];
@@ -2088,7 +2215,7 @@ function loadStaticData() {
   document.getElementById('empty').style.display = 'none';
   document.getElementById('stats').style.display = 'grid';
   document.getElementById('results').style.display = 'block';
-  document.getElementById('s-companies').textContent = STATIC_DATA.companies_scanned || 0;
+  document.getElementById('s-companies').textContent = getAllCompanies().length;
   updateStats();
   renderTable();
   buildHighlights();
@@ -2428,7 +2555,13 @@ function getFiltered() {
   const lvlAll = lvlVals.size === document.querySelectorAll('#level-filter input[type="checkbox"]').length;
   const ptAll = ptVals.size === document.querySelectorAll('#pay-type-filter input[type="checkbox"]').length;
   const schedAll = schedVals.size === document.querySelectorAll('#schedule-filter input[type="checkbox"]').length;
+  const autoClearDays = loadPrefs().autoClearDays || 0;
+  const autoClearCutoff = autoClearDays > 0 ? Date.now() - autoClearDays * 86400000 : 0;
   return allJobs.filter(j => {
+    if (autoClearCutoff && j.posted_at) {
+      const posted = new Date(j.posted_at).getTime();
+      if (!isNaN(posted) && posted < autoClearCutoff) return false;
+    }
     if (!showHidden && hiddenJobs.has(j.id)) return false;
     if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
     if (q && !(j.title + j.company + j.location).toLowerCase().includes(q)) return false;
@@ -3128,6 +3261,7 @@ const SEARCH_DEFAULTS = {
   level_entry:true, level_mid:true, level_senior:true, level_manager:true,
   sched_fulltime:true, sched_parttime:true, sched_contract:true,
   paid_only:false,
+  newAlertsOnly:true,
 };
 const LEVEL_PREF = {intern:'level_intern', fellow:'level_fellow', apprentice:'level_apprentice', entry:'level_entry', mid:'level_mid', 'senior+':'level_senior', 'manager+':'level_manager'};
 
@@ -3163,6 +3297,13 @@ function togglePref(key, btn) {
   btn.classList.toggle('on', prefs[key]);
 }
 
+function setAutoClear(val) {
+  const prefs = loadPrefs();
+  prefs.autoClearDays = parseInt(val, 10);
+  savePrefs(prefs);
+  renderTable();
+}
+
 function switchProfileTab(tab) {
   document.querySelectorAll('.profile-tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.profile-pane').forEach(p => p.classList.remove('active'));
@@ -3175,10 +3316,12 @@ function initPrefs() {
   document.getElementById('pref-autoscan').classList.toggle('on', !!prefs.autoscan);
   document.getElementById('pref-show-hidden').classList.toggle('on', !!prefs.showHiddenToggle);
   document.getElementById('pref-default-tracker').classList.toggle('on', !!prefs.defaultTracker);
+  document.getElementById('pref-autoclear').value = String(prefs.autoClearDays || 0);
   const sp = getSearchPrefs();
   document.querySelectorAll('.tag-chip[data-key]').forEach(el => {
     el.classList.toggle('active', sp[el.dataset.key]);
   });
+  document.getElementById('pref-new-alerts-only').classList.toggle('on', sp.newAlertsOnly);
   buildSavedFilterSelect();
 }
 
@@ -3316,7 +3459,9 @@ showApp = function() {
   initPrefs();
   buildBentoGrid();
   const prefs = loadPrefs();
-  if (prefs.defaultTracker) switchTab('tracker');
+  const routeTab = getTabFromPath();
+  if (routeTab !== 'landing') switchTab(routeTab, false);
+  else if (prefs.defaultTracker) switchTab('tracker');
   if (prefs.autoscan && !STATIC) setTimeout(startScan, 300);
   openJobFromHash();
 };
@@ -3418,6 +3563,150 @@ document.addEventListener('click', e => {
   const dd = document.getElementById('scan-dropdown');
   if (dd.classList.contains('open') && !e.target.closest('.scan-group')) closeScanDropdown();
 });
+
+let hiddenCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-hidden-companies') || '[]'));
+let addedCompanies = JSON.parse(localStorage.getItem('ux-internship-added-companies') || '[]');
+let renamedCompanies = JSON.parse(localStorage.getItem('ux-internship-renamed-companies') || '{}');
+let removedCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-removed-companies') || '[]'));
+
+function saveHiddenCompanies() { localStorage.setItem('ux-internship-hidden-companies', JSON.stringify([...hiddenCompanies])); }
+function saveAddedCompanies() { localStorage.setItem('ux-internship-added-companies', JSON.stringify(addedCompanies)); }
+function saveRenamedCompanies() { localStorage.setItem('ux-internship-renamed-companies', JSON.stringify(renamedCompanies)); }
+function saveRemovedCompanies() { localStorage.setItem('ux-internship-removed-companies', JSON.stringify([...removedCompanies])); }
+
+function getCompanyKey(c) { return (c.board || '') + ':' + (c.slug || c.tenant || c.name); }
+
+function getBoardUrl(c) {
+  const s = c.slug || c.tenant || '';
+  const urls = {
+    greenhouse: 'https://boards.greenhouse.io/' + s,
+    lever: 'https://jobs.lever.co/' + s,
+    ashby: 'https://jobs.ashbyhq.com/' + s,
+    smartrecruiters: 'https://jobs.smartrecruiters.com/' + s,
+    workable: 'https://apply.workable.com/' + s,
+  };
+  return urls[c.board] || '';
+}
+
+function getAllCompanies() {
+  let list = [];
+  if (typeof STATIC_CONFIG !== 'undefined') list = [...STATIC_CONFIG.companies];
+  list = list.concat(addedCompanies);
+  return list.filter(c => !removedCompanies.has(getCompanyKey(c)));
+}
+
+function getDisplayName(c) {
+  const key = getCompanyKey(c);
+  return renamedCompanies[key] || c.name;
+}
+
+function renderCompanyList() {
+  const q = (document.getElementById('cm-search').value || '').toLowerCase();
+  const companies = getAllCompanies();
+  const filtered = companies.filter(c => !q || getDisplayName(c).toLowerCase().includes(q) || (c.board || '').includes(q));
+  filtered.sort((a, b) => getDisplayName(a).localeCompare(getDisplayName(b)));
+
+  document.getElementById('cm-count').textContent = filtered.length + ' of ' + companies.length;
+
+  document.getElementById('cm-list').innerHTML = filtered.map(c => {
+    const key = getCompanyKey(c);
+    const name = esc(getDisplayName(c));
+    const isHidden = hiddenCompanies.has(key);
+    const isFav = favEmployers.has(c.name);
+    const url = getBoardUrl(c);
+    return '<li class="cm-item' + (isHidden ? ' cm-hidden' : '') + '" data-key="' + escAttr(key) + '">' +
+      '<span class="cm-name" id="cm-name-' + escAttr(key) + '">' + name + '</span>' +
+      '<span class="cm-board">' + esc(c.board || '') + '</span>' +
+      '<div class="cm-actions">' +
+        (url ? '<a class="cm-btn" href="' + url + '" target="_blank" rel="noopener" title="View careers page">↗</a>' : '') +
+        '<button class="cm-btn' + (isFav ? ' cm-fav-active' : '') + '" onclick="toggleCompanyFav(\'' + escAttr(key) + '\',\'' + escAttr(c.name) + '\')" title="Favorite">' + (isFav ? '♥' : '♡') + '</button>' +
+        '<button class="cm-btn' + (isHidden ? ' cm-hide-active' : '') + '" onclick="toggleCompanyHide(\'' + escAttr(key) + '\')" title="' + (isHidden ? 'Unhide' : 'Hide') + '">' + (isHidden ? '◉' : '⊘') + '</button>' +
+        '<button class="cm-btn" onclick="editCompanyName(\'' + escAttr(key) + '\',\'' + escAttr(c.name) + '\')" title="Edit">✎</button>' +
+        '<button class="cm-btn" onclick="removeCompany(\'' + escAttr(key) + '\')" title="Remove">✕</button>' +
+      '</div>' +
+    '</li>';
+  }).join('');
+}
+
+function openCompaniesModal() {
+  document.getElementById('cm-search').value = '';
+  renderCompanyList();
+  document.getElementById('companies-modal').classList.add('open');
+  document.getElementById('cm-search').focus();
+}
+function closeCompaniesModal() {
+  document.getElementById('companies-modal').classList.remove('open');
+}
+document.getElementById('companies-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeCompaniesModal();
+});
+document.getElementById('cm-search').addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCompaniesModal();
+});
+
+function toggleCompanyFav(key, name) {
+  favEmployers.has(name) ? favEmployers.delete(name) : favEmployers.add(name);
+  saveFavEmployers();
+  renderCompanyList();
+  if (allJobs.length) renderTable();
+}
+
+function toggleCompanyHide(key) {
+  hiddenCompanies.has(key) ? hiddenCompanies.delete(key) : hiddenCompanies.add(key);
+  saveHiddenCompanies();
+  renderCompanyList();
+}
+
+function editCompanyName(key, originalName) {
+  const nameEl = document.getElementById('cm-name-' + key);
+  if (!nameEl) return;
+  const current = renamedCompanies[key] || originalName;
+  nameEl.innerHTML = '<input class="cm-edit-input" value="' + escAttr(current) + '" ' +
+    'onblur="saveCompanyRename(\'' + escAttr(key) + '\',this.value)" ' +
+    'onkeydown="if(event.key===\'Enter\'){this.blur()}if(event.key===\'Escape\'){this.value=\'' + escAttr(current) + '\';this.blur()}">';
+  nameEl.querySelector('input').select();
+}
+
+function saveCompanyRename(key, newName) {
+  newName = newName.trim();
+  if (newName) {
+    renamedCompanies[key] = newName;
+  } else {
+    delete renamedCompanies[key];
+  }
+  saveRenamedCompanies();
+  renderCompanyList();
+}
+
+function removeCompany(key) {
+  removedCompanies.add(key);
+  saveRemovedCompanies();
+  renderCompanyList();
+  updateCompanyCount();
+}
+
+function addCompanyFromModal() {
+  const name = document.getElementById('cm-add-name').value.trim();
+  const board = document.getElementById('cm-add-board').value;
+  const slug = document.getElementById('cm-add-slug').value.trim();
+  if (!name || !slug) return;
+  const entry = { name, board, slug };
+  const key = getCompanyKey(entry);
+  removedCompanies.delete(key);
+  saveRemovedCompanies();
+  if (!addedCompanies.some(c => getCompanyKey(c) === key)) {
+    addedCompanies.push(entry);
+    saveAddedCompanies();
+  }
+  document.getElementById('cm-add-name').value = '';
+  document.getElementById('cm-add-slug').value = '';
+  renderCompanyList();
+  updateCompanyCount();
+}
+
+function updateCompanyCount() {
+  document.getElementById('s-companies').textContent = getAllCompanies().length;
+}
 
 checkAuth();
 

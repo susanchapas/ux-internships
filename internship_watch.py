@@ -254,11 +254,29 @@ def fetch_usajobs(cfg, company="US Federal Government"):
         time.sleep(0.5)
 
 
+def fetch_workable(slug, company):
+    url = f"https://apply.workable.com/api/v1/widget/accounts/{slug}?details=true"
+    r = requests.get(url, headers=UA, timeout=TIMEOUT)
+    r.raise_for_status()
+    for j in r.json().get("jobs", []):
+        loc = ", ".join(x for x in (j.get("city"), j.get("state") or j.get("country")) if x)
+        yield {
+            "id": f"wk:{slug}:{j.get('shortcode')}",
+            "title": j.get("title", ""),
+            "location": loc,
+            "url": j.get("url") or j.get("application_url", ""),
+            "company": company,
+            "source": "workable",
+            "pay": "",
+        }
+
+
 BOARD_FETCHERS = {
     "greenhouse": fetch_greenhouse,
     "lever": fetch_lever,
     "ashby": fetch_ashby,
     "smartrecruiters": fetch_smartrecruiters,
+    "workable": fetch_workable,
 }
 
 

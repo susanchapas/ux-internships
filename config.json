@@ -412,11 +412,6 @@
       "search": "intern"
     },
     {
-      "board": "greenhouse",
-      "slug": "esusu",
-      "name": "Esusu"
-    },
-    {
       "board": "workday",
       "name": "Etsy",
       "tenant": "etsy",
