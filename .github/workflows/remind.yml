@@ -1,0 +1,22 @@
+name: Application Reminders
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # daily at 10am ET
+  workflow_dispatch:
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install -r requirements.txt
+
+      - run: python internship_watch.py --remind
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}

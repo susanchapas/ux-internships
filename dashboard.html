@@ -2954,7 +2954,7 @@ async function fetchFromUrl() {
   const url = urlInput.value.trim();
   if (!url) { statusEl.textContent = 'Enter a URL first'; statusEl.className = 'fetch-status error'; return; }
   const parsed = parseJobUrl(url);
-  if (!parsed) { statusEl.textContent = 'Not a supported board URL — fill in details manually'; statusEl.className = 'fetch-status error'; return; }
+  if (!parsed) { statusEl.textContent = 'Can’t auto-fill from this URL — fill in details manually (link will still be saved)'; statusEl.className = 'fetch-status error'; return; }
   fetchBtn.disabled = true;
   statusEl.textContent = 'Fetching from ' + parsed.board + '…';
   statusEl.className = 'fetch-status loading';

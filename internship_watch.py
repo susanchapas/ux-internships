@@ -371,6 +371,47 @@ def notify(new_jobs):
         print(body)
 
 
+# --------------------------------------------------------- app reminders
+
+
+def remind_saved_applications():
+    discord = os.environ.get("DISCORD_WEBHOOK")
+    if not discord:
+        print("  ! no DISCORD_WEBHOOK set; skipping reminders")
+        return
+
+    from db import list_saved_applications
+    saved = list_saved_applications()
+    if not saved:
+        print("  -> no saved applications to remind about")
+        return
+
+    desc_lines = []
+    for app in saved:
+        parts = [f"**{app['company']}** — {app['title']}"]
+        if app.get("url"):
+            modal_url = f"{DASHBOARD_URL}#app={app['id']}"
+            parts[0] = f"[{app['company']} — {app['title']}]({modal_url})"
+        if app.get("location"):
+            parts.append(f"📍 {app['location']}")
+        saved_date = app.get("created_at", "")[:10]
+        if saved_date:
+            parts.append(f"saved {saved_date}")
+        desc_lines.append(" · ".join(parts))
+
+    embed = {
+        "title": f"📋 {len(saved)} saved application{'s' if len(saved) != 1 else ''} — not yet applied",
+        "description": "\n".join(desc_lines),
+        "color": 0xFEE75C,
+    }
+    payload = {
+        "content": "⏰ **Application reminder** — you saved these but haven't applied yet!",
+        "embeds": [embed],
+    }
+    requests.post(discord, json=payload, timeout=TIMEOUT)
+    print(f"  -> reminded about {len(saved)} saved applications on Discord")
+
+
 # ---------------------------------------------------------------- main
 
 
@@ -384,7 +425,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--seed", action="store_true", help="mark all current postings as seen")
+    ap.add_argument("--remind", action="store_true", help="send Discord reminders for saved applications")
     args = ap.parse_args()
+
+    if args.remind:
+        from db import init_db
+        init_db()
+        remind_saved_applications()
+        return
 
     cfg = load_json(CONFIG_PATH, None)
     if cfg is None:

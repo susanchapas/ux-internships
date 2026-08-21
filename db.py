@@ -130,6 +130,16 @@ def list_applications():
     return result
 
 
+def list_saved_applications():
+    conn = _connect()
+    rows = conn.execute(
+        "SELECT * FROM applications WHERE status='saved' ORDER BY created_at ASC"
+    ).fetchall()
+    result = [dict(r) for r in rows]
+    conn.close()
+    return result
+
+
 def add_application(company, title, url="", location="", pay="",
                     status="saved", notes="", job_id=None, applied_at=""):
     now = _now()
