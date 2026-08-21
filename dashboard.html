@@ -733,6 +733,26 @@ tr.hidden-row td{opacity:0.4}
 }
 .modal-field input::placeholder,.modal-field textarea::placeholder{color:var(--text-faint)}
 .modal-field textarea{resize:vertical;min-height:4rem}
+.modal-url-row{display:flex;gap:0.5rem}
+.modal-url-row input{flex:1}
+.fetch-btn{
+  font-family:var(--font-display);
+  background:var(--sky);color:#fff;border:none;
+  padding:0.5rem 1rem;border-radius:var(--radius-field);
+  font-size:0.875rem;font-weight:600;
+  cursor:pointer;white-space:nowrap;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.fetch-btn:hover{background:#5a72a0}
+.fetch-btn:disabled{opacity:0.5;cursor:not-allowed}
+.fetch-status{font-size:0.75rem;margin-top:0.25rem;min-height:1rem}
+.fetch-status.loading{color:var(--text-muted)}
+.fetch-status.success{color:var(--mint)}
+.fetch-status.error{color:var(--danger)}
+.modal-divider{
+  height:1px;background:var(--border-subtle);
+  margin:0.25rem 0 0.75rem;
+}
 .modal-actions{display:flex;gap:0.75rem;justify-content:flex-end;margin-top:1.5rem}
 .modal-cancel{
   font-family:var(--font-display);font-size:0.875rem;font-weight:600;
@@ -1588,16 +1608,21 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     <h2 id="modal-title">Add Application</h2>
     <form id="add-form" onsubmit="submitAdd(event)">
       <div class="modal-field">
+        <label for="m-url">Job URL</label>
+        <div class="modal-url-row">
+          <input id="m-url" type="url" placeholder="Paste a job posting URL...">
+          <button type="button" class="fetch-btn" id="fetch-btn" onclick="fetchFromUrl()">Fetch</button>
+        </div>
+        <div class="fetch-status" id="fetch-status"></div>
+      </div>
+      <div class="modal-divider"></div>
+      <div class="modal-field">
         <label for="m-company">Company *</label>
         <input id="m-company" required placeholder="e.g. Stripe">
       </div>
       <div class="modal-field">
         <label for="m-title">Job Title *</label>
         <input id="m-title" required placeholder="e.g. UX Research Intern">
-      </div>
-      <div class="modal-field">
-        <label for="m-url">URL</label>
-        <input id="m-url" type="url" placeholder="https://...">
       </div>
       <div class="modal-field">
         <label for="m-location">Location</label>
@@ -2706,13 +2731,122 @@ function deleteApp(id) {
 
 function openAddModal() {
   document.getElementById('add-modal').classList.add('open');
-  document.getElementById('m-company').focus();
+  document.getElementById('m-url').focus();
 }
 
 function closeAddModal() {
   document.getElementById('add-modal').classList.remove('open');
   document.getElementById('add-form').reset();
+  const s = document.getElementById('fetch-status');
+  s.textContent = '';
+  s.className = 'fetch-status';
 }
+
+function parseJobUrl(url) {
+  try {
+    const u = new URL(url);
+    const host = u.hostname;
+    const path = u.pathname.replace(/\/$/, '');
+    if (host.endsWith('greenhouse.io')) {
+      const m = path.match(/\/([^/]+)\/jobs\/(\d+)/);
+      if (m) return { board: 'greenhouse', slug: m[1], jobId: m[2] };
+    }
+    if (host === 'jobs.lever.co') {
+      const segs = path.split('/').filter(Boolean);
+      if (segs.length >= 2) return { board: 'lever', slug: segs[0], jobId: segs[1] };
+    }
+    if (host === 'jobs.ashbyhq.com') {
+      const segs = path.split('/').filter(Boolean);
+      if (segs.length >= 2) return { board: 'ashby', slug: segs[0], jobId: segs[1] };
+    }
+    return null;
+  } catch { return null; }
+}
+
+function resolveCompanyName(board, slug) {
+  if (typeof STATIC_CONFIG !== 'undefined') {
+    const entry = STATIC_CONFIG.companies.find(c => c.board === board && (c.slug === slug || c.tenant === slug));
+    if (entry) return entry.name;
+  }
+  return slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+const JOB_FETCH = {
+  greenhouse: async (slug, jobId) => {
+    const r = await fetch('https://boards-api.greenhouse.io/v1/boards/' + slug + '/jobs/' + jobId + '?content=true');
+    if (!r.ok) throw new Error('Job not found');
+    const j = await r.json();
+    return {
+      company: resolveCompanyName('greenhouse', slug),
+      title: j.title || '',
+      location: (j.location || {}).name || '',
+      pay: extractPay(j.content || ''),
+      url: j.absolute_url || '',
+    };
+  },
+  lever: async (slug, jobId) => {
+    const r = await fetch('https://api.lever.co/v0/postings/' + slug + '/' + jobId);
+    if (!r.ok) throw new Error('Job not found');
+    const j = await r.json();
+    let text = [j.descriptionPlain, j.additionalPlain, j.openingPlain].filter(Boolean).join(' ');
+    (j.lists || []).forEach(s => { if (typeof s.content === 'string') text += ' ' + s.content; });
+    return {
+      company: resolveCompanyName('lever', slug),
+      title: j.text || '',
+      location: (j.categories || {}).location || '',
+      pay: extractPay(text),
+      url: j.hostedUrl || '',
+    };
+  },
+  ashby: async (slug, jobId) => {
+    const r = await fetch('https://api.ashbyhq.com/posting-api/job-board/' + slug);
+    if (!r.ok) throw new Error('Board not found');
+    const data = await r.json();
+    const j = (data.jobs || []).find(j => j.id === jobId);
+    if (!j) throw new Error('Job not found on board');
+    return {
+      company: resolveCompanyName('ashby', slug),
+      title: j.title || '',
+      location: j.location || '',
+      pay: j.compensationTierSummary || extractPay(j.descriptionHtml || ''),
+      url: j.jobUrl || '',
+    };
+  },
+};
+
+async function fetchFromUrl() {
+  const urlInput = document.getElementById('m-url');
+  const statusEl = document.getElementById('fetch-status');
+  const fetchBtn = document.getElementById('fetch-btn');
+  const url = urlInput.value.trim();
+  if (!url) { statusEl.textContent = 'Enter a URL first'; statusEl.className = 'fetch-status error'; return; }
+  const parsed = parseJobUrl(url);
+  if (!parsed) { statusEl.textContent = 'Not a supported board URL — fill in details manually'; statusEl.className = 'fetch-status error'; return; }
+  fetchBtn.disabled = true;
+  statusEl.textContent = 'Fetching from ' + parsed.board + '…';
+  statusEl.className = 'fetch-status loading';
+  try {
+    const job = await JOB_FETCH[parsed.board](parsed.slug, parsed.jobId);
+    document.getElementById('m-company').value = job.company || '';
+    document.getElementById('m-title').value = job.title || '';
+    document.getElementById('m-location').value = job.location || '';
+    document.getElementById('m-pay').value = job.pay || '';
+    if (job.url) urlInput.value = job.url;
+    statusEl.textContent = 'Fetched — review and edit below';
+    statusEl.className = 'fetch-status success';
+  } catch (err) {
+    statusEl.textContent = 'Could not fetch: ' + (err.message || 'unknown error');
+    statusEl.className = 'fetch-status error';
+  }
+  fetchBtn.disabled = false;
+}
+
+document.getElementById('m-url').addEventListener('paste', () => {
+  setTimeout(() => {
+    const url = document.getElementById('m-url').value.trim();
+    if (url && parseJobUrl(url)) fetchFromUrl();
+  }, 0);
+});
 
 function submitAdd(e) {
   e.preventDefault();
