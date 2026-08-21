@@ -200,15 +200,40 @@ header{
 .scan-dropdown-toggle.open svg{transform:rotate(180deg)}
 .scan-dropdown{
   display:none;position:absolute;top:calc(100% + 0.375rem);right:0;
-  min-width:12rem;max-width:18rem;
+  min-width:15rem;max-width:22rem;max-height:70vh;
   background:var(--surface-card);
   border:1px solid var(--border-subtle);
   border-radius:var(--radius-lg);
   box-shadow:0 8px 24px -4px rgba(0,0,0,0.15);
-  z-index:20;overflow:hidden;
+  z-index:20;overflow-x:hidden;overflow-y:auto;padding-bottom:0.375rem;
   animation:scanDropIn var(--duration-fast) var(--ease-smooth);
 }
 .scan-dropdown.open{display:block}
+.scan-check-item{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:0.3125rem 0.75rem;
+  font-size:0.8125rem;color:var(--text-body);
+  cursor:pointer;
+  transition:background var(--duration-fast) var(--ease-smooth);
+}
+.scan-check-item:hover{background:var(--mint-a10)}
+.scan-check-item input[type="checkbox"]{
+  accent-color:var(--mint);width:0.875rem;height:0.875rem;cursor:pointer;flex-shrink:0;
+}
+.scan-input-row{
+  display:flex;align-items:center;gap:0.5rem;
+  padding:0.3125rem 0.75rem;font-size:0.75rem;color:var(--text-muted);
+}
+.scan-input-row span{white-space:nowrap;min-width:4.5rem}
+.scan-input-row input{
+  flex:1;padding:0.25rem 0.375rem;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-sm);
+  font-size:0.75rem;font-family:var(--font-body);
+  background:var(--surface-page);color:var(--text-body);
+}
+.scan-input-row input[type="number"]{max-width:5rem;font-family:var(--font-mono)}
+.scan-input-row input:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.scan-divider{height:1px;background:var(--border-subtle);margin:0.25rem 0}
 @keyframes scanDropIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .scan-dropdown-header{
   font-size:0.6875rem;font-weight:600;
@@ -2042,9 +2067,8 @@ function getFiltered() {
   const lvl = document.getElementById('level-filter').value;
   const pt = document.getElementById('pay-type-filter').value;
   const sched = document.getElementById('schedule-filter').value;
-  const sp = getSearchPrefs();
+  const sf = getScanFilters();
   return allJobs.filter(j => {
-    if (!matchesSearchPrefs(j, sp)) return false;
     if (!showHidden && hiddenJobs.has(j.id)) return false;
     if (showFavOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
     if (q && !(j.title + j.company + j.location).toLowerCase().includes(q)) return false;
@@ -2055,6 +2079,15 @@ function getFiltered() {
     if (pt === 'listed' && !j.pay) return false;
     if (pt === 'unlisted' && j.pay) return false;
     if (sched && j.schedule !== sched) return false;
+    if (sf.levels.length < 7 && !sf.levels.includes(j.level)) return false;
+    if (sf.schedules.length < 4) {
+      if (!sf.schedules.includes(j.schedule || 'other')) return false;
+    }
+    if (sf.payListed && !j.pay) return false;
+    if (sf.minHourly && j.pay_type === 'hourly' && parsePayNum(j.pay) < parseFloat(sf.minHourly)) return false;
+    if (sf.minSalary && j.pay_type === 'salary' && parsePayNum(j.pay) < parseFloat(sf.minSalary)) return false;
+    if (sf.favoritesOnly && !favEmployers.has(j.company)) return false;
+    if (sf.location && !(j.location || '').toLowerCase().includes(sf.location.toLowerCase())) return false;
     return true;
   });
 }
@@ -2718,19 +2751,70 @@ function closeScanDropdown() {
   document.getElementById('scan-dropdown-toggle').classList.remove('open');
 }
 
+const SCAN_FILTERS_KEY = 'ux-internship-scan-filters';
+const SCAN_FILTER_DEFAULTS = {
+  levels:['intern','fellow','apprentice','entry','mid','senior+','manager+'],
+  schedules:['full-time','part-time','contract','other'],
+  payListed:false,minHourly:'',minSalary:'',favoritesOnly:false,location:'',
+};
+function getScanFilters() {
+  try { return {...SCAN_FILTER_DEFAULTS,...JSON.parse(localStorage.getItem(SCAN_FILTERS_KEY))}; } catch { return {...SCAN_FILTER_DEFAULTS}; }
+}
+function setScanFilters(f) { localStorage.setItem(SCAN_FILTERS_KEY, JSON.stringify(f)); }
+
+function parsePayNum(s) {
+  if (!s) return 0;
+  const m = s.match(/\$\s*([\d,]+(?:\.\d+)?)/);
+  return m ? parseFloat(m[1].replace(/,/g,'')) : 0;
+}
+
+function saveScanFiltersFromUI() {
+  const dd = document.getElementById('scan-dropdown');
+  const sf = {
+    levels:[...dd.querySelectorAll('input[data-group="level"]:checked')].map(c => c.value),
+    schedules:[...dd.querySelectorAll('input[data-group="schedule"]:checked')].map(c => c.value),
+    payListed:!!dd.querySelector('input[data-group="pay"][value="listed"]:checked'),
+    minHourly:(document.getElementById('scan-min-hourly')||{}).value||'',
+    minSalary:(document.getElementById('scan-min-salary')||{}).value||'',
+    favoritesOnly:!!dd.querySelector('input[data-group="other"][value="favorites"]:checked'),
+    location:(document.getElementById('scan-location')||{}).value||'',
+  };
+  setScanFilters(sf);
+  if (allJobs.length) renderTable();
+}
+
 function buildScanDropdown() {
   const dd = document.getElementById('scan-dropdown');
-  const filters = getSavedFilters();
-  if (!filters.length) {
-    dd.innerHTML = '<div class="scan-dropdown-empty">No saved filters yet</div>';
-    return;
-  }
+  const sf = getScanFilters();
+  const levels = [
+    {v:'intern',l:'Intern / Co-op'},{v:'fellow',l:'Fellow'},{v:'apprentice',l:'Apprentice'},
+    {v:'entry',l:'Entry / Associate'},{v:'mid',l:'Mid'},{v:'senior+',l:'Senior+'},{v:'manager+',l:'Manager+'},
+  ];
+  const scheds = [
+    {v:'full-time',l:'Full-time'},{v:'part-time',l:'Part-time'},
+    {v:'contract',l:'Contract'},{v:'other',l:'Other'},
+  ];
   dd.innerHTML =
-    '<div class="scan-dropdown-header">Scan with filter</div>' +
-    filters.map(f =>
-      '<button class="scan-dropdown-item" onclick="scanWithFilter(\'' + escAttr(f.name) + '\')">' +
-        esc(f.name) + '</button>'
-    ).join('');
+    '<div class="scan-dropdown-header">Position Level</div>' +
+    levels.map(i => '<label class="scan-check-item"><input type="checkbox" data-group="level" value="'+i.v+'"'+(sf.levels.includes(i.v)?' checked':'')+'>'+i.l+'</label>').join('') +
+    '<div class="scan-divider"></div>' +
+    '<div class="scan-dropdown-header">Schedule</div>' +
+    scheds.map(i => '<label class="scan-check-item"><input type="checkbox" data-group="schedule" value="'+i.v+'"'+(sf.schedules.includes(i.v)?' checked':'')+'>'+i.l+'</label>').join('') +
+    '<div class="scan-divider"></div>' +
+    '<div class="scan-dropdown-header">Pay</div>' +
+    '<label class="scan-check-item"><input type="checkbox" data-group="pay" value="listed"'+(sf.payListed?' checked':'')+'>Has pay listed</label>' +
+    '<div class="scan-input-row"><span>Min hourly</span><input type="number" id="scan-min-hourly" placeholder="$0" min="0"></div>' +
+    '<div class="scan-input-row"><span>Min salary</span><input type="number" id="scan-min-salary" placeholder="$0" min="0"></div>' +
+    '<div class="scan-divider"></div>' +
+    '<div class="scan-dropdown-header">Other</div>' +
+    '<label class="scan-check-item"><input type="checkbox" data-group="other" value="favorites"'+(sf.favoritesOnly?' checked':'')+'>Favorited companies</label>' +
+    '<div class="scan-input-row"><span>Location</span><input type="text" id="scan-location" placeholder="e.g. New York"></div>';
+  document.getElementById('scan-min-hourly').value = sf.minHourly || '';
+  document.getElementById('scan-min-salary').value = sf.minSalary || '';
+  document.getElementById('scan-location').value = sf.location || '';
+  dd.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', saveScanFiltersFromUI));
+  dd.querySelectorAll('input[type="number"]').forEach(inp => inp.addEventListener('change', saveScanFiltersFromUI));
+  document.getElementById('scan-location').addEventListener('input', saveScanFiltersFromUI);
 }
 
 function scanWithFilter(name) {
