@@ -1,7 +1,7 @@
 {
   "title_include": [
     "\\bUX\\b|\\bUI\\b|\\buser experience\\b|\\buser interface\\b|\\bproduct design|\\binteraction design|\\busability\\b|\\bhuman factors\\b|\\baccessibility\\b|\\binformation architecture\\b|\\bservice design\\b|\\bHCI\\b|\\bvisual design|\\bbrand design|\\bcontent strateg|\\bdesign research|\\bUXR\\b|\\bUX research",
-    "\\b(design|research|creative)\\b.*(\\bintern|\\bco-?op\\b|\\bfellow|\\bapprentice|\\bjunior\\b|\\bassociate\\b|\\bmanager\\b|\\bdirector\\b|\\blead\\b|\\bhead\\b|\\bsenior\\b|\\bstaff\\b|\\bprincipal\\b|\\bvp\\b)"
+    "\\b(design|designer|research|researcher|product|creative).*(\\bintern|\\bco-?op\\b|\\bfellow|\\bapprentice|\\bjunior\\b|\\bassociate\\b|\\bmanager\\b|\\bdirector\\b|\\blead\\b|\\bhead\\b|\\bsenior\\b|\\bstaff\\b|\\bprincipal\\b|\\bvp\\b)"
   ],
   "title_exclude": [
     "mechanical",
