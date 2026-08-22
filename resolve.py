@@ -378,8 +378,9 @@ def main():
         chosen = [k for k, v in cats.items() if v.get("priority", 3) <= args.priority]
     else:
         print("pick one: --category NAME | --priority N | --all\n")
+        w = max(len(k) for k in cats)
         for k, v in cats.items():
-            print(f"  {k:<22} p{v.get('priority',3)}  {len(v['companies']):>3}  {v['label']}")
+            print(f"  {k:<{w}}  p{v.get('priority',3)}  {len(v['companies']):>3}  {v['label']}")
         return
 
     for cat in chosen:
