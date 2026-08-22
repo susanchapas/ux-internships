@@ -148,6 +148,8 @@ class Handler(BaseHTTPRequestHandler):
                 notes=body.get("notes", ""),
                 job_id=body.get("job_id"),
                 applied_at=body.get("applied_at", ""),
+                deadline=body.get("deadline", ""),
+                reminder_interval=body.get("reminder_interval", "daily"),
             )
             self._json_response({"id": app_id})
         else:

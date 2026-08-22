@@ -86,6 +86,7 @@ body{
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
   text-wrap:pretty;
+  overflow-x:hidden;
 }
 ::selection{background:var(--mint);color:#ffffff}
 :focus-visible{outline:3px solid var(--focus-ring);outline-offset:3px}
@@ -422,6 +423,8 @@ main{max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 5rem}
   border-radius:var(--radius-lg);
   background:var(--surface-card);
   box-shadow:var(--shadow-card);
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
 }
 table{width:100%;border-collapse:collapse;font-size:0.875rem}
 th{
@@ -1095,7 +1098,10 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
 .bento-scanner{grid-column:1/3;position:relative}
 .bento-tracker{grid-column:3}
+.bento-deadlines{grid-column:1/4;display:none}
+.bento-grid.has-deadlines .bento-deadlines{display:block}
 .bento-highlights{grid-column:1;grid-row:2/4}
+.bento-grid.has-deadlines .bento-highlights{grid-row:3/5}
 .bento-stats{grid-column:2/4}
 .bento-favorites{grid-column:2/4}
 .bento-manual{grid-column:1/4}
@@ -1193,6 +1199,29 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 .bento-fav-pill .fav-heart{color:var(--danger);font-size:0.625rem}
 .bento-fav-empty{font-size:0.8125rem;color:var(--text-faint)}
 
+.bento-dl-list{display:flex;flex-direction:column;gap:0.5rem}
+.bento-dl-item{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.625rem 0.75rem;border-radius:var(--radius-md);
+  background:var(--surface-panel);border:1px solid var(--border-subtle);
+  transition:border-color var(--duration-fast) var(--ease-smooth);
+  cursor:pointer;
+}
+.bento-dl-item:hover{border-color:var(--border-hover)}
+.bento-dl-item.dl-overdue{border-left:3px solid var(--danger)}
+.bento-dl-item.dl-urgent{border-left:3px solid var(--clay)}
+.bento-dl-info{flex:1;min-width:0}
+.bento-dl-company{font-size:0.6875rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.05em}
+.bento-dl-title{font-size:0.8125rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bento-dl-badge{
+  font-size:0.6875rem;font-weight:600;padding:0.2rem 0.5rem;
+  border-radius:var(--radius-pill);white-space:nowrap;flex-shrink:0;
+}
+.dl-badge-overdue{background:rgba(220,69,69,0.12);color:var(--danger)}
+.dl-badge-urgent{background:rgba(196,125,82,0.12);color:var(--clay)}
+.dl-badge-soon{background:rgba(181,114,61,0.10);color:#b5723d}
+.dl-badge-later{background:var(--surface-panel);color:var(--text-faint);border:1px solid var(--border-subtle)}
+
 .bento-checks-wrap{max-height:16rem;overflow-y:auto}
 .bento-checks-list{
   display:flex;flex-wrap:wrap;gap:0.375rem;list-style:none;
@@ -1223,7 +1252,9 @@ td.notes-cell{min-width:10rem;max-width:16rem}
   .bento-grid{grid-template-columns:repeat(2,1fr)}
   .bento-scanner{grid-column:1/3}
   .bento-tracker{grid-column:1/3}
+  .bento-deadlines{grid-column:1/3}
   .bento-highlights{grid-column:1;grid-row:auto}
+  .bento-grid.has-deadlines .bento-highlights{grid-row:auto}
   .bento-stats{grid-column:2}
   .bento-favorites{grid-column:1/3}
   .bento-manual{grid-column:1/3}
@@ -1231,7 +1262,8 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
 @media(max-width:700px){
   .bento-grid{grid-template-columns:1fr}
-  .bento-scanner,.bento-tracker,.bento-highlights,.bento-stats,.bento-favorites,.bento-manual{grid-column:auto;grid-row:auto}
+  .bento-scanner,.bento-tracker,.bento-deadlines,.bento-highlights,.bento-stats,.bento-favorites,.bento-manual{grid-column:auto;grid-row:auto}
+  .bento-grid.has-deadlines .bento-highlights{grid-row:auto}
   .bento-scanner .bento-title{font-size:1.25rem}
   .bento-stats-grid{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -1358,6 +1390,13 @@ td.notes-cell{min-width:10rem;max-width:16rem}
         <div class="bento-subtitle">Track your applications &amp; pipeline</div>
         <div class="bento-arrow">&rarr;</div>
       </a>
+      <div class="bento-card bento-deadlines">
+        <div class="bento-header">
+          <h3>Upcoming Deadlines</h3>
+          <a class="bento-view-all" href="#tracker" onclick="switchTab('tracker'); return false;">View all &rarr;</a>
+        </div>
+        <div id="bento-dl-list" class="bento-dl-list"></div>
+      </div>
       <div class="bento-card bento-highlights">
         <div class="bento-header">
           <h3>Recent Highlights</h3>
@@ -1536,6 +1575,8 @@ td.notes-cell{min-width:10rem;max-width:16rem}
           <th style="cursor:default">Title</th>
           <th style="cursor:default">Location</th>
           <th style="cursor:default">Status</th>
+          <th style="cursor:default">Deadline</th>
+          <th style="cursor:default">Remind</th>
           <th style="cursor:default">Applied</th>
           <th style="cursor:default">Notes</th>
           <th style="cursor:default"></th>
@@ -1727,6 +1768,19 @@ td.notes-cell{min-width:10rem;max-width:16rem}
       <div class="modal-field">
         <label for="m-applied">Date Applied</label>
         <input id="m-applied" type="date">
+      </div>
+      <div class="modal-field">
+        <label for="m-deadline">Application Deadline</label>
+        <input id="m-deadline" type="date">
+      </div>
+      <div class="modal-field">
+        <label for="m-remind">Reminder Frequency</label>
+        <select id="m-remind">
+          <option value="daily">Daily</option>
+          <option value="every_3_days">Every 3 days</option>
+          <option value="weekly">Weekly</option>
+          <option value="off">Off</option>
+        </select>
       </div>
       <div class="modal-field">
         <label for="m-notes">Notes</label>
@@ -2722,6 +2776,8 @@ function trackJob(btn, jobId) {
       pay: job.pay || '',
       status: 'saved',
       applied_at: '',
+      deadline: '',
+      reminder_interval: 'daily',
       notes: '',
     };
     applications.push(app);
@@ -2754,7 +2810,7 @@ function trackJob(btn, jobId) {
     applications.push({
       id: data.id, job_id: job.id, company: job.company, title: job.title,
       url: job.url || '', location: job.location || '', pay: job.pay || '',
-      status: 'saved', applied_at: '', notes: '',
+      status: 'saved', applied_at: '', deadline: '', reminder_interval: 'daily', notes: '',
     });
     updateTrackerStats();
     renderTracker();
@@ -2877,10 +2933,17 @@ function renderTracker() {
     '<option value="' + v + '">${SEL}' + l + '</option>'
   ).join('');
 
+  const REMIND_LABELS = {daily:'Daily',every_3_days:'Every 3 days',weekly:'Weekly',off:'Off'};
+  const remindOpts = Object.entries(REMIND_LABELS).map(([v,l]) =>
+    '<option value="' + v + '">${RS}' + l + '</option>'
+  ).join('');
+
   document.getElementById('tracker-tbody').innerHTML = filtered.map(a => {
     const opts = statusOpts.replace('${SEL}' + STATUS_LABELS[a.status], '${SEL}' + STATUS_LABELS[a.status])
       .replaceAll('${SEL}', '')
       .replace('value="' + a.status + '"', 'value="' + a.status + '" selected');
+    const ri = a.reminder_interval || 'daily';
+    const rOpts = remindOpts.replaceAll('${RS}', '').replace('value="' + ri + '"', 'value="' + ri + '" selected');
     return '<tr>' +
       '<td>' + esc(a.company) + '</td>' +
       '<td class="title-cell">' + (a.url
@@ -2888,6 +2951,8 @@ function renderTracker() {
         : esc(a.title)) + '</td>' +
       '<td class="loc-cell">' + esc(a.location || '—') + '</td>' +
       '<td><select class="inline-select" onchange="updateApp(' + a.id + ',\'status\',this.value)">' + opts + '</select></td>' +
+      '<td><input type="date" class="inline-date" value="' + esc(a.deadline || '') + '" onchange="updateApp(' + a.id + ',\'deadline\',this.value)"></td>' +
+      '<td><select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select></td>' +
       '<td><input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)"></td>' +
       '<td class="notes-cell"><input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)"></td>' +
       '<td><button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button></td>' +
@@ -2899,9 +2964,12 @@ function updateApp(id, field, value) {
   const app = applications.find(a => a.id === id);
   if (app) app[field] = value;
 
+  const refreshBento = field === 'deadline' || field === 'status';
+
   if (STATIC) {
     lsSave(applications);
     updateTrackerStats();
+    if (refreshBento) buildBentoGrid();
     return;
   }
 
@@ -2911,7 +2979,7 @@ function updateApp(id, field, value) {
     method: 'PUT',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(body),
-  }).then(() => updateTrackerStats());
+  }).then(() => { updateTrackerStats(); if (refreshBento) buildBentoGrid(); });
 }
 
 function deleteApp(id) {
@@ -2921,6 +2989,7 @@ function deleteApp(id) {
   updateTrackerStats();
   renderTracker();
   renderTable();
+  buildBentoGrid();
   if (STATIC) {
     lsSave(applications);
   } else {
@@ -3057,6 +3126,8 @@ function submitAdd(e) {
     pay: document.getElementById('m-pay').value,
     status: document.getElementById('m-status').value,
     applied_at: document.getElementById('m-applied').value,
+    deadline: document.getElementById('m-deadline').value,
+    reminder_interval: document.getElementById('m-remind').value,
     notes: document.getElementById('m-notes').value,
   };
 
@@ -3460,7 +3531,53 @@ const MANUAL_CHECKS = [
   {name:'World Bank',url:'https://www.worldbank.org/en/about/careers',cat:'Government'},
 ];
 
+function deadlineDaysLeft(dl) {
+  if (!dl) return null;
+  const d = new Date(dl + 'T00:00:00');
+  if (isNaN(d)) return null;
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  return Math.round((d - today) / 86400000);
+}
+
 function buildBentoGrid() {
+  const grid = document.querySelector('.bento-grid');
+  const dlApps = (applications || [])
+    .filter(a => a.status === 'saved' && a.deadline)
+    .map(a => ({...a, _days: deadlineDaysLeft(a.deadline)}))
+    .filter(a => a._days !== null)
+    .sort((a, b) => a._days - b._days);
+
+  const dlEl = document.getElementById('bento-dl-list');
+  if (dlApps.length) {
+    grid.classList.add('has-deadlines');
+    dlEl.innerHTML = dlApps.map(a => {
+      const d = a._days;
+      let badgeClass, badgeText, itemClass = '';
+      if (d < 0) {
+        badgeClass = 'dl-badge-overdue'; badgeText = Math.abs(d) + 'd overdue'; itemClass = ' dl-overdue';
+      } else if (d === 0) {
+        badgeClass = 'dl-badge-overdue'; badgeText = 'Due today'; itemClass = ' dl-overdue';
+      } else if (d <= 3) {
+        badgeClass = 'dl-badge-urgent'; badgeText = d + 'd left'; itemClass = ' dl-urgent';
+      } else if (d <= 7) {
+        badgeClass = 'dl-badge-soon'; badgeText = d + 'd left';
+      } else {
+        badgeClass = 'dl-badge-later'; badgeText = new Date(a.deadline + 'T00:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      }
+      return '<div class="bento-dl-item' + itemClass + '" onclick="switchTab(\'tracker\')">' +
+        '<div class="bento-dl-info">' +
+          '<div class="bento-dl-company">' + esc(a.company) + '</div>' +
+          '<div class="bento-dl-title">' + esc(a.title) + '</div>' +
+        '</div>' +
+        '<span class="bento-dl-badge ' + badgeClass + '">' + badgeText + '</span>' +
+      '</div>';
+    }).join('');
+  } else {
+    grid.classList.remove('has-deadlines');
+    dlEl.innerHTML = '';
+  }
+
   const sp = getSearchPrefs();
   const hl = allJobs
     .filter(j => j.is_new && !hiddenJobs.has(j.id) && matchesSearchPrefs(j, sp))

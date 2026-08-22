@@ -56,10 +56,17 @@ def init_db():
                                  'offer','accepted','rejected','withdrawn')),
             applied_at TEXT NOT NULL DEFAULT '',
             notes TEXT NOT NULL DEFAULT '',
+            deadline TEXT NOT NULL DEFAULT '',
+            reminder_interval TEXT NOT NULL DEFAULT 'daily',
             created_at TEXT NOT NULL,
             updated_at TEXT NOT NULL
         );
     """)
+    for col, default in [("deadline", "''"), ("reminder_interval", "'daily'")]:
+        try:
+            conn.execute(f"ALTER TABLE applications ADD COLUMN {col} TEXT NOT NULL DEFAULT {default}")
+        except sqlite3.OperationalError:
+            pass
     conn.close()
 
 
@@ -141,16 +148,18 @@ def list_saved_applications():
 
 
 def add_application(company, title, url="", location="", pay="",
-                    status="saved", notes="", job_id=None, applied_at=""):
+                    status="saved", notes="", job_id=None, applied_at="",
+                    deadline="", reminder_interval="daily"):
     now = _now()
     conn = _connect()
     cur = conn.execute(
         """INSERT INTO applications
            (job_id, company, title, url, location, pay,
-            status, applied_at, notes, created_at, updated_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
+            status, applied_at, notes, deadline, reminder_interval,
+            created_at, updated_at)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)""",
         (job_id, company, title, url, location, pay,
-         status, applied_at, notes, now, now),
+         status, applied_at, notes, deadline, reminder_interval, now, now),
     )
     conn.commit()
     app_id = cur.lastrowid
@@ -160,7 +169,8 @@ def add_application(company, title, url="", location="", pay="",
 
 def update_application(app_id, **fields):
     allowed = {"company", "title", "url", "location", "pay",
-               "status", "applied_at", "notes"}
+               "status", "applied_at", "notes", "deadline",
+               "reminder_interval"}
     updates = {k: v for k, v in fields.items() if k in allowed}
     if not updates:
         return

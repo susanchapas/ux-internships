@@ -374,6 +374,48 @@ def notify(new_jobs):
 # --------------------------------------------------------- app reminders
 
 
+def _should_remind(app):
+    interval = app.get("reminder_interval", "daily")
+    if interval == "off":
+        return False
+    if interval == "daily":
+        return True
+    created = app.get("created_at", "")[:10]
+    if not created:
+        return True
+    try:
+        from datetime import datetime, timezone
+        created_date = datetime.strptime(created, "%Y-%m-%d").date()
+        today = datetime.now(timezone.utc).date()
+        days_since = (today - created_date).days
+    except ValueError:
+        return True
+    if interval == "every_3_days":
+        return days_since % 3 == 0
+    if interval == "weekly":
+        return days_since % 7 == 0
+    return True
+
+
+def _deadline_label(deadline_str):
+    if not deadline_str:
+        return ""
+    try:
+        from datetime import datetime, timezone
+        dl = datetime.strptime(deadline_str, "%Y-%m-%d").date()
+        today = datetime.now(timezone.utc).date()
+        diff = (dl - today).days
+    except ValueError:
+        return ""
+    if diff < 0:
+        return f"🔴 {-diff}d overdue"
+    if diff == 0:
+        return "🔴 Due today"
+    if diff <= 3:
+        return f"⚠️ {diff}d left"
+    return f"📅 {dl.strftime('%b %d')}"
+
+
 def remind_saved_applications():
     discord = os.environ.get("DISCORD_WEBHOOK")
     if not discord:
@@ -381,10 +423,12 @@ def remind_saved_applications():
         return
 
     from db import list_saved_applications
-    saved = list_saved_applications()
+    saved = [a for a in list_saved_applications() if _should_remind(a)]
     if not saved:
         print("  -> no saved applications to remind about")
         return
+
+    saved.sort(key=lambda a: (a.get("deadline") or "9999", a.get("created_at", "")))
 
     desc_lines = []
     for app in saved:
@@ -394,9 +438,13 @@ def remind_saved_applications():
             parts[0] = f"[{app['company']} — {app['title']}]({modal_url})"
         if app.get("location"):
             parts.append(f"📍 {app['location']}")
-        saved_date = app.get("created_at", "")[:10]
-        if saved_date:
-            parts.append(f"saved {saved_date}")
+        dl_label = _deadline_label(app.get("deadline", ""))
+        if dl_label:
+            parts.append(dl_label)
+        else:
+            saved_date = app.get("created_at", "")[:10]
+            if saved_date:
+                parts.append(f"saved {saved_date}")
         desc_lines.append(" · ".join(parts))
 
     embed = {
