@@ -7,18 +7,11 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232a9d6e' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M3 8V5a2 2 0 0 1 2-2h3'/%3E%3Cpath d='M16 3h3a2 2 0 0 1 2 2v3'/%3E%3Cpath d='M21 16v3a2 2 0 0 1-2 2h-3'/%3E%3Cpath d='M8 21H5a2 2 0 0 1-2-2v-3'/%3E%3Ccircle cx='12' cy='12' r='2.5' fill='%232a9d6e' stroke='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-<script>
-// TODO: Replace with your Firebase project config
-// Firebase Console → Project Settings → Your apps → Config
-firebase.initializeApp({
-  apiKey: "AIzaSyAC1aXUkAuVGUQNMqczvYR8NJeHbs37HJ8",
-  authDomain: "ux-internships.firebaseapp.com",
-  projectId: "ux-internships",
-});
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
 :root{
   --midnight:#1a2332;
@@ -1439,7 +1432,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
     <div id="results">
       <div class="section-title">All Findings</div>
       <div class="toolbar">
-        <input type="text" id="search" placeholder="Search company, title, or location..." oninput="renderTable()">
+        <input type="text" id="search" placeholder="Search company, title, or location..." oninput="debouncedRenderTable()">
         <div class="filter-multi" id="level-filter">
           <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Level</button>
           <div class="filter-multi-panel">
@@ -1515,7 +1508,7 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 
     <div class="toolbar">
       <button class="add-btn" onclick="openAddModal()">+ Add Application</button>
-      <input type="text" class="tracker-search" id="tracker-search" placeholder="Search tracked applications..." oninput="renderTracker()">
+      <input type="text" class="tracker-search" id="tracker-search" placeholder="Search tracked applications..." oninput="debouncedRenderTracker()">
       <select id="tracker-status-filter" class="filter-select" onchange="renderTracker()">
         <option value="">All statuses</option>
         <option value="saved">Saved</option>
@@ -1801,6 +1794,12 @@ td.notes-cell{min-width:10rem;max-width:16rem}
 </div>
 
 <script>
+firebase.initializeApp({
+  apiKey: "AIzaSyAC1aXUkAuVGUQNMqczvYR8NJeHbs37HJ8",
+  authDomain: "ux-internships.firebaseapp.com",
+  projectId: "ux-internships",
+});
+
 let currentUser = null;
 
 function switchAuth(tab) {
@@ -1932,11 +1931,13 @@ async function handleLogout() {
   document.getElementById('auth-screen').style.display = 'flex';
 }
 
-function showApp() {
+async function showApp() {
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app-shell').style.display = 'block';
   const isStatic = typeof STATIC_DATA !== 'undefined';
   if (isStatic) {
+    await cloudLoad();
+    refreshCompanyState();
     loadStaticData();
   }
   loadApplications();
@@ -1986,9 +1987,60 @@ let favJobs = new Set(JSON.parse(localStorage.getItem('ux-internship-fav-jobs') 
 let favEmployers = new Set(JSON.parse(localStorage.getItem('ux-internship-fav-employers') || '[]'));
 let showFavOnly = false;
 let showHidden = false;
-function saveHidden() { localStorage.setItem('ux-internship-hidden', JSON.stringify([...hiddenJobs])); }
-function saveFavJobs() { localStorage.setItem('ux-internship-fav-jobs', JSON.stringify([...favJobs])); }
-function saveFavEmployers() { localStorage.setItem('ux-internship-fav-employers', JSON.stringify([...favEmployers])); }
+function saveHidden() { localStorage.setItem('ux-internship-hidden', JSON.stringify([...hiddenJobs])); cloudSync(); }
+function saveFavJobs() { localStorage.setItem('ux-internship-fav-jobs', JSON.stringify([...favJobs])); cloudSync(); }
+function saveFavEmployers() { localStorage.setItem('ux-internship-fav-employers', JSON.stringify([...favEmployers])); cloudSync(); }
+
+const SYNC_KEYS = {
+  hidden:'ux-internship-hidden', favJobs:'ux-internship-fav-jobs',
+  favEmployers:'ux-internship-fav-employers', savedFilters:'ux-internship-saved-filters',
+  tracker:'ux-internship-tracker', prefs:'ux-internship-prefs',
+  scanFilters:'ux-internship-scan-filters', hiddenCompanies:'ux-internship-hidden-companies',
+  addedCompanies:'ux-internship-added-companies', renamedCompanies:'ux-internship-renamed-companies',
+  removedCompanies:'ux-internship-removed-companies',
+};
+const db = firebase.firestore();
+let _syncTimer = null;
+
+function getUserDoc() {
+  const user = firebase.auth().currentUser;
+  return user ? db.collection('users').doc(user.uid) : null;
+}
+
+function cloudSync(immediate) {
+  if (!STATIC) return;
+  clearTimeout(_syncTimer);
+  const run = () => {
+    const ref = getUserDoc();
+    if (!ref) return;
+    const data = {};
+    for (const [k, lsKey] of Object.entries(SYNC_KEYS))
+      data[k] = localStorage.getItem(lsKey) || (lsKey.includes('renamed') || lsKey.includes('prefs') || lsKey.includes('scan-filters') ? '{}' : '[]');
+    ref.set(data);
+  };
+  if (immediate) run();
+  else _syncTimer = setTimeout(run, 1500);
+}
+
+async function cloudLoad() {
+  const ref = getUserDoc();
+  if (!ref) return;
+  const snap = await ref.get();
+  if (!snap.exists) { cloudSync(true); return; }
+  const d = snap.data();
+  for (const [k, lsKey] of Object.entries(SYNC_KEYS))
+    if (d[k] != null) localStorage.setItem(lsKey, d[k]);
+  hiddenJobs = new Set(JSON.parse(localStorage.getItem('ux-internship-hidden') || '[]'));
+  favJobs = new Set(JSON.parse(localStorage.getItem('ux-internship-fav-jobs') || '[]'));
+  favEmployers = new Set(JSON.parse(localStorage.getItem('ux-internship-fav-employers') || '[]'));
+}
+
+function refreshCompanyState() {
+  hiddenCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-hidden-companies') || '[]'));
+  addedCompanies = JSON.parse(localStorage.getItem('ux-internship-added-companies') || '[]');
+  renamedCompanies = JSON.parse(localStorage.getItem('ux-internship-renamed-companies') || '{}');
+  removedCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-removed-companies') || '[]'));
+}
 
 const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source'};
 
@@ -2040,7 +2092,7 @@ const SAVED_FILTERS_KEY = 'ux-internship-saved-filters';
 function getSavedFilters() {
   try { return JSON.parse(localStorage.getItem(SAVED_FILTERS_KEY)) || []; } catch { return []; }
 }
-function setSavedFilters(filters) { localStorage.setItem(SAVED_FILTERS_KEY, JSON.stringify(filters)); }
+function setSavedFilters(filters) { localStorage.setItem(SAVED_FILTERS_KEY, JSON.stringify(filters)); cloudSync(); }
 
 function getCurrentFilterState() {
   return {
@@ -2172,7 +2224,7 @@ function toggleShowHidden() {
 
 const LS_KEY = 'ux-internship-tracker';
 function lsLoad() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch { return []; } }
-function lsSave(arr) { localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
+function lsSave(arr) { localStorage.setItem(LS_KEY, JSON.stringify(arr)); cloudSync(); }
 let _nextId = Date.now();
 
 function switchTab(tab, updateHash) {
@@ -2227,9 +2279,7 @@ const PAY_REGEX = /\$\s*[\d,]+(?:\.\d{2})?(?:\s*(?:[-–—\/]|to)\s*\$?\s*[\d,]
 
 function extractPay(text) {
   if (!text) return '';
-  const el = document.createElement('div');
-  el.innerHTML = text;
-  text = el.textContent;
+  text = text.replace(/<[^>]*>/g, ' ');
   const m = [...new Set(text.match(PAY_REGEX) || [])];
   return m.join('; ');
 }
@@ -2338,7 +2388,7 @@ async function clientScan() {
   prebaked.forEach(j => { j.is_new = false; classifyJob(j); });
   allJobs.push(...prebaked);
   prebaked.forEach(j => jobsById.set(j.id, j));
-  updateStats(); renderTable();
+  updateStats(); scheduleRenderTable();
 
   const seen = new Set(allJobs.map(j => j.id));
   const myId = scanId;
@@ -2361,7 +2411,7 @@ async function clientScan() {
         return !l || locInc.test(l);
       });
       for (const h of hits) { h.is_new = !seen.has(h.id); classifyJob(h); seen.add(h.id); }
-      if (hits.length) { allJobs.push(...hits); updateStats(); renderTable(); }
+      if (hits.length) { allJobs.push(...hits); updateStats(); scheduleRenderTable(); }
     } catch (e) {
       scanErrors.push({ company, error: String(e.message || e) });
     }
@@ -2427,7 +2477,7 @@ function startScan() {
     const d = JSON.parse(e.data);
     allJobs.push(...d.jobs);
     updateStats();
-    renderTable();
+    scheduleRenderTable();
   });
 
   source.addEventListener('scan_error', e => {
@@ -2479,9 +2529,14 @@ function startScan() {
 }
 
 function updateStats() {
+  let newCount = 0, payCount = 0;
+  for (let i = 0; i < allJobs.length; i++) {
+    if (allJobs[i].is_new) newCount++;
+    if (allJobs[i].pay) payCount++;
+  }
   document.getElementById('s-matches').textContent = allJobs.length;
-  document.getElementById('s-new').textContent = allJobs.filter(j => j.is_new).length;
-  document.getElementById('s-pay').textContent = allJobs.filter(j => j.pay).length;
+  document.getElementById('s-new').textContent = newCount;
+  document.getElementById('s-pay').textContent = payCount;
 }
 
 function buildHighlights() {
@@ -2571,6 +2626,19 @@ function getFiltered() {
     }
     return true;
   });
+}
+
+function _debounce(fn, ms) {
+  let t; return function() { clearTimeout(t); t = setTimeout(fn, ms); };
+}
+const debouncedRenderTable = _debounce(() => renderTable(), 150);
+const debouncedRenderTracker = _debounce(() => renderTracker(), 150);
+
+let _renderPending = false;
+function scheduleRenderTable() {
+  if (_renderPending) return;
+  _renderPending = true;
+  requestAnimationFrame(() => { _renderPending = false; renderTable(); });
 }
 
 let _loadingFilter = false;
@@ -3022,24 +3090,32 @@ document.addEventListener('keydown', e => {
     closeAddModal();
 });
 
+const _dateCache = new Map();
 function parsePostedDate(s) {
   if (!s) return null;
+  if (_dateCache.has(s)) return _dateCache.get(s);
+  let result = null;
   const d = new Date(s);
-  if (!isNaN(d.getTime())) return d;
-  const lower = s.toLowerCase().replace(/posted\s+/i, '').trim();
-  if (/^(today|just now|0 days?)/.test(lower)) return new Date();
-  if (/^yesterday|^1 day/.test(lower)) { const t = new Date(); t.setDate(t.getDate() - 1); return t; }
-  const m = lower.match(/^(\d+)\s*(day|week|month|hour|minute)s?\s*ago/);
-  if (m) {
-    const n = parseInt(m[1]), unit = m[2], t = new Date();
-    if (unit === 'day') t.setDate(t.getDate() - n);
-    else if (unit === 'week') t.setDate(t.getDate() - n * 7);
-    else if (unit === 'month') t.setMonth(t.getMonth() - n);
-    else if (unit === 'hour') t.setHours(t.getHours() - n);
-    else if (unit === 'minute') t.setMinutes(t.getMinutes() - n);
-    return t;
+  if (!isNaN(d.getTime())) { result = d; }
+  else {
+    const lower = s.toLowerCase().replace(/posted\s+/i, '').trim();
+    if (/^(today|just now|0 days?)/.test(lower)) result = new Date();
+    else if (/^yesterday|^1 day/.test(lower)) { const t = new Date(); t.setDate(t.getDate() - 1); result = t; }
+    else {
+      const m = lower.match(/^(\d+)\s*(day|week|month|hour|minute)s?\s*ago/);
+      if (m) {
+        const n = parseInt(m[1]), unit = m[2], t = new Date();
+        if (unit === 'day') t.setDate(t.getDate() - n);
+        else if (unit === 'week') t.setDate(t.getDate() - n * 7);
+        else if (unit === 'month') t.setMonth(t.getMonth() - n);
+        else if (unit === 'hour') t.setHours(t.getHours() - n);
+        else if (unit === 'minute') t.setMinutes(t.getMinutes() - n);
+        result = t;
+      }
+    }
   }
-  return null;
+  _dateCache.set(s, result);
+  return result;
 }
 
 function timeAgo(s) {
@@ -3052,11 +3128,11 @@ function timeAgo(s) {
   return mo + (mo === 1 ? ' month ago' : ' months ago');
 }
 
+const _escMap = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+const _escRe = /[&<>"']/g;
 function esc(s) {
   if (!s) return '';
-  const d = document.createElement('div');
-  d.textContent = String(s);
-  return d.innerHTML;
+  return String(s).replace(_escRe, c => _escMap[c]);
 }
 
 function escAttr(s) {
@@ -3263,7 +3339,7 @@ const PREF_KEY = 'ux-internship-prefs';
 function loadPrefs() {
   try { return JSON.parse(localStorage.getItem(PREF_KEY)) || {}; } catch { return {}; }
 }
-function savePrefs(p) { localStorage.setItem(PREF_KEY, JSON.stringify(p)); }
+function savePrefs(p) { localStorage.setItem(PREF_KEY, JSON.stringify(p)); cloudSync(); }
 
 const SEARCH_DEFAULTS = {
   level_intern:true, level_fellow:true, level_apprentice:true,
@@ -3507,7 +3583,7 @@ const SCAN_FILTER_DEFAULTS = {
 function getScanFilters() {
   try { return {...SCAN_FILTER_DEFAULTS,...JSON.parse(localStorage.getItem(SCAN_FILTERS_KEY))}; } catch { return {...SCAN_FILTER_DEFAULTS}; }
 }
-function setScanFilters(f) { localStorage.setItem(SCAN_FILTERS_KEY, JSON.stringify(f)); }
+function setScanFilters(f) { localStorage.setItem(SCAN_FILTERS_KEY, JSON.stringify(f)); cloudSync(); }
 
 function parsePayNum(s) {
   if (!s) return 0;
@@ -3584,10 +3660,10 @@ let addedCompanies = JSON.parse(localStorage.getItem('ux-internship-added-compan
 let renamedCompanies = JSON.parse(localStorage.getItem('ux-internship-renamed-companies') || '{}');
 let removedCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-removed-companies') || '[]'));
 
-function saveHiddenCompanies() { localStorage.setItem('ux-internship-hidden-companies', JSON.stringify([...hiddenCompanies])); }
-function saveAddedCompanies() { localStorage.setItem('ux-internship-added-companies', JSON.stringify(addedCompanies)); }
-function saveRenamedCompanies() { localStorage.setItem('ux-internship-renamed-companies', JSON.stringify(renamedCompanies)); }
-function saveRemovedCompanies() { localStorage.setItem('ux-internship-removed-companies', JSON.stringify([...removedCompanies])); }
+function saveHiddenCompanies() { localStorage.setItem('ux-internship-hidden-companies', JSON.stringify([...hiddenCompanies])); cloudSync(); }
+function saveAddedCompanies() { localStorage.setItem('ux-internship-added-companies', JSON.stringify(addedCompanies)); cloudSync(); }
+function saveRenamedCompanies() { localStorage.setItem('ux-internship-renamed-companies', JSON.stringify(renamedCompanies)); cloudSync(); }
+function saveRemovedCompanies() { localStorage.setItem('ux-internship-removed-companies', JSON.stringify([...removedCompanies])); cloudSync(); }
 
 function getCompanyKey(c) { return (c.board || '') + ':' + (c.slug || c.tenant || c.name); }
 
