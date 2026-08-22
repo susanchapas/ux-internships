@@ -715,6 +715,63 @@
         }
       ]
     },
+    "ux_research_authorities": {
+      "label": "UX research / usability authorities",
+      "note": "Research institutes, publishers, and design-education orgs \u2014 plus the vendors whose product IS user research. High signal on a UX resume: one line here outweighs most of best_places_to_work. But read the shape of this list before you spend time on it. The first five are 15-50 person outfits with no standard ATS and no structured summer program; resolve.py will come back empty and that means 'no job board', not 'no opening'. Reach a named researcher by email with a portfolio. Forrester and the four tooling vendors are ordinary companies that do post intern reqs.",
+      "priority": 1,
+      "companies": [
+        {
+          "name": "Nielsen Norman Group",
+          "hint": "nngroup",
+          "note": "Jakob Nielsen / Don Norman. ~50 people, remote-first. Email direct \u2014 'group' is a stopword so slug guessing misses nngroup."
+        },
+        {
+          "name": "Baymard Institute",
+          "hint": "baymard",
+          "note": "E-commerce UX benchmarking. Copenhagen / remote. Small team, hires researchers directly."
+        },
+        {
+          "name": "Rosenfeld Media",
+          "hint": "rosenfeldmedia",
+          "note": "Publisher + Advancing Research and DesignOps Summit conferences. Tiny team; conference volunteering is the realistic way in."
+        },
+        {
+          "name": "Interaction Design Foundation",
+          "hint": "ixdf",
+          "note": "Design education, fully remote."
+        },
+        {
+          "name": "Center for Civic Design",
+          "hint": "civicdesign",
+          "note": "Election and civic usability. Overlaps civic_tech \u2014 don't double-apply."
+        },
+        {
+          "name": "Forrester",
+          "hint": "forrester",
+          "note": "Analyst firm with a real CX/UX research practice. The one org in this category running a formal internship program."
+        },
+        {
+          "name": "UserTesting",
+          "hint": "usertesting",
+          "note": "Research platform. Employs in-house researchers."
+        },
+        {
+          "name": "Dscout",
+          "hint": "dscout",
+          "note": "Diary-study / remote research platform. Chicago."
+        },
+        {
+          "name": "Optimal Workshop",
+          "hint": "optimalworkshop",
+          "note": "Card sorting / tree testing. New Zealand, remote-friendly."
+        },
+        {
+          "name": "Maze",
+          "hint": "maze",
+          "note": "Rapid usability testing. Remote-first."
+        }
+      ]
+    },
     "big_tech": {
       "label": "Big tech (NYC offices)",
       "note": "Most have dedicated UX research + product design internship tracks with early deadlines.",
