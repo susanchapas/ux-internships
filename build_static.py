@@ -125,8 +125,8 @@ def build():
 
     html = DASHBOARD.read_text()
 
-    static_script = f"<script>const STATIC_DATA = {static_data};\nconst STATIC_CONFIG = {config_json};</script>\n<script>"
-    html = html.replace("<script>", static_script, 1)
+    static_inject = f"<script>const STATIC_DATA = {static_data};\nconst STATIC_CONFIG = {config_json};</script>\n<script>/* STATIC_INJECT */"
+    html = html.replace("<script>/* STATIC_INJECT */", static_inject, 1)
 
     OUT_DIR.mkdir(exist_ok=True)
     (OUT_DIR / "index.html").write_text(html)
