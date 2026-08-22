@@ -116,10 +116,10 @@ header{
   position:sticky;top:0;z-index:10;
   background:var(--surface-glass);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border-subtle);
+  border-bottom:none;
   padding:0.75rem 1.5rem;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:none;
 }
 .nav-logo{
   font-family:var(--font-display);
@@ -131,7 +131,6 @@ header{
 .nav-logo span{color:var(--text-accent)}
 .nav-logo:hover{color:var(--midnight);text-decoration-color:transparent}
 .profile-icon-btn{
-  position:absolute;right:1.5rem;
   background:none;border:none;cursor:pointer;
   color:var(--text-muted);text-decoration:none;
   width:2rem;height:2rem;
@@ -143,7 +142,7 @@ header{
 .profile-icon-btn.active{color:var(--text-accent)}
 .sub-bar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:0.5rem 1.5rem;
+  max-width:72rem;margin:0 auto;padding:0.5rem 1.5rem;
 }
 
 .header-tabs{
@@ -1375,17 +1374,17 @@ td.notes-cell{max-width:16rem}
 
 <header>
   <a href="#" class="nav-logo" onclick="switchTab('landing'); return false;"><svg class="nav-logo-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="12" r="2.5" fill="var(--mint)" stroke="none"/></svg><span>UX</span> Internship Watch</a>
-  <a href="#profile" class="profile-icon-btn" onclick="switchTab('profile'); return false;" id="tab-profile" aria-label="Profile">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
-  </a>
-</header>
-
-<div class="sub-bar">
   <div class="header-tabs">
     <a href="#" class="header-tab active" onclick="switchTab('landing'); return false;" id="tab-landing">Home</a>
     <a href="#scanner" class="header-tab" onclick="switchTab('scanner'); return false;" id="tab-scanner">Scanner</a>
     <a href="#tracker" class="header-tab" onclick="switchTab('tracker'); return false;" id="tab-tracker">Tracker</a>
   </div>
+  <a href="#profile" class="profile-icon-btn" onclick="switchTab('profile'); return false;" id="tab-profile" aria-label="Profile">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+  </a>
+</header>
+
+<div class="sub-bar" style="justify-content:flex-end">
   <div class="scan-group" style="display:none">
     <button id="scan-btn" onclick="startScan()">
       <div class="spinner"></div>
@@ -1596,6 +1595,7 @@ td.notes-cell{max-width:16rem}
     <div class="table-wrap" id="tracker-table-wrap" style="display:none">
       <table>
         <thead><tr>
+          <th style="cursor:default;width:3%"></th>
           <th style="cursor:default;width:13%">Company</th>
           <th style="cursor:default;width:18%">Title</th>
           <th style="cursor:default;width:10%">Location</th>
@@ -1604,7 +1604,6 @@ td.notes-cell{max-width:16rem}
           <th style="cursor:default;width:10%">Remind</th>
           <th style="cursor:default;width:11%">Applied</th>
           <th style="cursor:default;width:13%">Notes</th>
-          <th style="cursor:default;width:3%"></th>
         </tr></thead>
         <tbody id="tracker-tbody"></tbody>
       </table>
@@ -2971,6 +2970,7 @@ function renderTracker() {
     const ri = a.reminder_interval || 'daily';
     const rOpts = remindOpts.replaceAll('${RS}', '').replace('value="' + ri + '"', 'value="' + ri + '" selected');
     return '<tr>' +
+      '<td><button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button></td>' +
       '<td>' + esc(a.company) + '</td>' +
       '<td class="title-cell">' + (a.url
         ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.title) + '</a>'
@@ -2981,7 +2981,6 @@ function renderTracker() {
       '<td><select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select></td>' +
       '<td><input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)"></td>' +
       '<td class="notes-cell"><input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)"></td>' +
-      '<td><button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button></td>' +
     '</tr>';
   }).join('');
 }
