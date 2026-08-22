@@ -444,7 +444,8 @@
       "companies": [
         {
           "name": "IDEO",
-          "hint": "ideo"
+          "hint": "ideo",
+          "note": "NYC studio at 395 Hudson St. Also SF, Chicago, London, Shanghai, Singapore."
         },
         {
           "name": "Work and Co",
@@ -473,11 +474,13 @@
         },
         {
           "name": "Instrument",
-          "hint": "instrument"
+          "hint": "instrument",
+          "note": "NYC at 1 WTC, plus Brooklyn. HQ Portland OR."
         },
         {
           "name": "Fantasy",
-          "hint": "fantasy"
+          "hint": "fantasy",
+          "note": "NYC at 30 Broad St. Also SF and London."
         },
         {
           "name": "Big Human",
@@ -516,19 +519,23 @@
         },
         {
           "name": "Thoughtbot",
-          "hint": "thoughtbot"
+          "hint": "thoughtbot",
+          "note": "Fully remote, with a NYC office at 1384 Broadway listed as HQ. Also Austin, Boston, London, Raleigh, SF."
         },
         {
           "name": "Viget",
-          "hint": "viget"
+          "hint": "viget",
+          "note": "NO NY/NJ presence and not remote-first \u2014 Falls Church VA (HQ), Durham NC, Boulder CO. Deprioritize."
         },
         {
           "name": "Rangle",
-          "hint": "rangle"
+          "hint": "rangle",
+          "note": "NO NY/NJ presence \u2014 Toronto and Amsterdam only. Acquired by Bounteous. Deprioritize."
         },
         {
           "name": "Metalab",
-          "hint": "metalab"
+          "hint": "metalab",
+          "note": "Remote-first, 160+ people across 17 countries; hires remote EST roles. HQ Victoria BC, no NY office."
         },
         {
           "name": "Lippincott",
@@ -547,11 +554,13 @@
         },
         {
           "name": "Landor",
-          "hint": "landor"
+          "hint": "landor",
+          "note": "NYC at 175 Greenwich St. WPP-owned."
         },
         {
           "name": "Prophet",
-          "hint": "prophet"
+          "hint": "prophet",
+          "note": "NYC at 230 Park Ave. Also SF, Chicago, Atlanta, London."
         },
         {
           "name": "Droga5",
@@ -575,16 +584,18 @@
         },
         {
           "name": "Publicis Sapient",
-          "hint": "publicissapient"
+          "hint": "publicissapient",
+          "note": "NYC at 375 Hudson St."
         },
         {
           "name": "Dentsu",
-          "hint": "dentsu"
+          "hint": "dentsu",
+          "note": "NYC at 150 E 42nd St \u2014 this is the US HQ."
         },
         {
           "name": "Designit",
           "hint": "designit",
-          "note": "Wipro-owned"
+          "note": "Brooklyn studio at 77 Sands St; NYC is the US HQ. Wipro-owned."
         }
       ]
     },
@@ -671,7 +682,8 @@
       "companies": [
         {
           "name": "Be My Eyes",
-          "hint": "bemyeyes"
+          "hint": "bemyeyes",
+          "note": "Distributed across Copenhagen, SF and London. No NY office; remote roles exist."
         },
         {
           "name": "Fable",
@@ -680,24 +692,28 @@
         },
         {
           "name": "Level Access",
-          "hint": "levelaccess"
+          "hint": "levelaccess",
+          "note": "Employees work remotely. HQ Arlington VA; also Stafford VA, Toronto, Bristol. No NY office."
         },
         {
           "name": "Deque Systems",
-          "hint": "deque"
+          "hint": "deque",
+          "note": "Hybrid, not fully remote. HQ Herndon VA; also Hyderabad and Utrecht. No NY office \u2014 check each posting."
         },
         {
           "name": "TPGi",
-          "hint": "tpgi"
+          "hint": "tpgi",
+          "note": "Part of Vispero, HQ Clearwater FL. No NY office; remote status varies by role."
         },
         {
           "name": "Aira",
-          "hint": "aira"
+          "hint": "aira",
+          "note": "Carlsbad CA. Posts remote roles, including remote agent positions."
         },
         {
           "name": "Vispero",
           "hint": "vispero",
-          "note": "JAWS/ZoomText"
+          "note": "JAWS/ZoomText. HQ Clearwater FL. No NY office and not remote-first. Deprioritize."
         },
         {
           "name": "Lighthouse Guild",
@@ -711,7 +727,8 @@
         },
         {
           "name": "American Foundation for the Blind",
-          "hint": "afb"
+          "hint": "afb",
+          "note": "HQ Arlington VA since 2017, offices in five US cities. No confirmed NY office."
         }
       ]
     },
@@ -931,88 +948,108 @@
         },
         {
           "name": "Notion",
-          "hint": "notion"
+          "hint": "notion",
+          "note": "NYC at 75 Varick St, expanded 2023. Enterprise sales and CS."
         },
         {
           "name": "Canva",
-          "hint": "canva"
+          "hint": "canva",
+          "note": "NO NY office \u2014 US presence is Austin (US HQ) and SF only; global HQ Sydney. Not remote-first. Deprioritize."
         },
         {
           "name": "Atlassian",
-          "hint": "atlassian"
+          "hint": "atlassian",
+          "note": "NYC at 888 Broadway \u2014 enterprise and financial services accounts."
         },
         {
           "name": "Asana",
-          "hint": "asana"
+          "hint": "asana",
+          "note": "NYC at 3 World Trade Center."
         },
         {
           "name": "Miro",
-          "hint": "miro"
+          "hint": "miro",
+          "note": "NYC office. HQ San Francisco."
         },
         {
           "name": "Airtable",
-          "hint": "airtable"
+          "hint": "airtable",
+          "note": "NYC at 114 Crosby St."
         },
         {
           "name": "Webflow",
-          "hint": "webflow"
+          "hint": "webflow",
+          "note": "Remote-first with an explicit no-RTO-mandate commitment, 900+ people in 25 countries. No NY office."
         },
         {
           "name": "Framer",
-          "hint": "framer"
+          "hint": "framer",
+          "note": "NO NY presence \u2014 single office in Amsterdam. Deprioritize unless a remote req appears."
         },
         {
           "name": "Vercel",
-          "hint": "vercel"
+          "hint": "vercel",
+          "note": "NYC office. Remote-friendly; some roles are office-based in SF/NYC."
         },
         {
           "name": "Linear",
-          "hint": "linear"
+          "hint": "linear",
+          "note": "Fully remote since founding, with an optional NYC co-working hub. No attendance expectation."
         },
         {
           "name": "Retool",
-          "hint": "retool"
+          "hint": "retool",
+          "note": "NYC office in the Flatiron District \u2014 one of two main hubs with SF. Hybrid."
         },
         {
           "name": "Zapier",
-          "hint": "zapier"
+          "hint": "zapier",
+          "note": "100% remote since founding, no offices at all, 40+ countries. Async-first."
         },
         {
           "name": "Twilio",
-          "hint": "twilio"
+          "hint": "twilio",
+          "note": "Remote-first since 2022 plus a NYC office used as a collaboration hub."
         },
         {
           "name": "Amplitude",
-          "hint": "amplitude"
+          "hint": "amplitude",
+          "note": "NYC at 29 W 30th St, NoMad."
         },
         {
           "name": "Mixpanel",
-          "hint": "mixpanel"
+          "hint": "mixpanel",
+          "note": "NYC office. HQ San Francisco."
         },
         {
           "name": "Klaviyo",
-          "hint": "klaviyo"
+          "hint": "klaviyo",
+          "note": "NO NY office \u2014 Boston HQ, plus Denver, SF, London, Sydney, Dublin. Deprioritize."
         },
         {
           "name": "HubSpot",
-          "hint": "hubspot"
+          "hint": "hubspot",
+          "note": "NYC at 1 Park Ave, plus an @home option \u2014 93% of staff are @home or @flex."
         },
         {
           "name": "Dropbox",
-          "hint": "dropbox"
+          "hint": "dropbox",
+          "note": "Virtual First: remote is the default for all staff. NYC office exists for quarterly in-person work."
         },
         {
           "name": "Zoom",
-          "hint": "zoom"
+          "hint": "zoom",
+          "note": "NYC is a regional hub. Hybrid \u2014 staff within 50 miles of an office come in 2 days/week."
         },
         {
           "name": "Duolingo",
           "hint": "duolingo",
-          "note": "Design-heavy culture"
+          "note": "Design-heavy culture. NYC at 150 Greenwich St; HQ Pittsburgh."
         },
         {
           "name": "Shopify",
-          "hint": "shopify"
+          "hint": "shopify",
+          "note": "Digital by Default \u2014 fully remote-first, hiring is not tied to a location within a country."
         },
         {
           "name": "Wix",
@@ -1026,11 +1063,13 @@
         },
         {
           "name": "Instacart",
-          "hint": "instacart"
+          "hint": "instacart",
+          "note": "NYC office in the Flatiron District, plus a Flex First model (office, home, or mix)."
         },
         {
           "name": "Bumble",
-          "hint": "bumble"
+          "hint": "bumble",
+          "note": "Austin HQ; NY has only been a pop-up, not a permanent office. Not remote-first. Deprioritize."
         },
         {
           "name": "Hinge",
@@ -1039,19 +1078,23 @@
         },
         {
           "name": "Substack",
-          "hint": "substack"
+          "hint": "substack",
+          "note": "Remote-first and distributed. HQ San Francisco, no NY office."
         },
         {
           "name": "Patreon",
-          "hint": "patreon"
+          "hint": "patreon",
+          "note": "NYC office, but office-based contracts now require 3 days/week on site. Fully remote contracts are exempt."
         },
         {
           "name": "Calm",
-          "hint": "calm"
+          "hint": "calm",
+          "note": "Remote-first with a NYC office. Also Palo Alto, LA, Minneapolis, SF."
         },
         {
           "name": "Headspace",
-          "hint": "headspace"
+          "hint": "headspace",
+          "note": "Remote-first, but US remote is limited to select states. Offices Santa Monica, SF, London \u2014 none in NY."
         }
       ]
     },
@@ -1342,39 +1385,43 @@
       "companies": [
         {
           "name": "Deloitte",
-          "note": "Deloitte Digital"
+          "note": "Deloitte Digital. NYC at 30 Rockefeller Plaza."
         },
         {
           "name": "Accenture",
-          "note": "Accenture Song absorbed Fjord + Droga5"
+          "note": "Accenture Song absorbed Fjord + Droga5. NYC at One Manhattan West."
         },
         {
           "name": "McKinsey",
-          "note": "McKinsey Design"
+          "note": "McKinsey Design. NYC at 3 World Trade Center."
         },
         {
           "name": "Boston Consulting Group",
-          "note": "BCG X"
+          "note": "BCG X. NYC office."
         },
         {
           "name": "Bain",
-          "note": "Bain Vector"
+          "note": "Bain Vector. NYC at the Grace Building, moving to 22 Vanderbilt in 2026."
         },
         {
-          "name": "EY"
+          "name": "EY",
+          "note": "NYC at 401 9th Ave."
         },
         {
-          "name": "PwC"
+          "name": "PwC",
+          "note": "NYC at 300 Madison Ave."
         },
         {
-          "name": "KPMG"
+          "name": "KPMG",
+          "note": "NYC at Two Manhattan West, 375 Ninth Ave."
         },
         {
           "name": "Gartner",
-          "note": "Stamford CT"
+          "note": "Stamford CT \u2014 NOT in the NY/NJ filter set, ~50 min by train from GCT. Verify a NYC posting before applying."
         },
         {
-          "name": "ZS Associates"
+          "name": "ZS Associates",
+          "note": "NYC at the Empire State Building, 350 Fifth Ave."
         }
       ],
       "expect_workday": true
@@ -1385,15 +1432,18 @@
       "companies": [
         {
           "name": "Coursera",
-          "hint": "coursera"
+          "hint": "coursera",
+          "note": "Remote-friendly with some in-office roles. HQ Mountain View, no NY office."
         },
         {
           "name": "Udemy",
-          "hint": "udemy"
+          "hint": "udemy",
+          "note": "NO NY office \u2014 SF HQ, plus Austin, Dublin, Ankara. Hybrid, not remote-first. Deprioritize."
         },
         {
           "name": "Khan Academy",
-          "hint": "khanacademy"
+          "hint": "khanacademy",
+          "note": "Fully remote in the US (some Mountain View roles). Nonprofit."
         },
         {
           "name": "Newsela",
@@ -1422,19 +1472,23 @@
         },
         {
           "name": "MasterClass",
-          "hint": "masterclass"
+          "hint": "masterclass",
+          "note": "NO NY office \u2014 SF HQ, 3 offices. Deprioritize."
         },
         {
           "name": "Quizlet",
-          "hint": "quizlet"
+          "hint": "quizlet",
+          "note": "NO NY office \u2014 SF HQ at 501 2nd St. Deprioritize."
         },
         {
           "name": "Guild",
-          "hint": "guild"
+          "hint": "guild",
+          "note": "Distributed / remote-first, though 2026 brought return-to-office incentives. HQ Denver."
         },
         {
           "name": "2U",
-          "hint": "2u"
+          "hint": "2u",
+          "note": "HQ Lanham MD, 11 offices; no confirmed NY office and no clear remote policy. Verify before applying."
         }
       ]
     },
