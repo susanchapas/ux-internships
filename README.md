@@ -386,6 +386,14 @@ Design are 15-50 person outfits with no standard ATS and no structured summer
 program. `resolve.py` will return nothing for them, and that means *no job
 board* — not *no opening*. Email a named researcher with a portfolio instead.
 
+Geography barely applies here. Only Forrester (Manhattan), Rosenfeld Media
+(Brooklyn), and Dscout (NYC office) are in the NY/NJ area at all; the rest are
+remote-first, which `location_include` already passes on the `remote` keyword.
+What does bite is eligibility: Baymard is Danish, IxDF is Danish, and Optimal
+Workshop is a New Zealand company, so their "Remote" postings clear the filter
+in `matches()` but may be EU/NZ-only. `location_include` can't express that —
+the posting just says "Remote" — so it's flagged per-company in the notes.
+
 Forrester and the four tooling vendors (UserTesting, Dscout, Optimal Workshop,
 Maze) are ordinary companies that post intern reqs, so these are the ones worth
 spending probe budget on. None of the ten has been resolved yet — run

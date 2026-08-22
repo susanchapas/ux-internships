@@ -717,58 +717,58 @@
     },
     "ux_research_authorities": {
       "label": "UX research / usability authorities",
-      "note": "Research institutes, publishers, and design-education orgs \u2014 plus the vendors whose product IS user research. High signal on a UX resume: one line here outweighs most of best_places_to_work. But read the shape of this list before you spend time on it. The first five are 15-50 person outfits with no standard ATS and no structured summer program; resolve.py will come back empty and that means 'no job board', not 'no opening'. Reach a named researcher by email with a portfolio. Forrester and the four tooling vendors are ordinary companies that do post intern reqs.",
+      "note": "Research institutes, publishers, and design-education orgs \u2014 plus the vendors whose product IS user research. High signal on a UX resume: one line here outweighs most of best_places_to_work. Geography is close to a non-issue \u2014 only Forrester (Manhattan), Rosenfeld Media (Brooklyn), and Dscout (NYC office) sit in the NY/NJ area at all, and the rest are remote-first, which location_include already passes. The live constraint is eligibility, not commute: Baymard, IxDF, and Optimal Workshop are based in Denmark and New Zealand, so their 'Remote' postings sail through the filter but may be EU/NZ-only. The first five are also 15-50 person outfits with no standard ATS and no structured summer program; resolve.py will come back empty, and that means 'no job board', not 'no opening'. Reach a named researcher by email with a portfolio.",
       "priority": 1,
       "companies": [
         {
           "name": "Nielsen Norman Group",
           "hint": "nngroup",
-          "note": "Jakob Nielsen / Don Norman. ~50 people, remote-first. Email direct \u2014 'group' is a stopword so slug guessing misses nngroup."
+          "note": "Jakob Nielsen / Don Norman. ~50 people, fully distributed \u2014 no office in NY/NJ, remote by default. Email direct \u2014 'group' is a stopword, so slug guessing generates nielsennorman but never nngroup."
         },
         {
           "name": "Baymard Institute",
           "hint": "baymard",
-          "note": "E-commerce UX benchmarking. Copenhagen / remote. Small team, hires researchers directly."
+          "note": "E-commerce UX benchmarking. Copenhagen-based, fully remote, ~60 people across the US and Europe. Remote roles may be EU-scoped \u2014 confirm US eligibility before investing time."
         },
         {
           "name": "Rosenfeld Media",
           "hint": "rosenfeldmedia",
-          "note": "Publisher + Advancing Research and DesignOps Summit conferences. Tiny team; conference volunteering is the realistic way in."
+          "note": "Brooklyn (457 3rd St). Publisher + Advancing Research and DesignOps Summit conferences. ~10 people, so 'Brooklyn office' means the founder is in Brooklyn. Conference volunteering is the realistic way in."
         },
         {
           "name": "Interaction Design Foundation",
           "hint": "ixdf",
-          "note": "Design education, fully remote."
+          "note": "Design education. Aarhus, Denmark; fully remote, team on every continent. Remote roles may be EU-scoped \u2014 confirm US eligibility."
         },
         {
           "name": "Center for Civic Design",
           "hint": "civicdesign",
-          "note": "Election and civic usability. Overlaps civic_tech \u2014 don't double-apply."
+          "note": "Election and civic usability. Fully distributed across the US since founding, ~16 people. Overlaps civic_tech \u2014 don't double-apply."
         },
         {
           "name": "Forrester",
           "hint": "forrester",
-          "note": "Analyst firm with a real CX/UX research practice. The one org in this category running a formal internship program."
+          "note": "NYC office at 1180 Avenue of the Americas (HQ Cambridge MA). Analyst firm with a real CX/UX research practice, and the one org in this category running a formal internship program. Best probe-budget spend here."
         },
         {
           "name": "UserTesting",
           "hint": "usertesting",
-          "note": "Research platform. Employs in-house researchers."
+          "note": "Research platform. HQ Bellevue WA, remote-first; the NYC presence is coworking-scale, not a hiring hub."
         },
         {
           "name": "Dscout",
           "hint": "dscout",
-          "note": "Diary-study / remote research platform. Chicago."
+          "note": "Diary-study / remote research platform. Chicago HQ, remote-first, with a real NYC office alongside Austin and Seattle."
         },
         {
           "name": "Optimal Workshop",
           "hint": "optimalworkshop",
-          "note": "Card sorting / tree testing. New Zealand, remote-friendly."
+          "note": "Card sorting / tree testing. Wellington, New Zealand. Remote roles may be NZ/AU-scoped \u2014 confirm US eligibility."
         },
         {
           "name": "Maze",
           "hint": "maze",
-          "note": "Rapid usability testing. Remote-first."
+          "note": "Rapid usability testing. Fully remote with no central office anywhere."
         }
       ]
     },
