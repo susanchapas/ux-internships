@@ -1880,6 +1880,19 @@ firebase.initializeApp({
 });
 
 let currentUser = null;
+const ADMIN_EMAIL = 'susanchapas39@gmail.com';
+
+function isAdmin() {
+  if (!currentUser) return false;
+  if (currentUser.role === 'admin') return true;
+  if (currentUser.email === ADMIN_EMAIL) return true;
+  return false;
+}
+
+function redact(text) {
+  if (isAdmin() || !text) return esc(text);
+  return '•••••';
+}
 
 function switchAuth(tab) {
   document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
@@ -2634,11 +2647,11 @@ function buildHighlights() {
   document.getElementById('hl-grid').innerHTML = hl.map(j =>
     '<div class="hl-card">' +
       '<div class="hl-company">' + esc(j.company) + '</div>' +
-      '<div class="hl-title"><a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a></div>' +
+      '<div class="hl-title">' + (isAdmin() ? '<a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a>' : redact(j.title)) + '</div>' +
       '<div class="hl-meta">' +
         levelBadge(j.level) +
         (j.location ? '<span>' + esc(j.location) + '</span>' : '') +
-        (j.pay ? '<span class="badge badge-pay">' + esc(j.pay) + '</span>' : '') +
+        (j.pay ? '<span class="badge badge-pay">' + redact(j.pay) + '</span>' : '') +
         (j.is_new ? '<span class="badge badge-new">NEW</span>' : '') +
         (j.schedule ? '<span class="badge badge-source">' + j.schedule + '</span>' : '') +
         (j.posted_at ? '<span>' + timeAgo(j.posted_at) + '</span>' : '') +
@@ -2765,15 +2778,15 @@ function renderTable() {
     return '<tr' + (isHidden ? ' class="hidden-row"' : '') + '>' +
     '<td><button class="fav-btn' + (isFav ? ' active' : '') + '" onclick="toggleFavJob(\'' + escAttr(j.id) + '\')" title="Favorite job">' + (isFav ? '★' : '☆') + '</button></td>' +
     '<td><button class="fav-employer' + (isEmpFav ? ' active' : '') + '" onclick="toggleFavEmployerByJob(\'' + escAttr(j.id) + '\')" title="Favorite employer">♥</button>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
-    '<td class="title-cell">' + levelBadge(j.level) + ' <a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a></td>' +
+    '<td class="title-cell">' + levelBadge(j.level) + ' ' + (isAdmin() ? '<a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a>' : redact(j.title)) + '</td>' +
     '<td class="loc-cell">' + esc(j.location || '—') + '</td>' +
-    '<td class="pay-cell">' + (j.pay ? '<span class="pay-text">' + esc(j.pay) + '</span>' + (j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
+    '<td class="pay-cell">' + (j.pay ? '<span class="pay-text">' + redact(j.pay) + '</span>' + (isAdmin() && j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
     '<td class="time-cell">' + (j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
     '<td class="source-cell"><span class="badge badge-source">' + esc(j.source) + '</span>' + (j.schedule ? ' <span class="badge badge-source">' + j.schedule + '</span>' : '') + '</td>' +
-    '<td>' + (tracked
+    '<td>' + (isAdmin() ? (tracked
       ? '<button class="track-btn" disabled>Tracked</button>'
       : '<button class="track-btn" onclick="trackJob(this,\'' + escAttr(j.id) + '\')">Track</button>') +
-    ' <button class="delete-btn" onclick="toggleHideJob(\'' + escAttr(j.id) + '\')" title="' + (isHidden ? 'Unhide' : 'Hide') + '">' + (isHidden ? '◉' : '⊘') + '</button>' +
+    ' <button class="delete-btn" onclick="toggleHideJob(\'' + escAttr(j.id) + '\')" title="' + (isHidden ? 'Unhide' : 'Hide') + '">' + (isHidden ? '◉' : '⊘') + '</button>' : '') +
     '</td></tr>';
   }).join('');
 }
@@ -2969,18 +2982,19 @@ function renderTracker() {
       .replace('value="' + a.status + '"', 'value="' + a.status + '" selected');
     const ri = a.reminder_interval || 'daily';
     const rOpts = remindOpts.replaceAll('${RS}', '').replace('value="' + ri + '"', 'value="' + ri + '" selected');
+    const admin = isAdmin();
     return '<tr>' +
-      '<td><button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button></td>' +
+      '<td>' + (admin ? '<button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button>' : '') + '</td>' +
       '<td>' + esc(a.company) + '</td>' +
-      '<td class="title-cell">' + (a.url
-        ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.title) + '</a>'
-        : esc(a.title)) + '</td>' +
+      '<td class="title-cell">' + (admin
+        ? (a.url ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.title) + '</a>' : esc(a.title))
+        : '•••••') + '</td>' +
       '<td class="loc-cell">' + esc(a.location || '—') + '</td>' +
-      '<td><select class="inline-select" onchange="updateApp(' + a.id + ',\'status\',this.value)">' + opts + '</select></td>' +
-      '<td><input type="date" class="inline-date" value="' + esc(a.deadline || '') + '" onchange="updateApp(' + a.id + ',\'deadline\',this.value)"></td>' +
-      '<td><select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select></td>' +
-      '<td><input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)"></td>' +
-      '<td class="notes-cell"><input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)"></td>' +
+      '<td>' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'status\',this.value)">' + opts + '</select>' : esc(STATUS_LABELS[a.status] || a.status)) + '</td>' +
+      '<td>' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.deadline || '') + '" onchange="updateApp(' + a.id + ',\'deadline\',this.value)">' : esc(a.deadline || '—')) + '</td>' +
+      '<td>' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select>' : esc(REMIND_LABELS[ri] || ri)) + '</td>' +
+      '<td>' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)">' : esc(a.applied_at || '—')) + '</td>' +
+      '<td class="notes-cell">' + (admin ? '<input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)">' : esc(a.notes || '—')) + '</td>' +
     '</tr>';
   }).join('');
 }
@@ -3295,7 +3309,7 @@ function openJobModal(jobId) {
   const j = jobsById.get(jobId);
   if (!j) return;
   document.getElementById('jm-badge').innerHTML = levelBadge(j.level);
-  document.getElementById('jm-title').textContent = j.title;
+  document.getElementById('jm-title').textContent = isAdmin() ? j.title : '•••••';
   document.getElementById('jm-company').textContent = j.company;
 
   const tags = [];
@@ -3310,16 +3324,17 @@ function openJobModal(jobId) {
     fields.push('<span class="jm-field-label">' + label + '</span><span class="jm-field-value">' + esc(val) + '</span>');
   };
   addField('Location', j.location);
-  addField('Pay', j.pay);
+  addField('Pay', isAdmin() ? j.pay : (j.pay ? '•••••' : ''));
   addField('Posted', j.posted_at ? timeAgo(j.posted_at) : '');
   document.getElementById('jm-fields').innerHTML = fields.join('');
 
   const tracked = trackedIds.has(j.id);
-  document.getElementById('jm-actions').innerHTML =
-    '<a class="jm-btn jm-btn-primary" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">View Posting ↗</a>' +
-    (tracked
-      ? '<button class="jm-btn jm-btn-secondary" disabled>Tracked</button>'
-      : '<button class="jm-btn jm-btn-secondary" onclick="trackJob(this,\'' + escAttr(j.id) + '\');closeJobModal()">Track</button>');
+  document.getElementById('jm-actions').innerHTML = isAdmin()
+    ? '<a class="jm-btn jm-btn-primary" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">View Posting ↗</a>' +
+      (tracked
+        ? '<button class="jm-btn jm-btn-secondary" disabled>Tracked</button>'
+        : '<button class="jm-btn jm-btn-secondary" onclick="trackJob(this,\'' + escAttr(j.id) + '\');closeJobModal()">Track</button>')
+    : '';
 
   history.replaceState(null, '', '#job=' + encodeURIComponent(j.id));
   document.getElementById('job-modal').classList.add('open');
@@ -3649,7 +3664,7 @@ function buildBentoGrid() {
       return '<div class="bento-dl-item' + itemClass + '" onclick="switchTab(\'tracker\')">' +
         '<div class="bento-dl-info">' +
           '<div class="bento-dl-company">' + esc(a.company) + '</div>' +
-          '<div class="bento-dl-title">' + esc(a.title) + '</div>' +
+          '<div class="bento-dl-title">' + redact(a.title) + '</div>' +
         '</div>' +
         '<span class="bento-dl-badge ' + badgeClass + '">' + badgeText + '</span>' +
       '</div>';
@@ -3674,10 +3689,10 @@ function buildBentoGrid() {
     hlEl.innerHTML = hl.map(j =>
       '<div class="bento-hl-item" onclick="switchTab(\'scanner\');setTimeout(()=>{openJobModal(\'' + escAttr(j.id) + '\')},100)">' +
         '<div class="bento-hl-company">' + esc(j.company) + '</div>' +
-        '<div class="bento-hl-title">' + esc(j.title) + '</div>' +
+        '<div class="bento-hl-title">' + redact(j.title) + '</div>' +
         '<div class="bento-hl-badges">' +
           levelBadge(j.level) +
-          (j.pay ? '<span class="badge badge-pay">' + esc(j.pay) + '</span>' : '') +
+          (j.pay ? '<span class="badge badge-pay">' + redact(j.pay) + '</span>' : '') +
           (j.is_new ? '<span class="badge badge-new">NEW</span>' : '') +
         '</div>' +
       '</div>'

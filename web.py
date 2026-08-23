@@ -107,7 +107,16 @@ class Handler(BaseHTTPRequestHandler):
         elif self.path == "/api/scan":
             self._run_scan()
         elif self.path == "/api/applications":
-            self._json_response(db.list_applications())
+            apps = db.list_applications()
+            user = self._current_user()
+            if user and user.role != Role.admin:
+                for a in apps:
+                    a["title"] = "•••••"
+                    if a.get("pay"):
+                        a["pay"] = "•••••"
+                    if a.get("url"):
+                        a["url"] = ""
+            self._json_response(apps)
         elif self.path == "/api/hidden":
             self._json_response(sorted(db.get_hidden_ids()))
         elif self.path == "/api/me":
@@ -287,6 +296,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(html)
 
     def _run_scan(self):
+        user = self._current_user()
+        redact = user is not None and user.role != Role.admin
+
         self.send_response(200)
         self.send_header("Content-Type", "text/event-stream")
         self.send_header("Cache-Control", "no-cache")
@@ -337,9 +349,19 @@ class Handler(BaseHTTPRequestHandler):
 
             if hits:
                 db.upsert_jobs(hits)
+                out = hits
+                if redact:
+                    out = []
+                    for h in hits:
+                        c = dict(h)
+                        c["title"] = "•••••"
+                        if c.get("pay"):
+                            c["pay"] = "•••••"
+                        c["url"] = ""
+                        out.append(c)
                 self._sse("matches", {
                     "company": company,
-                    "jobs": hits,
+                    "jobs": out,
                     "total_open": len(jobs),
                     "matched": len(hits),
                     "new": new_count,
