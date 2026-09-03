@@ -1584,6 +1584,14 @@ td.notes-cell{max-width:16rem}
         <option value="withdrawn">Withdrawn</option>
         <option value="ghosted">Ghosted</option>
       </select>
+      <div class="filter-multi" id="tracker-company-filter">
+        <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Company</button>
+        <div class="filter-multi-panel" id="tracker-company-panel"></div>
+      </div>
+      <div class="filter-multi" id="tracker-location-filter">
+        <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Location</button>
+        <div class="filter-multi-panel" id="tracker-location-panel"></div>
+      </div>
       <div class="result-count" id="tracker-count"></div>
     </div>
 
@@ -2134,7 +2142,7 @@ function refreshCompanyState() {
   removedCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-removed-companies') || '[]'));
 }
 
-const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source'};
+const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source','tracker-company-filter':'Company','tracker-location-filter':'Location'};
 
 function toggleFilterPanel(btn) {
   const panel = btn.nextElementSibling;
@@ -2945,13 +2953,52 @@ function filterByStatus(status) {
   renderTracker();
 }
 
+function buildTrackerFilters() {
+  const companies = [...new Set(applications.map(a => a.company).filter(Boolean))].sort((a,b) => a.localeCompare(b));
+  const locations = [...new Set(applications.map(a => a.location || '—').filter(Boolean))].sort((a,b) => a.localeCompare(b));
+  const compPanel = document.getElementById('tracker-company-panel');
+  const locPanel = document.getElementById('tracker-location-panel');
+  const buildLabels = (vals, panel, id) => {
+    const prev = new Set([...panel.querySelectorAll('input:checked')].map(c => c.value));
+    panel.innerHTML = vals.map(v =>
+      '<label><input type="checkbox" value="' + esc(v) + '"' + (prev.size === 0 || prev.has(v) ? ' checked' : '') + ' onchange="onTrackerFilterCheck(this)"> ' + esc(v) + '</label>'
+    ).join('');
+    updateFilterBtnLabel(id);
+  };
+  buildLabels(companies, compPanel, 'tracker-company-filter');
+  buildLabels(locations, locPanel, 'tracker-location-filter');
+}
+
+function onTrackerFilterCheck(cb) {
+  const container = cb.closest('.filter-multi');
+  const boxes = container.querySelectorAll('input[type="checkbox"]');
+  const checked = [...boxes].filter(c => c.checked);
+  if (checked.length === 0) { cb.checked = true; return; }
+  updateFilterBtnLabel(container.id);
+  renderTracker();
+}
+
+function getTrackerFilterValues(panelId) {
+  const panel = document.getElementById(panelId);
+  const boxes = panel.querySelectorAll('input[type="checkbox"]');
+  if (!boxes.length) return null;
+  const checked = [...boxes].filter(c => c.checked);
+  if (checked.length === boxes.length) return null;
+  return new Set(checked.map(c => c.value));
+}
+
 function renderTracker() {
   renderPipeline();
+  buildTrackerFilters();
   const q = document.getElementById('tracker-search').value.toLowerCase();
   const sf = document.getElementById('tracker-status-filter').value;
+  const cf = getTrackerFilterValues('tracker-company-panel');
+  const lf = getTrackerFilterValues('tracker-location-panel');
   const filtered = applications.filter(a => {
     if (q && !(a.title + a.company + (a.location||'')).toLowerCase().includes(q)) return false;
     if (sf && a.status !== sf) return false;
+    if (cf && !cf.has(a.company)) return false;
+    if (lf && !lf.has(a.location || '—')) return false;
     return true;
   });
 

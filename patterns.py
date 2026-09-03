@@ -271,7 +271,8 @@ class UXOnlyFilterStrategy(FilterStrategy):
         r"\bUX\b|\bUI\b|user experience|user interface|product design"
         r"|interaction design|usability|human factors|accessibility"
         r"|information architecture|service design|\bHCI\b|visual design"
-        r"|brand design|content strateg|design research|\bUXR\b",
+        r"|brand design|content strateg|design research|\bUXR\b"
+        r"|\btechnolog.*\b(?:intern|co-?op\b|fellow|apprentice)",
         re.I,
     )
 
