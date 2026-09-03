@@ -135,6 +135,11 @@
     },
     {
       "board": "greenhouse",
+      "slug": "anthropic",
+      "name": "Anthropic"
+    },
+    {
+      "board": "greenhouse",
       "slug": "applovin",
       "name": "AppLovin"
     },
@@ -515,6 +520,11 @@
     },
     {
       "board": "greenhouse",
+      "slug": "kasisto",
+      "name": "Kasisto"
+    },
+    {
+      "board": "greenhouse",
       "slug": "kickstarter",
       "name": "Kickstarter"
     },
@@ -540,6 +550,11 @@
       "wd": 1,
       "site": "External",
       "search": "intern"
+    },
+    {
+      "board": "ashby",
+      "slug": "lemonade",
+      "name": "Lemonade"
     },
     {
       "board": "greenhouse",
@@ -749,6 +764,11 @@
       "name": "Ogilvy"
     },
     {
+      "board": "ashby",
+      "slug": "openai",
+      "name": "OpenAI"
+    },
+    {
       "board": "greenhouse",
       "slug": "oportun",
       "name": "Oportun"
@@ -773,6 +793,11 @@
       "wd": 5,
       "site": "panwexternalcareers",
       "search": "intern"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "pagaya",
+      "name": "Pagaya"
     },
     {
       "board": "ashby",
@@ -942,6 +967,11 @@
       "wd": 1,
       "site": "snap",
       "search": "intern"
+    },
+    {
+      "board": "ashby",
+      "slug": "socure",
+      "name": "Socure"
     },
     {
       "board": "greenhouse",
