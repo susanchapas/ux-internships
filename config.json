@@ -14,7 +14,6 @@
     "devops",
     "firmware",
     "network engineer",
-    "international",
     "sales",
     "talent acquisition",
     "recruiting",
@@ -23,16 +22,17 @@
     "supply chain",
     "manufacturing",
     "hardware",
-    "software engineer",
     "data engineer",
+    "data scientist",
     "machine learning",
+    "data science",
+    "data analyst",
     "human resources",
     "\\bhr\\b",
     "legal",
     "compliance",
     "audit",
-    "accounting",
-    "institutional"
+    "accounting"
   ],
   "location_include": [
     "new york",
