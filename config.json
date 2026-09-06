@@ -350,6 +350,14 @@
       "name": "Community Reinvestment Fund"
     },
     {
+      "board": "workday",
+      "name": "Condé Nast",
+      "tenant": "condenast",
+      "wd": 5,
+      "site": "CondeCareers",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "consumerreports",
       "name": "Consumer Reports"
@@ -371,6 +379,11 @@
       "wd": 5,
       "site": "crowdstrikecareers",
       "search": "intern"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "crunchyroll",
+      "name": "Crunchyroll"
     },
     {
       "board": "greenhouse",
@@ -419,6 +432,14 @@
       "tenant": "capitalone",
       "wd": 12,
       "site": "Capital_One",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Disney",
+      "tenant": "disney",
+      "wd": 5,
+      "site": "disneycareer",
       "search": "intern"
     },
     {
@@ -773,6 +794,11 @@
       "name": "Navan"
     },
     {
+      "board": "smartrecruiters",
+      "slug": "NBCUniversal3",
+      "name": "NBCUniversal"
+    },
+    {
       "board": "workday",
       "name": "Netflix",
       "tenant": "netflix",
@@ -784,6 +810,11 @@
       "board": "greenhouse",
       "slug": "new",
       "name": "New York Life"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "thenewyorktimes",
+      "name": "New York Times"
     },
     {
       "board": "smartrecruiters",
@@ -1104,6 +1135,14 @@
       "name": "The Athletic"
     },
     {
+      "board": "workday",
+      "name": "The Atlantic",
+      "tenant": "atlanticmedia",
+      "wd": 1,
+      "site": "Careers",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "theknotworldwide",
       "name": "The Knot Worldwide"
@@ -1186,10 +1225,26 @@
     },
     {
       "board": "workday",
+      "name": "Warner Bros Discovery",
+      "tenant": "warnerbros",
+      "wd": 5,
+      "site": "global",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
       "name": "Warner Music",
       "tenant": "wmg",
       "wd": 1,
       "site": "WMGUS",
+      "search": "intern"
+    },
+    {
+      "board": "workday",
+      "name": "Washington Post",
+      "tenant": "washpost",
+      "wd": 5,
+      "site": "washingtonpostcareers",
       "search": "intern"
     },
     {

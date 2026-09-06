@@ -422,7 +422,7 @@ main{max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 5rem}
   border-radius:var(--radius-lg);
   background:var(--surface-card);
   box-shadow:var(--shadow-card);
-  overflow:clip;
+  overflow-x:auto;overflow-y:hidden;
   -webkit-overflow-scrolling:touch;
 }
 table{width:100%;border-collapse:collapse;font-size:0.875rem}
@@ -1291,18 +1291,46 @@ td.notes-cell{max-width:16rem}
   .bento-scanner .bento-title{font-size:1.25rem}
   .bento-stats-grid{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
+  .stat .n{font-size:1.375rem}
   .hl-grid{grid-template-columns:1fr}
-  .toolbar{flex-direction:column}
+  .toolbar{flex-direction:column;gap:0.5rem}
   #search,.tracker-search,.result-count,.filter-select,.filter-multi,.toolbar-toggle,.saved-filter-group{width:100%}
   .filter-multi-btn{width:100%}
   .filter-multi-panel{left:0;right:0}
   .saved-filter-select{max-width:none;flex:1}
   .result-count{text-align:left;margin-left:0}
-  header{padding:0.625rem 0.875rem}
+  header{padding:0.625rem 0.875rem;flex-wrap:wrap;gap:0.375rem}
+  .nav-logo{font-size:1rem}
+  .header-tabs{order:3;width:100%;justify-content:stretch}
+  .header-tab{flex:1;text-align:center;font-size:0.75rem;padding:0.375rem 0.5rem}
   .profile-icon-btn{right:0.875rem}
-  .sub-bar{padding:0.5rem 0.875rem}
-  main{padding:1rem 0.625rem 3.75rem}
-  .header-tab{flex:1;text-align:center}
+  .sub-bar{padding:0.375rem 0.875rem}
+  main{padding:0.75rem 0.5rem 3.75rem}
+  #results table,#scanner-tab table{min-width:52rem}
+  #tracker-table-wrap table{min-width:48rem}
+  th{position:relative;top:auto}
+  .table-wrap{border-radius:var(--radius-md);margin:0 -0.125rem}
+  .modal{width:96%;max-width:none;padding:1.5rem 1.25rem;max-height:90vh;overflow-y:auto}
+  .companies-modal{max-height:85vh;padding:0}
+  .companies-modal h2{padding:1.25rem 1.25rem 0;font-size:1rem}
+  .cm-toolbar{padding:0 1.25rem 0.5rem}
+  .cm-list{padding:0 1.25rem 1.25rem}
+  .cm-add-row{padding:0.75rem 1rem;flex-wrap:wrap}
+  .cm-add-row .cm-add-input{min-width:0}
+  .cm-add-row select{flex:1 1 auto !important;width:auto !important}
+  .scan-dropdown{min-width:12rem;right:-0.5rem}
+  .profile-section{padding:1.25rem;max-width:none}
+  .profile-tabs{max-width:none}
+  .profile-tab-btn{font-size:0.75rem;padding:0.4rem 0.25rem}
+  .auth-card{padding:1.75rem 1.5rem}
+  .bento-scanner.bento-link{padding:1.5rem 1.25rem}
+  .bento-card{padding:1.125rem}
+  .section-title{font-size:0.8125rem}
+  .jm-fields{font-size:0.75rem}
+  .job-detail-modal{padding:2rem 1.5rem 1.5rem}
+  .pref-row{flex-wrap:wrap;gap:0.5rem}
+  .pref-row>div{flex:1;min-width:0}
+  #progress-bar{top:auto}
 }
 
 @media(prefers-reduced-motion:reduce){
