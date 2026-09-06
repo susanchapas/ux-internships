@@ -1,6 +1,6 @@
 {
   "title_include": [
-    "\\bUX\\b|\\bUI\\b|\\buser experience|\\buser interface|\\buser research|\\bproduct design|\\binteraction design|\\bexperience design|\\busability\\b|\\bhuman factors\\b|\\baccessibility\\b|\\binformation architecture\\b|\\bservice design|\\bHCI\\b|\\bvisual design|\\bbrand design|\\bcontent strateg|\\bdesign research|\\bdesign system|\\bdesign ops|\\bdesign technolog|\\bUXR\\b|\\bUX research|\\bCX\\b",
+    "\\bUX\\b|\\bUI\\b|\\buser experience|\\buser interface|\\buser research|\\bproduct design|\\binteraction design|\\bexperience design|\\busability\\b|\\bhuman factors\\b|\\baccessibility\\b|\\binformation architecture\\b|\\bservice design|\\bHCI\\b|\\bvisual design|\\bbrand design|\\bcontent strateg|\\bdesign research|\\bdesign system|\\bdesign ops|\\bdesign technolog|\\bUXR\\b|\\bUX research|\\bCX\\b|\\bcontent design|\\bmotion design",
     "\\b(design|designer|research|researcher|product|creative).*(\\bintern|\\bco-?op\\b|\\bfellow|\\bapprentice|\\bjunior\\b|\\bassociate\\b|\\bmanager\\b|\\bdirector\\b|\\blead\\b|\\bhead\\b|\\bsenior\\b|\\bstaff\\b|\\bprincipal\\b|\\bvp\\b)",
     "(\\bintern|\\bco-?op\\b|\\bfellow|\\bapprentice|\\bjunior\\b|\\bassociate\\b|\\bmanager\\b|\\bdirector\\b|\\blead\\b|\\bhead\\b|\\bsenior\\b|\\bstaff\\b|\\bprincipal\\b|\\bvp\\b).*(\\bdesign|\\bresearch|\\bcreative|\\bproduct\\b)",
     "\\btechnolog.*(\\bintern|\\bco-?op\\b|\\bfellow|\\bapprentice)",
@@ -43,30 +43,14 @@
     "jersey city",
     "hoboken",
     "newark",
-    "remote"
+    "remote",
+    "brooklyn",
+    "queens",
+    "stamford",
+    "white plains",
+    "hybrid"
   ],
   "companies": [
-    {
-      "board": "workday",
-      "name": "AIG",
-      "tenant": "aig",
-      "wd": 1,
-      "site": "aig",
-      "search": "intern"
-    },
-    {
-      "board": "greenhouse",
-      "slug": "akqa",
-      "name": "AKQA"
-    },
-    {
-      "board": "workday",
-      "name": "AT&T",
-      "tenant": "att",
-      "wd": 1,
-      "site": "ATTGeneral",
-      "search": "intern"
-    },
     {
       "board": "workday",
       "name": "Accenture",
@@ -109,6 +93,14 @@
       "name": "Affirm"
     },
     {
+      "board": "workday",
+      "name": "AIG",
+      "tenant": "aig",
+      "wd": 1,
+      "site": "aig",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "airbnb",
       "name": "Airbnb"
@@ -117,6 +109,11 @@
       "board": "greenhouse",
       "slug": "airtable",
       "name": "Airtable"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "akqa",
+      "name": "AKQA"
     },
     {
       "board": "greenhouse",
@@ -172,6 +169,19 @@
       "search": "intern"
     },
     {
+      "board": "workday",
+      "name": "AT&T",
+      "tenant": "att",
+      "wd": 1,
+      "site": "ATTGeneral",
+      "search": "intern"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "atlassian",
+      "name": "Atlassian"
+    },
+    {
       "board": "ashby",
       "slug": "away",
       "name": "Away"
@@ -182,17 +192,17 @@
       "name": "Axios"
     },
     {
-      "board": "greenhouse",
-      "slug": "bark",
-      "name": "BARK"
-    },
-    {
       "board": "workday",
       "name": "Bank of America",
       "tenant": "ghr",
       "wd": 1,
       "site": "Lateral-US",
       "search": "intern"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "bark",
+      "name": "BARK"
     },
     {
       "board": "greenhouse",
@@ -262,6 +272,11 @@
       "board": "greenhouse",
       "slug": "buzzfeed",
       "name": "BuzzFeed"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "canva",
+      "name": "Canva"
     },
     {
       "board": "lever",
@@ -348,6 +363,11 @@
       "board": "greenhouse",
       "slug": "community",
       "name": "Community Reinvestment Fund"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "compassinc",
+      "name": "Compass"
     },
     {
       "board": "workday",
@@ -444,6 +464,16 @@
     },
     {
       "board": "greenhouse",
+      "slug": "docusign",
+      "name": "DocuSign"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "doordash",
+      "name": "DoorDash"
+    },
+    {
+      "board": "greenhouse",
       "slug": "doubleverify",
       "name": "DoubleVerify"
     },
@@ -528,6 +558,16 @@
     },
     {
       "board": "greenhouse",
+      "slug": "gitlab",
+      "name": "GitLab"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "grammarly",
+      "name": "Grammarly"
+    },
+    {
+      "board": "greenhouse",
       "slug": "gusto",
       "name": "Gusto"
     },
@@ -535,6 +575,11 @@
       "board": "ashby",
       "slug": "handshake",
       "name": "Handshake"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "headspace",
+      "name": "Headspace"
     },
     {
       "board": "greenhouse",
@@ -551,6 +596,11 @@
     },
     {
       "board": "greenhouse",
+      "slug": "hubspot",
+      "name": "HubSpot"
+    },
+    {
+      "board": "greenhouse",
       "slug": "hugeinc",
       "name": "Huge"
     },
@@ -558,6 +608,19 @@
       "board": "greenhouse",
       "slug": "ideo",
       "name": "IDEO"
+    },
+    {
+      "board": "workday",
+      "name": "iHeartMedia",
+      "tenant": "iheartmedia",
+      "wd": 5,
+      "site": "External_iHM",
+      "search": "intern"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "instacart",
+      "name": "Instacart"
     },
     {
       "board": "lever",
@@ -710,14 +773,14 @@
       "name": "Mercury"
     },
     {
-      "board": "lever",
-      "slug": "metlife",
-      "name": "MetLife"
-    },
-    {
       "board": "greenhouse",
       "slug": "metalab",
       "name": "Metalab"
+    },
+    {
+      "board": "lever",
+      "slug": "metlife",
+      "name": "MetLife"
     },
     {
       "board": "ashby",
@@ -822,6 +885,11 @@
       "name": "News Corp"
     },
     {
+      "board": "greenhouse",
+      "slug": "noom",
+      "name": "Noom"
+    },
+    {
       "board": "smartrecruiters",
       "slug": "northwesternmutual",
       "name": "Northwestern Mutual"
@@ -916,11 +984,6 @@
       "name": "Plaid"
     },
     {
-      "board": "greenhouse",
-      "slug": "propublica",
-      "name": "ProPublica"
-    },
-    {
       "board": "ashby",
       "slug": "propel",
       "name": "Propel"
@@ -929,6 +992,11 @@
       "board": "greenhouse",
       "slug": "prophet",
       "name": "Prophet"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "propublica",
+      "name": "ProPublica"
     },
     {
       "board": "workday",
@@ -999,6 +1067,11 @@
     },
     {
       "board": "greenhouse",
+      "slug": "roblox",
+      "name": "Roblox"
+    },
+    {
+      "board": "greenhouse",
       "slug": "rockstargames",
       "name": "Rockstar Games"
     },
@@ -1048,6 +1121,11 @@
     },
     {
       "board": "greenhouse",
+      "slug": "shopify",
+      "name": "Shopify"
+    },
+    {
+      "board": "greenhouse",
       "slug": "skylighthq",
       "name": "Skylight"
     },
@@ -1073,6 +1151,11 @@
       "board": "lever",
       "slug": "spotify",
       "name": "Spotify"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "springhealth",
+      "name": "Spring Health"
     },
     {
       "board": "greenhouse",
@@ -1103,14 +1186,6 @@
       "tenant": "tmobile",
       "wd": 1,
       "site": "External",
-      "search": "intern"
-    },
-    {
-      "board": "workday",
-      "name": "TIAA",
-      "tenant": "tiaa",
-      "wd": 1,
-      "site": "Search",
       "search": "intern"
     },
     {
@@ -1153,6 +1228,14 @@
       "name": "Thoughtbot"
     },
     {
+      "board": "workday",
+      "name": "TIAA",
+      "tenant": "tiaa",
+      "wd": 1,
+      "site": "Search",
+      "search": "intern"
+    },
+    {
       "board": "greenhouse",
       "slug": "toast",
       "name": "Toast"
@@ -1171,6 +1254,16 @@
       "name": "Trustpilot"
     },
     {
+      "board": "greenhouse",
+      "slug": "twilio",
+      "name": "Twilio"
+    },
+    {
+      "board": "greenhouse",
+      "slug": "twitch",
+      "name": "Twitch"
+    },
+    {
       "board": "ashby",
       "slug": "unit",
       "name": "Unit"
@@ -1179,6 +1272,16 @@
       "board": "greenhouse",
       "slug": "upstart",
       "name": "Upstart"
+    },
+    {
+      "board": "usajobs",
+      "keyword": "intern",
+      "name": "US Federal",
+      "locations": [
+        "New York, New York",
+        "Newark, New Jersey",
+        "Jersey City, New Jersey"
+      ]
     },
     {
       "board": "workday",
@@ -1197,6 +1300,11 @@
       "board": "greenhouse",
       "slug": "vaynermedia",
       "name": "VaynerMedia"
+    },
+    {
+      "board": "ashby",
+      "slug": "vercel",
+      "name": "Vercel"
     },
     {
       "board": "greenhouse",
@@ -1224,6 +1332,11 @@
       "name": "Vox Media"
     },
     {
+      "board": "greenhouse",
+      "slug": "warbyparker",
+      "name": "Warby Parker"
+    },
+    {
       "board": "workday",
       "name": "Warner Bros Discovery",
       "tenant": "warnerbros",
@@ -1248,14 +1361,6 @@
       "search": "intern"
     },
     {
-      "board": "workday",
-      "name": "WeWork",
-      "tenant": "wework",
-      "wd": 1,
-      "site": "WeWork",
-      "search": "intern"
-    },
-    {
       "board": "lever",
       "slug": "wealthfront",
       "name": "Wealthfront"
@@ -1264,6 +1369,14 @@
       "board": "greenhouse",
       "slug": "ww",
       "name": "WeightWatchers"
+    },
+    {
+      "board": "workday",
+      "name": "WeWork",
+      "tenant": "wework",
+      "wd": 1,
+      "site": "WeWork",
+      "search": "intern"
     },
     {
       "board": "greenhouse",
@@ -1302,24 +1415,6 @@
       "board": "greenhouse",
       "slug": "zetaglobal",
       "name": "Zeta Global"
-    },
-    {
-      "board": "workday",
-      "name": "iHeartMedia",
-      "tenant": "iheartmedia",
-      "wd": 5,
-      "site": "External_iHM",
-      "search": "intern"
-    },
-    {
-      "board": "usajobs",
-      "keyword": "intern",
-      "name": "US Federal",
-      "locations": [
-        "New York, New York",
-        "Newark, New Jersey",
-        "Jersey City, New Jersey"
-      ]
     }
   ]
 }

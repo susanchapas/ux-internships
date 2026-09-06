@@ -1379,53 +1379,6 @@
       ],
       "expect_workday": true
     },
-    "consulting": {
-      "label": "Consulting (design + digital arms)",
-      "priority": 2,
-      "companies": [
-        {
-          "name": "Deloitte",
-          "note": "Deloitte Digital. NYC at 30 Rockefeller Plaza."
-        },
-        {
-          "name": "Accenture",
-          "note": "Accenture Song absorbed Fjord + Droga5. NYC at One Manhattan West."
-        },
-        {
-          "name": "McKinsey",
-          "note": "McKinsey Design. NYC at 3 World Trade Center."
-        },
-        {
-          "name": "Boston Consulting Group",
-          "note": "BCG X. NYC office."
-        },
-        {
-          "name": "Bain",
-          "note": "Bain Vector. NYC at the Grace Building, moving to 22 Vanderbilt in 2026."
-        },
-        {
-          "name": "EY",
-          "note": "NYC at 401 9th Ave."
-        },
-        {
-          "name": "PwC",
-          "note": "NYC at 300 Madison Ave."
-        },
-        {
-          "name": "KPMG",
-          "note": "NYC at Two Manhattan West, 375 Ninth Ave."
-        },
-        {
-          "name": "Gartner",
-          "note": "Stamford CT \u2014 NOT in the NY/NJ filter set, ~50 min by train from GCT. Verify a NYC posting before applying."
-        },
-        {
-          "name": "ZS Associates",
-          "note": "NYC at the Empire State Building, 350 Fifth Ave."
-        }
-      ],
-      "expect_workday": true
-    },
     "edtech": {
       "label": "Edtech",
       "priority": 3,
