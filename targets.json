@@ -371,6 +371,11 @@
           "hint": "newyorkfed",
           "note": "NYC. Directly relevant to your CDFI background.",
           "priority": 1
+        },
+        {
+          "name": "UBS",
+          "hint": "ubs",
+          "note": "Weehawken, NJ and NYC offices."
         }
       ],
       "expect_workday": true
