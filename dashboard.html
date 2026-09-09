@@ -673,6 +673,27 @@ th.fav-col{width:2rem;min-width:2rem;cursor:default !important}
 .save-filter-modal{max-width:20rem;padding:1.5rem}
 .save-filter-modal h2{font-size:1rem;margin-bottom:1rem}
 
+tr.filter-row th{
+  background:var(--surface-panel);padding:0.25rem 0.5rem;
+  border-bottom:1px solid var(--border-default);
+  top:5rem;z-index:4;
+}
+.col-filter{
+  width:100%;padding:0.25rem 0.375rem;
+  border:1px solid var(--border-subtle);border-radius:var(--radius-sm);
+  font-size:0.75rem;font-family:var(--font-body);
+  background:var(--surface-card);color:var(--text-body);
+  box-sizing:border-box;
+}
+.col-filter:focus{border-color:transparent;outline:2px solid var(--focus-ring)}
+.col-filter::placeholder{color:var(--text-faint)}
+select.col-filter{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='none' stroke='%236b83b0' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M2.5 3.75 5 6.25 7.5 3.75'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 0.375rem center;
+  padding-right:1.25rem;cursor:pointer;
+}
+
 tr.hidden-row td{opacity:0.4}
 
 .companies-modal{max-width:40rem;max-height:80vh;display:flex;flex-direction:column;padding:0}
@@ -861,6 +882,31 @@ tr.hidden-row td{opacity:0.4}
 #tracker-empty p{font-size:0.875rem;max-width:25rem;margin:0 auto}
 
 td.notes-cell{max-width:16rem}
+
+.more-btn{
+  font-family:var(--font-display);
+  font-size:0.75rem;font-weight:600;
+  padding:0.25rem 0.625rem;
+  border-radius:var(--radius-pill);
+  border:1px solid var(--border-subtle);
+  background:transparent;color:var(--text-muted);
+  cursor:pointer;white-space:nowrap;
+  transition:all var(--duration-fast) var(--ease-smooth);
+}
+.more-btn:hover{border-color:var(--border-hover);color:var(--text-accent)}
+.more-btn.open{background:var(--mint-a10);border-color:var(--mint-a30);color:var(--mint)}
+tr.detail-row td{
+  padding:0;border-bottom:1px solid var(--border-subtle);
+  background:var(--surface-panel);
+}
+tr.detail-row .detail-inner{
+  padding:0.75rem 1rem 0.75rem 3.5rem;
+  display:grid;grid-template-columns:auto 1fr;gap:0.25rem 1rem;
+  font-size:0.8125rem;
+}
+tr.detail-row .detail-label{color:var(--text-faint);font-weight:600;white-space:nowrap}
+tr.detail-row .detail-value{color:var(--text-body);word-break:break-word}
+tr.detail-row .detail-value a{font-weight:500}
 
 .auth-screen{
   min-height:100vh;
@@ -1307,7 +1353,7 @@ td.notes-cell{max-width:16rem}
   .sub-bar{padding:0.375rem 0.875rem}
   main{padding:0.75rem 0.5rem 3.75rem}
   #results table,#scanner-tab table{min-width:52rem}
-  #tracker-table-wrap table{min-width:48rem}
+  #tracker-table-wrap table{min-width:52rem}
   th{position:relative;top:auto}
   .table-wrap{border-radius:var(--radius-md);margin:0 -0.125rem}
   .modal{width:96%;max-width:none;padding:1.5rem 1.25rem;max-height:90vh;overflow-y:auto}
@@ -1600,26 +1646,6 @@ td.notes-cell{max-width:16rem}
     <div class="toolbar">
       <button class="add-btn" onclick="openAddModal()">+ Add Application</button>
       <input type="text" class="tracker-search" id="tracker-search" placeholder="Search tracked applications..." oninput="debouncedRenderTracker()">
-      <select id="tracker-status-filter" class="filter-select" onchange="renderTracker()">
-        <option value="">All statuses</option>
-        <option value="saved">Saved</option>
-        <option value="applied">Applied</option>
-        <option value="phone_screen">Phone Screen</option>
-        <option value="interview">Interview</option>
-        <option value="offer">Offer</option>
-        <option value="accepted">Accepted</option>
-        <option value="rejected">Rejected</option>
-        <option value="withdrawn">Withdrawn</option>
-        <option value="ghosted">Ghosted</option>
-      </select>
-      <div class="filter-multi" id="tracker-company-filter">
-        <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Company</button>
-        <div class="filter-multi-panel" id="tracker-company-panel"></div>
-      </div>
-      <div class="filter-multi" id="tracker-location-filter">
-        <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Location</button>
-        <div class="filter-multi-panel" id="tracker-location-panel"></div>
-      </div>
       <div class="result-count" id="tracker-count"></div>
     </div>
 
@@ -1630,7 +1656,8 @@ td.notes-cell{max-width:16rem}
 
     <div class="table-wrap" id="tracker-table-wrap" style="display:none">
       <table>
-        <thead><tr>
+        <thead>
+        <tr>
           <th style="cursor:default;width:3%"></th>
           <th style="cursor:default;width:13%">Company</th>
           <th style="cursor:default;width:18%">Title</th>
@@ -1639,8 +1666,22 @@ td.notes-cell{max-width:16rem}
           <th style="cursor:default;width:11%">Deadline</th>
           <th style="cursor:default;width:10%">Remind</th>
           <th style="cursor:default;width:11%">Applied</th>
-          <th style="cursor:default;width:13%">Notes</th>
-        </tr></thead>
+          <th style="cursor:default;width:11%">Notes</th>
+          <th style="cursor:default;width:4%"></th>
+        </tr>
+        <tr class="filter-row">
+          <th style="cursor:default"></th>
+          <th style="cursor:default"><input type="text" class="col-filter" id="cf-company" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th style="cursor:default"><input type="text" class="col-filter" id="cf-title" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th style="cursor:default"><input type="text" class="col-filter" id="cf-location" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th style="cursor:default"><select class="col-filter" id="cf-status" onchange="renderTracker()"><option value="">All</option></select></th>
+          <th style="cursor:default"><input type="date" class="col-filter" id="cf-deadline" onchange="renderTracker()"></th>
+          <th style="cursor:default"><select class="col-filter" id="cf-remind" onchange="renderTracker()"><option value="">All</option><option value="daily">Daily</option><option value="every_3_days">Every 3 days</option><option value="weekly">Weekly</option><option value="off">Off</option></select></th>
+          <th style="cursor:default"><input type="date" class="col-filter" id="cf-applied" onchange="renderTracker()"></th>
+          <th style="cursor:default"><input type="text" class="col-filter" id="cf-notes" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th style="cursor:default"></th>
+        </tr>
+        </thead>
         <tbody id="tracker-tbody"></tbody>
       </table>
     </div>
@@ -2170,7 +2211,7 @@ function refreshCompanyState() {
   removedCompanies = new Set(JSON.parse(localStorage.getItem('ux-internship-removed-companies') || '[]'));
 }
 
-const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source','tracker-company-filter':'Company','tracker-location-filter':'Location'};
+const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source'};
 
 function toggleFilterPanel(btn) {
   const panel = btn.nextElementSibling;
@@ -2954,7 +2995,7 @@ function renderPipeline() {
 
   function row(status, max) {
     const pct = Math.max(2, counts[status] / max * 100).toFixed(1);
-    const active = document.getElementById('tracker-status-filter').value === status;
+    const active = document.getElementById('cf-status').value === status;
     return '<div class="pipeline-row' + (active ? ' active' : '') + '" onclick="filterByStatus(\'' + status + '\')">' +
       '<div class="pipeline-label">' + STATUS_LABELS[status] + '</div>' +
       '<div class="pipeline-bar-track"><div class="pipeline-bar" style="width:' + pct + '%;background:' + PIPELINE_COLORS[status] + '"></div></div>' +
@@ -2976,57 +3017,41 @@ function renderPipeline() {
 }
 
 function filterByStatus(status) {
-  const sel = document.getElementById('tracker-status-filter');
+  const sel = document.getElementById('cf-status');
   sel.value = sel.value === status ? '' : status;
   renderTracker();
 }
 
-function buildTrackerFilters() {
-  const companies = [...new Set(applications.map(a => a.company).filter(Boolean))].sort((a,b) => a.localeCompare(b));
-  const locations = [...new Set(applications.map(a => a.location || '—').filter(Boolean))].sort((a,b) => a.localeCompare(b));
-  const compPanel = document.getElementById('tracker-company-panel');
-  const locPanel = document.getElementById('tracker-location-panel');
-  const buildLabels = (vals, panel, id) => {
-    const prev = new Set([...panel.querySelectorAll('input:checked')].map(c => c.value));
-    panel.innerHTML = vals.map(v =>
-      '<label><input type="checkbox" value="' + esc(v) + '"' + (prev.size === 0 || prev.has(v) ? ' checked' : '') + ' onchange="onTrackerFilterCheck(this)"> ' + esc(v) + '</label>'
-    ).join('');
-    updateFilterBtnLabel(id);
-  };
-  buildLabels(companies, compPanel, 'tracker-company-filter');
-  buildLabels(locations, locPanel, 'tracker-location-filter');
-}
-
-function onTrackerFilterCheck(cb) {
-  const container = cb.closest('.filter-multi');
-  const boxes = container.querySelectorAll('input[type="checkbox"]');
-  const checked = [...boxes].filter(c => c.checked);
-  if (checked.length === 0) { cb.checked = true; return; }
-  updateFilterBtnLabel(container.id);
-  renderTracker();
-}
-
-function getTrackerFilterValues(panelId) {
-  const panel = document.getElementById(panelId);
-  const boxes = panel.querySelectorAll('input[type="checkbox"]');
-  if (!boxes.length) return null;
-  const checked = [...boxes].filter(c => c.checked);
-  if (checked.length === boxes.length) return null;
-  return new Set(checked.map(c => c.value));
+function populateColumnFilterOptions() {
+  const statusSel = document.getElementById('cf-status');
+  const prev = statusSel.value;
+  const statuses = [...new Set(applications.map(a => a.status).filter(Boolean))];
+  statusSel.innerHTML = '<option value="">All</option>' +
+    statuses.map(s => '<option value="' + s + '"' + (s === prev ? ' selected' : '') + '>' + (STATUS_LABELS[s] || s) + '</option>').join('');
 }
 
 function renderTracker() {
   renderPipeline();
-  buildTrackerFilters();
+  populateColumnFilterOptions();
   const q = document.getElementById('tracker-search').value.toLowerCase();
-  const sf = document.getElementById('tracker-status-filter').value;
-  const cf = getTrackerFilterValues('tracker-company-panel');
-  const lf = getTrackerFilterValues('tracker-location-panel');
+  const cfCompany = (document.getElementById('cf-company').value || '').toLowerCase();
+  const cfTitle = (document.getElementById('cf-title').value || '').toLowerCase();
+  const cfLocation = (document.getElementById('cf-location').value || '').toLowerCase();
+  const cfStatus = document.getElementById('cf-status').value;
+  const cfDeadline = document.getElementById('cf-deadline').value;
+  const cfRemind = document.getElementById('cf-remind').value;
+  const cfApplied = document.getElementById('cf-applied').value;
+  const cfNotes = (document.getElementById('cf-notes').value || '').toLowerCase();
   const filtered = applications.filter(a => {
     if (q && !(a.title + a.company + (a.location||'')).toLowerCase().includes(q)) return false;
-    if (sf && a.status !== sf) return false;
-    if (cf && !cf.has(a.company)) return false;
-    if (lf && !lf.has(a.location || '—')) return false;
+    if (cfCompany && !(a.company || '').toLowerCase().includes(cfCompany)) return false;
+    if (cfTitle && !(a.title || '').toLowerCase().includes(cfTitle)) return false;
+    if (cfLocation && !(a.location || '').toLowerCase().includes(cfLocation)) return false;
+    if (cfStatus && a.status !== cfStatus) return false;
+    if (cfDeadline && (a.deadline || '') !== cfDeadline) return false;
+    if (cfRemind && (a.reminder_interval || 'daily') !== cfRemind) return false;
+    if (cfApplied && (a.applied_at || '') !== cfApplied) return false;
+    if (cfNotes && !(a.notes || '').toLowerCase().includes(cfNotes)) return false;
     return true;
   });
 
@@ -3058,7 +3083,7 @@ function renderTracker() {
     const ri = a.reminder_interval || 'daily';
     const rOpts = remindOpts.replaceAll('${RS}', '').replace('value="' + ri + '"', 'value="' + ri + '" selected');
     const admin = isAdmin();
-    return '<tr>' +
+    const mainRow = '<tr>' +
       '<td>' + (admin ? '<button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button>' : '') + '</td>' +
       '<td>' + esc(a.company) + '</td>' +
       '<td class="title-cell">' + (admin
@@ -3070,8 +3095,34 @@ function renderTracker() {
       '<td>' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select>' : esc(REMIND_LABELS[ri] || ri)) + '</td>' +
       '<td>' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)">' : esc(a.applied_at || '—')) + '</td>' +
       '<td class="notes-cell">' + (admin ? '<input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)">' : esc(a.notes || '—')) + '</td>' +
+      '<td><button class="more-btn" onclick="toggleDetail(this,' + a.id + ')">More</button></td>' +
     '</tr>';
+
+    const colSpan = admin ? 10 : 10;
+    const details = [];
+    if (admin && a.pay) details.push(['Pay', '<span class="pay-text">' + esc(a.pay) + '</span>']);
+    if (admin && a.url) details.push(['URL', '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.url) + '</a>']);
+    details.push(['Status', '<span class="status-badge status-' + a.status + '">' + esc(STATUS_LABELS[a.status] || a.status) + '</span>']);
+    if (a.location) details.push(['Location', esc(a.location)]);
+    if (a.applied_at) details.push(['Applied', esc(a.applied_at)]);
+    if (a.deadline) details.push(['Deadline', esc(a.deadline)]);
+    if (a.notes) details.push(['Notes', esc(a.notes)]);
+
+    const detailRow = '<tr class="detail-row" id="detail-' + a.id + '" style="display:none">' +
+      '<td colspan="' + colSpan + '"><div class="detail-inner">' +
+      details.map(([l,v]) => '<span class="detail-label">' + l + '</span><span class="detail-value">' + v + '</span>').join('') +
+      '</div></td></tr>';
+
+    return mainRow + detailRow;
   }).join('');
+}
+
+function toggleDetail(btn, id) {
+  const row = document.getElementById('detail-' + id);
+  const open = row.style.display !== 'none';
+  row.style.display = open ? 'none' : 'table-row';
+  btn.classList.toggle('open', !open);
+  btn.textContent = open ? 'More' : 'Less';
 }
 
 function updateApp(id, field, value) {
