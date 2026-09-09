@@ -254,10 +254,10 @@ class DefaultFilterStrategy(FilterStrategy):
     """Filters using the title_include / title_exclude / location_include regexes from config.json."""
 
     def __init__(self, cfg):
-        self._title_inc, self._title_exc, self._loc_inc = compile_filters(cfg)
+        self._title_inc, self._title_exc, self._loc_inc, self._loc_exc = compile_filters(cfg)
 
     def apply(self, jobs):
-        return [j for j in jobs if matches(j, self._title_inc, self._title_exc, self._loc_inc)]
+        return [j for j in jobs if matches(j, self._title_inc, self._title_exc, self._loc_inc, self._loc_exc)]
 
     @property
     def name(self):

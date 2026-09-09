@@ -287,20 +287,32 @@ def compile_filters(cfg):
     title_inc = re.compile("|".join(cfg["title_include"]), re.I)
     title_exc = re.compile("|".join(cfg["title_exclude"]), re.I) if cfg.get("title_exclude") else None
     loc_inc = re.compile("|".join(cfg["location_include"]), re.I)
-    return title_inc, title_exc, loc_inc
+    loc_exc = re.compile("|".join(cfg["location_exclude"]), re.I) if cfg.get("location_exclude") else None
+    return title_inc, title_exc, loc_inc, loc_exc
 
 
-def matches(job, title_inc, title_exc, loc_inc):
+_REMOTE_RE = re.compile(r"\bremote\b|\bhybrid\b", re.I)
+_US_RE = re.compile(r"\bUS\b|\bU\.S\b|\bUSA\b|\bunited states\b", re.I)
+
+
+def matches(job, title_inc, title_exc, loc_inc, loc_exc=None):
     title = job.get("title", "") or ""
     loc = job.get("location", "") or ""
     if not title_inc.search(title):
         return False
     if title_exc and title_exc.search(title):
         return False
-    # Remote-friendly: allow if location is blank or says remote, plus geo matches
     if not loc:
         return True
-    return bool(loc_inc.search(loc))
+    if loc_inc.search(loc):
+        return True
+    if _REMOTE_RE.search(loc):
+        if _US_RE.search(loc):
+            return True
+        if loc_exc and loc_exc.search(loc):
+            return False
+        return True
+    return False
 
 
 # ---------------------------------------------------------------- notify
@@ -487,7 +499,7 @@ def main():
         sys.exit(f"missing {CONFIG_PATH}")
     seen = set(load_json(STATE_PATH, {"ids": []})["ids"])
 
-    title_inc, title_exc, loc_inc = compile_filters(cfg)
+    title_inc, title_exc, loc_inc, loc_exc = compile_filters(cfg)
     found, errors = [], []
 
     for entry in cfg["companies"]:
@@ -507,7 +519,7 @@ def main():
             errors.append({"company": company, "error": f"{type(e).__name__}: {e}"})
             continue
 
-        hits = [j for j in jobs if matches(j, title_inc, title_exc, loc_inc)]
+        hits = [j for j in jobs if matches(j, title_inc, title_exc, loc_inc, loc_exc)]
         print(f"{company:<28} {len(jobs):>4} open  {len(hits):>3} match")
         found.extend(hits)
         time.sleep(0.4)
