@@ -8,7 +8,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  # The scanner's durable "already alerted" state is committed after each run.
+  # A GitHub Actions cache cannot be used for this: cache entries are immutable,
+  # so a fixed cache key keeps restoring an old seen.json.
+  contents: write
   pages: write
   id-token: write
 
@@ -28,11 +31,6 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - uses: actions/cache@v4
-        with:
-          path: seen.json
-          key: seen-state
-
       - name: Scan jobs and notify
         if: github.event_name != 'push'
         run: python internship_watch.py
@@ -42,6 +40,14 @@ jobs:
       - name: Scan jobs (no notify on push)
         if: github.event_name == 'push'
         run: python internship_watch.py
+
+      - name: Persist alerted-job state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f seen.json
+          git diff --cached --quiet || git commit -m "chore: update alerted job state [skip ci]"
+          git push origin HEAD:${{ github.event.repository.default_branch }}
 
       - run: python build_static.py
 

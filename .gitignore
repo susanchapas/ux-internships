@@ -5,7 +5,8 @@ data.db
 data.db-shm
 data.db-wal
 files/out/
-seen.json
+# seen.json is intentionally versioned: the scheduled GitHub Action updates it
+# so that a job is alerted once across independent workflow runners.
 _scan_results.json
 .DS_Store
 .env
