@@ -500,11 +500,14 @@ def main():
     seen = set(load_json(STATE_PATH, {"ids": []})["ids"])
 
     title_inc, title_exc, loc_inc, loc_exc = compile_filters(cfg)
-    found, errors = [], []
+    found, errors, disabled = [], [], []
 
     for entry in cfg["companies"]:
         board = entry["board"]
         company = entry.get("name", entry.get("slug", board))
+        if not entry.get("enabled", True):
+            disabled.append({"company": company, "reason": entry.get("disabled_reason", "disabled in config")})
+            continue
         try:
             if board in BOARD_FETCHERS:
                 jobs = list(BOARD_FETCHERS[board](entry["slug"], company))
@@ -529,6 +532,11 @@ def main():
         for e in errors:
             print(f"  - {e['company']}: {e['error']}")
 
+    if disabled:
+        print(f"\nskipped {len(disabled)} disabled source{'s' if len(disabled) != 1 else ''}:")
+        for entry in disabled:
+            print(f"  - {entry['company']}: {entry['reason']}")
+
     hidden = set(load_json(HIDDEN_PATH, []))
     new = [j for j in found if j["id"] not in seen and j["id"] not in hidden]
     print(f"\n{len(found)} matches, {len(new)} new")
@@ -552,7 +560,8 @@ def main():
         )
 
     (HERE / "_scan_results.json").write_text(json.dumps({
-        "jobs": found, "errors": errors, "companies_scanned": len(cfg["companies"]),
+        "jobs": found, "errors": errors, "disabled": disabled,
+        "companies_scanned": len(cfg["companies"]) - len(disabled),
     }, default=str))
 
 

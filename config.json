@@ -226,7 +226,9 @@
     {
       "board": "greenhouse",
       "slug": "atlassian",
-      "name": "Atlassian"
+      "name": "Atlassian",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "ashby",
@@ -321,8 +323,8 @@
       "name": "BuzzFeed"
     },
     {
-      "board": "greenhouse",
-      "slug": "canva",
+      "board": "smartrecruiters",
+      "slug": "Canva",
       "name": "Canva"
     },
     {
@@ -413,7 +415,7 @@
     },
     {
       "board": "greenhouse",
-      "slug": "compassinc",
+      "slug": "compassindia",
       "name": "Compass"
     },
     {
@@ -422,7 +424,9 @@
       "tenant": "condenast",
       "wd": 5,
       "site": "CondeCareers",
-      "search": "intern"
+      "search": "intern",
+      "enabled": false,
+      "disabled_reason": "Workday endpoint now rejects the public search request (HTTP 422); re-verify its current API contract."
     },
     {
       "board": "greenhouse",
@@ -512,12 +516,16 @@
     {
       "board": "greenhouse",
       "slug": "docusign",
-      "name": "DocuSign"
+      "name": "DocuSign",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "greenhouse",
       "slug": "doordash",
-      "name": "DoorDash"
+      "name": "DoorDash",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "greenhouse",
@@ -611,7 +619,9 @@
     {
       "board": "greenhouse",
       "slug": "grammarly",
-      "name": "Grammarly"
+      "name": "Grammarly",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "greenhouse",
@@ -626,7 +636,9 @@
     {
       "board": "greenhouse",
       "slug": "headspace",
-      "name": "Headspace"
+      "name": "Headspace",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "greenhouse",
@@ -781,7 +793,9 @@
     {
       "board": "greenhouse",
       "slug": "marqeta",
-      "name": "Marqeta"
+      "name": "Marqeta",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site now serves openings through a custom integration."
     },
     {
       "board": "greenhouse",
@@ -934,7 +948,9 @@
     {
       "board": "greenhouse",
       "slug": "noom",
-      "name": "Noom"
+      "name": "Noom",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "smartrecruiters",
@@ -1169,7 +1185,9 @@
     {
       "board": "greenhouse",
       "slug": "shopify",
-      "name": "Shopify"
+      "name": "Shopify",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses an Ashby-backed custom integration."
     },
     {
       "board": "greenhouse",
@@ -1201,7 +1219,7 @@
     },
     {
       "board": "greenhouse",
-      "slug": "springhealth",
+      "slug": "springhealth66",
       "name": "Spring Health"
     },
     {
@@ -1341,7 +1359,9 @@
     {
       "board": "lever",
       "slug": "varomoney",
-      "name": "Varo"
+      "name": "Varo",
+      "enabled": false,
+      "disabled_reason": "Retired Lever board; re-verify the current careers-site API before re-enabling."
     },
     {
       "board": "greenhouse",
@@ -1381,7 +1401,9 @@
     {
       "board": "greenhouse",
       "slug": "warbyparker",
-      "name": "Warby Parker"
+      "name": "Warby Parker",
+      "enabled": false,
+      "disabled_reason": "Retired Greenhouse board; careers site uses a custom ATS."
     },
     {
       "board": "workday",

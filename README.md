@@ -13,6 +13,24 @@ python internship_watch.py --seed        # mark everything currently open as "se
 python internship_watch.py               # from here on, only new stuff notifies
 ```
 
+### Retired career-board URLs
+
+ATS providers and companies regularly change board identifiers. A company entry
+can be temporarily excluded without making a scan fail:
+
+```json
+{
+  "board": "greenhouse",
+  "slug": "old-board",
+  "name": "Example",
+  "enabled": false,
+  "disabled_reason": "Career site moved to an unsupported ATS; re-verify before re-enabling."
+}
+```
+
+The scan reports these separately as skipped, not as HTTP errors. Re-enable an
+entry only after validating its new API endpoint.
+
 Then drop `watch.yml` into `.github/workflows/` in a **private** repo and add your secrets under
 Settings → Secrets and variables → Actions. Free tier covers this easily.
 
