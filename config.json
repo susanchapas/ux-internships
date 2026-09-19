@@ -1339,6 +1339,241 @@
       "name": "Upstart"
     },
     {
+      "board": "jsonld",
+      "slug": "https://amazon.jobs",
+      "name": "Amazon"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://jobs.apple.com",
+      "name": "Apple"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.audiblecareers.com",
+      "name": "Audible"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.archgroup.com",
+      "name": "Arch Capital Group"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://egug.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1",
+      "name": "American Express"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.bloomberg.com/company/careers/",
+      "name": "Bloomberg LP"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.borngroup.com/careers",
+      "name": "BORN Group"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://jobs.bnymellon.com",
+      "name": "BNY Mellon"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.cityblock.com/careers",
+      "name": "Cityblock Health"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.dtcc.com",
+      "name": "DTCC"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.dowjones.com/careers/",
+      "name": "Dow Jones / WSJ"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.ey.com",
+      "name": "EY Design Studio"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.factset.com",
+      "name": "FactSet"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://flatiron.com/careers/",
+      "name": "Flatiron Health"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.frog.co/careers",
+      "name": "Frog"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://higher.gs.com",
+      "name": "Goldman Sachs"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.google.com",
+      "name": "Google"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.ibm.com",
+      "name": "IBM"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001",
+      "name": "JPMorgan Chase"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.klarna.com/careers/",
+      "name": "Klarna"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.lseg.com/en/careers",
+      "name": "LSEG / Refinitiv"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.lordabbett.com",
+      "name": "Lord Abbett"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.marketaxess.com/careers",
+      "name": "MarketAxess"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.mars.com",
+      "name": "Mars Digital Hub"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://metacareers.com",
+      "name": "Meta"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.microsoft.com",
+      "name": "Microsoft"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://monday.com/careers",
+      "name": "Monday.com"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://career8.successfactors.com/career?career_company=MoodysProd",
+      "name": "Moody's"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.nice.com/careers",
+      "name": "NICE Actimize"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.pega.com/about/careers",
+      "name": "Pegasystems"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.ro.co/careers/",
+      "name": "Ro"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.servicenow.com",
+      "name": "ServiceNow"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://jobs.siemens.com",
+      "name": "Siemens"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.sprinklr.com/careers/",
+      "name": "Sprinklr"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.thoughtworks.com/careers",
+      "name": "Thoughtworks"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.tradeweb.com/careers/",
+      "name": "Tradeweb"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.twosigma.com/careers/",
+      "name": "Two Sigma"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.ubs.com/global/en/careers.html",
+      "name": "UBS"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.usertesting.com/careers",
+      "name": "UserTesting"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://uber.com/careers",
+      "name": "Uber"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.verisk.com/careers/",
+      "name": "Verisk Analytics"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://vimeo.com/careers",
+      "name": "Vimeo"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.wiley.com",
+      "name": "Wiley"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://careers.walmart.com",
+      "name": "Walmart eCommerce"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://work.co/careers/",
+      "name": "Work & Co"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://jobs.zendesk.com",
+      "name": "Zendesk"
+    },
+    {
+      "board": "jsonld",
+      "slug": "https://www.zocdoc.com/about/careers/",
+      "name": "Zocdoc"
+    },
+    {
       "board": "usajobs",
       "keyword": "intern",
       "name": "US Federal",

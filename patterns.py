@@ -21,7 +21,7 @@ import requests
 
 from internship_watch import (
     load_json, compile_filters, matches,
-    fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters,
+    fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters, fetch_jsonld,
     fetch_workday, fetch_usajobs,
     CONFIG_PATH, TIMEOUT,
 )
@@ -363,6 +363,14 @@ class SmartRecruitersFetcher(Fetcher):
         return list(fetch_smartrecruiters(self.slug, self.company))
 
 
+class JsonLdFetcher(Fetcher):
+    def __init__(self, url, company):
+        self.url, self.company = url, company
+
+    def fetch(self):
+        return list(fetch_jsonld(self.url, self.company))
+
+
 class WorkdayFetcher(Fetcher):
     def __init__(self, cfg, company):
         self.cfg, self.company = cfg, company
@@ -387,6 +395,7 @@ class FetcherFactory:
         "lever": LeverFetcher,
         "ashby": AshbyFetcher,
         "smartrecruiters": SmartRecruitersFetcher,
+        "jsonld": JsonLdFetcher,
     }
 
     @classmethod

@@ -11,6 +11,7 @@ State lives in seen.json. Config lives in config.json.
 """
 
 import argparse
+import hashlib
 import json
 import os
 
@@ -21,7 +22,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import quote, urlencode
+from urllib.parse import quote, urlencode, urljoin
 
 import html as htmlmod
 
@@ -271,12 +272,78 @@ def fetch_workable(slug, company):
         }
 
 
+def fetch_jsonld(url, company):
+    """Fetch JobPosting objects embedded on a public careers page.
+
+    This is a conservative fallback for employers whose ATS has no supported
+    public API.  A page with no JobPosting schema simply yields no jobs.
+    """
+    r = requests.get(url, headers=UA, timeout=TIMEOUT)
+    r.raise_for_status()
+    blocks = re.findall(
+        r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+        r.text, re.S | re.I,
+    )
+
+    def walk(value):
+        if isinstance(value, list):
+            for item in value:
+                yield from walk(item)
+        elif isinstance(value, dict):
+            if "@graph" in value:
+                yield from walk(value["@graph"])
+            else:
+                yield value
+
+    for block in blocks:
+        try:
+            data = json.loads(htmlmod.unescape(block.strip()))
+        except (json.JSONDecodeError, TypeError):
+            continue
+        for job in walk(data):
+            if "JobPosting" not in str(job.get("@type", "")):
+                continue
+            locations = job.get("jobLocation") or []
+            if not isinstance(locations, list):
+                locations = [locations]
+            location_parts = []
+            for loc in locations:
+                address = loc.get("address", {}) if isinstance(loc, dict) else {}
+                if isinstance(address, list):
+                    address = address[0] if address else {}
+                if isinstance(address, dict):
+                    location_parts.append(
+                        ", ".join(str(address.get(key, "")) for key in
+                                  ("addressLocality", "addressRegion", "addressCountry")
+                                  if address.get(key))
+                    )
+            if job.get("jobLocationType") == "TELECOMMUTE":
+                location_parts.append("Remote")
+            title = job.get("title", "")
+            job_url = urljoin(r.url, job.get("url") or url)
+            key = hashlib.sha256(f"{job_url}|{title}|{job.get('datePosted', '')}".encode()).hexdigest()[:16]
+            salary = job.get("baseSalary") or ""
+            if isinstance(salary, dict):
+                salary = json.dumps(salary, sort_keys=True)
+            yield {
+                "id": f"ld:{key}",
+                "title": title,
+                "location": "; ".join(part for part in location_parts if part),
+                "url": job_url,
+                "company": company,
+                "source": "jsonld",
+                "pay": str(salary),
+                "posted_at": job.get("datePosted", ""),
+            }
+
+
 BOARD_FETCHERS = {
     "greenhouse": fetch_greenhouse,
     "lever": fetch_lever,
     "ashby": fetch_ashby,
     "smartrecruiters": fetch_smartrecruiters,
     "workable": fetch_workable,
+    "jsonld": fetch_jsonld,
 }
 
 
