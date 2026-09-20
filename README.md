@@ -15,6 +15,11 @@ python internship_watch.py --seed        # mark everything currently open as "se
 python internship_watch.py               # from here on, only new stuff notifies
 ```
 
+Scans fetch 16 company sources concurrently by default, then pause briefly
+between batches. Tune this for a slower connection or more conservative source
+load with `python internship_watch.py --batch-size 4` (use `1` for serial
+scanning). You can also set `"scan_batch_size"` in `config.json`.
+
 ### Retired career-board URLs
 
 ATS providers and companies regularly change board identifiers. A company entry

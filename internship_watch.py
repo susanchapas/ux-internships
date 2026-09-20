@@ -14,6 +14,7 @@ import argparse
 import hashlib
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -36,6 +37,8 @@ HIDDEN_PATH = HERE / "hidden.json"
 
 UA = {"User-Agent": "internship-watch/1.0 (personal job search tool)"}
 TIMEOUT = 20
+DEFAULT_BATCH_SIZE = 16
+BETWEEN_BATCH_DELAY = 0.2
 DASHBOARD_URL = "https://susanchapas.github.io/ux-internships/"
 
 PAY_RE = re.compile(
@@ -711,11 +714,38 @@ def load_json(path, default):
     return default
 
 
+def fetch_company(entry):
+    """Fetch one source, returning an error instead of stopping the scan.
+
+    This function deliberately performs a single company's requests in order.
+    The caller runs different companies concurrently in bounded batches, so
+    pagination and the Workday search-term sequence remain gentle per source.
+    """
+    board = entry["board"]
+    company = entry.get("name", entry.get("slug", board))
+    try:
+        if board in BOARD_FETCHERS:
+            jobs = list(BOARD_FETCHERS[board](entry["slug"], company))
+        elif board == "workday":
+            jobs = list(fetch_workday(entry, company))
+        elif board == "usajobs":
+            jobs = list(fetch_usajobs(entry))
+        else:
+            return company, None, f"unknown board '{board}'"
+    except Exception as e:
+        return company, None, f"{type(e).__name__}: {e}"
+    return company, jobs, ""
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--seed", action="store_true", help="mark all current postings as seen")
     ap.add_argument("--remind", action="store_true", help="send Discord reminders for saved applications")
+    ap.add_argument(
+        "--batch-size", type=int, default=None,
+        help=f"number of company sources to fetch concurrently (default: {DEFAULT_BATCH_SIZE})",
+    )
     args = ap.parse_args()
 
     if args.remind:
@@ -727,6 +757,9 @@ def main():
     cfg = load_json(CONFIG_PATH, None)
     if cfg is None:
         sys.exit(f"missing {CONFIG_PATH}")
+    batch_size = args.batch_size if args.batch_size is not None else cfg.get("scan_batch_size", DEFAULT_BATCH_SIZE)
+    if batch_size < 1:
+        ap.error("--batch-size must be at least 1")
     state = load_json(STATE_PATH, {"ids": []})
     seen = set(state["ids"])
     prior_fingerprints = state.get("fingerprints", {})
@@ -751,41 +784,41 @@ def main():
         except Exception as e:
             errors.append({"company": watch["name"], "error": f"page watch {type(e).__name__}: {e}"})
 
+    enabled_entries = []
     for entry in cfg["companies"]:
-        board = entry["board"]
-        company = entry.get("name", entry.get("slug", board))
+        company = entry.get("name", entry.get("slug", entry["board"]))
         if not entry.get("enabled", True):
             disabled.append({"company": company, "reason": entry.get("disabled_reason", "disabled in config")})
             continue
-        try:
-            if board in BOARD_FETCHERS:
-                jobs = list(BOARD_FETCHERS[board](entry["slug"], company))
-            elif board == "workday":
-                jobs = list(fetch_workday(entry, company))
-            elif board == "usajobs":
-                jobs = list(fetch_usajobs(entry))
-            else:
-                errors.append({"company": company, "error": f"unknown board '{board}'"})
-                continue
-        except Exception as e:
-            errors.append({"company": company, "error": f"{type(e).__name__}: {e}"})
-            source_status[company] = {"count": None, "error": f"{type(e).__name__}: {e}"}
-            continue
+        enabled_entries.append(entry)
 
-        source_status[company] = {"count": len(jobs), "error": ""}
-        hits = []
-        for job in jobs:
-            lane = classify_match(
-                job, title_inc, title_exc, loc_inc, loc_exc,
-                description_inc, adjacent_inc, early_career_inc,
-                cfg.get("allow_all_remote", False),
-            )
-            if lane:
-                job["match_lane"] = lane
-                hits.append(job)
-        print(f"{company:<28} {len(jobs):>4} open  {len(hits):>3} match")
-        found.extend(hits)
-        time.sleep(0.4)
+    print(f"scanning {len(enabled_entries)} sources in batches of {batch_size}")
+    for start in range(0, len(enabled_entries), batch_size):
+        batch = enabled_entries[start:start + batch_size]
+        # executor.map preserves config order, keeping console output stable.
+        with ThreadPoolExecutor(max_workers=len(batch)) as executor:
+            results = executor.map(fetch_company, batch)
+            for company, jobs, error in results:
+                if error:
+                    errors.append({"company": company, "error": error})
+                    source_status[company] = {"count": None, "error": error}
+                    continue
+
+                source_status[company] = {"count": len(jobs), "error": ""}
+                hits = []
+                for job in jobs:
+                    lane = classify_match(
+                        job, title_inc, title_exc, loc_inc, loc_exc,
+                        description_inc, adjacent_inc, early_career_inc,
+                        cfg.get("allow_all_remote", False),
+                    )
+                    if lane:
+                        job["match_lane"] = lane
+                        hits.append(job)
+                print(f"{company:<28} {len(jobs):>4} open  {len(hits):>3} match")
+                found.extend(hits)
+        if start + batch_size < len(enabled_entries):
+            time.sleep(BETWEEN_BATCH_DELAY)
 
     if errors:
         print("\nerrors:")
