@@ -10,7 +10,7 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 
 from internship_watch import (
-    load_json, compile_filters, matches, CONFIG_PATH, HIDDEN_PATH,
+    load_json, compile_filters, compile_discovery_filters, classify_match, CONFIG_PATH, HIDDEN_PATH,
     fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters,
     fetch_workday, fetch_usajobs, BOARD_FETCHERS,
 )
@@ -21,6 +21,7 @@ from schemas import UserCreate, UserRead
 
 HERE = Path(__file__).parent
 DASHBOARD = HERE / "dashboard.html"
+EARLY_CAREER_SOURCES = HERE / "early_career_sources.json"
 
 LEVEL_RULES = [
     ("intern",     re.compile(r"\bintern(?:ship)?\b|\bco-?op\b|\bextern(?:ship)?\b|\btrainee\b|\bpracticum\b", re.I)),
@@ -288,7 +289,13 @@ class Handler(BaseHTTPRequestHandler):
         HIDDEN_PATH.write_text(json.dumps(sorted(db.get_hidden_ids()), indent=1))
 
     def _serve_dashboard(self):
-        html = DASHBOARD.read_bytes()
+        sources = load_json(EARLY_CAREER_SOURCES, {"sources": []})
+        source_script = (
+            "<script>const EARLY_CAREER_SOURCES = "
+            + json.dumps(sources.get("sources", []))
+            + ";</script>\n<script>/* STATIC_INJECT */"
+        )
+        html = DASHBOARD.read_text().replace("<script>/* STATIC_INJECT */", source_script, 1).encode()
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(html)))
@@ -312,7 +319,8 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         seen = db.get_seen_ids()
-        title_inc, title_exc, loc_inc = compile_filters(cfg)
+        title_inc, title_exc, loc_inc, loc_exc = compile_filters(cfg)
+        description_inc, adjacent_inc, early_career_inc = compile_discovery_filters(cfg)
         companies = cfg["companies"]
         total_matches = 0
         total_new = 0
@@ -338,7 +346,12 @@ class Handler(BaseHTTPRequestHandler):
                 error_count += 1
                 continue
 
-            hits = [j for j in jobs if matches(j, title_inc, title_exc, loc_inc)]
+            hits = []
+            for job in jobs:
+                lane = classify_match(job, title_inc, title_exc, loc_inc, loc_exc, description_inc, adjacent_inc, early_career_inc, cfg.get("allow_all_remote", False))
+                if lane:
+                    job["match_lane"] = lane
+                    hits.append(job)
             for h in hits:
                 h["is_new"] = h["id"] not in seen
                 classify(h)

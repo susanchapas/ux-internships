@@ -20,8 +20,8 @@ from urllib.parse import quote
 import requests
 
 from internship_watch import (
-    load_json, compile_filters, matches,
-    fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters, fetch_jsonld,
+    load_json, compile_filters, compile_discovery_filters, classify_match, matches,
+    fetch_greenhouse, fetch_lever, fetch_ashby, fetch_smartrecruiters, fetch_jsonld_with_fallback,
     fetch_workday, fetch_usajobs,
     CONFIG_PATH, TIMEOUT,
 )
@@ -107,7 +107,12 @@ class DiscordObserver(JobObserver):
     EMBED_COLOR = 0x5865F2
     DASHBOARD = "https://susanchapas.github.io/ux-internships/"
     _ALERT_RE = re.compile(
-        r"\bintern\b|\bapprentice|\bfellow\b|\bfellowship\b|\bstudent\b", re.I,
+        r"\bintern\b|\bapprentice\b|\bfellow(?:ship)?\b|\bstudent\b"
+        r"|\bco-?op\b|\bcooperative education\b|\bsummer\s+(?:analyst|associate|scholar|intern)\b"
+        r"|\bearly[- ](?:career|talent)\b|\bemerging talent\b|\bnew[- ]grad\b"
+        r"|\bundergraduate\b|\bundergrad\b|\bgraduate\b|\bpostgrad\b"
+        r"|\btrainee\b|\bextern\b|\bresiden(?:cy)?\b|\bpracticum\b|\bpathways\b",
+        re.I,
     )
 
     def __init__(self):
@@ -255,9 +260,17 @@ class DefaultFilterStrategy(FilterStrategy):
 
     def __init__(self, cfg):
         self._title_inc, self._title_exc, self._loc_inc, self._loc_exc = compile_filters(cfg)
+        self._description_inc, self._adjacent_inc, self._early_career_inc = compile_discovery_filters(cfg)
+        self._allow_all_remote = cfg.get("allow_all_remote", False)
 
     def apply(self, jobs):
-        return [j for j in jobs if matches(j, self._title_inc, self._title_exc, self._loc_inc, self._loc_exc)]
+        hits = []
+        for job in jobs:
+            lane = classify_match(job, self._title_inc, self._title_exc, self._loc_inc, self._loc_exc, self._description_inc, self._adjacent_inc, self._early_career_inc, self._allow_all_remote)
+            if lane:
+                job["match_lane"] = lane
+                hits.append(job)
+        return hits
 
     @property
     def name(self):
@@ -268,11 +281,34 @@ class UXOnlyFilterStrategy(FilterStrategy):
     """Strict filter: title must mention a UX discipline."""
 
     _UX = re.compile(
-        r"\bUX\b|\bUI\b|user experience|user interface|product design"
-        r"|interaction design|usability|human factors|accessibility"
-        r"|information architecture|service design|\bHCI\b|visual design"
-        r"|brand design|content strateg|digital strateg|design research|\bUXR\b"
-        r"|\btechnolog.*\b(?:intern|co-?op\b|fellow|apprentice)",
+        r"\bUX\b|\bUI\b|user experience|user interface|user research|customer research"
+        r"|customer experience|product design|product experience|interaction design"
+        r"|experience design|experience architecture|human-centered design|inclusive design"
+        r"|usability|user testing|human factors|accessibility|information architecture"
+        r"|information design|service design|\bHCI\b|visual design|communication design"
+        r"|brand design|content strateg|content design|content writing|UX writing"
+        r"|conversation design|conversational design|digital strateg|design strateg"
+        r"|experience strateg|product strateg|customer strateg|service strateg"
+        r"|innovation strateg|journey strateg|customer journey|digital transformation"
+        r"|design research|design system|design ops|design operations|design program"
+        r"|design management|experience operations|product operations|research ops"
+        r"|research operations|consumer insights|customer insights|human insights"
+        r"|behavioral insights|ethnograph|voice of customer|\bVOC\b|design technolog"
+        r"|creative technolog|\bUXR\b|UX research|\bCX\b|motion design|prototyp"
+        r"|\ba11y\b|assistive tech|assistive technology|universal design|digital accessibility"
+        r"|accessible design|design engineer|design engineering|creative developer"
+        r"|creative development|creative code|creative coding|UX engineer|UX engineering"
+        r"|UX developer|UI engineer|UI developer|web design|web designer|front-?end design"
+        r"|qualitative research|quantitative UX|quant.*UX|mixed[- ]methods research"
+        r"|mixed[- ]methods researcher|behavioral science|behavioral research|behavioral design"
+        r"|decision science|human[- ]?computer interaction|ergonomics|user insights"
+        r"|consumer research|shopper insights|member insights|interactive design"
+        r"|interactive designer|spatial design|spatial computing|spatial experience|XR design"
+        r"|AR/VR design|virtual reality design|augmented reality design|voice UX|voice design"
+        r"|\bVUI\b|multimodal design|multimodal interaction|human[- ]AI|human-centered AI"
+        r"|AI interaction|AI UX|experience architect|information architect|UX architect"
+        r"|UI architect|systems design|system designer|digital product"
+        r"|\btechnolog.*\b(?:intern|co-?op\b|fellow|apprentice|trainee|placement|extern|residen|student program|early careers)",
         re.I,
     )
 
@@ -368,7 +404,7 @@ class JsonLdFetcher(Fetcher):
         self.url, self.company = url, company
 
     def fetch(self):
-        return list(fetch_jsonld(self.url, self.company))
+        return list(fetch_jsonld_with_fallback(self.url, self.company))
 
 
 class WorkdayFetcher(Fetcher):

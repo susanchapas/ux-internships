@@ -4,6 +4,8 @@
 
 Polls company ATS APIs on a schedule, pushes you a notification when a new posting matches your filters. Includes an interactive REPL for scanning, filtering, and tracking applications.
 
+The ATS scanner is complemented by [`early_career_sources.json`](early_career_sources.json): a curated set of student-program and internship pages with named pipelines and application-cycle context. These pages appear in the dashboard’s **Program & Manual Checks** card; they supplement, rather than replace, broad ATS scans.
+
 ## Setup
 
 ```bash

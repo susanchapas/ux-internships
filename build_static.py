@@ -9,13 +9,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from internship_watch import (
-    load_json, compile_filters, matches, CONFIG_PATH,
+    load_json, compile_filters, compile_discovery_filters, classify_match, CONFIG_PATH,
     BOARD_FETCHERS, fetch_workday, fetch_usajobs,
 )
 
 HERE = Path(__file__).parent
 DASHBOARD = HERE / "dashboard.html"
 OUT_DIR = HERE / "_site"
+EARLY_CAREER_SOURCES = HERE / "early_career_sources.json"
 
 LEVEL_RULES = [
     ("intern",     re.compile(r"\bintern(?:ship)?\b|\bco-?op\b|\bextern(?:ship)?\b|\btrainee\b|\bpracticum\b", re.I)),
@@ -73,7 +74,8 @@ def run_scan():
     if cfg is None:
         sys.exit("missing config.json")
 
-    title_inc, title_exc, loc_inc = compile_filters(cfg)
+    title_inc, title_exc, loc_inc, loc_exc = compile_filters(cfg)
+    description_inc, adjacent_inc, early_career_inc = compile_discovery_filters(cfg)
     all_jobs = []
     errors = []
 
@@ -96,7 +98,12 @@ def run_scan():
             print(f"    ERROR: {e}")
             continue
 
-        hits = [j for j in jobs if matches(j, title_inc, title_exc, loc_inc)]
+        hits = []
+        for job in jobs:
+            lane = classify_match(job, title_inc, title_exc, loc_inc, loc_exc, description_inc, adjacent_inc, early_career_inc, cfg.get("allow_all_remote", False))
+            if lane:
+                job["match_lane"] = lane
+                hits.append(job)
         for h in hits:
             h["is_new"] = False
             classify(h)
@@ -122,10 +129,17 @@ def build():
 
     cfg = load_json(CONFIG_PATH, None)
     config_json = json.dumps(cfg)
+    early_career = load_json(EARLY_CAREER_SOURCES, {"sources": []})
+    early_career_json = json.dumps(early_career.get("sources", []))
 
     html = DASHBOARD.read_text()
 
-    static_inject = f"<script>const STATIC_DATA = {static_data};\nconst STATIC_CONFIG = {config_json};</script>\n<script>/* STATIC_INJECT */"
+    static_inject = (
+        f"<script>const STATIC_DATA = {static_data};\n"
+        f"const STATIC_CONFIG = {config_json};\n"
+        f"const EARLY_CAREER_SOURCES = {early_career_json};</script>\n"
+        "<script>/* STATIC_INJECT */"
+    )
     html = html.replace("<script>/* STATIC_INJECT */", static_inject, 1)
 
     OUT_DIR.mkdir(exist_ok=True)

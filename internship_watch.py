@@ -27,6 +27,7 @@ from urllib.parse import quote, urlencode, urljoin
 import html as htmlmod
 
 import requests
+from extractors import fetch_bamboohr, fetch_recruitee, fetch_eightfold, page_fingerprint
 
 HERE = Path(__file__).parent
 CONFIG_PATH = HERE / "config.json"
@@ -73,6 +74,7 @@ def fetch_greenhouse(slug, company):
             "company": company,
             "source": "greenhouse",
             "pay": extract_pay(j.get("content", "")),
+            "description": j.get("content", "") or "",
             "posted_at": j.get("updated_at", ""),
         }
 
@@ -98,6 +100,7 @@ def fetch_lever(slug, company):
             "company": company,
             "source": "lever",
             "pay": extract_pay(text_blob),
+            "description": text_blob,
             "posted_at": (datetime.fromtimestamp(j["createdAt"] / 1000, tz=timezone.utc).isoformat()
                           if j.get("createdAt") else ""),
             "commitment": cats.get("commitment", ""),
@@ -119,6 +122,7 @@ def fetch_ashby(slug, company):
             "company": company,
             "source": "ashby",
             "pay": comp or extract_pay(desc),
+            "description": desc,
             "posted_at": j.get("publishedAt", ""),
             "employment_type": j.get("employmentType", ""),
         }
@@ -152,7 +156,8 @@ def fetch_smartrecruiters(slug, company):
                 "url": f"https://jobs.smartrecruiters.com/{slug}/{j.get('id')}",
                 "company": company,
                 "source": "smartrecruiters",
-                "pay": pay,
+            "pay": pay,
+            "description": " ".join(str(j.get(k, "")) for k in ("jobAd", "jobAdText", "description")),
                 "posted_at": j.get("releasedDate", ""),
             }
         offset += page
@@ -170,43 +175,56 @@ def fetch_workday(cfg, company):
     tenant, wd, site = cfg["tenant"], cfg.get("wd", 5), cfg["site"]
     base = f"https://{tenant}.wd{wd}.myworkdayjobs.com"
     endpoint = f"{base}/wday/cxs/{tenant}/{site}/jobs"
-    offset = 0
-    while True:
-        body = {
-            "appliedFacets": {},
-            "limit": 20,
-            "offset": offset,
-            "searchText": cfg.get("search", "intern"),
-        }
-        r = requests.post(
-            endpoint,
-            json=body,
-            headers={**UA, "Accept": "application/json", "Content-Type": "application/json"},
-            timeout=TIMEOUT,
-        )
-        r.raise_for_status()
-        data = r.json()
-        posts = data.get("jobPostings", [])
-        for j in posts:
-            path = j.get("externalPath", "")
-            pay = ""
-            sal = j.get("compensationAmount") or j.get("salaryAmount") or ""
-            if sal:
-                pay = str(sal)
-            yield {
-                "id": f"wd:{tenant}:{path}",
-                "title": j.get("title", ""),
-                "location": j.get("locationsText", "") or "",
-                "url": f"{base}/en-US/{site}{path}",
-                "company": company,
-                "source": "workday",
-                "pay": pay,
-                "posted_at": j.get("postedOn", ""),
+    # Workday only supports one free-text query per request. Query the common
+    # early-career names so a board that calls its roles "placements" or
+    # "fellowships" is not invisible to an internship-only search.
+    queries = cfg.get("search_terms") or [
+        cfg.get("search", "intern"), "co-op", "fellowship", "apprentice",
+        "trainee", "placement", "extern", "residency", "student",
+    ]
+    emitted = set()
+    for query in dict.fromkeys(q for q in queries if q):
+        offset = 0
+        while True:
+            body = {
+                "appliedFacets": {},
+                "limit": 20,
+                "offset": offset,
+                "searchText": query,
             }
-        offset += 20
-        if offset >= data.get("total", 0) or not posts:
-            break
-        time.sleep(0.4)
+            r = requests.post(
+                endpoint,
+                json=body,
+                headers={**UA, "Accept": "application/json", "Content-Type": "application/json"},
+                timeout=TIMEOUT,
+            )
+            r.raise_for_status()
+            data = r.json()
+            posts = data.get("jobPostings", [])
+            for j in posts:
+                path = j.get("externalPath", "")
+                if path in emitted:
+                    continue
+                emitted.add(path)
+                pay = ""
+                sal = j.get("compensationAmount") or j.get("salaryAmount") or ""
+                if sal:
+                    pay = str(sal)
+                yield {
+                    "id": f"wd:{tenant}:{path}",
+                    "title": j.get("title", ""),
+                    "location": j.get("locationsText", "") or "",
+                    "url": f"{base}/en-US/{site}{path}",
+                    "company": company,
+                    "source": "workday",
+                    "pay": pay,
+                    "description": " ".join(str(j.get(k, "")) for k in ("bulletFields", "externalDescription", "jobDescription")),
+                    "posted_at": j.get("postedOn", ""),
+                }
+            offset += 20
+            if offset >= data.get("total", 0) or not posts:
+                break
+            time.sleep(0.4)
 
 
 def fetch_usajobs(cfg, company="US Federal Government"):
@@ -333,8 +351,64 @@ def fetch_jsonld(url, company):
                 "company": company,
                 "source": "jsonld",
                 "pay": str(salary),
+                "description": job.get("description", "") or "",
                 "posted_at": job.get("datePosted", ""),
             }
+
+
+def fetch_hydration_jobs(url, company):
+    """Best-effort fallback for Next.js career pages without JSON-LD.
+
+    It only accepts objects that look like a job (a title plus a URL/id), so
+    generic page cards are not turned into postings.
+    """
+    r = requests.get(url, headers=UA, timeout=TIMEOUT)
+    r.raise_for_status()
+    m = re.search(r'<script[^>]*id=["\']__NEXT_DATA__["\'][^>]*>(.*?)</script>', r.text, re.S | re.I)
+    if not m:
+        return
+    try:
+        payload = json.loads(htmlmod.unescape(m.group(1)).strip())
+    except (json.JSONDecodeError, TypeError):
+        return
+
+    def walk(value):
+        if isinstance(value, dict):
+            yield value
+            for child in value.values():
+                yield from walk(child)
+        elif isinstance(value, list):
+            for child in value:
+                yield from walk(child)
+
+    seen = set()
+    for item in walk(payload):
+        title = item.get("title") or item.get("name") or item.get("text")
+        path = item.get("absolute_url") or item.get("absoluteUrl") or item.get("jobUrl") or item.get("url") or item.get("externalPath")
+        identifier = item.get("id") or item.get("jobId") or path
+        if not isinstance(title, str) or not title.strip() or not identifier or not path:
+            continue
+        job_url = urljoin(r.url, str(path))
+        key = f"hydr:{hashlib.sha256(str(identifier).encode()).hexdigest()[:16]}"
+        if key in seen:
+            continue
+        seen.add(key)
+        location = item.get("location") or item.get("locationsText") or ""
+        description = item.get("description") or item.get("descriptionHtml") or ""
+        yield {
+            "id": key, "title": title.strip(), "location": str(location),
+            "url": job_url, "company": company, "source": "hydration",
+            "description": str(description), "pay": extract_pay(str(description)),
+            "posted_at": item.get("datePosted") or item.get("postedOn") or "",
+        }
+
+
+def fetch_jsonld_with_fallback(url, company):
+    jobs = list(fetch_jsonld(url, company))
+    if jobs:
+        yield from jobs
+        return
+    yield from fetch_hydration_jobs(url, company)
 
 
 BOARD_FETCHERS = {
@@ -343,7 +417,10 @@ BOARD_FETCHERS = {
     "ashby": fetch_ashby,
     "smartrecruiters": fetch_smartrecruiters,
     "workable": fetch_workable,
-    "jsonld": fetch_jsonld,
+    "bamboohr": fetch_bamboohr,
+    "recruitee": fetch_recruitee,
+    "eightfold": fetch_eightfold,
+    "jsonld": fetch_jsonld_with_fallback,
 }
 
 
@@ -358,7 +435,37 @@ def compile_filters(cfg):
     return title_inc, title_exc, loc_inc, loc_exc
 
 
-_REMOTE_RE = re.compile(r"\bremote\b|\bhybrid\b", re.I)
+def compile_discovery_filters(cfg):
+    """Compile additive lanes; core title matching remains unchanged."""
+    description_inc = re.compile(cfg.get("description_include", "(?!)"), re.I)
+    adjacent_inc = re.compile(cfg.get("adjacent_title_include", "(?!)"), re.I)
+    early_career_inc = re.compile(cfg.get("early_career_include", "(?!)"), re.I)
+    return description_inc, adjacent_inc, early_career_inc
+
+
+_CORE_UX_RE = re.compile(
+    r"\bUX\b|\bUI\b|\buser experience|\buser interface|\buser research"
+    r"|\bproduct design|\binteraction design|\binteractive design"
+    r"|\bexperience design|\bhuman-centered design|\binclusive design"
+    r"|\baccessibility\b|\ba11y\b|\busability\b|\bHCI\b|\bUXR\b"
+    r"|\bdesign research|\bdesign system|\bcontent design|\bUX writing"
+    r"|\bdesign engineer|\bdesign engineering|\bcreative developer|\bcreative development"
+    r"|\bUX engineer|\bUX developer|\bUI engineer|\bUI developer",
+    re.I,
+)
+
+_DOMAIN_EXCLUDE_RE = re.compile(
+    r"\bsales\b|\brecruiting\b|\brecruiter\b|\btalent acquisition\b|\bclinical\b"
+    r"|\bhuman resources\b|\bhr\b|\blegal\b|\bcompliance\b|\baudit\b|\baccounting\b"
+    r"|\bsupply chain\b|\bdata science\b|\bdata scientist\b|\bmachine learning\b|\bdata analyst\b"
+    r"|\bequity research\b|\bcredit research\b",
+    re.I,
+)
+
+_REMOTE_RE = re.compile(
+    r"\bremote\b|\bhybrid\b|\bvirtual\b|\btelecommute\b|\btelecommuting\b|\bwork from home\b|\bwfh\b|\banywhere\b|\bdistributed\b",
+    re.I,
+)
 _US_RE = re.compile(r"\bUS\b|\bU\.S\b|\bUSA\b|\bunited states\b", re.I)
 
 
@@ -368,7 +475,16 @@ def matches(job, title_inc, title_exc, loc_inc, loc_exc=None):
     if not title_inc.search(title):
         return False
     if title_exc and title_exc.search(title):
-        return False
+        # Option 1: Core UX Immunity
+        # If the title explicitly contains a core UX/Product Design discipline,
+        # internal business domain keywords (sales, recruiting, HR, legal, etc.)
+        # do not disqualify the posting.
+        if _CORE_UX_RE.search(title):
+            stripped = _DOMAIN_EXCLUDE_RE.sub(" ", title)
+            if title_exc.search(stripped):
+                return False
+        else:
+            return False
     if not loc:
         return True
     if loc_inc.search(loc):
@@ -382,6 +498,31 @@ def matches(job, title_inc, title_exc, loc_inc, loc_exc=None):
     return False
 
 
+def classify_match(job, title_inc, title_exc, loc_inc, loc_exc, description_inc, adjacent_inc, early_career_inc, allow_all_remote=False):
+    """Return a discovery lane or None, without narrowing legacy title hits."""
+    title = job.get("title", "") or ""
+    description = job.get("description", "") or ""
+    location = job.get("location", "") or ""
+
+    # Preserve every existing title match exactly as before.
+    core = matches(job, title_inc, title_exc, loc_inc, loc_exc)
+    if not core and allow_all_remote and _REMOTE_RE.search(location):
+        core = bool(title_inc.search(title)) and not (title_exc and title_exc.search(title))
+    if core:
+        return "core-title"
+
+    # A generic internship title can still be highly relevant when its body
+    # names the discipline. Adjacent titles are deliberately labeled, not
+    # blended into the core UX results.
+    early_career = bool(early_career_inc.search(f"{title} {description}"))
+    location_ok = (not location or loc_inc.search(location) or _REMOTE_RE.search(location))
+    if early_career and location_ok and description_inc.search(description):
+        return "description-match"
+    if early_career and location_ok and adjacent_inc.search(title):
+        return "adjacent-role"
+    return None
+
+
 # ---------------------------------------------------------------- notify
 
 
@@ -389,7 +530,9 @@ def notify(new_jobs):
     lines = []
     for j in new_jobs:
         pay = f"\n💰 {j['pay']}" if j.get("pay") else ""
-        lines.append(f"{j['company']} — {j['title']}\n{j['location']}{pay}\n{j['url']}")
+        status = "UPDATED " if j.get("is_update") else "NEW "
+        lane = f" [{j['match_lane']}]" if j.get("match_lane") and j.get("match_lane") != "core-title" else ""
+        lines.append(f"{status}{j['company']} — {j['title']}{lane}\n{j['location']}{pay}\n{j['url']}")
     body = "\n\n".join(lines)
     subject = f"{len(new_jobs)} new UX posting{'s' if len(new_jobs) != 1 else ''}"
 
@@ -406,12 +549,16 @@ def notify(new_jobs):
     discord = os.environ.get("DISCORD_WEBHOOK")
     if discord:
         discord_re = re.compile(
-            r"\bintern\b|\bapprentice|\bfellow\b|\bfellowship\b|\bstudent\b",
+            r"\bintern\b|\bapprentice\b|\bfellow(?:ship)?\b|\bstudent\b"
+            r"|\bco-?op\b|\bcooperative education\b|\bsummer\s+(?:analyst|associate|scholar|intern)\b"
+            r"|\bearly[- ](?:career|talent)\b|\bemerging talent\b|\bnew[- ]grad\b"
+            r"|\bundergraduate\b|\bundergrad\b|\bgraduate\b|\bpostgrad\b"
+            r"|\btrainee\b|\bextern\b|\bresiden(?:cy)?\b|\bpracticum\b|\bpathways\b",
             re.I,
         )
         discord_jobs = [j for j in new_jobs if discord_re.search(j.get("title", ""))]
         if not discord_jobs:
-            print("  -> no intern/apprentice/fellow/student postings for Discord")
+            print("  -> no early-career postings for Discord")
         else:
             by_company = {}
             for j in discord_jobs:
@@ -448,6 +595,22 @@ def notify(new_jobs):
     if not (ntfy_topic or discord):
         print("  ! no notification channel configured; printing instead\n")
         print(body)
+
+
+def notify_source_health(alerts):
+    """Send scan failures and suspicious empty boards through active channels."""
+    if not alerts:
+        return
+    body = "\n".join(f"• {a['company']}: {a['reason']}" for a in alerts)
+    ntfy_topic = os.environ.get("NTFY_TOPIC")
+    if ntfy_topic:
+        requests.post(
+            f"https://ntfy.sh/{ntfy_topic}", data=body.encode("utf-8"),
+            headers={"Title": "Internship scan source alert", "Tags": "warning"}, timeout=TIMEOUT,
+        )
+    discord = os.environ.get("DISCORD_WEBHOOK")
+    if discord:
+        requests.post(discord, json={"content": f"⚠️ **Internship scan source alert**\n{body}"}, timeout=TIMEOUT)
 
 
 # --------------------------------------------------------- app reminders
@@ -564,10 +727,29 @@ def main():
     cfg = load_json(CONFIG_PATH, None)
     if cfg is None:
         sys.exit(f"missing {CONFIG_PATH}")
-    seen = set(load_json(STATE_PATH, {"ids": []})["ids"])
+    state = load_json(STATE_PATH, {"ids": []})
+    seen = set(state["ids"])
+    prior_fingerprints = state.get("fingerprints", {})
+    prior_sources = state.get("sources", {})
+    prior_page_fingerprints = state.get("page_fingerprints", {})
 
     title_inc, title_exc, loc_inc, loc_exc = compile_filters(cfg)
+    description_inc, adjacent_inc, early_career_inc = compile_discovery_filters(cfg)
     found, errors, disabled = [], [], []
+    source_status = {}
+    page_fingerprints = {}
+    page_alerts = []
+
+    # Non-ATS career pages cannot reliably yield structured jobs. Monitor a
+    # normalized page fingerprint so a meaningful change prompts a manual look.
+    for watch in cfg.get("page_watches", []):
+        try:
+            fingerprint, _ = page_fingerprint(watch["url"], watch.get("selector"), watch.get("strip_patterns"))
+            page_fingerprints[watch["url"]] = fingerprint
+            if prior_page_fingerprints.get(watch["url"]) not in (None, fingerprint):
+                page_alerts.append({"company": watch["name"], "reason": "manual careers page changed"})
+        except Exception as e:
+            errors.append({"company": watch["name"], "error": f"page watch {type(e).__name__}: {e}"})
 
     for entry in cfg["companies"]:
         board = entry["board"]
@@ -587,9 +769,20 @@ def main():
                 continue
         except Exception as e:
             errors.append({"company": company, "error": f"{type(e).__name__}: {e}"})
+            source_status[company] = {"count": None, "error": f"{type(e).__name__}: {e}"}
             continue
 
-        hits = [j for j in jobs if matches(j, title_inc, title_exc, loc_inc, loc_exc)]
+        source_status[company] = {"count": len(jobs), "error": ""}
+        hits = []
+        for job in jobs:
+            lane = classify_match(
+                job, title_inc, title_exc, loc_inc, loc_exc,
+                description_inc, adjacent_inc, early_career_inc,
+                cfg.get("allow_all_remote", False),
+            )
+            if lane:
+                job["match_lane"] = lane
+                hits.append(job)
         print(f"{company:<28} {len(jobs):>4} open  {len(hits):>3} match")
         found.extend(hits)
         time.sleep(0.4)
@@ -605,11 +798,35 @@ def main():
             print(f"  - {entry['company']}: {entry['reason']}")
 
     hidden = set(load_json(HIDDEN_PATH, []))
-    new = [j for j in found if j["id"] not in seen and j["id"] not in hidden]
-    print(f"\n{len(found)} matches, {len(new)} new")
+    fingerprints = {
+        j["id"]: hashlib.sha256(json.dumps(
+            {k: j.get(k, "") for k in ("title", "location", "url", "pay", "description")},
+            sort_keys=True,
+        ).encode()).hexdigest()
+        for j in found
+    }
+    new = []
+    for job in found:
+        if job["id"] in hidden:
+            continue
+        is_update = job["id"] in seen and prior_fingerprints.get(job["id"]) not in (None, fingerprints[job["id"]])
+        if job["id"] not in seen or is_update:
+            job["is_update"] = is_update
+            new.append(job)
+    health_alerts = []
+    for company, status in source_status.items():
+        previous = prior_sources.get(company, {})
+        if status["error"] and status["error"] != previous.get("error"):
+            health_alerts.append({"company": company, "reason": status["error"]})
+        elif status["count"] == 0 and previous.get("count", 0) > 0:
+            health_alerts.append({"company": company, "reason": "board returned zero postings"})
+    health_alerts.extend(page_alerts)
+    print(f"\n{len(found)} matches, {len(new)} new or updated")
+    if health_alerts:
+        print(f"{len(health_alerts)} source health alert{'s' if len(health_alerts) != 1 else ''}")
 
     if args.seed:
-        STATE_PATH.write_text(json.dumps({"ids": sorted({j["id"] for j in found} | seen)}, indent=1))
+        STATE_PATH.write_text(json.dumps({"ids": sorted({j["id"] for j in found} | seen), "fingerprints": fingerprints, "sources": source_status, "page_fingerprints": page_fingerprints}, indent=1))
         print("seeded state; nothing sent")
         return
 
@@ -622,12 +839,14 @@ def main():
     if new:
         notify(new)
         seen |= {j["id"] for j in new}
-        STATE_PATH.write_text(
-            json.dumps({"updated": datetime.now(timezone.utc).isoformat(), "ids": sorted(seen)}, indent=1)
-        )
+    notify_source_health(health_alerts)
+    STATE_PATH.write_text(json.dumps({
+        "updated": datetime.now(timezone.utc).isoformat(), "ids": sorted(seen),
+        "fingerprints": fingerprints, "sources": source_status, "page_fingerprints": page_fingerprints,
+    }, indent=1))
 
     (HERE / "_scan_results.json").write_text(json.dumps({
-        "jobs": found, "errors": errors, "disabled": disabled,
+        "jobs": found, "errors": errors, "disabled": disabled, "health_alerts": health_alerts,
         "companies_scanned": len(cfg["companies"]) - len(disabled),
     }, default=str))
 

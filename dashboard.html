@@ -1547,7 +1547,7 @@ tr.detail-row .detail-value a{font-weight:500}
       </div>
       <div class="bento-card bento-manual">
         <div class="bento-header">
-          <h3>Manual Check</h3>
+          <h3>Program &amp; Manual Checks</h3>
           <span class="bento-count" id="bento-manual-count"></span>
         </div>
         <div class="bento-checks-wrap">
@@ -2567,8 +2567,13 @@ const BOARD_FETCH = {
 async function clientScan() {
   const cfg = STATIC_CONFIG;
   const titleInc = new RegExp(cfg.title_include.join('|'), 'i');
-  const titleExc = cfg.title_exclude.length ? new RegExp(cfg.title_exclude.join('|'), 'i') : null;
+  const titleExc = cfg.title_exclude && cfg.title_exclude.length ? new RegExp(cfg.title_exclude.join('|'), 'i') : null;
   const locInc = new RegExp(cfg.location_include.join('|'), 'i');
+  const locExc = cfg.location_exclude && cfg.location_exclude.length ? new RegExp(cfg.location_exclude.join('|'), 'i') : null;
+  const coreUxRe = /\bUX\b|\bUI\b|\buser experience|\buser interface|\buser research|\bproduct design|\binteraction design|\binteractive design|\bexperience design|\bhuman-centered design|\binclusive design|\baccessibility\b|\ba11y\b|\busability\b|\bHCI\b|\bUXR\b|\bdesign research|\bdesign system|\bcontent design|\bUX writing|\bdesign engineer|\bdesign engineering|\bcreative developer|\bcreative development|\bUX engineer|\bUX developer|\bUI engineer|\bUI developer/i;
+  const domainExcludeRe = /\bsales\b|\brecruiting\b|\brecruiter\b|\btalent acquisition\b|\bclinical\b|\bhuman resources\b|\bhr\b|\blegal\b|\bcompliance\b|\baudit\b|\baccounting\b|\bsupply chain\b|\bdata science\b|\bdata scientist\b|\bmachine learning\b|\bdata analyst\b|\bequity research\b|\bcredit research\b/gi;
+  const remoteRe = /\bremote\b|\bhybrid\b|\bvirtual\b|\btelecommute\b|\btelecommuting\b|\bwork from home\b|\bwfh\b|\banywhere\b|\bdistributed\b/i;
+  const usRe = /\bUS\b|\bU\.S\b|\bUSA\b|\bunited states\b/i;
 
   const prebaked = (STATIC_DATA.jobs || []).filter(j => !BOARD_FETCH[j.source]);
   prebaked.forEach(j => { j.is_new = false; classifyJob(j); });
@@ -2593,8 +2598,22 @@ async function clientScan() {
       const hits = jobs.filter(j => {
         const t = j.title || '', l = j.location || '';
         if (!titleInc.test(t)) return false;
-        if (titleExc && titleExc.test(t)) return false;
-        return !l || locInc.test(l);
+        if (titleExc && titleExc.test(t)) {
+          if (coreUxRe.test(t)) {
+            const stripped = t.replace(domainExcludeRe, ' ');
+            if (titleExc.test(stripped)) return false;
+          } else {
+            return false;
+          }
+        }
+        if (!l) return true;
+        if (locInc.test(l)) return true;
+        if (remoteRe.test(l)) {
+          if (usRe.test(l)) return true;
+          if (locExc && locExc.test(l)) return false;
+          return true;
+        }
+        return false;
       });
       for (const h of hits) { h.is_new = !seen.has(h.id); classifyJob(h); seen.add(h.id); }
       if (hits.length) { allJobs.push(...hits); updateStats(); scheduleRenderTable(); }
@@ -3790,7 +3809,7 @@ const MANUAL_CHECKS = [
   {name:'Be My Eyes',url:'https://bemyeyes.com/business/join-our-team',cat:'Accessibility'},
   {name:'Collins',url:'https://wearecollins.com/careers',cat:'Agency'},
   {name:'Pentagram',url:'https://pentagram.com/careers',cat:'Agency'},
-  {name:'NYC Office of Technology & Innovation',url:'https://www.nyc.gov/content/oti/pages/',cat:'Government'},
+  {name:'NYC Office of Technology & Innovation',url:'https://www.nyc.gov/site/dcas/employment/summer-internship-program-oti.page',cat:'Government'},
   {name:'NYC Economic Development Corporation',url:'https://edc.nyc/careers',cat:'Government'},
   {name:'MTA',url:'https://new.mta.info/careers',cat:'Government'},
   {name:'Port Authority of NY & NJ',url:'https://www.panynj.gov/corporate/en/careers.html',cat:'Government'},
@@ -3799,7 +3818,7 @@ const MANUAL_CHECKS = [
   {name:'NJ Transit',url:'https://www.njtransit.com/careers',cat:'Government'},
   {name:'NJ Economic Development Authority',url:'https://www.njeda.gov/careers/',cat:'Government'},
   {name:'New York State ITS',url:'https://statejobs.ny.gov/',cat:'Government'},
-  {name:'Federal Reserve Bank of New York',url:'https://www.newyorkfed.org/careers',cat:'Government'},
+  {name:'Federal Reserve Bank of New York',url:'https://www.newyorkfed.org/careers/student-programs-and-internships',cat:'Government'},
   {name:'FDIC',url:'https://www.fdic.gov/about/careers/',cat:'Government'},
   {name:'OCC',url:'https://www.occ.gov/careers/',cat:'Government'},
   {name:'SEC',url:'https://www.sec.gov/careers',cat:'Government'},
@@ -4053,10 +4072,14 @@ function buildBentoGrid() {
   }
 
   const checksEl = document.getElementById('bento-checks-list');
-  document.getElementById('bento-manual-count').textContent = MANUAL_CHECKS.length + ' companies';
-  checksEl.innerHTML = MANUAL_CHECKS.map(c =>
+  const programSources = typeof EARLY_CAREER_SOURCES === 'undefined' ? [] : EARLY_CAREER_SOURCES;
+  const seenCheckUrls = new Set();
+  const checks = [...programSources.map(c => ({...c, cat: c.category, program: true})), ...MANUAL_CHECKS]
+    .filter(c => !seenCheckUrls.has(c.url) && seenCheckUrls.add(c.url));
+  document.getElementById('bento-manual-count').textContent = checks.length + ' sources';
+  checksEl.innerHTML = checks.map(c =>
     '<a href="' + esc(c.url) + '" target="_blank" rel="noopener">' +
-      esc(c.name) + '<span class="check-cat">' + esc(c.cat) + '</span></a>'
+      esc(c.name) + '<span class="check-cat">' + esc(c.program ? 'Program · ' + c.cat : c.cat) + '</span></a>'
   ).join('');
 }
 

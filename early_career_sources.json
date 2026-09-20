@@ -1,0 +1,69 @@
+{
+  "_readme": "Companion sources for named student, internship, fellowship, and early-career programs. These remain separate from config.json: ATS boards are the source of truth for open requisitions, while this catalog preserves program-specific eligibility, timelines, and application links that job boards can obscure.",
+  "sources": [
+    {
+      "name": "JPMorgan Chase — Design Development Summer",
+      "company": "JPMorgan Chase",
+      "category": "Design & research",
+      "url": "https://careers.jpmorgan.com/us/en/students/programs/design-dev-summer",
+      "cadence": "Check weekly Aug–Oct",
+      "focus": "UX/UI design, user research, prototyping"
+    },
+    {
+      "name": "Bank of America — Student Programs",
+      "company": "Bank of America",
+      "category": "Financial services",
+      "url": "https://careers.bankofamerica.com/en-us/students/programs",
+      "cadence": "Check weekly Aug–Oct",
+      "focus": "Technology, operations, digital solutions"
+    },
+    {
+      "name": "Citi — North America Students & Graduates",
+      "company": "Citi",
+      "category": "Financial services",
+      "url": "https://careers.citigroup.com/students-and-graduates/nam.html",
+      "cadence": "Check weekly Aug–Oct",
+      "focus": "Internships, university programs, sophomore leadership"
+    },
+    {
+      "name": "New York Fed — Student Programs & Internships",
+      "company": "Federal Reserve Bank of New York",
+      "category": "Government",
+      "url": "https://www.newyorkfed.org/careers/student-programs-and-internships",
+      "cadence": "Check weekly Aug–Oct",
+      "focus": "Undergraduate and graduate summer programs"
+    },
+    {
+      "name": "New York Fed — Undergraduate Summer Analyst",
+      "company": "Federal Reserve Bank of New York",
+      "category": "Government",
+      "url": "https://www.newyorkfed.org/careers/student-programs-and-internships/junior-summer-analyst-program",
+      "cadence": "Check weekly while applications are open",
+      "focus": "10-week public-service internship"
+    },
+    {
+      "name": "NYC OTI — Summer Internship Program",
+      "company": "NYC Office of Technology & Innovation",
+      "category": "Government",
+      "url": "https://www.nyc.gov/site/dcas/employment/summer-internship-program-oti.page",
+      "cadence": "Check monthly Jan–May; weekly when open",
+      "focus": "Communication design, front-end, product-adjacent technology"
+    },
+    {
+      "name": "Microsoft — Global University Internships",
+      "company": "Microsoft",
+      "category": "Big Tech",
+      "url": "https://careers.microsoft.com/v2/global/en/universityinternship",
+      "cadence": "Check weekly Sep–Apr",
+      "focus": "University internships and Explore program"
+    },
+    {
+      "name": "USAJOBS — Students & Recent Graduates",
+      "company": "Federal government",
+      "category": "Government",
+      "url": "https://www.usajobs.gov/help/working-in-government/unique-hiring-paths/students/",
+      "cadence": "Check weekly",
+      "focus": "Pathways internships and recent-graduate hiring"
+    }
+  ]
+}
