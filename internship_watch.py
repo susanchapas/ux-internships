@@ -37,9 +37,9 @@ HIDDEN_PATH = HERE / "hidden.json"
 
 UA = {"User-Agent": "internship-watch/1.0 (personal job search tool)"}
 TIMEOUT = 20
-DEFAULT_BATCH_SIZE = 16
-BETWEEN_BATCH_DELAY = 0.2
-DASHBOARD_URL = "https://susanchapas.github.io/ux-internships/"
+DEFAULT_BATCH_SIZE = 1
+BETWEEN_BATCH_DELAY = 1.0
+DASHBOARD_URL = os.environ.get("DASHBOARD_URL", "http://127.0.0.1:8080/")
 
 PAY_RE = re.compile(
     r"\$\s*[\d,]+(?:\.\d{2})?"
@@ -470,6 +470,17 @@ _REMOTE_RE = re.compile(
     re.I,
 )
 _US_RE = re.compile(r"\bUS\b|\bU\.S\b|\bUSA\b|\bunited states\b", re.I)
+_REMOTE_WORDS_RE = re.compile(
+    r"\bremote\b|\bhybrid\b|\bvirtual\b|\btelecommute\b|\btelecommuting\b"
+    r"|\bwork from home\b|\bwfh\b|\banywhere\b|\bdistributed\b",
+    re.I,
+)
+_LOCATION_TEXT_RE = re.compile(r"[A-Za-z]")
+_OUT_OF_AREA_STATE_RE = re.compile(
+    r",\s*(?:AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NM|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)\b"
+    r"|,\s*(?:alabama|alaska|arizona|arkansas|california|colorado|connecticut|delaware|florida|georgia|hawaii|idaho|illinois|indiana|iowa|kansas|kentucky|louisiana|maine|maryland|massachusetts|michigan|minnesota|mississippi|missouri|montana|nebraska|nevada|new hampshire|new mexico|north carolina|north dakota|ohio|oklahoma|oregon|pennsylvania|rhode island|south carolina|south dakota|tennessee|texas|utah|vermont|virginia|washington|west virginia|wisconsin|wyoming|district of columbia)\b",
+    re.I,
+)
 
 
 def matches(job, title_inc, title_exc, loc_inc, loc_exc=None):
@@ -488,17 +499,40 @@ def matches(job, title_inc, title_exc, loc_inc, loc_exc=None):
                 return False
         else:
             return False
-    if not loc:
-        return True
-    if loc_inc.search(loc):
-        return True
-    if _REMOTE_RE.search(loc):
-        if _US_RE.search(loc):
+    return location_is_eligible(loc, loc_inc, loc_exc)
+
+
+def location_is_eligible(location, loc_inc, loc_exc=None):
+    """Whether a posting is commutable or an eligible remote role.
+
+    Remote is deliberately evaluated before the local-location allowlist.
+    Unqualified "Remote" is allowed, but a remote role naming a place must
+    explicitly be US-scoped or offer one of the allowed local areas.
+    """
+    # A missing location cannot establish that the role is commutable or US
+    # remote, so keep it out rather than treating it as an unrestricted match.
+    if not location:
+        return False
+    if _REMOTE_RE.search(location):
+        if _US_RE.search(location):
             return True
-        if loc_exc and loc_exc.search(loc):
+        # "Remote — San Francisco" and "Remote — Canada" both name a place
+        # outside the allowed set.  A bare "Remote" remains eligible.
+        if loc_exc and loc_exc.search(location):
+            return False
+        if loc_inc.search(location):
+            return True
+        place_text = _REMOTE_WORDS_RE.sub(" ", location)
+        if _LOCATION_TEXT_RE.search(place_text):
             return False
         return True
-    return False
+    # Check exclusions first: a location such as "Brooklyn, Canada" must not
+    # pass merely because it includes an allowed city name.
+    return (
+        not (loc_exc and loc_exc.search(location))
+        and not _OUT_OF_AREA_STATE_RE.search(location)
+        and bool(loc_inc.search(location))
+    )
 
 
 def classify_match(job, title_inc, title_exc, loc_inc, loc_exc, description_inc, adjacent_inc, early_career_inc, allow_all_remote=False):
@@ -509,7 +543,7 @@ def classify_match(job, title_inc, title_exc, loc_inc, loc_exc, description_inc,
 
     # Preserve every existing title match exactly as before.
     core = matches(job, title_inc, title_exc, loc_inc, loc_exc)
-    if not core and allow_all_remote and _REMOTE_RE.search(location):
+    if not core and allow_all_remote and _REMOTE_RE.search(location) and location_is_eligible(location, loc_inc, loc_exc):
         core = bool(title_inc.search(title)) and not (title_exc and title_exc.search(title))
     if core:
         return "core-title"
@@ -518,7 +552,7 @@ def classify_match(job, title_inc, title_exc, loc_inc, loc_exc, description_inc,
     # names the discipline. Adjacent titles are deliberately labeled, not
     # blended into the core UX results.
     early_career = bool(early_career_inc.search(f"{title} {description}"))
-    location_ok = (not location or loc_inc.search(location) or _REMOTE_RE.search(location))
+    location_ok = location_is_eligible(location, loc_inc, loc_exc)
     if early_career and location_ok and description_inc.search(description):
         return "description-match"
     if early_career and location_ok and adjacent_inc.search(title):
