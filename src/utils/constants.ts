@@ -1,0 +1,182 @@
+export const ADMIN_EMAIL = 'susanchapas39@gmail.com';
+
+export const STATUS_LABELS = {
+  saved: 'Saved',
+  applied: 'Applied',
+  phone_screen: 'Phone Screen',
+  interview: 'Interview',
+  offer: 'Offer',
+  accepted: 'Accepted',
+  rejected: 'Rejected',
+  withdrawn: 'Withdrawn',
+  ghosted: 'Ghosted',
+} as const;
+
+export type ApplicationStatus = keyof typeof STATUS_LABELS;
+
+export const PIPELINE_COLORS: Record<ApplicationStatus, string> = {
+  saved: 'var(--sky)',
+  applied: 'var(--mint)',
+  phone_screen: 'var(--clay)',
+  interview: '#b5723d',
+  offer: '#1e8a5a',
+  accepted: 'var(--mint)',
+  rejected: 'var(--danger)',
+  withdrawn: 'var(--text-faint)',
+  ghosted: '#7c3aed',
+};
+
+export const REMIND_LABELS = {
+  daily: 'Daily',
+  every_3_days: 'Every 3 days',
+  weekly: 'Weekly',
+  off: 'Off',
+} as const;
+
+export type ReminderInterval = keyof typeof REMIND_LABELS;
+
+export const COLUMN_DEFAULTS = {
+  scanner: ['company', 'title', 'location', 'pay', 'posted_at', 'source'],
+  tracker: ['company', 'title', 'location', 'status', 'deadline', 'remind', 'applied', 'notes'],
+} as const;
+
+export const FILTER_LABELS: Record<string, string> = {
+  'level-filter': 'Level',
+  'pay-type-filter': 'Pay type',
+  'schedule-filter': 'Schedule',
+  'source-filter': 'Source',
+};
+
+export const SYNC_KEYS = {
+  hidden: 'ux-internship-hidden',
+  favJobs: 'ux-internship-fav-jobs',
+  favEmployers: 'ux-internship-fav-employers',
+  savedFilters: 'ux-internship-saved-filters',
+  tracker: 'ux-internship-tracker',
+  prefs: 'ux-internship-prefs',
+  visibleColumns: 'ux-internship-visible-columns',
+  scanFilters: 'ux-internship-scan-filters',
+  hiddenCompanies: 'ux-internship-hidden-companies',
+  addedCompanies: 'ux-internship-added-companies',
+  renamedCompanies: 'ux-internship-renamed-companies',
+  removedCompanies: 'ux-internship-removed-companies',
+} as const;
+
+export const SCAN_FILTER_DEFAULTS = {
+  levels: ['intern', 'fellow', 'apprentice', 'entry', 'mid', 'senior+', 'manager+'],
+  schedules: ['full-time', 'part-time', 'contract', 'other'],
+  payListed: false,
+  minHourly: '',
+  minSalary: '',
+  favoritesOnly: false,
+  location: '',
+};
+
+export const SEARCH_DEFAULTS = {
+  level_intern: true,
+  level_fellow: true,
+  level_apprentice: true,
+  level_entry: true,
+  level_mid: true,
+  level_senior: true,
+  level_manager: true,
+  sched_fulltime: true,
+  sched_parttime: true,
+  sched_contract: true,
+  paid_only: false,
+  newAlertsOnly: true,
+};
+
+export const LEVEL_PREF: Record<string, keyof typeof SEARCH_DEFAULTS> = {
+  intern: 'level_intern',
+  fellow: 'level_fellow',
+  apprentice: 'level_apprentice',
+  entry: 'level_entry',
+  mid: 'level_mid',
+  'senior+': 'level_senior',
+  'manager+': 'level_manager',
+};
+
+export const MANUAL_CHECKS = [
+  { name: 'Amazon', url: 'https://amazon.jobs', cat: 'Big Tech' },
+  { name: 'Apple', url: 'https://jobs.apple.com', cat: 'Big Tech' },
+  { name: 'Audible', url: 'https://www.audiblecareers.com', cat: 'Big Tech' },
+  { name: 'Bloomberg LP', url: 'https://www.bloomberg.com/company/careers/', cat: 'Media' },
+  { name: 'BNY Mellon', url: 'https://jobs.bnymellon.com', cat: 'Banking' },
+  { name: 'DTCC', url: 'https://careers.dtcc.com', cat: 'Banking' },
+  { name: 'Deque Systems', url: 'https://deque.com/company/careers/', cat: 'Accessibility' },
+  { name: 'FactSet', url: 'https://careers.factset.com', cat: 'Banking' },
+  { name: 'Frog', url: 'https://www.frog.co/careers', cat: 'Agency' },
+  { name: 'Goldman Sachs', url: 'https://higher.gs.com', cat: 'Banking' },
+  { name: 'Google', url: 'https://careers.google.com', cat: 'Big Tech' },
+  { name: 'IBM', url: 'https://careers.ibm.com', cat: 'Big Tech' },
+  { name: 'Klarna', url: 'https://www.klarna.com/careers/', cat: 'Fintech' },
+  { name: 'LSEG / Refinitiv', url: 'https://www.lseg.com/en/careers', cat: 'Banking' },
+  { name: 'Lord Abbett', url: 'https://careers.lordabbett.com', cat: 'Banking' },
+  { name: 'MarketAxess', url: 'https://www.marketaxess.com/careers', cat: 'Banking' },
+  { name: 'Intuit', url: 'https://jobs.intuit.com', cat: 'Big Tech' },
+  { name: 'Meta', url: 'https://metacareers.com', cat: 'Big Tech' },
+  { name: 'Microsoft', url: 'https://careers.microsoft.com', cat: 'Big Tech' },
+  { name: 'Monday.com', url: 'https://monday.com/careers', cat: 'Tech' },
+  { name: 'NICE Actimize', url: 'https://www.nice.com/careers', cat: 'Banking' },
+  { name: 'Pegasystems', url: 'https://www.pega.com/about/careers', cat: 'Tech' },
+  { name: 'Rippling', url: 'https://rippling.com/careers', cat: 'Fintech' },
+  { name: 'ServiceNow', url: 'https://careers.servicenow.com', cat: 'Tech' },
+  { name: 'Siemens', url: 'https://jobs.siemens.com', cat: 'Tech' },
+  { name: 'Sprinklr', url: 'https://www.sprinklr.com/careers/', cat: 'Tech' },
+  { name: 'Thoughtworks', url: 'https://www.thoughtworks.com/careers', cat: 'Consulting' },
+  { name: 'Tradeweb', url: 'https://www.tradeweb.com/careers/', cat: 'Banking' },
+  { name: 'Two Sigma', url: 'https://www.twosigma.com/careers/', cat: 'Banking' },
+  { name: 'UBS', url: 'https://www.ubs.com/global/en/careers.html', cat: 'Banking' },
+  { name: 'UserTesting', url: 'https://www.usertesting.com/careers', cat: 'Tech' },
+  { name: 'Verisk Analytics', url: 'https://www.verisk.com/careers/', cat: 'Banking' },
+  { name: 'Wiley', url: 'https://careers.wiley.com', cat: 'Media' },
+  { name: 'Walmart eCommerce', url: 'https://careers.walmart.com', cat: 'Retail' },
+  { name: 'Zendesk', url: 'https://jobs.zendesk.com', cat: 'Tech' },
+  { name: 'Zocdoc', url: 'https://www.zocdoc.com/about/careers/', cat: 'Health' },
+  { name: 'Uber', url: 'https://uber.com/careers', cat: 'Big Tech' },
+  { name: 'Vimeo', url: 'https://vimeo.com/careers', cat: 'Big Tech' },
+  { name: 'Arch Capital Group', url: 'https://careers.archgroup.com', cat: 'Insurance' },
+  { name: 'BORN Group', url: 'https://www.borngroup.com/careers', cat: 'Agency' },
+  { name: 'Cityblock Health', url: 'https://www.cityblock.com/careers', cat: 'Health' },
+  { name: 'Dow Jones / WSJ', url: 'https://www.dowjones.com/careers/', cat: 'Media' },
+  { name: 'Flatiron Health', url: 'https://flatiron.com/careers/', cat: 'Health' },
+  { name: 'Mars Digital Hub', url: 'https://careers.mars.com', cat: 'Retail' },
+  { name: 'Ro', url: 'https://www.ro.co/careers/', cat: 'Health' },
+  { name: 'Work & Co', url: 'https://work.co/careers/', cat: 'Agency' },
+  { name: 'American Express', url: 'https://egug.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1', cat: 'Banking' },
+  { name: 'Chubb', url: 'https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com', cat: 'Insurance' },
+  { name: 'JPMorgan Chase', url: 'https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001', cat: 'Banking' },
+  { name: 'Oracle', url: 'https://eeho.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch', cat: 'Big Tech' },
+  { name: 'Warby Parker', url: 'https://jobs.warbyparker.com', cat: 'Big Tech' },
+  { name: 'Accion', url: 'https://jobs-accion.icims.com', cat: 'Mission' },
+  { name: 'Ally', url: 'https://ally.avature.net/careers', cat: 'Banking' },
+  { name: 'Coforma', url: 'https://coforma.pinpointhq.com', cat: 'Civic Tech' },
+  { name: 'DocuSign', url: 'https://uscareers-docusign.icims.com', cat: 'Tech' },
+  { name: 'Grameen America', url: 'https://app.trinethire.com/companies/924509-grameen-america-inc', cat: 'Mission' },
+  { name: "Moody's", url: 'https://career8.successfactors.com/career?career_company=MoodysProd', cat: 'Banking' },
+  { name: 'U.S. Digital Response', url: 'https://us-digital-response.breezy.hr', cat: 'Civic Tech' },
+  { name: 'Fearless', url: 'https://jobs.fearless.com', cat: 'Civic Tech' },
+  { name: 'Aira', url: 'https://aira.io/careers', cat: 'Accessibility' },
+  { name: 'American Foundation for the Blind', url: 'https://afb.org/about-afb/leadership/careers-afb', cat: 'Accessibility' },
+  { name: 'Be My Eyes', url: 'https://bemyeyes.com/business/join-our-team', cat: 'Accessibility' },
+  { name: 'Collins', url: 'https://wearecollins.com/careers', cat: 'Agency' },
+  { name: 'Pentagram', url: 'https://pentagram.com/careers', cat: 'Agency' },
+  { name: 'NYC Office of Technology & Innovation', url: 'https://www.nyc.gov/site/dcas/employment/summer-internship-program-oti.page', cat: 'Government' },
+  { name: 'NYC Economic Development Corporation', url: 'https://edc.nyc/careers', cat: 'Government' },
+  { name: 'MTA', url: 'https://new.mta.info/careers', cat: 'Government' },
+  { name: 'Port Authority of NY & NJ', url: 'https://www.panynj.gov/corporate/en/careers.html', cat: 'Government' },
+  { name: 'NJ Office of Innovation', url: 'https://innovation.nj.gov/', cat: 'Government' },
+  { name: 'NJ Civil Service Commission', url: 'https://www.nj.gov/csc/', cat: 'Government' },
+  { name: 'NJ Transit', url: 'https://www.njtransit.com/careers', cat: 'Government' },
+  { name: 'NJ Economic Development Authority', url: 'https://www.njeda.gov/careers/', cat: 'Government' },
+  { name: 'New York State ITS', url: 'https://statejobs.ny.gov/', cat: 'Government' },
+  { name: 'Federal Reserve Bank of New York', url: 'https://www.newyorkfed.org/careers/student-programs-and-internships', cat: 'Government' },
+  { name: 'FDIC', url: 'https://www.fdic.gov/about/careers/', cat: 'Government' },
+  { name: 'OCC', url: 'https://www.occ.gov/careers/', cat: 'Government' },
+  { name: 'SEC', url: 'https://www.sec.gov/careers', cat: 'Government' },
+  { name: 'FINRA', url: 'https://www.finra.org/careers', cat: 'Government' },
+  { name: 'United Nations', url: 'https://careers.un.org/', cat: 'Government' },
+  { name: 'UNICEF', url: 'https://www.unicef.org/careers/', cat: 'Government' },
+  { name: 'World Bank', url: 'https://www.worldbank.org/en/about/careers', cat: 'Government' },
+];

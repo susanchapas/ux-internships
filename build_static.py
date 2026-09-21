@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a static dashboard.html with pre-baked scan data for GitHub Pages."""
+"""Inject pre-baked scan data into Vite's static build for GitHub Pages."""
 
 import json
 import re
@@ -14,8 +14,8 @@ from internship_watch import (
 )
 
 HERE = Path(__file__).parent
-DASHBOARD = HERE / "dashboard.html"
-OUT_DIR = HERE / "_site"
+DIST_DIR = HERE / "dist"
+INDEX = DIST_DIR / "index.html"
 EARLY_CAREER_SOURCES = HERE / "early_career_sources.json"
 
 LEVEL_RULES = [
@@ -125,26 +125,37 @@ def build():
         "errors": errors,
         "companies_scanned": company_count,
         "updated_at": now,
-    }, default=str)
+    }, default=str, separators=(",", ":"))
 
     cfg = load_json(CONFIG_PATH, None)
-    config_json = json.dumps(cfg)
+    config_json = json.dumps(cfg, separators=(",", ":"))
     early_career = load_json(EARLY_CAREER_SOURCES, {"sources": []})
-    early_career_json = json.dumps(early_career.get("sources", []))
+    early_career_json = json.dumps(early_career.get("sources", []), separators=(",", ":"))
 
-    html = DASHBOARD.read_text()
+    if not INDEX.exists():
+        sys.exit("missing dist/index.html; run `npm run build` before `python build_static.py`")
+
+    # Escape '<' so data from job descriptions cannot terminate the script tag.
+    def safe_for_script(value):
+        return value.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
 
     static_inject = (
-        f"<script>const STATIC_DATA = {static_data};\n"
-        f"const STATIC_CONFIG = {config_json};\n"
-        f"const EARLY_CAREER_SOURCES = {early_career_json};</script>\n"
-        "<script>/* STATIC_INJECT */"
+        '<script id="static-data">\n'
+        f"window.STATIC_DATA={safe_for_script(static_data)};\n"
+        f"window.STATIC_CONFIG={safe_for_script(config_json)};\n"
+        f"window.EARLY_CAREER_SOURCES={safe_for_script(early_career_json)};\n"
+        "</script>"
     )
-    html = html.replace("<script>/* STATIC_INJECT */", static_inject, 1)
+    html = INDEX.read_text()
+    html = re.sub(r'<script id="static-data">.*?</script>\s*', "", html, flags=re.DOTALL)
+    if "</head>" not in html:
+        sys.exit("Vite output is missing a closing </head> tag")
+    html = html.replace("</head>", f"{static_inject}</head>", 1)
 
-    OUT_DIR.mkdir(exist_ok=True)
-    (OUT_DIR / "index.html").write_text(html)
-    print(f"\nWrote _site/index.html ({len(jobs)} jobs baked in)")
+    INDEX.write_text(html)
+    # GitHub Pages serves this fallback for direct visits to client-side routes.
+    (DIST_DIR / "404.html").write_text(html)
+    print(f"\nInjected {len(jobs)} jobs into dist/index.html")
 
 
 if __name__ == "__main__":

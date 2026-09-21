@@ -29,6 +29,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
       - run: pip install -r requirements.txt
 
       - name: Scan jobs and notify
@@ -49,11 +54,19 @@ jobs:
           git diff --cached --quiet || git commit -m "chore: update alerted job state [skip ci]"
           git push origin HEAD:${{ github.event.repository.default_branch }}
 
-      - run: python build_static.py
+      - run: npm ci
+
+      - name: Build React dashboard
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+
+      - name: Inject static scan data
+        run: python build_static.py
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     needs: build

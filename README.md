@@ -176,6 +176,24 @@ subsystems directly.
 └── README.md
 ```
 
+## React app and Firebase Authentication
+
+The deployed static React app uses Firebase Authentication. For local React
+development against the unchanged Python API, start `python3 web.py` and then
+run `npm install && npm run dev`; Vite proxies `/api` requests to the Python
+server on port 8080. That mode uses the Python cookie-session authentication,
+so account and application changes use the same identity as the API.
+
+For Google sign-in during local development, add `localhost` under Firebase
+Authentication → Settings → Authorized domains, and enable the **Google**
+provider. Firebase projects created after April 28, 2025 do not add localhost
+automatically. The Firebase SDK retains the authenticated browser session by
+default.
+
+For Firebase-only development (for example, previewing a static build), add
+`VITE_AUTH_MODE=firebase` to a local `.env` file. Email/password registration
+and sign-in require the **Email/Password** provider to be enabled in Firebase.
+
 ## Notifications
 
 Pick one, set it as an env var / GitHub secret:

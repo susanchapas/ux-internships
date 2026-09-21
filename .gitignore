@@ -12,3 +12,4 @@ _scan_results.json
 .env
 venv/
 node_modules/
+dist/

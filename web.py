@@ -2,12 +2,14 @@
 """web.py — browser dashboard for internship_watch. Run: python web.py"""
 
 import json
+import mimetypes
 import re
 import sys
 import time
 from http.cookies import SimpleCookie
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 from internship_watch import (
     load_json, compile_filters, compile_discovery_filters, classify_match, CONFIG_PATH, HIDDEN_PATH,
@@ -21,6 +23,7 @@ from schemas import UserCreate, UserRead
 
 HERE = Path(__file__).parent
 DASHBOARD = HERE / "dashboard.html"
+DIST_DIR = HERE / "dist"
 EARLY_CAREER_SOURCES = HERE / "early_career_sources.json"
 
 LEVEL_RULES = [
@@ -104,7 +107,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if self.path == "/":
-            self._serve_dashboard()
+            self._serve_app()
         elif self.path == "/api/scan":
             self._run_scan()
         elif self.path == "/api/applications":
@@ -125,7 +128,7 @@ class Handler(BaseHTTPRequestHandler):
             if user:
                 self._json_response(UserRead.model_validate(user).model_dump())
         else:
-            self.send_error(404)
+            self._serve_app()
 
     def do_POST(self):
         if self.path == "/api/register":
@@ -288,7 +291,36 @@ class Handler(BaseHTTPRequestHandler):
     def _sync_hidden_json(self):
         HIDDEN_PATH.write_text(json.dumps(sorted(db.get_hidden_ids()), indent=1))
 
-    def _serve_dashboard(self):
+    def _serve_app(self):
+        """Serve the Vite build, with a legacy fallback before it is built."""
+        index = DIST_DIR / "index.html"
+        if index.exists():
+            requested = unquote(urlparse(self.path).path).lstrip("/")
+            candidate = (DIST_DIR / requested).resolve() if requested else index
+            # Only serve files inside dist. Client-side routes fall back to the
+            # SPA entry point so React Router can resolve them.
+            if (
+                requested
+                and candidate.is_file()
+                and DIST_DIR.resolve() in candidate.parents
+            ):
+                self._file_response(candidate)
+            else:
+                self._file_response(index)
+            return
+
+        self._serve_legacy_dashboard()
+
+    def _file_response(self, path):
+        body = path.read_bytes()
+        content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        self.send_response(200)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _serve_legacy_dashboard(self):
         sources = load_json(EARLY_CAREER_SOURCES, {"sources": []})
         source_script = (
             "<script>const EARLY_CAREER_SOURCES = "

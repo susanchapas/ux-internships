@@ -1,0 +1,5 @@
+import { getEarlyCareerSources } from '../../api/mode';
+import { MANUAL_CHECKS } from '../../utils/constants';
+import styles from './Landing.module.css';
+type Program = { name?: string; url?: string; category?: string };
+export function ManualChecksCard() { const programs = getEarlyCareerSources() as Program[]; const seen = new Set<string>(); const checks = [...programs.map((item) => ({ name: item.name || 'Program', url: item.url || '', category: item.category || '', program: true })), ...MANUAL_CHECKS.map((item) => ({ name: item.name, url: item.url, category: item.cat, program: false }))].filter((item) => item.url && !seen.has(item.url) && Boolean(seen.add(item.url))); return <section className={`${styles.card} ${styles.manual}`}><header className={styles.header}><h2>Program &amp; Manual Checks</h2><span>{checks.length} sources</span></header><div className={styles.checkList}>{checks.map((check) => <a href={check.url} target="_blank" rel="noreferrer" key={check.url}>{check.name}<small>{check.program ? `Program · ${check.category}` : check.category}</small></a>)}</div></section>; }

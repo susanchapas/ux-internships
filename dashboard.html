@@ -414,6 +414,8 @@ main{max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 5rem}
 .filter-multi-panel input[type="checkbox"]{
   accent-color:var(--mint);width:14px;height:14px;margin:0;cursor:pointer;
 }
+.column-picker-panel{min-width:10.5rem}
+[data-column].column-hidden{display:none}
 
 .result-count{font-size:0.8125rem;color:var(--text-faint);margin-left:auto}
 
@@ -1622,6 +1624,17 @@ tr.detail-row .detail-value a{font-weight:500}
         </div>
         <button class="toolbar-toggle" id="fav-toggle" onclick="toggleShowFav()">★ Favorites</button>
         <button class="toolbar-toggle" id="hidden-toggle" onclick="toggleShowHidden()">Hidden (0)</button>
+        <div class="filter-multi" id="scanner-columns">
+          <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Columns</button>
+          <div class="filter-multi-panel column-picker-panel">
+            <label><input type="checkbox" value="company" checked onchange="onColumnCheck('scanner',this)"> Company</label>
+            <label><input type="checkbox" value="title" checked onchange="onColumnCheck('scanner',this)"> Title</label>
+            <label><input type="checkbox" value="location" checked onchange="onColumnCheck('scanner',this)"> Location</label>
+            <label><input type="checkbox" value="pay" checked onchange="onColumnCheck('scanner',this)"> Pay</label>
+            <label><input type="checkbox" value="posted_at" checked onchange="onColumnCheck('scanner',this)"> Posted</label>
+            <label><input type="checkbox" value="source" checked onchange="onColumnCheck('scanner',this)"> Source</label>
+          </div>
+        </div>
         <div class="saved-filter-group">
           <select id="saved-filter-select" class="saved-filter-select" onchange="loadSavedFilter(this.value)" title="Saved filters">
             <option value="">Saved filters</option>
@@ -1635,12 +1648,12 @@ tr.detail-row .detail-value a{font-weight:500}
         <table>
           <thead><tr>
             <th class="fav-col"></th>
-            <th onclick="sortBy('company')">Company <span class="arrow"></span></th>
-            <th onclick="sortBy('title')">Title <span class="arrow"></span></th>
-            <th onclick="sortBy('location')">Location <span class="arrow"></span></th>
-            <th onclick="sortBy('pay')">Pay <span class="arrow"></span></th>
-            <th onclick="sortBy('posted_at')">Posted <span class="arrow"></span></th>
-            <th onclick="sortBy('source')">Source <span class="arrow"></span></th>
+            <th data-column="company" onclick="sortBy('company')">Company <span class="arrow"></span></th>
+            <th data-column="title" onclick="sortBy('title')">Title <span class="arrow"></span></th>
+            <th data-column="location" onclick="sortBy('location')">Location <span class="arrow"></span></th>
+            <th data-column="pay" onclick="sortBy('pay')">Pay <span class="arrow"></span></th>
+            <th data-column="posted_at" onclick="sortBy('posted_at')">Posted <span class="arrow"></span></th>
+            <th data-column="source" onclick="sortBy('source')">Source <span class="arrow"></span></th>
             <th style="cursor:default"></th>
           </tr></thead>
           <tbody id="tbody"></tbody>
@@ -1663,6 +1676,19 @@ tr.detail-row .detail-value a{font-weight:500}
     <div class="toolbar">
       <button class="add-btn" onclick="openAddModal()">+ Add Application</button>
       <input type="text" class="tracker-search" id="tracker-search" placeholder="Search tracked applications..." oninput="debouncedRenderTracker()">
+      <div class="filter-multi" id="tracker-columns">
+        <button class="filter-multi-btn" onclick="toggleFilterPanel(this)">Columns</button>
+        <div class="filter-multi-panel column-picker-panel">
+          <label><input type="checkbox" value="company" checked onchange="onColumnCheck('tracker',this)"> Company</label>
+          <label><input type="checkbox" value="title" checked onchange="onColumnCheck('tracker',this)"> Title</label>
+          <label><input type="checkbox" value="location" checked onchange="onColumnCheck('tracker',this)"> Location</label>
+          <label><input type="checkbox" value="status" checked onchange="onColumnCheck('tracker',this)"> Status</label>
+          <label><input type="checkbox" value="deadline" checked onchange="onColumnCheck('tracker',this)"> Deadline</label>
+          <label><input type="checkbox" value="remind" checked onchange="onColumnCheck('tracker',this)"> Remind</label>
+          <label><input type="checkbox" value="applied" checked onchange="onColumnCheck('tracker',this)"> Applied</label>
+          <label><input type="checkbox" value="notes" checked onchange="onColumnCheck('tracker',this)"> Notes</label>
+        </div>
+      </div>
       <div class="result-count" id="tracker-count"></div>
     </div>
 
@@ -1676,26 +1702,26 @@ tr.detail-row .detail-value a{font-weight:500}
         <thead>
         <tr>
           <th style="cursor:default;width:3%"></th>
-          <th style="cursor:default;width:13%">Company</th>
-          <th style="cursor:default;width:18%">Title</th>
-          <th style="cursor:default;width:10%">Location</th>
-          <th style="cursor:default;width:11%">Status</th>
-          <th style="cursor:default;width:11%">Deadline</th>
-          <th style="cursor:default;width:10%">Remind</th>
-          <th style="cursor:default;width:11%">Applied</th>
-          <th style="cursor:default;width:11%">Notes</th>
+          <th data-column="company" style="cursor:default;width:13%">Company</th>
+          <th data-column="title" style="cursor:default;width:18%">Title</th>
+          <th data-column="location" style="cursor:default;width:10%">Location</th>
+          <th data-column="status" style="cursor:default;width:11%">Status</th>
+          <th data-column="deadline" style="cursor:default;width:11%">Deadline</th>
+          <th data-column="remind" style="cursor:default;width:10%">Remind</th>
+          <th data-column="applied" style="cursor:default;width:11%">Applied</th>
+          <th data-column="notes" style="cursor:default;width:11%">Notes</th>
           <th style="cursor:default;width:4%"></th>
         </tr>
         <tr class="filter-row">
           <th style="cursor:default"></th>
-          <th style="cursor:default"><input type="text" class="col-filter" id="cf-company" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
-          <th style="cursor:default"><input type="text" class="col-filter" id="cf-title" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
-          <th style="cursor:default"><input type="text" class="col-filter" id="cf-location" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
-          <th style="cursor:default"><select class="col-filter" id="cf-status" onchange="renderTracker()"><option value="">All</option></select></th>
-          <th style="cursor:default"><input type="date" class="col-filter" id="cf-deadline" onchange="renderTracker()"></th>
-          <th style="cursor:default"><select class="col-filter" id="cf-remind" onchange="renderTracker()"><option value="">All</option><option value="daily">Daily</option><option value="every_3_days">Every 3 days</option><option value="weekly">Weekly</option><option value="off">Off</option></select></th>
-          <th style="cursor:default"><input type="date" class="col-filter" id="cf-applied" onchange="renderTracker()"></th>
-          <th style="cursor:default"><input type="text" class="col-filter" id="cf-notes" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th data-column="company" style="cursor:default"><input type="text" class="col-filter" id="cf-company" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th data-column="title" style="cursor:default"><input type="text" class="col-filter" id="cf-title" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th data-column="location" style="cursor:default"><input type="text" class="col-filter" id="cf-location" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
+          <th data-column="status" style="cursor:default"><select class="col-filter" id="cf-status" onchange="renderTracker()"><option value="">All</option></select></th>
+          <th data-column="deadline" style="cursor:default"><input type="date" class="col-filter" id="cf-deadline" onchange="renderTracker()"></th>
+          <th data-column="remind" style="cursor:default"><select class="col-filter" id="cf-remind" onchange="renderTracker()"><option value="">All</option><option value="daily">Daily</option><option value="every_3_days">Every 3 days</option><option value="weekly">Weekly</option><option value="off">Off</option></select></th>
+          <th data-column="applied" style="cursor:default"><input type="date" class="col-filter" id="cf-applied" onchange="renderTracker()"></th>
+          <th data-column="notes" style="cursor:default"><input type="text" class="col-filter" id="cf-notes" placeholder="Filter…" oninput="debouncedRenderTracker()"></th>
           <th style="cursor:default"></th>
         </tr>
         </thead>
@@ -2181,6 +2207,7 @@ const SYNC_KEYS = {
   hidden:'ux-internship-hidden', favJobs:'ux-internship-fav-jobs',
   favEmployers:'ux-internship-fav-employers', savedFilters:'ux-internship-saved-filters',
   tracker:'ux-internship-tracker', prefs:'ux-internship-prefs',
+  visibleColumns:'ux-internship-visible-columns',
   scanFilters:'ux-internship-scan-filters', hiddenCompanies:'ux-internship-hidden-companies',
   addedCompanies:'ux-internship-added-companies', renamedCompanies:'ux-internship-renamed-companies',
   removedCompanies:'ux-internship-removed-companies',
@@ -2229,6 +2256,42 @@ function refreshCompanyState() {
 }
 
 const FILTER_LABELS = {'level-filter':'Level','pay-type-filter':'Pay type','schedule-filter':'Schedule','source-filter':'Source'};
+
+const COLUMN_DEFAULTS = {
+  scanner:['company','title','location','pay','posted_at','source'],
+  tracker:['company','title','location','status','deadline','remind','applied','notes'],
+};
+const VISIBLE_COLUMNS_KEY = 'ux-internship-visible-columns';
+function getVisibleColumns() {
+  try { return JSON.parse(localStorage.getItem(VISIBLE_COLUMNS_KEY)) || {}; } catch { return {}; }
+}
+function visibleColumnsFor(view) {
+  const saved = getVisibleColumns()[view];
+  return new Set(Array.isArray(saved) ? saved : COLUMN_DEFAULTS[view]);
+}
+function applyColumnVisibility(view) {
+  const visible = visibleColumnsFor(view);
+  document.querySelectorAll('#' + view + '-tab [data-column]').forEach(el => {
+    el.classList.toggle('column-hidden', !visible.has(el.dataset.column));
+  });
+  document.querySelectorAll('#' + view + '-columns input[type="checkbox"]').forEach(cb => {
+    cb.checked = visible.has(cb.value);
+  });
+  const btn = document.querySelector('#' + view + '-columns .filter-multi-btn');
+  if (btn) {
+    const total = COLUMN_DEFAULTS[view].length;
+    btn.textContent = visible.size === total ? 'Columns' : 'Columns (' + visible.size + ')';
+  }
+}
+function onColumnCheck(view, cb) {
+  const visible = visibleColumnsFor(view);
+  if (cb.checked) visible.add(cb.value); else visible.delete(cb.value);
+  const saved = getVisibleColumns();
+  saved[view] = [...visible];
+  localStorage.setItem(VISIBLE_COLUMNS_KEY, JSON.stringify(saved));
+  cloudSync();
+  applyColumnVisibility(view);
+}
 
 function toggleFilterPanel(btn) {
   const panel = btn.nextElementSibling;
@@ -2811,6 +2874,12 @@ function getFiltered() {
   const newResultsOnly = getSearchPrefs().newAlertsOnly;
   const autoClearDays = loadPrefs().autoClearDays || 0;
   const autoClearCutoff = autoClearDays > 0 ? Date.now() - autoClearDays * 86400000 : 0;
+  const sf = getScanFilters();
+  const sfLevels = new Set(sf.levels);
+  const sfScheds = new Set(sf.schedules);
+  const sfMinHourly = sf.minHourly ? parseFloat(sf.minHourly) : 0;
+  const sfMinSalary = sf.minSalary ? parseFloat(sf.minSalary) : 0;
+  const sfLoc = (sf.location || '').toLowerCase();
   return allJobs.filter(j => {
     if (newResultsOnly && !j.is_new) return false;
     if (autoClearCutoff && j.posted_at) {
@@ -2831,6 +2900,20 @@ function getFiltered() {
       if (ptVals.has('unlisted') && !j.pay) match = true;
       if (!match) return false;
     }
+    if (!sfLevels.has(j.level || 'mid')) return false;
+    const sched = j.schedule || 'other';
+    if (!sfScheds.has(sched === '' ? 'other' : sched)) return false;
+    if (sf.payListed && !j.pay) return false;
+    if (sfMinHourly && j.pay_type === 'hourly') {
+      const amt = parsePayNum(j.pay);
+      if (amt && amt < sfMinHourly) return false;
+    }
+    if (sfMinSalary && j.pay_type === 'salary') {
+      const amt = parsePayNum(j.pay);
+      if (amt && amt < sfMinSalary) return false;
+    }
+    if (sf.favoritesOnly && !favJobs.has(j.id) && !favEmployers.has(j.company)) return false;
+    if (sfLoc && !(j.location || '').toLowerCase().includes(sfLoc)) return false;
     return true;
   });
 }
@@ -2892,18 +2975,19 @@ function renderTable() {
     const isHidden = hiddenJobs.has(j.id);
     return '<tr' + (isHidden ? ' class="hidden-row"' : '') + '>' +
     '<td><button class="fav-btn' + (isFav ? ' active' : '') + '" onclick="toggleFavJob(\'' + escAttr(j.id) + '\')" title="Favorite job">' + (isFav ? '★' : '☆') + '</button></td>' +
-    '<td><button class="fav-employer' + (isEmpFav ? ' active' : '') + '" onclick="toggleFavEmployerByJob(\'' + escAttr(j.id) + '\')" title="Favorite employer">♥</button>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
-    '<td class="title-cell">' + levelBadge(j.level) + ' ' + (isAdmin() ? '<a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a>' : redact(j.title)) + '</td>' +
-    '<td class="loc-cell">' + esc(j.location || '—') + '</td>' +
-    '<td class="pay-cell">' + (j.pay ? '<span class="pay-text">' + redact(j.pay) + '</span>' + (isAdmin() && j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
-    '<td class="time-cell">' + (j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
-    '<td class="source-cell"><span class="badge badge-source">' + esc(j.source) + '</span>' + (j.schedule ? ' <span class="badge badge-source">' + j.schedule + '</span>' : '') + '</td>' +
+    '<td data-column="company"><button class="fav-employer' + (isEmpFav ? ' active' : '') + '" onclick="toggleFavEmployerByJob(\'' + escAttr(j.id) + '\')" title="Favorite employer">♥</button>' + esc(j.company) + (j.is_new ? ' <span class="badge badge-new">NEW</span>' : '') + '</td>' +
+    '<td data-column="title" class="title-cell">' + levelBadge(j.level) + ' ' + (isAdmin() ? '<a href="#job=' + encodeURIComponent(j.id) + '" onclick="event.preventDefault();openJobModal(\'' + escAttr(j.id) + '\')">' + esc(j.title) + '</a>' : redact(j.title)) + '</td>' +
+    '<td data-column="location" class="loc-cell">' + esc(j.location || '—') + '</td>' +
+    '<td data-column="pay" class="pay-cell">' + (j.pay ? '<span class="pay-text">' + redact(j.pay) + '</span>' + (isAdmin() && j.pay_type ? ' <span style="color:var(--text-faint);font-size:0.6875rem;font-family:var(--font-mono)">' + j.pay_type + '</span>' : '') : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
+    '<td data-column="posted_at" class="time-cell">' + (j.posted_at ? timeAgo(j.posted_at) : '<span style="color:var(--text-faint)">—</span>') + '</td>' +
+    '<td data-column="source" class="source-cell"><span class="badge badge-source">' + esc(j.source) + '</span>' + (j.schedule ? ' <span class="badge badge-source">' + j.schedule + '</span>' : '') + '</td>' +
     '<td>' + (isAdmin() ? (tracked
       ? '<button class="track-btn" disabled>Tracked</button>'
       : '<button class="track-btn" onclick="trackJob(this,\'' + escAttr(j.id) + '\')">Track</button>') +
     ' <button class="delete-btn" onclick="toggleHideJob(\'' + escAttr(j.id) + '\')" title="' + (isHidden ? 'Unhide' : 'Hide') + '">' + (isHidden ? '◉' : '⊘') + '</button>' : '') +
     '</td></tr>';
   }).join('');
+  applyColumnVisibility('scanner');
 }
 
 function sortBy(col) {
@@ -3123,20 +3207,20 @@ function renderTracker() {
     const admin = isAdmin();
     const mainRow = '<tr>' +
       '<td>' + (admin ? '<button class="delete-btn" onclick="deleteApp(' + a.id + ')" title="Remove">✕</button>' : '') + '</td>' +
-      '<td>' + esc(a.company) + '</td>' +
-      '<td class="title-cell">' + (admin
+      '<td data-column="company">' + esc(a.company) + '</td>' +
+      '<td data-column="title" class="title-cell">' + (admin
         ? (a.url ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.title) + '</a>' : esc(a.title))
         : '•••••') + '</td>' +
-      '<td class="loc-cell">' + esc(a.location || '—') + '</td>' +
-      '<td>' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'status\',this.value)">' + opts + '</select>' : esc(STATUS_LABELS[a.status] || a.status)) + '</td>' +
-      '<td>' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.deadline || '') + '" onchange="updateApp(' + a.id + ',\'deadline\',this.value)">' : esc(a.deadline || '—')) + '</td>' +
-      '<td>' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select>' : esc(REMIND_LABELS[ri] || ri)) + '</td>' +
-      '<td>' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)">' : esc(a.applied_at || '—')) + '</td>' +
-      '<td class="notes-cell">' + (admin ? '<input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)">' : esc(a.notes || '—')) + '</td>' +
+      '<td data-column="location" class="loc-cell">' + esc(a.location || '—') + '</td>' +
+      '<td data-column="status">' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'status\',this.value)">' + opts + '</select>' : esc(STATUS_LABELS[a.status] || a.status)) + '</td>' +
+      '<td data-column="deadline">' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.deadline || '') + '" onchange="updateApp(' + a.id + ',\'deadline\',this.value)">' : esc(a.deadline || '—')) + '</td>' +
+      '<td data-column="remind">' + (admin ? '<select class="inline-select" onchange="updateApp(' + a.id + ',\'reminder_interval\',this.value)">' + rOpts + '</select>' : esc(REMIND_LABELS[ri] || ri)) + '</td>' +
+      '<td data-column="applied">' + (admin ? '<input type="date" class="inline-date" value="' + esc(a.applied_at || '') + '" onchange="updateApp(' + a.id + ',\'applied_at\',this.value)">' : esc(a.applied_at || '—')) + '</td>' +
+      '<td data-column="notes" class="notes-cell">' + (admin ? '<input type="text" class="inline-input" value="' + esc(a.notes || '') + '" placeholder="Add notes…" onblur="updateApp(' + a.id + ',\'notes\',this.value)">' : esc(a.notes || '—')) + '</td>' +
       '<td><button class="more-btn" onclick="toggleDetail(this,' + a.id + ')">More</button></td>' +
     '</tr>';
 
-    const colSpan = admin ? 10 : 10;
+    const colSpan = visibleColumnsFor('tracker').size + 2;
     const details = [];
     if (admin && a.pay) details.push(['Pay', '<span class="pay-text">' + esc(a.pay) + '</span>']);
     if (admin && a.url) details.push(['URL', '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.url) + '</a>']);
@@ -3153,6 +3237,7 @@ function renderTracker() {
 
     return mainRow + detailRow;
   }).join('');
+  applyColumnVisibility('tracker');
 }
 
 function toggleDetail(btn, id) {
@@ -3739,6 +3824,8 @@ function initPrefs() {
   });
   document.getElementById('pref-new-alerts-only').classList.toggle('on', sp.newAlertsOnly);
   buildSavedFilterSelect();
+  applyColumnVisibility('scanner');
+  applyColumnVisibility('tracker');
 }
 
 const MANUAL_CHECKS = [

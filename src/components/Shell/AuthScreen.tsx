@@ -1,0 +1,26 @@
+import { FormEvent, useState } from 'react'
+import { usesFirebaseAuth } from '../../api/mode'
+import { useAuthStore } from '../../store/auth'
+import styles from './AuthScreen.module.css'
+
+type AuthTab = 'login' | 'register'
+
+export function AuthScreen() {
+  const [tab, setTab] = useState<AuthTab>('login')
+  const [message, setMessage] = useState<string | null>(null)
+  const [login, setLogin] = useState({ username: '', password: '' })
+  const [registration, setRegistration] = useState({ username: '', email: '', password: '' })
+  const loginWithPassword = useAuthStore((state) => state.login)
+  const register = useAuthStore((state) => state.register)
+  const loginWithGoogle = useAuthStore((state) => state.loginWithGoogle)
+  const isLoading = useAuthStore((state) => state.isLoading)
+  const firebaseAuth = usesFirebaseAuth()
+  const changeTab = (next: AuthTab) => { setTab(next); setMessage(null) }
+  const submitLogin = async (event: FormEvent) => { event.preventDefault(); setMessage(null); try { await loginWithPassword(login) } catch (err) { setMessage(errorMessage(err)) } }
+  const submitRegistration = async (event: FormEvent) => { event.preventDefault(); setMessage(null); try { await register(registration); if (!firebaseAuth) { setLogin({ username: registration.username, password: '' }); setTab('login'); setMessage('Account created. Sign in to continue.') } } catch (err) { setMessage(errorMessage(err)) } }
+  const submitGoogle = async () => { setMessage(null); try { await loginWithGoogle() } catch (err) { const message = errorMessage(err); if (!/popup closed/i.test(message)) setMessage(message) } }
+  return <main className={styles.screen}><section className={styles.card} aria-labelledby="auth-title"><h1 id="auth-title"><span>UX</span> Internship Watch</h1><p className={styles.subtitle}>Sign in to access your dashboard</p><div className={styles.tabs} role="tablist" aria-label="Authentication"><button role="tab" aria-selected={tab === 'login'} className={tab === 'login' ? styles.active : ''} onClick={() => changeTab('login')}>Sign In</button><button role="tab" aria-selected={tab === 'register'} className={tab === 'register' ? styles.active : ''} onClick={() => changeTab('register')}>Register</button></div>{tab === 'login' ? <form onSubmit={submitLogin}><Field label={firebaseAuth ? 'Email' : 'Username'} type={firebaseAuth ? 'email' : 'text'} value={login.username} autoComplete="username" onChange={(username) => setLogin({ ...login, username })} placeholder={firebaseAuth ? 'you@example.com' : 'Your username'} /><Field label="Password" type="password" value={login.password} autoComplete="current-password" onChange={(password) => setLogin({ ...login, password })} placeholder="Your password" /><button className={styles.primary} disabled={isLoading}>Sign In</button></form> : <form onSubmit={submitRegistration}><Field label="Username" value={registration.username} autoComplete="username" onChange={(username) => setRegistration({ ...registration, username })} placeholder="Choose a username" /><Field label="Email" type="email" value={registration.email} autoComplete="email" onChange={(email) => setRegistration({ ...registration, email })} placeholder="you@example.com" /><Field label="Password" type="password" value={registration.password} autoComplete="new-password" minLength={6} onChange={(password) => setRegistration({ ...registration, password })} placeholder="Choose a password" /><button className={styles.primary} disabled={isLoading}>Create Account</button></form>}{firebaseAuth && <><div className={styles.divider}>or</div><button className={styles.google} onClick={submitGoogle} disabled={isLoading}><GoogleIcon />Continue with Google</button></>}{message && <p className={message.startsWith('Account created') ? styles.success : styles.error} role="alert">{message}</p>}</section></main>
+}
+function Field({ label, type = 'text', value, autoComplete, placeholder, minLength, onChange }: { label: string; type?: string; value: string; autoComplete: string; placeholder: string; minLength?: number; onChange: (value: string) => void }) { const id = `auth-${label.toLowerCase().replaceAll(' ', '-')}`; return <label className={styles.field} htmlFor={id}>{label}<input id={id} type={type} required value={value} autoComplete={autoComplete} placeholder={placeholder} minLength={minLength} onChange={(event) => onChange(event.target.value)} /></label> }
+function errorMessage(error: unknown) { if (!(error instanceof Error)) return 'Something went wrong. Please try again.'; return error.message.replace(/^Firebase: Error \([^)]*\)\.?\s*/, '') || 'Something went wrong. Please try again.' }
+function GoogleIcon() { return <svg viewBox="0 0 18 18" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.81.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.97 10.72A5.41 5.41 0 0 1 3.67 9c0-.6.1-1.18.3-1.72V4.95H.96A9 9 0 0 0 0 9c0 1.45.35 2.82.96 4.05l3.01-2.33z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.46 3.43 1.36l2.57-2.57C13.46.94 11.43 0 9 0A9 9 0 0 0 .96 4.95l3.01 2.33c.71-2.12 2.69-3.7 5.03-3.7z"/></svg> }

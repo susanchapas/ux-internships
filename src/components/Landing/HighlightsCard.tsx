@@ -1,0 +1,7 @@
+import type { Job } from '../../api/types';
+import { parsePostedDate } from '../../utils/format';
+import { usePreferencesStore } from '../../store/preferences';
+import { Link } from 'react-router-dom';
+import styles from './Landing.module.css';
+const prefForLevel: Record<string, string> = { intern: 'level_intern', fellow: 'level_fellow', apprentice: 'level_apprentice', entry: 'level_entry', mid: 'level_mid', 'senior+': 'level_senior', 'manager+': 'level_manager' };
+export function HighlightsCard({ jobs, hiddenIds }: { jobs: Job[]; hiddenIds: string[] }) { const prefs = usePreferencesStore((state) => state.userPrefs); const hidden = new Set(hiddenIds); const highlights = jobs.filter((job) => job.is_new && !hidden.has(job.id) && prefs[prefForLevel[job.level || 'mid']] !== false).sort((a, b) => { if (Boolean(a.pay) !== Boolean(b.pay)) return a.pay ? -1 : 1; return (parsePostedDate(b.posted_at)?.getTime() || 0) - (parsePostedDate(a.posted_at)?.getTime() || 0); }).slice(0, 5); return <section className={`${styles.card} ${styles.highlights}`}><header className={styles.header}><h2>Recent Highlights</h2><Link to="/scanner">View all →</Link></header>{highlights.length ? <div className={styles.highlightList}>{highlights.map((job) => <Link to="/scanner" className={styles.highlight} key={job.id}><small>{job.company}</small><b>{job.title}</b><span>{job.level || 'mid'}{job.pay ? ` · ${job.pay}` : ''}<em>NEW</em></span></Link>)}</div> : <p className={styles.empty}>Run a scan to see recent postings</p>}</section>; }
