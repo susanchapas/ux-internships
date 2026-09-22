@@ -37,8 +37,10 @@ HIDDEN_PATH = HERE / "hidden.json"
 
 UA = {"User-Agent": "internship-watch/1.0 (personal job search tool)"}
 TIMEOUT = 20
-DEFAULT_BATCH_SIZE = 1
-BETWEEN_BATCH_DELAY = 1.0
+DEFAULT_BATCH_SIZE = 2
+BETWEEN_BATCH_DELAY = 2.5
+CONNECTION_RETRIES = 2
+CONNECTION_RETRY_DELAYS = (2.0, 3.0)
 DASHBOARD_URL = os.environ.get("DASHBOARD_URL", "http://127.0.0.1:8080/")
 
 PAY_RE = re.compile(
@@ -757,17 +759,23 @@ def fetch_company(entry):
     """
     board = entry["board"]
     company = entry.get("name", entry.get("slug", board))
-    try:
-        if board in BOARD_FETCHERS:
-            jobs = list(BOARD_FETCHERS[board](entry["slug"], company))
-        elif board == "workday":
-            jobs = list(fetch_workday(entry, company))
-        elif board == "usajobs":
-            jobs = list(fetch_usajobs(entry))
-        else:
-            return company, None, f"unknown board '{board}'"
-    except Exception as e:
-        return company, None, f"{type(e).__name__}: {e}"
+    for attempt in range(CONNECTION_RETRIES + 1):
+        try:
+            if board in BOARD_FETCHERS:
+                jobs = list(BOARD_FETCHERS[board](entry["slug"], company))
+            elif board == "workday":
+                jobs = list(fetch_workday(entry, company))
+            elif board == "usajobs":
+                jobs = list(fetch_usajobs(entry))
+            else:
+                return company, None, f"unknown board '{board}'"
+            break
+        except requests.exceptions.ConnectionError as e:
+            if attempt == CONNECTION_RETRIES:
+                return company, None, f"{type(e).__name__}: {e}"
+            time.sleep(CONNECTION_RETRY_DELAYS[attempt])
+        except Exception as e:
+            return company, None, f"{type(e).__name__}: {e}"
     return company, jobs, ""
 
 
@@ -810,6 +818,12 @@ def main():
     # Non-ATS career pages cannot reliably yield structured jobs. Monitor a
     # normalized page fingerprint so a meaningful change prompts a manual look.
     for watch in cfg.get("page_watches", []):
+        if not watch.get("enabled", True):
+            disabled.append({
+                "company": watch["name"],
+                "reason": watch.get("disabled_reason", "disabled in config"),
+            })
+            continue
         try:
             fingerprint, _ = page_fingerprint(watch["url"], watch.get("selector"), watch.get("strip_patterns"))
             page_fingerprints[watch["url"]] = fingerprint
@@ -914,7 +928,7 @@ def main():
 
     (HERE / "_scan_results.json").write_text(json.dumps({
         "jobs": found, "errors": errors, "disabled": disabled, "health_alerts": health_alerts,
-        "companies_scanned": len(cfg["companies"]) - len(disabled),
+        "companies_scanned": len(enabled_entries),
     }, default=str))
 
 
